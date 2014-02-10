@@ -20,6 +20,7 @@
     "undef": true,
     "unused": true,
     "strict": false,
+    "globalstrict":false,
     "trailing": true,
     "smarttabs": true,
     "maxlen": 120,
