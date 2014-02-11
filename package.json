@@ -61,7 +61,8 @@
     "selenium-webdriver": ">2.35.1",
     "sinon": "~1.7.3",
     "sinon-chai": "~2.4.0",
-    "styledocco": "~0.6.4"
+    "styledocco": "~0.6.4",
+    "chai-as-promised": "~4.1.0"
   },
   "repository": {
     "type": "git",
