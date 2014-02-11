@@ -2,6 +2,8 @@
 // For some reason 'grunt jshint' doesn't respect the node:true in the .jshintrc file, so we have to add it here
 
 exports.config = {
+    framework: 'mocha',
+    
     // The address of a running selenium server. If this is specified,
     // seleniumServerJar and seleniumPort will be ignored.
     seleniumAddress: 'http://localhost:4444/wd/hub',
@@ -11,7 +13,7 @@ exports.config = {
     baseUrl: 'http://localhost:9000',
 
     specs: [
-        './midway/*.js',
+        './stories/*.js',
         //'./e2e/*.js'
     ],
 
@@ -20,12 +22,9 @@ exports.config = {
         'browserName': 'firefox'
     },
 
-    // Options to be passed to Jasmine-node.
-    jasmineNodeOpts: {
-        isVerbose: false,
-        showColors: true,
-        includeStackTrace: true,
-        defaultTimeoutInterval: 30000
+    mochaOpts: {
+        reporter: 'spec',
+        slow: 3000
     }
 };
 
