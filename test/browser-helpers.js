@@ -114,7 +114,7 @@ helpers = {
         }
 
         var foundChildDiv = _.find(children, function (child) {
-            if (this.dataAttribute == 'class') {
+            if (this.dataAttribute === 'class') {
                 return angular.element(child).hasClass(this.childTitle);
             } else {
                 return (angular.element(child).attr(this.dataAttribute) === this.childTitle);
