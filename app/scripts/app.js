@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('billing', ['ngRoute', 'ngResource'])
+angular.module('billingApp', ['ngRoute', 'ngResource'])
     .config(function($routeProvider, $locationProvider) {
         $routeProvider
             .when('/login', {
