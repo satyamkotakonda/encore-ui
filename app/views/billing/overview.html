@@ -1,0 +1,173 @@
+<rx-nav></rx-nav>
+
+<div class="page-content">
+    <rx-related-menu state="menuShown" collapsable="false" position="left">
+        <rx-user-details user="user"></rx-user-details>
+        <rx-product-resources user="user"></rx-product-resources>
+    </rx-related-menu>
+    <div class="main-content">
+        <div class="section overview-header">
+            <div class="flush-left">
+                <h2 class="page-title">Billing Overview</h2>
+                <h3 class="page-subtitle">On account {{account.name}}</h3>
+            </div>
+            <button class="button button-green flush-right">
+                + Make a Payment
+            </button>
+        </div>
+        <hr />
+        <div class="section billing-info">
+            <dl class="flush-left">
+                <dt class="accent">Current Amount Due:</dt>
+                <dd class="accent accent-group">
+                    <span class="left">
+                        ${{account.currentDue.toFixed(2)}}
+                    </span>
+                    <span class="right">
+                        <button class="button button-green button-small">Pay Bill</button>
+                    </span>
+                </dd>
+                <dt>Account Balance:</dt>
+                <dd>${{account.balance.toFixed(2)}}</dd>
+                <dt>Past Due:</dt>
+                <dd>${{account.pastDue.toFixed(2)}}</dd>
+            </dl>
+            <dl class="flush-right">
+                <dt>Currency:</dt>
+                <dd>{{account.currencyType}}</dd>
+                <dt>Terms:</dt>
+                <dd>{{account.terms}}</dd>
+                <dt>Billing Cycle:</dt>
+                <dd>{{account.cycle}} Months</dd>
+                <dt>Paperless Billing:</dt>
+                <dd>{{account.paperless ? 'ON' : 'OFF'}}</dd>
+            </dl>
+        </div>
+        <hr />
+        <h3 class="section-title">Account Aging</h3>
+        <div class="section account-aging">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Current</th>
+                        <th>1 - 30 Days</th>
+                        <th>31 - 60 Days</th>
+                        <th>61 - 90 Days</th>
+                        <th>91 - 120 Days</th>
+                        <th>121 - 180 Days</th>
+                        <th>181+ Days</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr />
+        <h3 class="section-title">Billed Items</h3>
+        <div class="section billing-transactions">
+            <div class="billing-filters">
+                <span class="filter">
+                    <rx-form-input
+                        type="text"
+                        label="Reference #"
+                        required="false"
+                        model="filter.reference"
+                        field-id="filterReferenceNumber"
+                    ></rx-form-input>
+                </span>
+                <span class="filter">
+                    <rx-form-select
+                        label="Type"
+                        required="false"
+                        model="filter.type"
+                        options="transactionTypes"
+                        field-id="filterType"
+                    ></rx-form-select>
+                </span>
+                <span class="filter">
+                    <rx-form-select
+                        label="Status"
+                        required="false"
+                        model="filter.status"
+                        options="transactionStatus"
+                        field-id="filterStatus"
+                    ></rx-form-select>
+                </span>
+                <span class="filter">
+                    <rx-form-select
+                        label="Range"
+                        required="false"
+                        model="filterDate"
+                        options="transactionDate"
+                        field-id="filterDate"
+                    ></rx-form-select>
+                </span>
+                <div class="flush-right">
+                    <button class="button button-blue" ng-click="filter=undefined;filterDate=undefined">Clear Filter</button>
+                </div>
+            </div>
+            <table class="table transaction-list">
+                <thead>
+                    <tr>
+                        <th ng-class="{'sorted': sort.field == 'reference'}" 
+                            ng-click="sort.field = 'reference'; sort.reverse = !sort.reverse">
+                            Reference #
+                            <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
+                        </th>
+                        <th ng-class="{'sorted': sort.field == 'date'}" 
+                            ng-click="sort.field = 'date'; sort.reverse = !sort.reverse">
+                            Date
+                            <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
+                        </th>
+                        <th ng-class="{'sorted': sort.field == 'type'}" 
+                            ng-click="sort.field = 'type'; sort.reverse = !sort.reverse">
+                            Type
+                            <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
+                        </th>
+                        <th ng-class="{'sorted': sort.field == 'status'}" 
+                            ng-click="sort.field = 'status'; sort.reverse = !sort.reverse">
+                            Status
+                            <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
+                        </th>
+                        <th ng-class="{'sorted': sort.field == 'amount'}" 
+                            ng-click="sort.field = 'amount'; sort.reverse = !sort.reverse">
+                            Transaction Amount
+                            <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
+                        </th>
+                        <th ng-class="{'sorted': sort.field == 'balance'}" 
+                            ng-click="sort.field = 'balance'; sort.reverse = !sort.reverse">
+                            Balance
+                            <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="txn in transactions | orderBy:sort.field:sort.reverse | filter:filter | filter:filterTransactionsByDate | Paginate:pager" class="{{ txn.type.toLowerCase() }}">
+                        <td>{{ txn.reference }}</td>
+                        <td>{{ txn.date | date:'MM / dd / yyyy' }}</td>
+                        <td>{{ txn.type }}</td>
+                        <td class="{{ txn.status.toLowerCase() }}">{{ txn.status }}</td>
+                        <td class="currency">{{ txn.amount | currency }}</td>
+                        <td class="currency">{{ txn.balance | currency }}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="paginate-area">
+                        <td colspan="6">
+                            <rx-paginate page-tracking="pager"></rx-paginate>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
