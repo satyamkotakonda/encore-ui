@@ -1,0 +1,177 @@
+// These will be included in encore-ui, should be removed from here once so.
+.page-title,
+.section-title {
+    font-weight: 400;
+    font-size: 1.6em;
+    color: #727272;
+}
+
+.page-title {
+    margin-top: 0;
+}
+
+.page-subtitle {
+    font-weight: 500;
+    margin: -10px 0 10px;
+    font-size: 1.0em;
+    color: #aaa;
+}
+
+.flush-left {
+    float: left;
+}
+
+.flush-right {
+    float: right;
+}
+
+.currency {
+    text-align: right;
+}
+
+//Overview classes (Might be replaced by common css from encore-ui) 
+.section {
+    overflow: auto;
+    margin: 0 0 20px;
+    table {
+        tr {
+            background: white;
+        }
+    }
+}
+
+.billing-info {
+    @spacing: 25px;
+    @fontSize: 1.1em;
+    @lineHeight: @fontSize * 1.54;
+
+    dl {
+        max-width: 350px;
+        font-weight: 400;
+        font-size: @fontSize;
+        color: #727272;
+        .accent {
+            font-size: @fontSize + (@fontSize * 0.10);
+            line-height: @lineHeight * 1.3;
+            border: 1px #aaa solid;
+            .button {
+                margin: 0;
+                line-height: @lineHeight * 0.73;
+            }
+            margin-bottom: @lineHeight * 0.3;
+            &.accent-group {
+                border: 0;
+                margin-bottom: @lineHeight * 0.3;
+                padding-left: 0;
+                .left {
+                    border: 1px #aaa solid;
+                    border-left: 0;
+                    border-right: 0;
+                    padding-right: 10px;
+                    padding-left: @spacing - 1;
+                    float: left;
+                }
+                .right {
+                    border: 0;
+                    .button {
+                        padding: 0 10px;
+                        line-height: @lineHeight * 1.712;
+                        border-radius: 0;
+                    }
+                }
+            }
+        }
+
+        dt {
+            width: 49%;
+            font-weight: 500;
+            float: left;
+            text-align: right;
+            line-height: @lineHeight;
+            letter-spacing: -0.04em;
+            &.accent {
+                padding-right: 0;
+                padding-left: 0;
+                border-right: 0;
+            }
+        }
+        dd {
+            float: left;
+            margin: 0;
+            padding-left: @spacing;
+            line-height: @lineHeight;
+            &.accent {
+                padding-left: @spacing;
+                border-left: 0;
+            }
+        }
+    }
+    margin: 0 0 20px;
+}
+
+.billing-transactions {
+    @sortColor: #666666;
+    @accentRow: #f2f2f2;
+    @alertColor: #ff2c00;
+    .billing-filters {
+        padding: 15px 20px;
+        overflow: auto;
+        background: white;
+        margin-bottom: 30px;
+        .filter {
+            float: left;
+            margin-right: 10px;
+            .form-item {
+                overflow: auto;
+                div {
+                    &.field-select {
+                        margin-left: 0;
+                    }
+                    float: left;
+                }
+            }
+            input {
+                width: 225px;
+                top: 0;
+            }
+        }
+    }
+    .transaction-list {
+        tr {
+            &.invoice {
+                background-color: @accentRow;
+            }
+            th {
+                cursor: pointer;
+                &.sorted {
+                    div {
+                        display: block;
+                        margin-top: 5px;
+                    }
+                    .arrow-up {
+                        width: 0; 
+                        height: 0; 
+                        border-left: 5px solid transparent;
+                        border-right: 5px solid transparent;
+                        
+                        border-bottom: 5px solid @sortColor;
+                    }
+                    .arrow-down {
+                        width: 0; 
+                        height: 0; 
+                        border-left: 5px solid transparent;
+                        border-right: 5px solid transparent;
+                        
+                        border-top: 5px solid @sortColor;
+                    }
+                }
+            }
+            td {
+                &.unpaid {
+                    color: @alertColor;
+                }
+            }
+        }
+    }
+}
+
