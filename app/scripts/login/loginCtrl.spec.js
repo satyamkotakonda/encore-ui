@@ -1,7 +1,7 @@
 
 describe('Billing: LoginCtrl', function () {
     var scope, ctrl;
-    beforeEach( function () {
+    beforeEach(function () {
         module('billingApp');
         inject(function ($controller, $rootScope) {
             scope = $rootScope.$new();

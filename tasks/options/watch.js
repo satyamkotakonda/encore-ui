@@ -1,14 +1,14 @@
 module.exports = {
     scripts: {
         files: ['Gruntfile.js', 'app/scripts/**/*.js', '!app/scripts/**/*.spec.js', '!app/scripts/debug.js'],
-        tasks: ['jshint:scripts', 'test:unit'],
+        tasks: ['jshint:scripts','jscs:scripts', 'test:unit'],
         options: {
             livereload: true
         }
     },
     specs: {
         files: ['app/scripts/**/*.spec.js'],
-        tasks: ['jshint:specs', 'test:unit'],
+        tasks: ['jshint:specs','jscs:scripts', 'test:unit'],
         options: {
             livereload: false
         }
