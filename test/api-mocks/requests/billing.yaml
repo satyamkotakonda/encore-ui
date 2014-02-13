@@ -1,0 +1,10 @@
+# Get Billing Transactions for an Account
+request:
+    url: ^/api/billing/transactions/12345
+    method: GET
+response:
+    status: 200
+    latentcy: 1000
+    headers:
+        content-type: application/json
+    file: test/api-mocks/responses/transactions.json
