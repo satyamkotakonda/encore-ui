@@ -7,7 +7,7 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui.tpls', 'encore
                 templateUrl: 'views/login.html',
                 controller: 'LoginCtrl'
             })
-            .when('/billing/overview', {
+            .when('/billing/overview/:accountnumber', {
                 templateUrl: '/views/billing/overview.html',
                 controller: 'OverviewCtrl'
             })
