@@ -1,0 +1,11 @@
+{
+    "id": 1020121,
+    "balance": 380,
+    "pastDue": 180,
+    "currentDue": 200,
+    "currencyType": "USD",
+    "terms": "Due Upon Receipt",
+    "cycle": 12,
+    "paperless": false,
+    "name": "hub_cap1589"
+}

@@ -1,5 +1,5 @@
 angular.module('billingApp')
-    .controller('OverviewCtrl', function ($scope, PageTracking){
+    .controller('OverviewCtrl', function ($scope, $routeParams, Transaction, Account, PageTracking){
         // For generating Dummy Data
         var itemToOption = function itemToOption(val) {
                 if(val.hasOwnProperty('value') && val.hasOwnProperty('label')) {
@@ -29,17 +29,6 @@ angular.module('billingApp')
                 [-7, 'Last 6 Statements']],
             currentDate = new Date(),
             periodStart = new Date((currentDate.getFullYear()-(Math.random() * 5)), ((Math.random()*12)+1), 1),
-            accountInfo = {
-                id: 1020121,
-                balance: 380,
-                pastDue: 180,
-                currentDue: 200,
-                currencyType: 'USD',
-                terms: 'Due Upon Receipt',
-                cycle: 12,
-                paperless: false,
-                name: 'hub_cap1589'
-            },
             txn = [], x, c, a = 0, t, s;
 
         for(x = 0, c = 1000; x < c; x += 1) {
@@ -60,8 +49,9 @@ angular.module('billingApp')
         $scope.pager = PageTracking.createInstance();
         $scope.pager.itemsPerPage = 11;
 
-        $scope.account = accountInfo;
-        $scope.transactions = txn;
+        $scope.account = Account.get({id: $routeParams.accountNumber});
+        $scope.transactions = Transaction.list({id: $routeParams.accountNumber});
+
         
         // This is most likely done differently, from an API call maybe? similar concept though.
         $scope.transactionTypes = transactionTypes.map(itemToOption);
