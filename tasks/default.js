@@ -1,11 +1,12 @@
 module.exports = function (grunt) {
     grunt.registerTask('default',
-        'Default task will lint code, run unit, mid and functional tests, build code and generate docs.',
+        'Default task will run the server locally with stubbed api calls.',
         [
-            'jshint',
-            'karma:full',
-            'build',
-            'docs'
+            // 'jshint',
+            // 'karma:full',
+            // 'build',
+            // 'docs'
+            'server:stubbed:watch'
         ]
     );
 };
