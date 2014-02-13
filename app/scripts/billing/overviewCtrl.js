@@ -1,5 +1,5 @@
 angular.module('billingApp')
-    .controller('OverviewCtrl', function ($scope, PageTracking){
+    .controller('OverviewCtrl', function ($scope, $routeParams, Transaction, PageTracking){
         // For generating Dummy Data
         var itemToOption = function itemToOption(val) {
                 if(val.hasOwnProperty('value') && val.hasOwnProperty('label')) {
@@ -61,7 +61,9 @@ angular.module('billingApp')
         $scope.pager.itemsPerPage = 11;
 
         $scope.account = accountInfo;
-        $scope.transactions = txn;
+        console.log($routeParams.accountNumber);
+        $scope.transactions = Transaction.list({id: $routeParams.accountNumber});
+
         
         // This is most likely done differently, from an API call maybe? similar concept though.
         $scope.transactionTypes = transactionTypes.map(itemToOption);
