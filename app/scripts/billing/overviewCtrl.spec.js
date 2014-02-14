@@ -1,8 +1,7 @@
-/* jshint node: true */
 describe('Billing: OverviewCtrl', function () {
-    var scope, ctrl, PageTrackingObject;
+    var scope, ctrl, account, transaction, PageTrackingObject;
 
-    var testAccountNumber = '1020121';
+    var testAccountNumber = '12345';
 
     beforeEach(function () {
         module('billingApp');
@@ -10,8 +9,13 @@ describe('Billing: OverviewCtrl', function () {
             scope = $rootScope.$new();
             PageTrackingObject = PageTracking.createInstance().constructor;
             
+            transaction = { list: sinon.stub() };
+            account = { get: sinon.stub() };
+
             ctrl = $controller('OverviewCtrl',{
                 $scope: scope,
+                Transaction: transaction,
+                Account: account,
                 $routeParams: {
                     accountNumber: testAccountNumber
                 }
@@ -33,11 +37,20 @@ describe('Billing: OverviewCtrl', function () {
         expect(scope.pager).to.be.an.instanceof(PageTrackingObject);
     });
 
-    it('OverviewCtrl should have transaction data types defined', function () {
+    it('OverviewCtrl should have default values', function () {
         expect(scope.transactionData.types).to.be.an('array');
-        expect(scope.transactionData.types).to.have.length.above(0);
+        expect(scope.transactionData.types.length).to.be.eq(5);
 
         expect(scope.transactionData.status).to.be.an('array');
-        expect(scope.transactionData.status).to.have.length.above(0);
+        expect(scope.transactionData.status.length).to.be.eq(4);
+        expect(scope.sort).to.deep.eq({ field: 'date', reverse: true });
+    });
+
+    it('OverviewCtrl should get list of transactions', function () {
+        sinon.assert.calledOnce(transaction.list);
+    });
+
+    it('OverviewCtrl should get account info', function () {
+        sinon.assert.calledOnce(account.get);
     });
 });

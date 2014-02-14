@@ -1,5 +1,7 @@
 angular.module('billingApp')
-    .controller('OverviewCtrl', function ($scope, $routeParams, Transaction, Account, PageTracking) {
+    .controller('OverviewCtrl', function ($scope, $routeParams, Transaction,
+        Account, PageTracking) {
+
         var currentDate = new Date(),
             // Process the start date
             getStartDate = function getStartDate (start) {
@@ -73,16 +75,16 @@ angular.module('billingApp')
                     label: val
                 };
             },
-            getFormSelectList = function getFormSelectList (list) {
+            getFormDropdownList = function getFormDropdownList (list) {
                 list = [{ value: undefined, label: 'Any' }].concat(list).map(itemToOption);
                 return function () {
                     return list;
                 };
             },
             transactionData =  {
-                types: getFormSelectList(['Payment', 'Invoice', 'Reversal', 'Adjustment']),
-                status: getFormSelectList(['Paid', 'Settled', 'Unpaid']),
-                periods: getFormSelectList([[ -1, 'Current Period'], [ -2, 'Previous Statement'],
+                types: getFormDropdownList(['Payment', 'Invoice', 'Reversal', 'Adjustment']),
+                status: getFormDropdownList(['Paid', 'Settled', 'Unpaid']),
+                periods: getFormDropdownList([[ -1, 'Current Period'], [ -2, 'Previous Statement'],
                     [ -4, 'Last 3 Statements'], [ -7, 'Last 6 Statements']])
             };
 
