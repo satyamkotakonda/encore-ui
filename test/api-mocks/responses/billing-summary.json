@@ -1,0 +1,135 @@
+{
+    "billing-summary": {
+        "currency": "USD",
+        "item": [{
+            "itemId": 4579,
+            "itemDate": 1071468000000,
+            "itemAmount": 9.95,
+            "itemStatus": "UNPAID",
+            "type": "INVOICE",
+            "itemDescription": "",
+            "link": [{
+                "rel": "next",
+                "href": "http://billing.api.rackspacecloud.com/v1/accounts/440369/invoices/4579"
+            }]
+        }, {
+            "itemId": 3249,
+            "itemDate": 1068951204951,
+            "itemAmount": 9.95,
+            "itemStatus": "SETTLED",
+            "type": "PAYMENT",
+            "itemDescription": "Payment Received - Thank You",
+            "link": [{
+                "rel": "next",
+                "href": "http://billing.api.rackspacecloud.com/v1/accounts/440369/invoices/3249"
+            }]
+        }, {
+            "itemId": 3396,
+            "itemDate": 1068876000000,
+            "itemAmount": 9.95,
+            "itemStatus": "PAID",
+            "type": "INVOICE",
+            "itemDescription": "",
+            "link": [{
+                "rel": "next",
+                "href": "http://billing.api.rackspacecloud.com/v1/accounts/440369/invoices/3396"
+            }]
+        }, {
+            "itemId": 2173,
+            "itemDate": 1066199706813,
+            "itemAmount": 9.95,
+            "itemStatus": "SETTLED",
+            "type": "PAYMENT",
+            "itemDescription": "Payment Received - Thank You",
+            "link": [{
+                "rel": "next",
+                "href": "http://billing.api.rackspacecloud.com/v1/accounts/440369/payments/2173"
+            }]
+        }, {
+            "itemId": 2174,
+            "itemDate": 1066199706813,
+            "itemAmount": 9.95,
+            "itemStatus": "PENDING",
+            "type": "PAYMENT",
+            "itemDescription": "Payment Sample",
+            "link": [{
+                "rel": "next",
+                "href": "http://billing.api.rackspacecloud.com/v1/accounts/440369/payments/2173"
+            }]
+        }, {
+            "itemId": 2221,
+            "itemDate": 1066194000000,
+            "itemAmount": 9.95,
+            "itemStatus": "PAID",
+            "type": "INVOICE",
+            "itemDescription": "",
+            "link": [{
+                "rel": "next",
+                "href": "http://billing.api.rackspacecloud.com/v1/accounts/440369/invoices/2221"
+            }]
+        }, {
+            "itemId": 1336,
+            "itemDate": 1063638710084,
+            "itemAmount": 9.95,
+            "itemStatus": "SETTLED",
+            "type": "PAYMENT",
+            "itemDescription": "Payment Received - Thank You",
+            "link": [{
+                "rel": "next",
+                "href": "http://billing.api.rackspacecloud.com/v1/accounts/440369/payments/1336"
+            }]
+        }, {
+            "itemId": 1332,
+            "itemDate": 1063602000000,
+            "itemAmount": 9.95,
+            "itemStatus": "PAID",
+            "type": "INVOICE",
+            "itemDescription": "",
+            "link": [{
+                "rel": "next",
+                "href": "http://billing.api.rackspacecloud.com/v1/accounts/440369/invoices/1332"
+            }]
+        }, {
+            "itemId": 1013,
+            "itemDate": 1060923600000,
+            "itemAmount": 9.95,
+            "itemStatus": "UNPAID",
+            "type": "INVOICE",
+            "itemDescription": "",
+            "link": [{
+                "rel": "next",
+                "href": "http://billing.api.rackspacecloud.com/v1/accounts/440369/invoices/1013"
+            }]
+        }, {
+            "itemId": 17,
+            "itemDate": 1058297016555,
+            "itemAmount": 9.95,
+            "itemStatus": "SETTLED",
+            "type": "PAYMENT",
+            "itemDescription": "Payment Received - Thank You",
+            "link": [{
+                "rel": "next",
+                "href": "http://billing.api.rackspacecloud.com/v1/accounts/440369/payments/17"
+            }]
+        }, {
+            "itemId": 191,
+            "itemDate": 1058297016555,
+            "itemAmount": 9.95,
+            "itemStatus": "PAID",
+            "type": "INVOICE",
+            "itemDescription": "",
+            "link": [{
+                "rel": "next",
+                "href": "http://billing.api.rackspacecloud.com/v1/accounts/440369/invoices/191"
+            }]
+        }],
+        "accountId": 301253,
+        "link": [{
+            "rel": "next",
+            "href": "http://billing.api.rackspacecloud.com/v1/accounts/440369/invoice/payments?marker=4&amp;limit=10"
+        }, {
+            "rel": "prev",
+            "href": "http://billing.api.rackspacecloud.com/v1/accounts/440369/invoice/payments?marker=4&amp;limit=10"
+        }]
+    }
+}
