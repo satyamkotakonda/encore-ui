@@ -1,5 +1,5 @@
 describe('Billing: OverviewCtrl', function () {
-    var scope, filter, ctrl, account, transaction, PageTrackingObject;
+    var scope, ctrl, account, transaction, PageTrackingObject;
 
     var testAccountNumber = '12345';
 
@@ -7,7 +7,6 @@ describe('Billing: OverviewCtrl', function () {
         module('billingApp');
         inject(function ($controller, $rootScope, $filter, PageTracking) {
             scope = $rootScope.$new();
-            filter = $filter;
             PageTrackingObject = PageTracking.createInstance().constructor;
             
             transaction = { list: sinon.stub(), periods: sinon.stub() };
@@ -15,7 +14,7 @@ describe('Billing: OverviewCtrl', function () {
 
             ctrl = $controller('OverviewCtrl',{
                 $scope: scope,
-                $filter: filter,
+                $filter: $filter,
                 Transaction: transaction,
                 Account: account,
                 $routeParams: {
@@ -34,6 +33,10 @@ describe('Billing: OverviewCtrl', function () {
         expect(scope.sort).to.be.a('object');
         expect(scope.sort).to.have.property('field');
         expect(scope.sort.field).to.eq('date');
+    });
+
+    it('OverviewCtrl should have a default date format', function () {
+        expect(scope.defaultDateFormat).to.be.eq('MM / dd / yyyy');
     });
 
     it('OverviewCtrl should have a pager defined by PageTracking', function () {
