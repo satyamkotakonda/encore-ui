@@ -153,7 +153,7 @@
                 <tbody>
                     <tr ng-repeat="txn in transactions | orderBy:sort.field:sort.reverse | TransactionTable:filter | Paginate:pager" class="{{ txn.type.toLowerCase() }}">
                         <td>{{ txn.reference }}</td>
-                        <td>{{ txn.date | date:'MM / dd / yyyy' }}</td>
+                        <td>{{ txn.date | date: defaultDateFormat }}</td>
                         <td>{{ txn.type }}</td>
                         <td class="{{ txn.status.toLowerCase() }}">{{ txn.status }}</td>
                         <td class="currency">{{ txn.amount | currency }}</td>
