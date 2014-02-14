@@ -1,7 +1,7 @@
 describe('BillingFilters', function () {
     var table, createTransactions;
 
-    beforeEach( function (){
+    beforeEach(function () {
         module('billingApp');
 
         inject(function ($filter) {
@@ -17,11 +17,11 @@ describe('BillingFilters', function () {
     it('TransactionTable filter should filter results', function () {
         var actions = createTransactions();
         expect(actions).to.not.be.empty;
-        expect(table(actions, { type: 'Payment'}).length).to.be.eq(1);
-        expect(table(actions, { status: 'Paid'}).length).to.be.eq(3);
-        expect(table(actions, { reference: '76'}).length).to.be.eq(2);
-        expect(table(actions, { reference: '0', status: 'Paid'}).length).to.be.eq(2);
-        expect(table(actions, { date: '-1'}).length).to.be.eq(5);
+        expect(table(actions, { type: 'Payment' }).length).to.be.eq(1);
+        expect(table(actions, { status: 'Paid' }).length).to.be.eq(3);
+        expect(table(actions, { reference: '76' }).length).to.be.eq(2);
+        expect(table(actions, { reference: '0', status: 'Paid' }).length).to.be.eq(2);
+        expect(table(actions, { date: '-1' }).length).to.be.eq(5);
     });
 
     createTransactions = function () {
