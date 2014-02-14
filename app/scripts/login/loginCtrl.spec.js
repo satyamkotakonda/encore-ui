@@ -1,4 +1,4 @@
-
+/* jshint node: true */
 describe('Billing: LoginCtrl', function () {
     var scope, ctrl;
     beforeEach(function () {
