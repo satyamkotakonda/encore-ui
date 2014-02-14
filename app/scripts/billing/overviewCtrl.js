@@ -57,9 +57,7 @@ angular.module('billingApp')
             },
             transactionData =  {
                 types: getFormDropdownList(['Payment', 'Invoice', 'Reversal', 'Adjustment']),
-                status: getFormDropdownList(['Paid', 'Settled', 'Unpaid']),
-                periods: getFormDropdownList([[ -1, 'Current Period'], [ -2, 'Previous Statement'],
-                    [ -4, 'Last 3 Statements'], [ -7, 'Last 6 Statements']])
+                status: getFormDropdownList(['Paid', 'Settled', 'Unpaid'])
             };
 
         // Replace with service layer calls
@@ -70,14 +68,16 @@ angular.module('billingApp')
             periods: Transaction.periods({ id: $routeParams.accountNumber })
         };
 
-        $scope.transactionData.periods.$promise.then(function (data) {
-            $scope.transactionData.periods = _.map(data.billingPeriods.billingPeriod, function (period) {
-                return {
-                    label: (period.current === true || period.current === 'true') ?
-                        'Current Period' :
-                        'Periond Ending On: ' + moment(period.endDate).format('MM / DD / YYYY'),
-                    value: period.startDate
-                };
+        if ($scope.transactionData.periods) {
+            $scope.transactionData.periods.$promise.then(function (data) {
+                $scope.transactionData.periods = _.map(data.billingPeriods.billingPeriod, function (period) {
+                    return {
+                        label: (period.current === true || period.current === 'true') ?
+                            'Current Period' :
+                            'Periond Ending On: ' + moment(period.endDate).format('MM / DD / YYYY'),
+                        value: period.startDate
+                    };
+                });
             });
-        });
+        }
     });
