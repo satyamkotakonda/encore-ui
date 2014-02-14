@@ -89,7 +89,7 @@
                         label="Type"
                         required="false"
                         model="filter.type"
-                        options="transactionTypes"
+                        options="transactionData.types"
                         field-id="filterType"
                     ></rx-form-select>
                 </span>
@@ -98,7 +98,7 @@
                         label="Status"
                         required="false"
                         model="filter.status"
-                        options="transactionStatus"
+                        options="transactionData.status"
                         field-id="filterStatus"
                     ></rx-form-select>
                 </span>
@@ -106,45 +106,45 @@
                     <rx-form-select
                         label="Range"
                         required="false"
-                        model="filter.date"
-                        options="transactionDate"
-                        field-id="filterDate"
+                        model="filter.period"
+                        options="transactionData.periods"
+                        field-id="filterPeriod"
                     ></rx-form-select>
                 </span>
                 <div class="flush-right">
-                    <button class="button button-blue" ng-click="filter=undefined;filterDate=undefined">Clear Filter</button>
+                    <button class="button button-blue" ng-click="clearFilter()">Clear Filter</button>
                 </div>
             </div>
             <table class="table transaction-list">
                 <thead>
                     <tr>
                         <th ng-class="{'sorted': sort.field == 'reference'}" 
-                            ng-click="sort.field = 'reference'; sort.reverse = !sort.reverse">
+                            ng-click="sortField('reference', !sort.reverse)">
                             Reference #
                             <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
                         </th>
                         <th ng-class="{'sorted': sort.field == 'date'}" 
-                            ng-click="sort.field = 'date'; sort.reverse = !sort.reverse">
+                            ng-click="sortField('date', !sort.reverse)">
                             Date
                             <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
                         </th>
                         <th ng-class="{'sorted': sort.field == 'type'}" 
-                            ng-click="sort.field = 'type'; sort.reverse = !sort.reverse">
+                            ng-click="sortField('type', !sort.reverse)">
                             Type
                             <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
                         </th>
                         <th ng-class="{'sorted': sort.field == 'status'}" 
-                            ng-click="sort.field = 'status'; sort.reverse = !sort.reverse">
+                            ng-click="sortField('status', !sort.reverse)">
                             Status
                             <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
                         </th>
                         <th ng-class="{'sorted': sort.field == 'amount'}" 
-                            ng-click="sort.field = 'amount'; sort.reverse = !sort.reverse">
+                            ng-click="sortField('amount', !sort.reverse)">
                             Transaction Amount
                             <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
                         </th>
                         <th ng-class="{'sorted': sort.field == 'balance'}" 
-                            ng-click="sort.field = 'balance'; sort.reverse = !sort.reverse">
+                            ng-click="sortField('balance', !sort.reverse)">
                             Balance
                             <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
                         </th>
