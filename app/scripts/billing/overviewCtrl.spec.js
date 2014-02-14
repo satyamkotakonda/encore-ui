@@ -41,11 +41,11 @@ describe('Billing: OverviewCtrl', function () {
     });
 
     it('OverviewCtrl should have default values', function () {
-        expect(scope.transactionData.types).to.be.an('array');
-        expect(scope.transactionData.types.length).to.be.eq(5);
+        expect(scope.filterData.types).to.be.an('array');
+        expect(scope.filterData.types.length).to.be.eq(5);
 
-        expect(scope.transactionData.status).to.be.an('array');
-        expect(scope.transactionData.status.length).to.be.eq(4);
+        expect(scope.filterData.status).to.be.an('array');
+        expect(scope.filterData.status.length).to.be.eq(4);
         expect(scope.sort).to.deep.eq({ field: 'date', reverse: true });
     });
 
