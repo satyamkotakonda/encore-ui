@@ -72,7 +72,10 @@
             </table>
         </div>
         <hr />
-        <h3 class="section-title">Billed Items</h3>
+        <h3 class="section-title">
+            Billed Items
+            <a href="#" class="flush-right"><small>Download Transactions</small></a>
+        </h3>
         <div class="section billing-transactions">
             <div class="billing-filters">
                 <span class="filter">
@@ -89,7 +92,7 @@
                         label="Type"
                         required="false"
                         model="filter.type"
-                        options="transactionData.types"
+                        options="filterData.types"
                         field-id="filterType"
                     ></rx-form-select>
                 </span>
@@ -98,7 +101,7 @@
                         label="Status"
                         required="false"
                         model="filter.status"
-                        options="transactionData.status"
+                        options="filterData.status"
                         field-id="filterStatus"
                     ></rx-form-select>
                 </span>
@@ -107,7 +110,7 @@
                         label="Range"
                         required="false"
                         model="filter.period"
-                        options="transactionData.periods"
+                        options="filterData.periods"
                         field-id="filterPeriod"
                     ></rx-form-select>
                 </span>
