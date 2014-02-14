@@ -1,11 +1,68 @@
 angular.module('billingApp')
-    .controller('OverviewCtrl', function ($scope, $routeParams, Transaction, Account, PageTracking){
-        // For generating Dummy Data
-        var itemToOption = function itemToOption(val) {
-                if(val.hasOwnProperty('value') && val.hasOwnProperty('label')) {
+    .controller('OverviewCtrl', function ($scope, $routeParams, Transaction, Account, PageTracking) {
+        var currentDate = new Date(),
+            // Process the start date
+            getStartDate = function getStartDate (start) {
+                var startDate;
+                if (!isNaN(start)) {
+                    startDate = new Date(currentDate.getFullYear(),
+                                        currentDate.getMonth() + parseInt(start, 10), 1);
+                } else {
+                    startDate = moment(start).toDate();
+                }
+                return startDate;
+            },
+            // Function for filtering transactions by date range set by offset of months 
+            filterTransactionsByPeriod = function filterTransactionsByPeriod (row) {
+                // if the filter period is not defined, then we are not filtering dates
+                if ($scope.filterPeriod !== undefined) {
+                    // Calculate periods based from today's date by months.
+                    var startDate = getStartDate($scope.filterPeriod),
+                        date = moment(row.date).toDate(); // #NOTE: should be done better?
+                    // if the period start date is more recent than the rows date. omit row
+                    if (startDate > date) {
+                        return false;
+                    }
+                }
+                return true;
+            },
+            // Action for clearing the filters
+            clearFilter = function clearFilter () {
+                this.filter = undefined;
+                this.filterPeriod = undefined;
+            },
+            // Action for setting the sort
+            sortField = function sortField (field, reverse) {
+                this.sort.field = field;
+                this.sort.reverse = reverse;
+            },
+            itemsPerPage = 11,
+            defaultSort = {
+                field: 'date',
+                reverse: true
+            };
+
+        // Create an instance of the PageTracking component
+        $scope.pager = PageTracking.createInstance();
+        $scope.pager.itemsPerPage = itemsPerPage; // Set the items per page
+
+        // Set the default sort of the transactions
+        $scope.sort = defaultSort;
+
+        // Assign template actions
+        $scope.filterTransactionsByPeriod = filterTransactionsByPeriod;
+        $scope.clearFilter = clearFilter;
+        $scope.sortField = sortField;
+
+        // Get Account & Transactions Info
+        $scope.account = Account.get({ id: $routeParams.accountNumber });
+        $scope.transactions = Transaction.list({ id: $routeParams.accountNumber });
+
+        var itemToOption = function itemToOption (val) {
+                if (val.hasOwnProperty('value') && val.hasOwnProperty('label')) {
                     return val;
                 }
-                if(Object.prototype.toString.call(val) === '[object Array]' && val.length === 2) {
+                if (Object.prototype.toString.call(val) === '[object Array]' && val.length === 2) {
                     return {
                         value: val[0],
                         label: val[1]
@@ -16,62 +73,35 @@ angular.module('billingApp')
                     label: val
                 };
             },
-            randomDate = function randomDate(start, end) {
-                return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+            getFormSelectList = function getFormSelectList (list) {
+                list = [{ value: undefined, label: 'Any' }].concat(list).map(itemToOption);
+                return function () {
+                    return list;
+                };
             },
-            anyValue = {
-                value: undefined,
-                label: 'Any'
-            },
-            transactionTypes = [anyValue, 'Payment', 'Invoice', 'Reversal', 'Adjustment'],
-            transactionStatus = [anyValue, 'Paid', 'Settled', 'Unpaid'],
-            transactionDate = [anyValue, [-1, 'Current Period'], [-2, 'Previous Statement'], [-4, 'Last 3 Statements'],
-                [-7, 'Last 6 Statements']],
-            currentDate = new Date(),
-            periodStart = new Date((currentDate.getFullYear()-(Math.random() * 5)), ((Math.random()*12)+1), 1),
-            txn = [], x, c, a = 0, t, s;
+            transactionData =  {
+                types: getFormSelectList(['Payment', 'Invoice', 'Reversal', 'Adjustment']),
+                status: getFormSelectList(['Paid', 'Settled', 'Unpaid']),
+                periods: getFormSelectList([[ -1, 'Current Period'], [ -2, 'Previous Statement'],
+                    [ -4, 'Last 3 Statements'], [ -7, 'Last 6 Statements']])
+            };
 
-        for(x = 0, c = 1000; x < c; x += 1) {
-            a = (15 * (Math.random() + x/10)) * (Math.random() < 0.5 ? -1 : 1);
-            t = transactionTypes[parseInt(Math.random() * transactionTypes.length-1, 10)+1];
-            s = transactionStatus[parseInt(Math.random() * transactionStatus.length-1, 10)+1];
-            txn.push({
-                reference: (a+Math.random()*100000000).toFixed(0),
-                date: randomDate(periodStart, currentDate),
-                type: t,
-                status: s,
-                amount: a,
-                balance: (x > 0) ? txn[x-1].balance + a : 0
-            });
-        }
-        // Dummy Data Done
-
-        $scope.pager = PageTracking.createInstance();
-        $scope.pager.itemsPerPage = 11;
-
-        $scope.account = Account.get({id: $routeParams.accountNumber});
-        $scope.transactions = Transaction.list({id: $routeParams.accountNumber});
-
-        
+        // Replace with service layer calls
         // This is most likely done differently, from an API call maybe? similar concept though.
-        $scope.transactionTypes = transactionTypes.map(itemToOption);
-        $scope.transactionStatus = transactionStatus.map(itemToOption);
-        $scope.transactionDate = transactionDate.map(itemToOption);
-
-        $scope.sort = {
-            field: 'date',
-            reverse: true
+        $scope.transactionData = {
+            types: transactionData.types(),
+            status: transactionData.status(),
+            periods: Transaction.periods({ id: $routeParams.accountNumber })
         };
 
-        $scope.filterTransactionsByDate = function filterTransactionsByDate(row) {
-            if($scope.filterDate !== undefined) {
-                var date = row.date,
-                    startDate = new Date(currentDate.getFullYear(),
-                            currentDate.getMonth() + parseInt($scope.filterDate, 10), 1);
-                if(startDate > date) {
-                    return false;
-                }
-            }
-            return true;
-        };
+        $scope.transactionData.periods.$promise.then(function (data) {
+            $scope.transactionData.periods = _.map(data.billingPeriods.billingPeriod, function (period) {
+                return {
+                    label: (period.current === true || period.current === 'true') ?
+                        'Current Period' :
+                        'Periond Ending On: ' + moment(period.endDate).format('MM / DD / YYYY'),
+                    value: period.startDate
+                };
+            });
+        });
     });
