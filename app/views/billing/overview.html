@@ -106,7 +106,7 @@
                     <rx-form-select
                         label="Range"
                         required="false"
-                        model="filterDate"
+                        model="filter.date"
                         options="transactionDate"
                         field-id="filterDate"
                     ></rx-form-select>
@@ -151,7 +151,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="txn in transactions | orderBy:sort.field:sort.reverse | filter:filter | filter:filterTransactionsByDate | Paginate:pager" class="{{ txn.type.toLowerCase() }}">
+                    <tr ng-repeat="txn in transactions | orderBy:sort.field:sort.reverse | TransactionTable:filter | Paginate:pager" class="{{ txn.type.toLowerCase() }}">
                         <td>{{ txn.reference }}</td>
                         <td>{{ txn.date | date:'MM / dd / yyyy' }}</td>
                         <td>{{ txn.type }}</td>
