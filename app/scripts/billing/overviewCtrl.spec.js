@@ -1,13 +1,17 @@
-
 describe('Billing: OverviewCtrl', function () {
-    var scope, ctrl;
+    var scope, ctrl, account, transaction;
+
     beforeEach( function () {
         module('billingApp');
         inject(function ($controller, $rootScope) {
             scope = $rootScope.$new();
+            transaction = { list: sinon.stub() };
+            account = { get: sinon.stub() };
 
             ctrl = $controller('OverviewCtrl',{
-                $scope: scope
+                $scope: scope,
+                Transaction: transaction,
+                Account: account
             });
         });
     });
@@ -21,5 +25,13 @@ describe('Billing: OverviewCtrl', function () {
         expect(scope.transactionTypes.length).to.be.eq(5);
         expect(scope.transactionDate.length).to.be.eq(4);
         expect(scope.sort).to.deep.eq({field: 'date', reverse:true});
+    });
+
+    it('OverviewCtrl should get list of transactions', function () {
+        sinon.assert.calledOnce(transaction.list);
+    });
+
+    it('OverviewCtrl should get account info', function () {
+        sinon.assert.calledOnce(account.get);
     });
 });
