@@ -8,6 +8,16 @@
             content-type: application/json
         file: test/api-mocks/responses/transactions.json
 
+# Get Billing Periods for an account
+-   request:
+        url: ^/api/billing/periods/12345$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/periods.json
+
 # Get Account Info
 -   request:
         url: ^/api/billing/account/12345$
