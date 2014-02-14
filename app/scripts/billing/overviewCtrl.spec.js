@@ -9,7 +9,7 @@ describe('Billing: OverviewCtrl', function () {
             scope = $rootScope.$new();
             PageTrackingObject = PageTracking.createInstance().constructor;
             
-            transaction = { list: sinon.stub() };
+            transaction = { list: sinon.stub(), periods: sinon.stub() };
             account = { get: sinon.stub() };
 
             ctrl = $controller('OverviewCtrl',{
@@ -48,6 +48,10 @@ describe('Billing: OverviewCtrl', function () {
 
     it('OverviewCtrl should get list of transactions', function () {
         sinon.assert.calledOnce(transaction.list);
+    });
+
+    it('OverviewCtrl should get list of billing periods', function () {
+        sinon.assert.calledOnce(transaction.periods);
     });
 
     it('OverviewCtrl should get account info', function () {
