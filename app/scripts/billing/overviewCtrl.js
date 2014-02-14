@@ -31,6 +31,4 @@ angular.module('billingApp')
             field: 'date',
             reverse: true
         };
-
-        console.log($scope.transactionTypes);
     });
