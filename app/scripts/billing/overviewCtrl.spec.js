@@ -3,10 +3,13 @@ describe('Billing: OverviewCtrl', function () {
 
     beforeEach( function () {
         module('billingApp');
-        inject(function ($controller, $rootScope) {
+        inject(function ($controller, $rootScope, Account, Transaction) {
             scope = $rootScope.$new();
-            transaction = { list: sinon.stub() };
-            account = { get: sinon.stub() };
+            transaction = Transaction;
+            account = Account;
+
+            transaction.list = sinon.stub();
+            account.get = sinon.stub();
 
             ctrl = $controller('OverviewCtrl',{
                 $scope: scope,
