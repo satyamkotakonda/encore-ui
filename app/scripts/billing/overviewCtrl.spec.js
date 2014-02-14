@@ -1,12 +1,13 @@
 describe('Billing: OverviewCtrl', function () {
-    var scope, ctrl, account, transaction, PageTrackingObject;
+    var scope, filter, ctrl, account, transaction, PageTrackingObject;
 
     var testAccountNumber = '12345';
 
     beforeEach(function () {
         module('billingApp');
-        inject(function ($controller, $rootScope, PageTracking) {
+        inject(function ($controller, $rootScope, $filter, PageTracking) {
             scope = $rootScope.$new();
+            filter = $filter;
             PageTrackingObject = PageTracking.createInstance().constructor;
             
             transaction = { list: sinon.stub(), periods: sinon.stub() };
@@ -14,11 +15,13 @@ describe('Billing: OverviewCtrl', function () {
 
             ctrl = $controller('OverviewCtrl',{
                 $scope: scope,
+                $filter: filter,
                 Transaction: transaction,
                 Account: account,
                 $routeParams: {
                     accountNumber: testAccountNumber
-                }
+                },
+                PageTracking: PageTracking
             });
         });
     });
