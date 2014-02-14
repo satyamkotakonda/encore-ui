@@ -2,8 +2,8 @@ angular.module('billingApp')
     .controller('OverviewCtrl', function ($scope, $filter, $routeParams, Transaction,
         Account, PageTracking) {
 
-        // Action for clearing the filters
         var defaultDateFormat = 'MM / dd / yyyy',
+            // Action for clearing the filters
             clearFilter = function clearFilter () {
                 this.filter = undefined;
             },
@@ -42,40 +42,30 @@ angular.module('billingApp')
         var itemToOption = function itemToOption (val) {
                 if (val.hasOwnProperty('value') && val.hasOwnProperty('label')) {
                     return val;
+                } else if (Object.prototype.toString.call(val) === '[object Array]' && val.length === 2) {
+                    return { value: val[0], label: val[1] };
                 }
-                if (Object.prototype.toString.call(val) === '[object Array]' && val.length === 2) {
-                    return {
-                        value: val[0],
-                        label: val[1]
-                    };
-                }
-                return {
-                    value: val,
-                    label: val
-                };
+                return { value: val, label: val };
             },
-            getFormDropdownList = function getFormDropdownList (list) {
-                list = [{ value: undefined, label: 'Any' }].concat(list).map(itemToOption);
-                return function () {
-                    return list;
-                };
+            dataToOptions = function dataToOptions (data) {
+                return _.map([{ value: undefined, label: 'Any' }].concat(data), itemToOption);
             },
-            transactionData =  {
-                types: getFormDropdownList(['Payment', 'Invoice', 'Reversal', 'Adjustment']),
-                status: getFormDropdownList(['Paid', 'Settled', 'Unpaid'])
+            filterData = {
+                types: dataToOptions(['Payment', 'Invoice', 'Reversal', 'Adjustment']),
+                status: dataToOptions(['Paid', 'Settled', 'Unpaid'])
             };
 
         // Replace with service layer calls
         // This is most likely done differently, from an API call maybe? similar concept though.
-        $scope.transactionData = {
-            types: transactionData.types(),
-            status: transactionData.status(),
+        $scope.filterData = {
+            types: filterData.types,
+            status: filterData.status,
             periods: Transaction.periods({ id: $routeParams.accountNumber })
         };
-
-        if ($scope.transactionData.periods) {
-            $scope.transactionData.periods.$promise.then(function (data) {
-                $scope.transactionData.periods = _.map(data.billingPeriods.billingPeriod, function (period) {
+        
+        if ($scope.filterData.periods) {
+            $scope.filterData.periods.$promise.then(function (data) {
+                var periods = _.map(data.billingPeriods.billingPeriod, function (period) {
                     return {
                         label: (period.current === true || period.current === 'true') ?
                             'Current Period' :
@@ -83,6 +73,7 @@ angular.module('billingApp')
                         value: period.startDate
                     };
                 });
+                $scope.filterData.periods = [{ value: undefined, label: 'Any' }].concat(periods);
             });
         }
     });
