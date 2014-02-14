@@ -2,36 +2,9 @@ angular.module('billingApp')
     .controller('OverviewCtrl', function ($scope, $routeParams, Transaction,
         Account, PageTracking) {
 
-        var currentDate = new Date(),
-            // Process the start date
-            getStartDate = function getStartDate (start) {
-                var startDate;
-                if (!isNaN(start)) {
-                    startDate = new Date(currentDate.getFullYear(),
-                                        currentDate.getMonth() + parseInt(start, 10), 1);
-                } else {
-                    startDate = moment(start).toDate();
-                }
-                return startDate;
-            },
-            // Function for filtering transactions by date range set by offset of months 
-            filterTransactionsByPeriod = function filterTransactionsByPeriod (row) {
-                // if the filter period is not defined, then we are not filtering dates
-                if ($scope.filterPeriod !== undefined) {
-                    // Calculate periods based from today's date by months.
-                    var startDate = getStartDate($scope.filterPeriod),
-                        date = moment(row.date).toDate(); // #NOTE: should be done better?
-                    // if the period start date is more recent than the rows date. omit row
-                    if (startDate > date) {
-                        return false;
-                    }
-                }
-                return true;
-            },
-            // Action for clearing the filters
-            clearFilter = function clearFilter () {
+        // Action for clearing the filters
+        var clearFilter = function clearFilter () {
                 this.filter = undefined;
-                this.filterPeriod = undefined;
             },
             // Action for setting the sort
             sortField = function sortField (field, reverse) {
@@ -52,7 +25,6 @@ angular.module('billingApp')
         $scope.sort = defaultSort;
 
         // Assign template actions
-        $scope.filterTransactionsByPeriod = filterTransactionsByPeriod;
         $scope.clearFilter = clearFilter;
         $scope.sortField = sortField;
 
@@ -60,6 +32,8 @@ angular.module('billingApp')
         $scope.account = Account.get({ id: $routeParams.accountNumber });
         $scope.transactions = Transaction.list({ id: $routeParams.accountNumber });
 
+        // This might not be needed in the future with a newer version of rxForm, 
+        // until so, this could enhance rx-form-select
         var itemToOption = function itemToOption (val) {
                 if (val.hasOwnProperty('value') && val.hasOwnProperty('label')) {
                     return val;
