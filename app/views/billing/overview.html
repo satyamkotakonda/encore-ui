@@ -111,7 +111,6 @@
                         <label for="filterPeriod" class="field-label">Range:</label>
                         <div class="field-select">
                             <select name="filterPeriod" id="filterPeriod" ng-model="filter.period" >
-                            <!-- ng-options="dc.symbol as (dc.symbol + ' - ' + dc.name) for dc in datacenters" -->
                                 <option value="">Any</option>
                                 <option ng-repeat="p in filterData.periods" value="{{p.startDate}}">{{p.endDate ? 'Period Ending On: ' + ( p.endDate | date:'MM / dd / yyyy') : 'Current' }}</option>
                             </select>
