@@ -13,7 +13,7 @@ module.exports = {
             https: false,
             changeOrigin: false,
             rewrite: {
-                '/api': '/api'
+                'api': '/api'
             }
         }
     ],
