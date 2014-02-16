@@ -2,10 +2,16 @@
 .page-title,
 .section-title {
     font-weight: 400;
-    font-size: 1.6em;
-    color: #727272;
+    font-size: 1.4em;
+    color: #323232;
 }
-
+.section-title {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.section-title a small {
+    font-weight: 300;
+}
 .page-title {
     margin-top: 0;
 }
@@ -84,11 +90,13 @@
 
         dt {
             width: 49%;
+            min-width: 170px;
             font-weight: 500;
             float: left;
             text-align: right;
             line-height: @lineHeight;
             letter-spacing: -0.04em;
+
             &.accent {
                 padding-right: 0;
                 padding-left: 0;
@@ -123,16 +131,26 @@
             margin-right: 10px;
             .form-item {
                 overflow: auto;
+                // min-width: 400px;
+                // .field-label {
+                //     line-height: 30px;
+                // }
                 div {
                     &.field-select {
                         margin-left: 0;
+                        width: auto;
                     }
                     float: left;
                 }
-            }
-            input {
-                width: 225px;
-                top: 0;
+                input {
+                    width: 225px;
+                    top: 0;
+                }
+                select {
+                    min-width: 221px;
+                    max-width: 100%;
+                    width: auto;
+                }
             }
         }
     }

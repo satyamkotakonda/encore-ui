@@ -1,34 +1,79 @@
 angular.module('billingApp')
-    .controller('OverviewCtrl', function ($scope, $routeParams, Transaction,
+    .controller('OverviewCtrl', function ($scope, $filter, $routeParams, Transaction,
         Account, PageTracking) {
-        
-        $scope.pager = PageTracking.createInstance();
-        $scope.pager.itemsPerPage = 10;
 
+        var defaultDateFormat = 'MM / dd / yyyy',
+            // Action for clearing the filters
+            clearFilter = function clearFilter () {
+                this.filter = undefined;
+            },
+            // Action for setting the sort
+            sortField = function sortField (field, reverse) {
+                this.sort.field = field;
+                this.sort.reverse = reverse;
+            },
+            itemsPerPage = 11,
+            defaultSort = {
+                field: 'date',
+                reverse: true
+            },
+            $date = $filter('date');
+
+        // Create an instance of the PageTracking component
+        $scope.pager = PageTracking.createInstance();
+        $scope.pager.itemsPerPage = itemsPerPage; // Set the items per page
+
+        // Set the default sort of the transactions
+        $scope.sort = defaultSort;
+
+        // Default Date Format
+        $scope.defaultDateFormat = defaultDateFormat;
+
+        // Assign template actions
+        $scope.clearFilter = clearFilter;
+        $scope.sortField = sortField;
+
+        // Get Account & Transactions Info
         $scope.account = Account.get({ id: $routeParams.accountNumber });
         $scope.transactions = Transaction.list({ id: $routeParams.accountNumber });
 
-        var anyValue = { value: undefined, label: 'Any' },
-            itemToOption = function (val) {
-                if (val.label) {
+        // This might not be needed in the future with a newer version of rxForm, 
+        // until so, this could enhance rx-form-select
+        var itemToOption = function itemToOption (val) {
+                if (val.hasOwnProperty('value') && val.hasOwnProperty('label')) {
                     return val;
-                } else if (_.isString(val)) {
-                    return { value: val, label: val };
+                } else if (Object.prototype.toString.call(val) === '[object Array]' && val.length === 2) {
+                    return { value: val[0], label: val[1] };
                 }
-
-                return { value: val[0], label: val[1] };
+                return { value: val, label: val };
+            },
+            dataToOptions = function dataToOptions (data) {
+                return _.map([{ value: undefined, label: 'Any' }].concat(data), itemToOption);
+            },
+            filterData = {
+                types: dataToOptions(['Payment', 'Invoice', 'Reversal', 'Adjustment']),
+                status: dataToOptions(['Paid', 'Settled', 'Unpaid'])
             };
-        
-        $scope.transactionTypes = [anyValue, 'Payment', 'Invoice', 'Reversal',
-            'Adjustment'].map(itemToOption);
-        $scope.transactionStatus = [anyValue, 'Paid', 'Settled', 'Unpaid']
-            .map(itemToOption);
-        $scope.transactionDate = [anyValue, [ -1, 'Current Period'],
-            [ -2, 'Previous Statement'], [ -4, 'Last 3 Statements']]
-            .map(itemToOption);
 
-        $scope.sort = {
-            field: 'date',
-            reverse: true
+        // Replace with service layer calls
+        // This is most likely done differently, from an API call maybe? similar concept though.
+        $scope.filterData = {
+            types: filterData.types,
+            status: filterData.status,
+            periods: Transaction.periods({ id: $routeParams.accountNumber })
         };
+        
+        if ($scope.filterData.periods) {
+            $scope.filterData.periods.$promise.then(function (data) {
+                var periods = _.map(data.billingPeriods.billingPeriod, function (period) {
+                    return {
+                        label: (period.current === true || period.current === 'true') ?
+                            'Current Period' :
+                            'Periond Ending On: ' + $date(new Date(period.endDate), defaultDateFormat),
+                        value: period.startDate
+                    };
+                });
+                $scope.filterData.periods = [{ value: undefined, label: 'Any' }].concat(periods);
+            });
+        }
     });

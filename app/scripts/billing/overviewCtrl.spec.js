@@ -1,20 +1,29 @@
 describe('Billing: OverviewCtrl', function () {
-    var scope, ctrl, account, transaction;
+    var scope, ctrl, account, transaction, PageTrackingObject;
 
-    beforeEach( function () {
+    var testAccountNumber = '12345';
+
+    beforeEach(function () {
         module('billingApp');
-        inject(function ($controller, $rootScope, Account, Transaction) {
+
+        inject(function ($controller, $rootScope, Account, Transaction, PageTracking, $filter) {
             scope = $rootScope.$new();
             transaction = Transaction;
             account = Account;
-
             transaction.list = sinon.stub();
             account.get = sinon.stub();
 
+            PageTrackingObject = PageTracking.createInstance().constructor;
+            
             ctrl = $controller('OverviewCtrl',{
                 $scope: scope,
+                $filter: $filter,
                 Transaction: transaction,
-                Account: account
+                Account: account,
+                $routeParams: {
+                    accountNumber: testAccountNumber
+                },
+                PageTracking: PageTracking
             });
         });
     });
@@ -23,15 +32,35 @@ describe('Billing: OverviewCtrl', function () {
         expect(ctrl).to.exist;
     });
 
+    it('OverviewCtrl should have a sort object defined', function () {
+        expect(scope.sort).to.be.a('object');
+        expect(scope.sort).to.have.property('field');
+        expect(scope.sort.field).to.eq('date');
+    });
+
+    it('OverviewCtrl should have a default date format', function () {
+        expect(scope.defaultDateFormat).to.be.eq('MM / dd / yyyy');
+    });
+
+    it('OverviewCtrl should have a pager defined by PageTracking', function () {
+        expect(scope.pager).to.be.an.instanceof(PageTrackingObject);
+    });
+
     it('OverviewCtrl should have default values', function () {
-        expect(scope.transactionStatus.length).to.be.eq(4);
-        expect(scope.transactionTypes.length).to.be.eq(5);
-        expect(scope.transactionDate.length).to.be.eq(4);
-        expect(scope.sort).to.deep.eq({field: 'date', reverse:true});
+        expect(scope.filterData.types).to.be.an('array');
+        expect(scope.filterData.types.length).to.be.eq(5);
+
+        expect(scope.filterData.status).to.be.an('array');
+        expect(scope.filterData.status.length).to.be.eq(4);
+        expect(scope.sort).to.deep.eq({ field: 'date', reverse: true });
     });
 
     it('OverviewCtrl should get list of transactions', function () {
         sinon.assert.calledOnce(transaction.list);
+    });
+
+    xit('OverviewCtrl should get list of billing periods', function () {
+        sinon.assert.calledOnce(transaction.periods);
     });
 
     it('OverviewCtrl should get account info', function () {

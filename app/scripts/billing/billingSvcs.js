@@ -5,7 +5,8 @@ angular.module('billingSvcs', ['ngResource'])
                 id: '@id'
             },
             {
-                list: { method: 'GET', isArray: true }
+                list: { method: 'GET', isArray: true },
+                periods: { method: 'GET', isArray: false, url: '/api/billing/periods/:id' }
             }
         );
     })

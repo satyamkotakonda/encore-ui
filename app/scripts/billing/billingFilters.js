@@ -2,6 +2,18 @@ angular.module('billingApp')
     .filter('TransactionTable', function () {
         return function (transactions, filter) {
             filter = filter ? filter : {};
+            var getFilterDate = function getStartDate (start) {
+                    var filterDate, now;
+                    if (!isNaN(start)) {
+                        now = new Date();
+                        filterDate = new Date().setMonth(now.getMonth() + parseInt(start));
+                    } else {
+                        filterDate = new Date(start);
+                    }
+                    return filterDate;
+                };
+            getFilterDate.cache = {};
+
             var tFilter = {
                 isRefMatch: function (transaction) {
                     return filter.reference ? _.contains(transaction.reference, filter.reference) : true;
@@ -13,15 +25,13 @@ angular.module('billingApp')
                     return filter.status ? filter.status === transaction.status : true;
                 },
                 isInRange: function (transaction) {
-                    if (!filter.date) {
+                    if (!filter.period) {
                         return true;
                     }
-
                     var tdate = new Date(transaction.date),
-                        now = new Date(),
-                        filterDate = new Date().setMonth(now.getMonth() + parseInt(filter.date));
+                        filterDate = getFilterDate(filter.period);
 
-                    return filterDate > tdate;
+                    return filterDate < tdate;
                 }
             };
 
