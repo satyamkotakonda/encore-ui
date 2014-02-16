@@ -1,6 +1,6 @@
 angular.module('billingApp')
-    .controller('OverviewCtrl', function ($scope, $filter, $routeParams, Transaction,
-        Account, PageTracking) {
+    .controller('OverviewCtrl', function ($scope, $routeParams, Transaction, Account,
+        Period, PageTracking) {
 
         var defaultDateFormat = 'MM / dd / yyyy',
             // Action for clearing the filters
@@ -16,8 +16,7 @@ angular.module('billingApp')
             defaultSort = {
                 field: 'date',
                 reverse: true
-            },
-            $date = $filter('date');
+            };
 
         // Create an instance of the PageTracking component
         $scope.pager = PageTracking.createInstance();
@@ -60,20 +59,6 @@ angular.module('billingApp')
         $scope.filterData = {
             types: filterData.types,
             status: filterData.status,
-            periods: Transaction.periods({ id: $routeParams.accountNumber })
+            periods: Period.list({ account: $routeParams.accountNumber })
         };
-        
-        if ($scope.filterData.periods) {
-            $scope.filterData.periods.$promise.then(function (data) {
-                var periods = _.map(data.billingPeriods.billingPeriod, function (period) {
-                    return {
-                        label: (period.current === true || period.current === 'true') ?
-                            'Current Period' :
-                            'Periond Ending On: ' + $date(new Date(period.endDate), defaultDateFormat),
-                        value: period.startDate
-                    };
-                });
-                $scope.filterData.periods = [{ value: undefined, label: 'Any' }].concat(periods);
-            });
-        }
     });

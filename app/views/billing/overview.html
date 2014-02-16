@@ -105,14 +105,18 @@
                         field-id="filterStatus"
                     ></rx-form-select>
                 </span>
+    
                 <span class="filter">
-                    <rx-form-select
-                        label="Range"
-                        required="false"
-                        model="filter.period"
-                        options="filterData.periods"
-                        field-id="filterPeriod"
-                    ></rx-form-select>
+                    <fieldset class="form-item">
+                        <label for="filterPeriod" class="field-label">Range:</label>
+                        <div class="field-select">
+                            <select name="filterPeriod" id="filterPeriod" ng-model="filter.period" >
+                            <!-- ng-options="dc.symbol as (dc.symbol + ' - ' + dc.name) for dc in datacenters" -->
+                                <option value="">Any</option>
+                                <option ng-repeat="p in filterData.periods" value="{{p.startDate}}">{{p.endDate ? 'Period Ending On: ' + ( p.endDate | date:'MM / dd / yyyy') : 'Current' }}</option>
+                            </select>
+                        </div>
+                    </fieldset>
                 </span>
                 <div class="flush-right">
                     <button class="button button-blue" ng-click="clearFilter()">Clear Filter</button>
