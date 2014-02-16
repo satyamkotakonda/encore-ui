@@ -19,7 +19,7 @@ module.exports = function(config) {
             'bower_components/angular-resource/angular-resource.js',
             'bower_components/angular-route/angular-route.js',
             'bower_components/angular-sanitize/angular-sanitize.js',
-            'https://95c7050854423f809e66-6999ba0e7a4f47d417515fb3f08fa9b8.ssl.cf1.rackcdn.com/0.0.1/encore-ui-tpls.min.js',
+            'https://95c7050854423f809e66-6999ba0e7a4f47d417515fb3f08fa9b8.ssl.cf1.rackcdn.com/0.0.2/encore-ui-tpls.min.js',
             'bower_components/angular-xeditable/dist/js/xeditable.js',
             'bower_components/angular-rx-data-table/dist/scripts/rx-data-table.js',
             'bower_components/lodash/dist/lodash.js',
@@ -27,10 +27,8 @@ module.exports = function(config) {
             'bower_components/mousetrap-bind-element/mousetrap-bind-element.js',
             'bower_components/momentjs/moment.js',
             'scripts/**/*.js',
-            'modules/**/*.js',
             '../test/browser-helpers.js',
             'views/**/*.html',// templates
-            'modules/**/*.html'
         ],
 
         // list of files to exclude
