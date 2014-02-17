@@ -1,8 +1,15 @@
 <rx-modal-form 
-	title="Make a Payment" 
-	subtitle="user"
-	submitText="Confirm Payment">
+    title="Make a Payment" 
+    subtitle="user"
+    submitText="Confirm Payment">
+
+    <ul>
+        <li>
+        Current Amount Due:
+        {{account.currentDue | CurrencyMetricSuffix }}
+        Account Balance:
+        {{account.balance | CurrencyMetricSuffix }}
+        Past Due:
+        {{account.pastDue | CurrencyMetricSuffix }}
     
-
-
 </rx-modal-form>
