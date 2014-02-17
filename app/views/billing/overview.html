@@ -161,7 +161,7 @@
                         <td>{{ txn.reference }}</td>
                         <td>{{ txn.date | date: defaultDateFormat }}</td>
                         <td>{{ txn.type }}</td>
-                        <td class="{{ txn.status.toLowerCase() }}">{{ txn.status }}</td>
+                        <td class="{{ txn.status | lowercase }}">{{ txn.status }}</td>
                         <td class="currency">{{ txn.amount | currency }}</td>
                         <td class="currency">{{ txn.balance | currency }}</td>
                     </tr>
