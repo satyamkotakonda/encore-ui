@@ -21,7 +21,7 @@
                 <dt class="accent">Current Amount Due:</dt>
                 <dd class="accent accent-group">
                     <span class="left">
-                        ${{account.currentDue.toFixed(2)}}
+                        {{account.currentDue | currency }}
                     </span>
                     <span class="right">
                         <rx-modal-action template-url="/views/billing/makePayment.html">
@@ -30,9 +30,9 @@
                     </span>
                 </dd>
                 <dt>Account Balance:</dt>
-                <dd>${{account.balance.toFixed(2)}}</dd>
+                <dd>{{account.balance | currency }}</dd>
                 <dt>Past Due:</dt>
-                <dd>${{account.pastDue.toFixed(2)}}</dd>
+                <dd>{{account.pastDue | currency }}</dd>
             </dl>
             <dl class="flush-right">
                 <dt>Currency:</dt>
@@ -107,14 +107,17 @@
                         field-id="filterStatus"
                     ></rx-form-select>
                 </span>
+    
                 <span class="filter">
-                    <rx-form-select
-                        label="Range"
-                        required="false"
-                        model="filter.period"
-                        options="filterData.periods"
-                        field-id="filterPeriod"
-                    ></rx-form-select>
+                    <fieldset class="form-item">
+                        <label for="filterPeriod" class="field-label">Range:</label>
+                        <div class="field-select">
+                            <select name="filterPeriod" id="filterPeriod" ng-model="filter.period" >
+                                <option value="">Any</option>
+                                <option ng-repeat="p in filterData.periods" value="{{p.startDate}}">{{p.endDate ? 'Period Ending On: ' + ( p.endDate | date:'MM / dd / yyyy') : 'Current' }}</option>
+                            </select>
+                        </div>
+                    </fieldset>
                 </span>
                 <div class="flush-right">
                     <button class="button button-blue" ng-click="clearFilter()">Clear Filter</button>
@@ -160,7 +163,7 @@
                         <td>{{ txn.reference }}</td>
                         <td>{{ txn.date | date: defaultDateFormat }}</td>
                         <td>{{ txn.type }}</td>
-                        <td class="{{ txn.status.toLowerCase() }}">{{ txn.status }}</td>
+                        <td class="{{ txn.status | lowercase }}">{{ txn.status }}</td>
                         <td class="currency">{{ txn.amount | currency }}</td>
                         <td class="currency">{{ txn.balance | currency }}</td>
                     </tr>

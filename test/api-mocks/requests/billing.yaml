@@ -9,12 +9,12 @@
         file: test/api-mocks/responses/transactions.json
 
 # Get Billing Periods for an account
--   request:
-        url: ^/api/billing/periods/12345$
+-   request: 
+        url: ^/api/12345/billing_periods$
         method: GET
     response:
         status: 200
-        headers:
+        headers: 
             content-type: application/json
         file: test/api-mocks/responses/periods.json
 

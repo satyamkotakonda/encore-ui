@@ -16,6 +16,7 @@ module.exports = function (grunt) {
         } else if (target === 'stubbed') {
             commonTasks.unshift('stubby');
             if (watch === 'watch' || watch === 'true') {
+                commonTasks.push('open');
                 commonTasks.push('watch');
             }
         } else {

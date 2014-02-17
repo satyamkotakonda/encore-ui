@@ -1,6 +1,25 @@
 angular.module('billingApp')
-    .controller('OverviewCtrl', function ($scope, $filter, $routeParams, Transaction,
-        Account, PageTracking) {
+    /**
+    * @ngdoc object
+    * @name encore:controller.OverviewCtrl
+    * @description
+    * The Controller which displays an overview of a users' billing info.
+    *
+    * @requires $scope - The $scope variable for interacting with the UI.
+    * @requires $routeParams - AngularJS service which provides access to route paramters
+    * @requires billingSvcs.Transaction - Service for CRUD operations for the Transaction resource.
+    * @requires billingSvcs.Account - Service for CRUD operations for the Account resource.
+    * @requires billingSvcs.Period - Service for CRUD operations for the Period resource.
+    * @requires encore.paginate:PageTracking - Service which creates an object for pagination.
+    * 
+    * @example
+    * <pre>
+    * .controller('OverviewCtrl', function ($scope, $routeParams, Transaction,
+    *       Account, Period, PageTracking)
+    * </pre>    
+    */
+    .controller('OverviewCtrl', function ($scope, $routeParams, Transaction, Account,
+        Period, PageTracking) {
 
         var defaultDateFormat = 'MM / dd / yyyy',
             // Action for clearing the filters
@@ -16,8 +35,7 @@ angular.module('billingApp')
             defaultSort = {
                 field: 'date',
                 reverse: true
-            },
-            $date = $filter('date');
+            };
 
         // Create an instance of the PageTracking component
         $scope.pager = PageTracking.createInstance();
@@ -60,20 +78,6 @@ angular.module('billingApp')
         $scope.filterData = {
             types: filterData.types,
             status: filterData.status,
-            periods: Transaction.periods({ id: $routeParams.accountNumber })
+            periods: Period.list({ account: $routeParams.accountNumber })
         };
-        
-        if ($scope.filterData.periods) {
-            $scope.filterData.periods.$promise.then(function (data) {
-                var periods = _.map(data.billingPeriods.billingPeriod, function (period) {
-                    return {
-                        label: (period.current === true || period.current === 'true') ?
-                            'Current Period' :
-                            'Periond Ending On: ' + $date(new Date(period.endDate), defaultDateFormat),
-                        value: period.startDate
-                    };
-                });
-                $scope.filterData.periods = [{ value: undefined, label: 'Any' }].concat(periods);
-            });
-        }
     });
