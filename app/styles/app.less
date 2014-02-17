@@ -79,10 +79,29 @@
                 }
                 .right {
                     border: 0;
-                    .button {
-                        padding: 0 10px;
+                    .modal-link {
+                        display: inline-block;
+                        background: #00ac31;
+                        color: #fff;
+                        
+                        font-size: .8em;
                         line-height: @lineHeight * 1.712;
+                        font-weight: 100;
+                        
+                        padding: 0 10px;
+                        margin: 0;
+                        
+                        
                         border-radius: 0;
+                        border: 0;
+                        
+                        cursor: pointer;
+                        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                        &:hover,
+                        &:active,
+                        &:visited {
+                            text-decoration: none;
+                        }
                     }
                 }
             }
