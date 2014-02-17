@@ -1,15 +1,45 @@
-<rx-modal-form 
-    title="Make a Payment" 
-    subtitle="user"
-    submitText="Confirm Payment">
-
-    <ul>
-        <li>
-        Current Amount Due:
-        {{account.currentDue | CurrencySuffix }}
-        Account Balance:
-        {{account.balance | CurrencySuffix }}
-        Past Due:
-        {{account.pastDue | CurrencySuffix }}
-    
+<rx-modal-form
+    submitText="Confirm Payment"
+    title="Make a Payment"
+    subtitle="user">
+    <div class="payment-action">
+        <div class="account-summary">
+            <div class="amount flush-left">
+                <strong>Account Balance</strong>
+                <p>{{account.balance | CurrencySuffix }}</p>
+                <div class="arrow-down"></div>
+            </div>
+            <div class="amount flush-left">
+                <strong>Due Today</strong>
+                <p>{{account.currentDue | CurrencySuffix }}</p>
+                <div class="arrow-down"></div>
+            </div>
+            <div class="amount flush-left">
+                <strong>Past Due</strong>
+                <p>{{account.pastDue | CurrencySuffix }}</p>
+                <div class="arrow-down"></div>
+            </div>
+        </div>
+        <div class="payment-field">
+            <rx-form-input
+                type="text"
+                label="Payment Amount"
+                required="true"
+                model="payment.amount"
+                field-id="paymentAmount"
+            ></rx-form-input>
+        </div>
+        <div class="payment-field">
+            <fieldset class="form-item">
+                <label for="paymentOption" class="field-label">Payment Options:</label>
+                <div class="field-select">
+                    <select name="paymentOption" id="paymentOption" ng-model="payment.option" class="payment-select">
+                        <option value="">Option 1</option>
+                    </select>
+                </div>
+                <div class="payment-option-desc">
+                </div>
+            </fieldset>
+        </div>
+    </div>
 </rx-modal-form>
