@@ -58,7 +58,7 @@ angular.module('billingApp')
     })
     /**
     * @ngdoc filter
-    * @name encore.filter:CurrencyMetricSuffix
+    * @name encore.filter:CurrencySuffix
     * @param {$filter} $filter - Angular filterProvider for getting the currency filter
     * @description
     * Filter that formats a currency value shortened by a metric prefix (thousand/million/billion), if the value is less
@@ -73,7 +73,7 @@ angular.module('billingApp')
     * @param {Number} value - number to be formatted
     * @param {Boolean} shortcode - Whether to use the shortcode version or the metric version 
     */
-    .filter('CurrencyMetricSuffix', function ($filter) {
+    .filter('CurrencySuffix', function ($filter) {
         var currencyFilter = $filter('currency'),
             ranges = [{
                 divider: 1e12,
