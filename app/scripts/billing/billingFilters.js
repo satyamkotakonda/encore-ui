@@ -75,31 +75,16 @@ angular.module('billingApp')
     */
     .filter('CurrencySuffix', function ($filter) {
         var currencyFilter = $filter('currency'),
-            ranges = [{
-                divider: 1e12,
-                suffix: 't'
-            }, {
-                divider: 1e9,
-                suffix: 'b'
-            }, {
-                divider: 1e6,
-                suffix: 'm'
-            }, {
-                divider: 1e3,
-                suffix: 'k'
-            }];
+            units = ['k', 'm', 'b', 't'];
 
         return function (value) {
-            var i, v, suffix = '', modulus = (value < 0) ? -1 : 1;
-            for (i = 0; value > 9999 && i < ranges.length; i++) {
-                if (value >= ranges[i].divider) {
-                    v = (value / ranges[i].divider);
-                    suffix = (v.toString().length >= 2) ? ranges[i].suffix : '';
-                    value = (v.toString().length >= 2) ? v : value;
-                    break;
-                }
+            var modulus = (value < 0) ? -1 : 1, unit = false;
+            value = Math.abs(value);
+            if (value > 9999) {
+                unit = Math.floor(Math.log(value) / Math.log(1000));
+                value = value / Math.pow(1000, Math.floor(unit));
             }
-            return currencyFilter(modulus * value) + suffix;
+            return currencyFilter(modulus * value) + (units[unit - 1] || '');
         };
 
     });
