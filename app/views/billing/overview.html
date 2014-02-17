@@ -21,16 +21,16 @@
                 <dt class="accent">Current Amount Due:</dt>
                 <dd class="accent accent-group">
                     <span class="left">
-                        ${{account.currentDue.toFixed(2)}}
+                        {{account.currentDue | currency }}
                     </span>
                     <span class="right">
                         <button class="button button-green button-small">Pay Bill</button>
                     </span>
                 </dd>
                 <dt>Account Balance:</dt>
-                <dd>${{account.balance.toFixed(2)}}</dd>
+                <dd>{{account.balance | currency }}</dd>
                 <dt>Past Due:</dt>
-                <dd>${{account.pastDue.toFixed(2)}}</dd>
+                <dd>{{account.pastDue | currency }}</dd>
             </dl>
             <dl class="flush-right">
                 <dt>Currency:</dt>
