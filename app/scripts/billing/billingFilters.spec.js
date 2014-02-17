@@ -34,14 +34,16 @@ describe('BillingFilters', function () {
         expect(currencySuffix(2124)).to.be.eq('$2,124.00');
         expect(currencySuffix(381492513)).to.be.eq('$381.49m');
         expect(currencySuffix(25145)).to.be.eq('$25.15k');
+        expect(currencySuffix(12315100000)).to.be.eq('$12.32b');
+        expect(currencySuffix(-1359314.12)).to.be.eq('($1.36)m');
     });
 
     createTransactions = function () {
         var today = new Date(),
             lastMonth = new Date(),
             threeMonth = new Date();
-        lastMonth.setMonth(today.getMonth() -1);
-        threeMonth.setMonth(today.getMonth() -3);
+        lastMonth.setMonth(today.getMonth() - 1);
+        threeMonth.setMonth(today.getMonth() - 3);
 
         return [
             {
