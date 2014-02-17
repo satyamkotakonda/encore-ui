@@ -18,15 +18,15 @@ angular.module('billingApp')
         return function (transactions, filter) {
             filter = filter ? filter : {};
             var getFilterDate = function getStartDate (start) {
-                    var filterDate, now;
-                    if (!isNaN(start)) {
-                        now = new Date();
-                        filterDate = new Date().setMonth(now.getMonth() + parseInt(start));
-                    } else {
-                        filterDate = new Date(start);
-                    }
-                    return filterDate;
-                };
+                var filterDate, now;
+                if (!isNaN(start)) {
+                    now = new Date();
+                    filterDate = new Date().setMonth(now.getMonth() + parseInt(start));
+                } else {
+                    filterDate = new Date(start);
+                }
+                return filterDate;
+            };
             getFilterDate.cache = {};
 
             var tFilter = {
@@ -57,4 +57,47 @@ angular.module('billingApp')
                     tFilter.isInRange(transaction);
             });
         };
+    })
+    /**
+    * @ngdoc filter
+    * @name encore.filter:CurrencyMetricPrefix
+    * @description
+    * Filter that formats a currency value shortened by a metric prefix (thousand/million/billion), if the value is less
+    * than 10000 don't attempt to shorten it, this is meant for numbeers too big to display on UI.
+    * 
+    * @param {$filter} $filter - Angular filterProvider for formatting data
+    * @param {Number} value - number to be formatted
+    */
+    .filter('CurrencyMetricPrefix', function ($filter) {
+        var currencyFilter = $filter('currency'),
+            // Ranges based on the shortscale of the metric prefixes
+            // Idea from: 
+            // http://stackoverflow.com/questions/17633462/format-a-javascript-number-with-a-metric-prefix-like-1-5k-1m-1g-etc
+            ranges = [{
+                divider: 1e12,
+                suffix: 't'
+            }, {
+                divider: 1e9,
+                suffix: 'b'
+            }, {
+                divider: 1e6,
+                suffix: 'm'
+            }, {
+                divider: 1e3,
+                suffix: 'k'
+            }];
+
+        return function (value) {
+            var i, v, suffix = '', modulus = (value < 0) ? -1 : 1;
+            for (i = 0; value > 9999 && i < ranges.length; i++) {
+                if (value >= ranges[i].divider) {
+                    v = (value / ranges[i].divider);
+                    suffix = (v.toString().length >= 2) ? ranges[i].suffix : '';
+                    value = (v.toString().length >= 2) ? v : value;
+                    break;
+                }
+            }
+            return currencyFilter(modulus * value) + suffix;
+        };
+
     });
