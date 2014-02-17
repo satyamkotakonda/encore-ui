@@ -1,11 +1,12 @@
 describe('BillingFilters', function () {
-    var table, createTransactions;
+    var table, currencySuffix, createTransactions;
 
     beforeEach(function () {
         module('billingApp');
 
         inject(function ($filter) {
             table = $filter('TransactionTable');
+            currencySuffix = $filter('CurrencyMetricSuffix');
         });
     });
     
@@ -22,6 +23,17 @@ describe('BillingFilters', function () {
         expect(table(actions, { reference: '76' }).length).to.be.eq(2);
         expect(table(actions, { reference: '0', status: 'Paid' }).length).to.be.eq(2);
         expect(table(actions, { date: '-1' }).length).to.be.eq(5);
+    });
+
+    it('CurrencyMetricSuffix filter should exist', function () {
+        expect(currencySuffix).to.exist;
+        expect(currencySuffix).to.not.be.empty;
+    });
+
+    it('CurrencyMetricSuffix filter should format number values into their prefixed forms', function () {
+        expect(currencySuffix(2124)).to.be.eq('$2,124.00');
+        expect(currencySuffix(381492513)).to.be.eq('$381.49m');
+        expect(currencySuffix(25145)).to.be.eq('$25.15k');
     });
 
     createTransactions = function () {
