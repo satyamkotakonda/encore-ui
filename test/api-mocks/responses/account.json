@@ -1,8 +1,8 @@
 {
     "id": 1020121,
-    "balance": 380,
-    "pastDue": 180,
-    "currentDue": 200,
+    "balance": 380000000,
+    "pastDue": 18000,
+    "currentDue": 2124,
     "currencyType": "USD",
     "terms": "Due Upon Receipt",
     "cycle": 12,
