@@ -15,9 +15,7 @@ angular.module('billingApp')
     *     - **date** {Date} - The date the transaction occurred.
     */
     .filter('TransactionTable', function () {
-        return function (transactions, filter) {
-            filter = filter ? filter : {};
-            var getFilterDate = function getStartDate (start) {
+        var getFilterDate = function getStartDate (start) {
                 var filterDate, now;
                 if (!isNaN(start)) {
                     now = new Date();
@@ -26,20 +24,18 @@ angular.module('billingApp')
                     filterDate = new Date(start);
                 }
                 return filterDate;
-            };
-            getFilterDate.cache = {};
-
-            var tFilter = {
-                isRefMatch: function (transaction) {
+            },
+            tFilter = {
+                isRefMatch: function (transaction, filter) {
                     return filter.reference ? _.contains(transaction.reference, filter.reference) : true;
                 },
-                isType: function (transaction) {
+                isType: function (transaction, filter) {
                     return filter.type ? filter.type === transaction.type : true;
                 },
-                isStatus: function (transaction) {
+                isStatus: function (transaction, filter) {
                     return filter.status ? filter.status === transaction.status : true;
                 },
-                isInRange: function (transaction) {
+                isInRange: function (transaction, filter) {
                     if (!filter.period) {
                         return true;
                     }
@@ -49,30 +45,36 @@ angular.module('billingApp')
                     return filterDate < tdate;
                 }
             };
-
+        
+        return function (transactions, filter) {
+            filter = filter ? filter : {};
             return _.filter(transactions, function (transaction) {
-                return tFilter.isRefMatch(transaction) &&
-                    tFilter.isType(transaction) &&
-                    tFilter.isStatus(transaction) &&
-                    tFilter.isInRange(transaction);
+                return tFilter.isRefMatch(transaction, filter) &&
+                    tFilter.isType(transaction, filter) &&
+                    tFilter.isStatus(transaction, filter) &&
+                    tFilter.isInRange(transaction, filter);
             });
         };
     })
     /**
     * @ngdoc filter
-    * @name encore.filter:CurrencyMetricPrefix
+    * @name encore.filter:CurrencyMetricSuffix
+    * @param {$filter} $filter - Angular filterProvider for getting the currency filter
     * @description
     * Filter that formats a currency value shortened by a metric prefix (thousand/million/billion), if the value is less
     * than 10000 don't attempt to shorten it, this is meant for numbeers too big to display on UI.
+    *
+    * Ranges based on the shortscale of the metric prefixes
+    * Idea from: 
+    * http://stackoverflow.com/questions/17633462/format-a-javascript-number-with-a-metric-prefix-like-1-5k-1m-1g-etc
+    * Information from:
+    * http://en.wikipedia.org/wiki/SI_prefix
     * 
-    * @param {$filter} $filter - Angular filterProvider for formatting data
     * @param {Number} value - number to be formatted
+    * @param {Boolean} shortcode - Whether to use the shortcode version or the metric version 
     */
-    .filter('CurrencyMetricPrefix', function ($filter) {
+    .filter('CurrencyMetricSuffix', function ($filter) {
         var currencyFilter = $filter('currency'),
-            // Ranges based on the shortscale of the metric prefixes
-            // Idea from: 
-            // http://stackoverflow.com/questions/17633462/format-a-javascript-number-with-a-metric-prefix-like-1-5k-1m-1g-etc
             ranges = [{
                 divider: 1e12,
                 suffix: 't'
