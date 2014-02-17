@@ -1,4 +1,12 @@
 angular.module('billingSvcs', ['ngResource'])
+   /**
+    * @ngdoc service
+    * @name billingSvcs.Transaction
+    * @description
+    * Transaction Service for interaction with Billing API
+    *
+    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    */
     .factory('Transaction', function ($resource) {
         return $resource('/api/billing/transactions/:id',
             {
@@ -9,9 +17,25 @@ angular.module('billingSvcs', ['ngResource'])
             }
         );
     })
+   /**
+    * @ngdoc service
+    * @name billingSvcs.Account
+    * @description
+    * Account Service for interaction with Billing API
+    *
+    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    */
     .factory('Account', function ($resource) {
         return $resource('/api/billing/account/:id');
     })
+   /**
+    * @ngdoc service
+    * @name billingSvcs.Period
+    * @description
+    * Period Service for interaction with Billing API
+    *
+    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    */
     .factory('Period', function ($resource) {
         var transform = function (data) {
             var json = angular.fromJson(data);
