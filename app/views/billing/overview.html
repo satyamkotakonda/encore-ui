@@ -24,7 +24,9 @@
                         ${{account.currentDue.toFixed(2)}}
                     </span>
                     <span class="right">
-                        <button class="button button-green button-small">Pay Bill</button>
+                        <rx-modal-action template-url="/views/billing/makePayment.html">
+                            Pay Bill
+                        </rx-modal-action>
                     </span>
                 </dd>
                 <dt>Account Balance:</dt>
