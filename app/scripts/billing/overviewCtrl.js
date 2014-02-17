@@ -1,4 +1,23 @@
 angular.module('billingApp')
+    /**
+    * @ngdoc object
+    * @name encore:controller.OverviewCtrl
+    * @description
+    * The Controller which displays an overview of a users' billing info.
+    *
+    * @requires $scope - The $scope variable for interacting with the UI.
+    * @requires $routeParams - AngularJS service which provides access to route paramters
+    * @requires billingSvcs.Transaction - Service for CRUD operations for the Transaction resource.
+    * @requires billingSvcs.Account - Service for CRUD operations for the Account resource.
+    * @requires billingSvcs.Period - Service for CRUD operations for the Period resource.
+    * @requires encore.paginate:PageTracking - Service which creates an object for pagination.
+    * 
+    * @example
+    * <pre>
+    * .controller('OverviewCtrl', function ($scope, $routeParams, Transaction,
+    *       Account, Period, PageTracking)
+    * </pre>    
+    */
     .controller('OverviewCtrl', function ($scope, $routeParams, Transaction, Account,
         Period, PageTracking) {
 
