@@ -71,7 +71,6 @@ angular.module('billingApp')
     * http://en.wikipedia.org/wiki/SI_prefix
     * 
     * @param {Number} value - number to be formatted
-    * @param {Boolean} shortcode - Whether to use the shortcode version or the metric version 
     */
     .filter('CurrencySuffix', function ($filter) {
         var currencyFilter = $filter('currency'),
