@@ -19,11 +19,10 @@ angular.module('billingApp')
     * </pre>    
     */
     .controller('OverviewCtrl', function ($scope, $routeParams, Transaction, Account,
-        Period, PageTracking) {
+        Period, PageTracking, DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES) {
 
-        var defaultDateFormat = 'MM / dd / yyyy',
-            // Action for clearing the filters
-            clearFilter = function clearFilter () {
+        // Action for clearing the filters
+        var clearFilter = function clearFilter () {
                 this.filter = undefined;
             },
             // Action for setting the sort
@@ -45,7 +44,7 @@ angular.module('billingApp')
         $scope.sort = defaultSort;
 
         // Default Date Format
-        $scope.defaultDateFormat = defaultDateFormat;
+        $scope.defaultDateFormat = DATE_FORMAT;
 
         // Assign template actions
         $scope.clearFilter = clearFilter;
@@ -55,29 +54,11 @@ angular.module('billingApp')
         $scope.account = Account.get({ id: $routeParams.accountNumber });
         $scope.transactions = Transaction.list({ id: $routeParams.accountNumber });
 
-        // This might not be needed in the future with a newer version of rxForm, 
-        // until so, this could enhance rx-form-select
-        var itemToOption = function itemToOption (val) {
-                if (val.hasOwnProperty('value') && val.hasOwnProperty('label')) {
-                    return val;
-                } else if (Object.prototype.toString.call(val) === '[object Array]' && val.length === 2) {
-                    return { value: val[0], label: val[1] };
-                }
-                return { value: val, label: val };
-            },
-            dataToOptions = function dataToOptions (data) {
-                return _.map([{ value: undefined, label: 'Any' }].concat(data), itemToOption);
-            },
-            filterData = {
-                types: dataToOptions(['Payment', 'Invoice', 'Reversal', 'Adjustment']),
-                status: dataToOptions(['Paid', 'Settled', 'Unpaid'])
-            };
-
         // Replace with service layer calls
         // This is most likely done differently, from an API call maybe? similar concept though.
         $scope.filterData = {
-            types: filterData.types,
-            status: filterData.status,
+            types: TRANSACTION_TYPES,
+            statuses: TRANSACTION_STATUSES,
             periods: Period.list({ account: $routeParams.accountNumber })
         };
     });
