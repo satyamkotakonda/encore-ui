@@ -81,7 +81,7 @@ angular.module('billingApp')
             value = Math.abs(value);
             if (value > 9999) {
                 unit = Math.floor(Math.log(value) / Math.log(1000));
-                value = value / Math.pow(1000, Math.floor(unit));
+                value = value / Math.pow(1000, unit);
             }
             return currencyFilter(modulus * value) + (units[unit - 1] || '');
         };
