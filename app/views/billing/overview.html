@@ -90,27 +90,24 @@
                     ></rx-form-input>
                 </span>
                 <span class="filter">
-                    <fieldset class="form-item">
-                        <label for="filterType" class="field-label">Type:</label>
-                        <div class="field-select">
-                            <select name="filterType" id="filterType" ng-model="filter.type" >
-                                <option value="">Any</option>
-                                <option ng-repeat="t in filterData.types" value="{{t}}">{{t}}</option>
-                            </select>
-                        </div>
-                    </fieldset>
+                    <rx-form-select
+                        label="Type"
+                        required="false"
+                        model="filter.type"
+                        options="filterData.types"
+                        field-id="filterType"
+                    ></rx-form-select>
                 </span>
                 <span class="filter">
-                    <fieldset class="form-item">
-                        <label for="filterStatus" class="field-label">Status:</label>
-                        <div class="field-select">
-                            <select name="filterStatus" id="filterStatus" ng-model="filter.status" >
-                                <option value="">Any</option>
-                                <option ng-repeat="s in filterData.statuses" value="{{s}}">{{s}}</option>
-                            </select>
-                        </div>
-                    </fieldset>
-                </span>    
+                    <rx-form-select
+                        label="Status"
+                        required="false"
+                        model="filter.status"
+                        options="filterData.status"
+                        field-id="filterStatus"
+                    ></rx-form-select>
+                </span>
+    
                 <span class="filter">
                     <fieldset class="form-item">
                         <label for="filterPeriod" class="field-label">Range:</label>

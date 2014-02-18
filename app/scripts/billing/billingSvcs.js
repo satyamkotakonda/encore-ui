@@ -51,7 +51,4 @@ angular.module('billingSvcs', ['ngResource'])
                 list: { method: 'GET', isArray: true, transformResponse: transform }
             }
         );
-    })
-    .constant('DATE_FORMAT', 'MM / dd / yyyy')
-    .constant('TRANSACTION_TYPES', ['Payment', 'Invoice', 'Reversal', 'Adjustment'])
-    .constant('TRANSACTION_STATUSES', ['Paid', 'Settled', 'Unpaid']);
+    });
