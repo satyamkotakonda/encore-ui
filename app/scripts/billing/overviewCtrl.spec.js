@@ -23,10 +23,10 @@ describe('Billing: OverviewCtrl', function () {
                 Transaction: transaction,
                 Account: account,
                 Period: period,
-                $routeParams: {
-                    accountNumber: testAccountNumber
-                },
-                PageTracking: PageTracking
+                $routeParams: { accountNumber: testAccountNumber },
+                PageTracking: PageTracking,
+                TRANSACTION_TYPES: [],
+                TRANSACTION_STATUSES: []
             });
         });
     });
@@ -51,10 +51,7 @@ describe('Billing: OverviewCtrl', function () {
 
     it('OverviewCtrl should have default values', function () {
         expect(scope.filterData.types).to.be.an('array');
-        expect(scope.filterData.types.length).to.be.eq(5);
-
-        expect(scope.filterData.status).to.be.an('array');
-        expect(scope.filterData.status.length).to.be.eq(4);
+        expect(scope.filterData.statuses).to.be.an('array');
         expect(scope.sort).to.deep.eq({ field: 'date', reverse: true });
     });
 
