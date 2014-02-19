@@ -1,19 +1,21 @@
 describe('Billing: OverviewCtrl', function () {
-    var scope, ctrl, account, transaction, period, PageTrackingObject;
+    var scope, ctrl, account, transaction, period, paymentMethod, PageTrackingObject;
 
     var testAccountNumber = '12345';
 
     beforeEach(function () {
         module('billingApp');
 
-        inject(function ($controller, $rootScope, Account, Transaction, Period, PageTracking, $filter) {
+        inject(function ($controller, $rootScope, Account, Transaction, Period, PaymentMethod, PageTracking, $filter) {
             scope = $rootScope.$new();
             transaction = Transaction;
             account = Account;
             period = Period;
+            paymentMethod = PaymentMethod;
             transaction.list = sinon.stub();
             period.list = sinon.stub();
             account.get = sinon.stub();
+            paymentMethod.list = sinon.stub();
 
             PageTrackingObject = PageTracking.createInstance().constructor;
             
@@ -23,6 +25,7 @@ describe('Billing: OverviewCtrl', function () {
                 Transaction: transaction,
                 Account: account,
                 Period: period,
+                PaymentMethod: paymentMethod,
                 $routeParams: { accountNumber: testAccountNumber },
                 PageTracking: PageTracking,
                 TRANSACTION_TYPES: [],
@@ -57,6 +60,10 @@ describe('Billing: OverviewCtrl', function () {
 
     it('OverviewCtrl should get list of transactions', function () {
         sinon.assert.calledOnce(transaction.list);
+    });
+
+    it('OverviewCtrl should get list of payment methods', function () {
+        sinon.assert.calledOnce(paymentMethod.list);
     });
 
     it('OverviewCtrl should get list of billing periods', function () {
