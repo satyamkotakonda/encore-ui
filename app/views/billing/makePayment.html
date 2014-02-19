@@ -1,7 +1,7 @@
 <rx-modal-form
     submitText="Confirm Payment"
     title="Make a Payment"
-    subtitle="user">
+    subtitle="{{user}}">
     <div class="payment-action">
         <div class="account-summary">
             <div class="amount flush-left">
@@ -20,7 +20,7 @@
                 <div class="arrow-down"></div>
             </div>
         </div>
-        <div class="payment-field">
+        <div class="payment-field payment-amount">
             <rx-form-input
                 type="text"
                 label="Payment Amount"
@@ -33,11 +33,23 @@
             <fieldset class="form-item">
                 <label for="paymentOption" class="field-label">Payment Options:</label>
                 <div class="field-select">
-                    <select name="paymentOption" id="paymentOption" ng-model="payment.option" class="payment-select">
-                        <option value="">Option 1</option>
+                    <select name="paymentOption" id="paymentOption" ng-model="payment_method" class="payment-select">
+                        <option ng-repeat="payment in paymentMethods" value="{{$index}}">{{payment.type}} - {{payment.card_type}} {{payment.card_number}}</option>
                     </select>
                 </div>
                 <div class="payment-option-desc">
+                    <div ng-show="payment_method != undefined">
+                        <dl>
+                            <dt>Card Type:</dt>
+                            <dd>{{paymentMethods[payment_method].card_type}}</dd>
+                            <dt>Name:</dt>
+                            <dd>{{paymentMethods[payment_method].card_name}}</dd>
+                            <dt>Number:</dt>
+                            <dd>{{paymentMethods[payment_method].card_number}}</dd>
+                            <dt>Exp. Date:</dt>
+                            <dd>{{paymentMethods[payment_method].card_expiration_date | date: 'MM/yyyy'}}</dd>
+                        </dl>
+                    </div>
                 </div>
             </fieldset>
         </div>
