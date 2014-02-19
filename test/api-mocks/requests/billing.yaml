@@ -27,3 +27,13 @@
         headers:
             content-type: application/json
         file: test/api-mocks/responses/account.json
+
+# Get Available Payment Methods
+-   request:
+        url: ^/api/payment/12345/methods
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/payments.json

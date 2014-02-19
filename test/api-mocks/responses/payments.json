@@ -1,0 +1,23 @@
+[{
+
+	"primary": true,
+	"type": "Credit Card",
+	"card_type": "VISA",
+	"card_name": "Hundley Dudley",
+	"card_number": "**** 1341",
+	"card_expiration_date": "2015-01-02"
+}, {
+	"primary": false,
+	"type": "Credit Card",
+	"card_type": "VISA",
+	"card_name": "Micro Dudley",
+	"card_number": "**** 1921",
+	"card_expiration_date": "2015-01-02"
+}, {
+	"primary": false,
+	"type": "Credit Card",
+	"card_type": "VISA",
+	"card_name": "Uber Dudley",
+	"card_number": "**** 1312",
+	"card_expiration_date": "2015-01-02"
+}]
