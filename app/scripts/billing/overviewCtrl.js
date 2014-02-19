@@ -53,7 +53,7 @@ angular.module('billingApp')
         // Get Account & Transactions Info
         $scope.account = Account.get({ id: $routeParams.accountNumber });
         $scope.transactions = Transaction.list({ id: $routeParams.accountNumber });
-        $scope.paymentMethods = PaymentMethod.query({ id: $routeParams.accountNumber });
+        $scope.paymentMethods = PaymentMethod.list({ id: $routeParams.accountNumber });
 
         $scope.user = 'Test Username';
 
