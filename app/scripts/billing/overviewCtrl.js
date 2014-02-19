@@ -19,7 +19,7 @@ angular.module('billingApp')
     * </pre>    
     */
     .controller('OverviewCtrl', function ($scope, $routeParams, Transaction, Account,
-        Period, PageTracking, DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES) {
+        Period, PaymentMethod, PageTracking, DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES) {
 
         // Action for clearing the filters
         var clearFilter = function clearFilter () {
@@ -53,6 +53,9 @@ angular.module('billingApp')
         // Get Account & Transactions Info
         $scope.account = Account.get({ id: $routeParams.accountNumber });
         $scope.transactions = Transaction.list({ id: $routeParams.accountNumber });
+        $scope.paymentMethods = PaymentMethod.query({ id: $routeParams.accountNumber });
+
+        $scope.user = 'Test Username';
 
         // Replace with service layer calls
         // This is most likely done differently, from an API call maybe? similar concept though.
