@@ -61,7 +61,20 @@ angular.module('billingSvcs', ['ngResource'])
      * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
      */
     .factory('PaymentMethod', function ($resource) {
-        return $resource('/api/payment/:id/methods');
+        var transform = function (data) {
+            var json = angular.fromJson(data);
+            return json.msg ? json.msg : json.methods.method;
+        };
+        return $resource('/api/payment/:id/methods',
+            {
+                id: '@id',
+                marker: 0,
+                limit: 10
+            },
+            {
+                list: { method: 'GET', isArray: true, transformResponse: transform }
+            }
+        );
     })
     .constant('DATE_FORMAT', 'MM / dd / yyyy')
     .constant('TRANSACTION_TYPES', ['Payment', 'Invoice', 'Reversal', 'Adjustment'])
