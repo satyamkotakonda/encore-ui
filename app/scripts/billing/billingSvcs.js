@@ -52,6 +52,17 @@ angular.module('billingSvcs', ['ngResource'])
             }
         );
     })
+    /**
+     * @ngdoc service
+     * @name billingSvcs.Payment
+     * @description
+     * Payment Service for interaction with Billing API
+     *
+     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+     */
+    .factory('PaymentMethod', function ($resource) {
+        return $resource('/api/payment/:id/methods');
+    })
     .constant('DATE_FORMAT', 'MM / dd / yyyy')
     .constant('TRANSACTION_TYPES', ['Payment', 'Invoice', 'Reversal', 'Adjustment'])
     .constant('TRANSACTION_STATUSES', ['Paid', 'Settled', 'Unpaid']);
