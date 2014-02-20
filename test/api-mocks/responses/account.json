@@ -1,7 +1,7 @@
 {
-    "id": 12345,
-    "balance": 14619290,
-    "pastDue": 18000,
+    "id": 12345.21,
+    "balance": 14619290.341,
+    "pastDue": 18000.4113,
     "currentDue": 2124,
     "currencyType": "USD",
     "terms": "Due Upon Receipt",
