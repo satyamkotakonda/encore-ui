@@ -66,7 +66,13 @@
     "gulp-util": "~2.2.14",
     "gulp": "~3.5.2",
     "gulp-karma": "0.0.2",
-    "karma-spec-reporter": "0.0.9"
+    "karma-spec-reporter": "0.0.9",
+    "gulp-livereload": "~1.1.1",
+    "express": "~3.4.8",
+    "consolidate": "~0.10.0",
+    "stubby": "~0.2.3",
+    "http-proxy": "~1.0.2",
+    "request": "~2.34.0"
   },
   "repository": {
     "type": "git",
