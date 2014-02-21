@@ -14,7 +14,7 @@ var gulp        = require('gulp'),
     mockApi     = require('./test/api-mocks/requests/billing.js');
 
 var startServer = function () {
-    var port = 8080,
+    var port = 9000,
         app = express();
 
     app.all('/api/*', function(req, res) {
