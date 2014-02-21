@@ -1,19 +1,24 @@
 describe('Billing: OverviewCtrl', function () {
-    var scope, ctrl, account, transaction, period, PageTrackingObject;
+    var scope, ctrl, account, transaction, period, payment, paymentMethod, PageTrackingObject;
 
     var testAccountNumber = '12345';
 
     beforeEach(function () {
         module('billingApp');
 
-        inject(function ($controller, $rootScope, Account, Transaction, Period, PageTracking, $filter) {
+        inject(function ($controller, $rootScope, Account, Transaction, Period,
+                Payment, PaymentMethod, PageTracking, $filter) {
             scope = $rootScope.$new();
             transaction = Transaction;
             account = Account;
             period = Period;
+            paymentMethod = PaymentMethod;
+            payment = Payment;
             transaction.list = sinon.stub();
             period.list = sinon.stub();
             account.get = sinon.stub();
+            paymentMethod.list = sinon.stub().returns([{}]);
+            payment.post = sinon.stub();
 
             PageTrackingObject = PageTracking.createInstance().constructor;
             
@@ -23,6 +28,8 @@ describe('Billing: OverviewCtrl', function () {
                 Transaction: transaction,
                 Account: account,
                 Period: period,
+                Payment: payment,
+                PaymentMethod: paymentMethod,
                 $routeParams: { accountNumber: testAccountNumber },
                 PageTracking: PageTracking,
                 TRANSACTION_TYPES: [],
@@ -59,11 +66,20 @@ describe('Billing: OverviewCtrl', function () {
         sinon.assert.calledOnce(transaction.list);
     });
 
+    it('OverviewCtrl should get list of payment methods', function () {
+        sinon.assert.calledOnce(paymentMethod.list);
+    });
+
     it('OverviewCtrl should get list of billing periods', function () {
         sinon.assert.calledOnce(period.list);
     });
 
     it('OverviewCtrl should get account info', function () {
         sinon.assert.calledOnce(account.get);
+    });
+
+    it('OverviewCtrl should post a payment', function () {
+        scope.postPayment({ amount: 12314, method: 0 });
+        sinon.assert.calledOnce(payment.post);
     });
 });

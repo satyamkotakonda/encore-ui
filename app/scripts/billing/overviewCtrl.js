@@ -19,7 +19,7 @@ angular.module('billingApp')
     * </pre>    
     */
     .controller('OverviewCtrl', function ($scope, $routeParams, Transaction, Account,
-        Period, PageTracking, DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES) {
+        Period, Payment, PaymentMethod, PageTracking, DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES) {
 
         // Action for clearing the filters
         var clearFilter = function clearFilter () {
@@ -34,6 +34,17 @@ angular.module('billingApp')
             defaultSort = {
                 field: 'date',
                 reverse: true
+            },
+            setPayment = function setPayment (amount) {
+                this.payment.amount = parseFloat(amount).toFixed(2);
+            },
+            equalCurrency = function equalCurrency (amount, amount2) {
+                return parseFloat(amount).toFixed(2) === parseFloat(amount2).toFixed(2);
+            },
+            postPayment = function postPayment (payment) {
+                payment.methodId = $scope.paymentMethods[payment.method].methodId;
+                delete payment.method;
+                $scope.paymentResult = Payment.post({ id: $routeParams.accountNumber, payment: payment });
             };
 
         // Create an instance of the PageTracking component
@@ -47,18 +58,26 @@ angular.module('billingApp')
         $scope.defaultDateFormat = DATE_FORMAT;
 
         // Assign template actions
+        $scope.postPayment = postPayment;
+        $scope.setPayment = setPayment;
         $scope.clearFilter = clearFilter;
         $scope.sortField = sortField;
+        $scope.equalCurrency = equalCurrency;
 
         // Get Account & Transactions Info
         $scope.account = Account.get({ id: $routeParams.accountNumber });
         $scope.transactions = Transaction.list({ id: $routeParams.accountNumber });
+        $scope.paymentMethods = PaymentMethod.list({ id: $routeParams.accountNumber });
+
+        $scope.user = 'Test Username';
+        // Payment Object for making payment transactions
+        $scope.payment = {};
 
         // Replace with service layer calls
         // This is most likely done differently, from an API call maybe? similar concept though.
         $scope.filterData = {
             types: TRANSACTION_TYPES,
             statuses: TRANSACTION_STATUSES,
-            periods: Period.list({ account: $routeParams.accountNumber })
+            periods: Period.list({ id: $routeParams.accountNumber })
         };
     });

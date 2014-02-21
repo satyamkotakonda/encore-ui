@@ -42,6 +42,20 @@
     text-align: right;
 }
 
+.payment-trigger {
+    .modal-link {
+        background: #00ac31;
+        color: #fff;
+    }
+    &.button {
+        .modal-link {
+            font-size: 1em;
+            font-weight: 500;
+            color: #fff;
+        }
+    }
+}
+
 //Overview classes (Might be replaced by common css from encore-ui) 
 .section {
     overflow: auto;
@@ -56,7 +70,7 @@
 .billing-info {
     @spacing: 25px;
     @fontSize: 1.1em;
-    @lineHeight: @fontSize * 1.54;
+    @lineHeight: round(@fontSize * 1.54, 2);
 
     dl {
         max-width: 350px;
@@ -64,13 +78,9 @@
         font-size: @fontSize;
         color: #727272;
         .accent {
-            font-size: @fontSize + (@fontSize * 0.10);
-            line-height: @lineHeight * 1.3;
+            font-size: @fontSize * 1.1;
+            line-height: @lineHeight * 1.4;
             border: 1px #aaa solid;
-            .button {
-                margin: 0;
-                line-height: @lineHeight * 0.73;
-            }
             margin-bottom: @lineHeight * 0.3;
             &.accent-group {
                 border: 0;
@@ -86,13 +96,15 @@
                 }
                 .right {
                     border: 0;
+                    float: left;
+                    line-height: 0;
                     .modal-link {
                         display: inline-block;
                         background: #00ac31;
                         color: #fff;
-                        
-                        font-size: .8em;
-                        line-height: @lineHeight * 1.712;
+
+                        font-size: @fontSize * 0.7;
+                        line-height: @lineHeight * 1.8;
                         font-weight: 100;
                         
                         padding: 0 10px;
@@ -100,7 +112,7 @@
                         
                         
                         border-radius: 0;
-                        border: 0;
+                        border: 1px transparent solid;
                         
                         cursor: pointer;
                         transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -222,14 +234,15 @@
 .payment-action {
     .account-summary {
         overflow: auto;
-        margin-bottom: 2.5em;
+        margin-bottom: 1em;
+
         .amount {
             display: inline-block;
             
             text-align: center;
-            margin-left: 2%;
+            margin-left: 5%;
             margin-right: 0;
-            width: 32%;
+            width: 30%;
             padding: 15px 0;
             cursor: pointer;
             background: #e6e6e6;
@@ -246,32 +259,21 @@
                 font-size: 0.8em;
             }
             p {
-                font-size: 2.5em;
+                font-size: 1.9em;
                 font-weight: 100;
-                margin: 0.4em 0;
+                margin: 0.2em 0;
             }
             .arrow-down {
                 width: 0; 
                 height: 0; 
-                margin: 0 auto;
+                margin: 5px auto 0;
                 border-left: 9px solid transparent;
                 border-right: 9px solid transparent;
                 border-top: 8px solid #cfcfcf;
                 
             }
+            &:hover,
             &.active {
-                background-color: #0078ff;
-                color: #f3f9ff;
-                strong {
-                    color: #78acff;
-                }
-                .arrow-down {
-                    border-left: 9px solid transparent;
-                    border-right: 9px solid transparent;
-                    border-top: 8px solid #0062cc;
-                }
-            }
-            &:hover {
                 background-color: #0078ff;
                 color: #f3f9ff;
                 strong {
@@ -288,12 +290,16 @@
     }
     .payment-field {
         overflow: auto;
-        margin-bottom: 2.5em;
+        margin-bottom: 1em;
+        &:last-child {
+            margin-bottom: 0;
+        }
+
         .form-item {
             .field-label {
                 width: 30%;
                 font-weight: 500;
-                font-size: 1.3em;
+                font-size: 1em;
             }
             & > div {
                 width: 70%;
@@ -323,8 +329,51 @@
                 border-top: 0;
                 background-color: #f7f7f7;
                 .box-sizing(border-box);
+                dl {
+                    max-width: 100%;
+                    font-weight: 500;
+                    font-size: 12px;
+                    color: #727272;
+                    
+                    dt {
+                        width: 24%;
+                        min-width: 50px;
+                        font-weight: 800;
+                        float: left;
+                        text-align: right;
+                        clear: left;
+                    }
+                    dd {
+                        float: left;
+                        margin: 0;
+                        padding-left: 10px;
+                        clear: right;
+                    }
+                }
             }
-            
+        }
+        &.payment-amount {
+            .form-item {
+                & > div {
+                    input {
+                        background-color: #e8f3ff;
+                        border: 1px #dbeafc solid;
+                        border-radius: 0;
+                        font-size: 1.6em;
+                        font-weight: 200;
+                        letter-spacing: -0.09em;
+                        padding: 3px 6px;
+                        float: right;
+                        width: 95%;
+                    }
+                    &:before {
+                        content: '$';
+                        font-size: 1.7em;
+                        font-weight: 300;
+                        line-height: 0.9em;
+                    }
+                }
+            }
         }
     }
 }
