@@ -17,7 +17,7 @@ var startServer = function () {
     var port = 9000,
         app = express();
 
-    app.all('/api/*', function(req, res) {
+    app.all('/api/*', function (req, res) {
         console.info('Mocked: ', req.url);
         var url = 'http://localhost:3000/api/' + req.url;
         req.pipe(request(url)).pipe(res);
@@ -46,7 +46,7 @@ gulp.task('stubApi', function () {
         stubs: 3000,
         data: mockApi
     }, function (error) {
-        if(error) {
+        if (error) {
             console.error(error);
         }
     });
