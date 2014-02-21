@@ -11,8 +11,8 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'bower_components/jquery/jquery.min.js',
             'bower_components/angular/angular.js',
+            'bower_components/jquery/jquery.min.js',
             'bower_components/angular-animate/angular-animate.js',
             'bower_components/angular-cookies/angular-cookies.js',
             'bower_components/angular-mocks/angular-mocks.js',
@@ -46,7 +46,7 @@ module.exports = function(config) {
 
         // test results reporter to use
         // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-        reporters: ['progress', 'coverage'],
+        reporters: ['dots', 'coverage'],
 
         coverageReporter: {
             type : 'html',
