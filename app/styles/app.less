@@ -42,6 +42,20 @@
     text-align: right;
 }
 
+.payment-trigger {
+    .modal-link {
+        background: #00ac31;
+        color: #fff;
+    }
+    &.button {
+        .modal-link {
+            font-size: 1em;
+            font-weight: 500;
+            color: #fff;
+        }
+    }
+}
+
 //Overview classes (Might be replaced by common css from encore-ui) 
 .section {
     overflow: auto;
@@ -56,7 +70,7 @@
 .billing-info {
     @spacing: 25px;
     @fontSize: 1.1em;
-    @lineHeight: @fontSize * 1.54;
+    @lineHeight: round(@fontSize * 1.54, 2);
 
     dl {
         max-width: 350px;
@@ -64,13 +78,9 @@
         font-size: @fontSize;
         color: #727272;
         .accent {
-            font-size: @fontSize + (@fontSize * 0.10);
-            line-height: @lineHeight * 1.3;
+            font-size: @fontSize * 1.1;
+            line-height: @lineHeight * 1.4;
             border: 1px #aaa solid;
-            .button {
-                margin: 0;
-                line-height: @lineHeight * 0.73;
-            }
             margin-bottom: @lineHeight * 0.3;
             &.accent-group {
                 border: 0;
@@ -86,13 +96,15 @@
                 }
                 .right {
                     border: 0;
+                    float: left;
+                    line-height: 0;
                     .modal-link {
                         display: inline-block;
                         background: #00ac31;
                         color: #fff;
-                        
-                        font-size: @fontSize * 0.73;
-                        line-height: @lineHeight * 1.712;
+
+                        font-size: @fontSize * 0.7;
+                        line-height: @lineHeight * 1.8;
                         font-weight: 100;
                         
                         padding: 0 10px;
@@ -100,7 +112,7 @@
                         
                         
                         border-radius: 0;
-                        border: 0;
+                        border: 1px transparent solid;
                         
                         cursor: pointer;
                         transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -260,19 +272,8 @@
                 border-top: 8px solid #cfcfcf;
                 
             }
+            &:hover,
             &.active {
-                background-color: #0078ff;
-                color: #f3f9ff;
-                strong {
-                    color: #78acff;
-                }
-                .arrow-down {
-                    border-left: 9px solid transparent;
-                    border-right: 9px solid transparent;
-                    border-top: 8px solid #0062cc;
-                }
-            }
-            &:hover {
                 background-color: #0078ff;
                 color: #f3f9ff;
                 strong {
@@ -369,6 +370,7 @@
                         content: '$';
                         font-size: 1.7em;
                         font-weight: 300;
+                        line-height: 0.9em;
                     }
                 }
             }
