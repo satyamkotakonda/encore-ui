@@ -8,7 +8,7 @@ angular.module('billingSvcs', ['ngResource'])
     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
     */
     .factory('Transaction', function ($resource) {
-        return $resource('/api/billing/transactions/:id',
+        return $resource('/api/accounts/:id/transactions',
             {
                 id: '@id'
             },
@@ -26,7 +26,7 @@ angular.module('billingSvcs', ['ngResource'])
     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
     */
     .factory('Account', function ($resource) {
-        return $resource('/api/billing/account/:id');
+        return $resource('/api/accounts/:id');
     })
    /**
     * @ngdoc service
@@ -41,9 +41,9 @@ angular.module('billingSvcs', ['ngResource'])
             var json = angular.fromJson(data);
             return json.msg ? json.msg : json.billingPeriods.billingPeriod;
         };
-        return $resource('/api/:account/billing_periods',
+        return $resource('/api/accounts/:id/billing-periods',
             {
-                account: '@account',
+                id: '@id',
                 marker: 0,
                 limit: 10
             },
@@ -60,12 +60,38 @@ angular.module('billingSvcs', ['ngResource'])
      *
      * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
      */
+    .factory('Payment', function ($resource) {
+        var transform = function (data) {
+            var json = angular.fromJson(data);
+            return json.msg ? json.msg : json.payments.payment;
+        };
+        return $resource('/api/accounts/:id/payment',
+            {
+                id: '@id',
+                marker: 0,
+                limit: 10
+            },
+            {
+                list: { method: 'GET', isArray: true, transformResponse: transform },
+                // I realize this seems redundant, but verbally Payment.post makes more sense than Payment.save
+                post: { method: 'POST' }
+            }
+        );
+    })
+    /**
+     * @ngdoc service
+     * @name billingSvcs.Payment
+     * @description
+     * Payment Service for interaction with Billing API
+     *
+     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+     */
     .factory('PaymentMethod', function ($resource) {
         var transform = function (data) {
             var json = angular.fromJson(data);
             return json.msg ? json.msg : json.methods.method;
         };
-        return $resource('/api/payment/:id/methods',
+        return $resource('/api/accounts/:id/methods',
             {
                 id: '@id',
                 marker: 0,
