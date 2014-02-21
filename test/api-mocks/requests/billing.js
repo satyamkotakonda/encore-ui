@@ -1,7 +1,8 @@
 module.exports = [
+    //Get Billing Transactions for Account
     {
         request: {
-            url: '/api/billing/transactions/12345',
+            url: '/api/accounts/12345/transactions',
             method: 'GET'
         },
         response : {
@@ -12,9 +13,10 @@ module.exports = [
             file: './test/api-mocks/responses/transactions.json'
         }
     },
+    //Get Billing Periods for an account
     {
         request: {
-            url: '/api/12345/billing_periods',
+            url: '/api/accounts/12345/billing-periods',
             method: 'GET'
         },
         response : {
@@ -25,9 +27,10 @@ module.exports = [
             file: './test/api-mocks/responses/periods.json'
         }
     },
+    //Get Account Info
     {
         request: {
-            url: '/api/billing/account/12345',
+            url: '/api/accounts/12345',
             method: 'GET'
         },
         response : {
@@ -36,6 +39,34 @@ module.exports = [
                 'content-type': 'application/json'
             },
             file: './test/api-mocks/responses/account.json'
+        }
+    },
+    //Get Available Payment Methods
+    {
+        request: {
+            url: '/api/accounts/12345/methods',
+            method: 'GET'
+        },
+        response: {
+            status: 200,
+            headers: {
+                'content-type': 'application/json'
+            },
+            file: 'test/api-mocks/responses/payment-methods.json'
+        }
+    },
+    //Post a payment to account
+    {
+        request: {
+            url: '/api/accounts/12345/payment',
+            method: 'POST'
+        },
+        response: {
+            status: 200,
+            headers: {
+                'content-type': 'application/json'
+            },
+            file: 'test/api-mocks/responses/make-payment.json'
         }
     }
 ];
