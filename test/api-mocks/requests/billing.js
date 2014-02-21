@@ -27,20 +27,6 @@ module.exports = [
             file: './test/api-mocks/responses/periods.json'
         }
     },
-    //Get Account Info
-    {
-        request: {
-            url: '/api/accounts/12345',
-            method: 'GET'
-        },
-        response : {
-            status: 200,
-            headers: {
-                'content-type': 'application/json'
-            },
-            file: './test/api-mocks/responses/account.json'
-        }
-    },
     //Get Available Payment Methods
     {
         request: {
@@ -53,6 +39,21 @@ module.exports = [
                 'content-type': 'application/json'
             },
             file: 'test/api-mocks/responses/payment-methods.json'
+        }
+    },
+
+    //Get Account Info
+    {
+        request: {
+            url: '/api/accounts/12345',
+            method: 'GET'
+        },
+        response : {
+            status: 200,
+            headers: {
+                'content-type': 'application/json'
+            },
+            file: './test/api-mocks/responses/account.json'
         }
     },
     //Post a payment to account
