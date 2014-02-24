@@ -24,7 +24,7 @@ angular.module('billingApp')
 
         // Action for clearing the filters
         var clearFilter = function () {
-                this.filter = {};
+                $scope.transactionFilter = {};
             },
             // Action for setting the sort
             sortCol = function (predicate) {
@@ -32,14 +32,16 @@ angular.module('billingApp')
             },
             itemsPerPage = 10,
             setPayment = function (amount) {
-                this.payment.amount = parseFloat(amount).toFixed(2);
+                $scope.payment.amount = parseFloat(amount).toFixed(2);
+            },
+            setPaymentMethod = function () {
+                $scope.payment.method = $scope.paymentMethods[$scope.payment.methodIndex];
             },
             equalCurrency = function (amount, amount2) {
                 return parseFloat(amount).toFixed(2) === parseFloat(amount2).toFixed(2);
             },
             postPayment = function (payment) {
-                payment.methodId = $scope.paymentMethods[payment.method].methodId;
-                delete payment.method;
+                payment = { amount: payment.amount, methodId: payment.method.id };
                 $scope.paymentResult = Payment.post({ id: $routeParams.accountNumber, payment: payment });
             },
             cleanPaymentAmount = function (newval, oldval) {
@@ -48,7 +50,7 @@ angular.module('billingApp')
                 }
                 $scope.payment.amount = newval.replace(NON_NUMERIC_REGEX, '');
             };
-        
+
         // Create an instance of the PageTracking component
         $scope.pager = PageTracking.createInstance();
         $scope.pager.itemsPerPage = itemsPerPage; // Set the items per page
@@ -63,6 +65,7 @@ angular.module('billingApp')
         // Assign template actions
         $scope.postPayment = postPayment;
         $scope.setPayment = setPayment;
+        $scope.setPaymentMethod = setPaymentMethod;
         $scope.clearFilter = clearFilter;
         $scope.equalCurrency = equalCurrency;
 
@@ -72,6 +75,7 @@ angular.module('billingApp')
         $scope.paymentMethods = PaymentMethod.list({ id: $routeParams.accountNumber });
 
         $scope.user = 'Test Username';
+
         // Payment Object for making payment transactions
         $scope.payment = {};
 
