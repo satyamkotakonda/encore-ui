@@ -22,7 +22,7 @@
         </div>
         <div class="payment-field payment-amount">
             <rx-form-item label="Payment Amount" prefix="$">
-                <input type="text" ng-model="payment.amount" ng-required="true" />
+                <input type="text" ng-model="payment.amount" ng-required="true" ng-blur="setPayment(payment.amount)" />
             </rx-form-item>
         </div>
         <div class="payment-field">
