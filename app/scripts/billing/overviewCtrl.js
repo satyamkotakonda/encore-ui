@@ -23,26 +23,26 @@ angular.module('billingApp')
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, NON_NUMERIC_REGEX) {
 
         // Action for clearing the filters
-        var clearFilter = function clearFilter () {
+        var clearFilter = function () {
                 this.filter = {};
             },
             // Action for setting the sort
-            sortCol = function sortCol (predicate) {
+            sortCol = function (predicate) {
                 return rxSortUtil.sortCol($scope, predicate);
             },
             itemsPerPage = 10,
-            setPayment = function setPayment (amount) {
+            setPayment = function (amount) {
                 this.payment.amount = parseFloat(amount).toFixed(2);
             },
-            equalCurrency = function equalCurrency (amount, amount2) {
+            equalCurrency = function (amount, amount2) {
                 return parseFloat(amount).toFixed(2) === parseFloat(amount2).toFixed(2);
             },
-            postPayment = function postPayment (payment) {
+            postPayment = function (payment) {
                 payment.methodId = $scope.paymentMethods[payment.method].methodId;
                 delete payment.method;
                 $scope.paymentResult = Payment.post({ id: $routeParams.accountNumber, payment: payment });
             },
-            cleanPaymentAmount = function cleanPaymentAmount (newval, oldval) {
+            cleanPaymentAmount = function (newval, oldval) {
                 if (newval === oldval) {
                     return;
                 }
