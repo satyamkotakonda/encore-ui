@@ -74,7 +74,7 @@ gulp.task('test', function () {
         .pipe(karma({
             configFile: './karma.conf.js',
             action: 'run',
-            reporters: ['spec']
+            reporters: ['spec','coverage','threshold']
         }));
 });
 
