@@ -24,7 +24,7 @@ angular.module('billingApp')
 
         // Action for clearing the filters
         var clearFilter = function clearFilter () {
-                this.filter = undefined;
+                this.filter = {};
             },
             // Action for setting the sort
             sortCol = function sortCol (predicate) {
@@ -69,6 +69,7 @@ angular.module('billingApp')
         $scope.user = 'Test Username';
         // Payment Object for making payment transactions
         $scope.payment = {};
+        $scope.filter = {};
 
         // Replace with service layer calls
         // This is most likely done differently, from an API call maybe? similar concept though.
