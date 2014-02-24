@@ -54,7 +54,6 @@ angular.module('billingApp')
         $scope.pager.itemsPerPage = itemsPerPage; // Set the items per page
 
         // Set the default sort of the transactions
-        //$scope.sort = defaultSort;
         $scope.sort = rxSortUtil.getDefault('date', true);
         $scope.sortCol = sortCol;
 
