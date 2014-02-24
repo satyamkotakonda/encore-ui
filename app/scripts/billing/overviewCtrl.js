@@ -30,7 +30,7 @@ angular.module('billingApp')
             sortCol = function sortCol (predicate) {
                 return rxSortUtil.sortCol($scope, predicate);
             },
-            itemsPerPage = 11,
+            itemsPerPage = 10,
             setPayment = function setPayment (amount) {
                 this.payment.amount = parseFloat(amount).toFixed(2);
             },
