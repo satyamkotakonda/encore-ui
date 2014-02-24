@@ -44,8 +44,8 @@ describe('Billing: OverviewCtrl', function () {
 
     it('OverviewCtrl should have a sort object defined', function () {
         expect(scope.sort).to.be.a('object');
-        expect(scope.sort).to.have.property('field');
-        expect(scope.sort.field).to.eq('date');
+        expect(scope.sort).to.have.property('predicate');
+        expect(scope.sort.predicate).to.eq('date');
     });
 
     it('OverviewCtrl should have a default date format', function () {
@@ -59,7 +59,7 @@ describe('Billing: OverviewCtrl', function () {
     it('OverviewCtrl should have default values', function () {
         expect(scope.filterData.types).to.be.an('array');
         expect(scope.filterData.statuses).to.be.an('array');
-        expect(scope.sort).to.deep.eq({ field: 'date', reverse: true });
+        expect(scope.sort).to.deep.eq({ predicate: 'date', reverse: true });
     });
 
     it('OverviewCtrl should get list of transactions', function () {

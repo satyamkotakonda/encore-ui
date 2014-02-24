@@ -46,7 +46,7 @@
     "karma-firefox-launcher": ">0.1.0",
     "karma-growl-reporter": "~0.1.1",
     "karma-html2js-preprocessor": "~0.1.0",
-    "karma-mocha": "0.1.2",
+    "karma-mocha": "0.1.1",
     "karma-ng-html2js-preprocessor": "~0.1.0",
     "karma-phantomjs-launcher": ">0.1.0",
     "karma-requirejs": "~0.1.0",
@@ -79,7 +79,8 @@
     "gulp-jshint": "~1.4.2",
     "gulp-jscs": "~0.3.1",
     "gulp-open": "~0.2.8",
-    "karma-threshold-reporter": "~0.1.7"
+    "karma-threshold-reporter": "~0.1.7",
+    "hogan.js": "^2.0.0"
   },
   "repository": {
     "type": "git",
