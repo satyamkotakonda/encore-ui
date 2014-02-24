@@ -79,7 +79,7 @@ describe('Billing: OverviewCtrl', function () {
     });
 
     it('OverviewCtrl should post a payment', function () {
-        scope.postPayment({ amount: 12314, method: 0 });
+        scope.postPayment({ amount: 12314, method: { id: 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479' }});
         sinon.assert.calledOnce(payment.post);
     });
 });
