@@ -135,40 +135,64 @@
             <table class="table transaction-list">
                 <thead>
                     <tr>
-                        <th ng-class="{'sorted': sort.field == 'reference'}" 
-                            ng-click="sortField('reference', !sort.reverse)">
-                            Reference #
-                            <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
+                        <th scope="col">
+                            <rx-sortable-column
+                                sort-method="sortCol"
+                                sort-property="reference"
+                                predicate="sort.predicate"
+                                reverse="sort.reverse">
+                                Reference #
+                            </rx-sortable-column>
                         </th>
-                        <th ng-class="{'sorted': sort.field == 'date'}" 
-                            ng-click="sortField('date', !sort.reverse)">
-                            Date
-                            <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
+                        <th scope="col">
+                            <rx-sortable-column
+                                sort-method="sortCol"
+                                sort-property="date"
+                                predicate="sort.predicate"
+                                reverse="sort.reverse">
+                                Date
+                            </rx-sortable-column>
                         </th>
-                        <th ng-class="{'sorted': sort.field == 'type'}" 
-                            ng-click="sortField('type', !sort.reverse)">
-                            Type
-                            <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
+                        <th scope="col">
+                            <rx-sortable-column
+                                sort-method="sortCol"
+                                sort-property="type"
+                                predicate="sort.predicate"
+                                reverse="sort.reverse">
+                                Type
+                            </rx-sortable-column>
                         </th>
-                        <th ng-class="{'sorted': sort.field == 'status'}" 
-                            ng-click="sortField('status', !sort.reverse)">
-                            Status
-                            <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
+                        <th scope="col">
+                            <rx-sortable-column
+                                sort-method="sortCol"
+                                sort-property="status"
+                                predicate="sort.predicate"
+                                reverse="sort.reverse">
+                                Status
+                            </rx-sortable-column>
                         </th>
-                        <th ng-class="{'sorted': sort.field == 'amount'}" 
-                            ng-click="sortField('amount', !sort.reverse)">
-                            Transaction Amount
-                            <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
+                        <th scope="col">
+                            <rx-sortable-column
+                                sort-method="sortCol"
+                                sort-property="amount"
+                                predicate="sort.predicate"
+                                reverse="sort.reverse">
+                                Transaction Amount
+                            </rx-sortable-column>
                         </th>
-                        <th ng-class="{'sorted': sort.field == 'balance'}" 
-                            ng-click="sortField('balance', !sort.reverse)">
-                            Balance
-                            <div class="flush-right" ng-class="{'arrow-up': !sort.reverse, 'arrow-down': sort.reverse}"></div>
+                        <th scope="col">
+                            <rx-sortable-column
+                                sort-method="sortCol"
+                                sort-property="balance"
+                                predicate="sort.predicate"
+                                reverse="sort.reverse">
+                                Balance
+                            </rx-sortable-column>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="txn in transactions | orderBy:sort.field:sort.reverse | TransactionTable:filter | Paginate:pager" class="{{ txn.type.toLowerCase() }}">
+                    <tr ng-repeat="txn in transactions | orderBy:sort.predicate:sort.reverse | TransactionTable:filter | Paginate:pager" class="{{ txn.type.toLowerCase() }}">
                         <td>{{ txn.reference }}</td>
                         <td>{{ txn.date | date: defaultDateFormat }}</td>
                         <td>{{ txn.type }}</td>
