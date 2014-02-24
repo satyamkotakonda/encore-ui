@@ -21,44 +21,38 @@
             </div>
         </div>
         <div class="payment-field payment-amount">
-            <rx-form-input
-                type="text"
-                label="Payment Amount"
-                required="true"
-                name="paymentAmount"
-                model="payment.amount"
-                field-id="paymentAmount"
-            ></rx-form-input>
+            <rx-form-item label="Payment Amount" prefix="$">
+                <input type="text" ng-model="payment.amount" ng-required="true" />
+            </rx-form-item>
         </div>
         <div class="payment-field">
-            <fieldset class="form-item">
-                <label for="paymentMethod" class="field-label">Payment Options:</label>
-                <div class="field-select">
-                    <select name="paymentMethod" id="paymentMethod" ng-model="payment.method" class="payment-select" ng-required="true">
+            <rx-form-item label="Payment Options">
+                <span class="field-select">
+                    <select ng-model="payment.method" ng-required="true">
                         <option ng-repeat="payment in paymentMethods" value="{{$index}}" ng-disabled="payment.disabled == 'true'">
                             {{payment.electronicCheck && 'ACH' || 'Credit Card'}} - 
                             {{payment.electronicCheck && payment.electronicCheck.accountType || payment.paymentCard.cardType}}
                             {{payment.electronicCheck && payment.electronicCheck.accountNumber || payment.paymentCard.cardNumber}}
                         </option>
                     </select>
-                </div>
-                <div class="payment-option-desc">
-                    <div ng-show="payment.method != undefined">
-                        <dl>
-                            <dt>{{paymentMethods[payment.method].electronicCheck && 'Account' || 'Card'}} Type:</dt>
-                            <dd>{{paymentMethods[payment.method].electronicCheck && paymentMethods[payment.method].electronicCheck.accountType || paymentMethods[payment.method].paymentCard.cardType}}</dd>
-                            <dt>Name:</dt>
-                            <dd>{{paymentMethods[payment.method].electronicCheck && paymentMethods[payment.method].electronicCheck.accountHolderName || paymentMethods[payment.method].paymentCard.cardHolderName}}</dd>
-                            <dt ng-show="paymentMethods[payment.method].electronicCheck.routingNumber">Routing #:</dt>
-                            <dd ng-show="paymentMethods[payment.method].electronicCheck.routingNumber">{{paymentMethods[payment.method].electronicCheck.routingNumber}}</dd>
-                            <dt>Number:</dt>
-                            <dd>{{paymentMethods[payment.method].electronicCheck && paymentMethods[payment.method].electronicCheck.accountNumber || paymentMethods[payment.method].paymentCard.cardNumber}}</dd>
-                            <dt ng-show="paymentMethods[payment.method].paymentCard.cardExpirationDate">Exp. Date:</dt>
-                            <dd ng-show="paymentMethods[payment.method].paymentCard.cardExpirationDate">{{paymentMethods[payment.method].paymentCard.cardExpirationDate}}</dd>
-                        </dl>
+                    <div class="payment-option-desc">
+                        <div ng-show="payment.method != undefined">
+                            <dl>
+                                <dt>{{paymentMethods[payment.method].electronicCheck && 'Account' || 'Card'}} Type:</dt>
+                                <dd>{{paymentMethods[payment.method].electronicCheck && paymentMethods[payment.method].electronicCheck.accountType || paymentMethods[payment.method].paymentCard.cardType}}</dd>
+                                <dt>Name:</dt>
+                                <dd>{{paymentMethods[payment.method].electronicCheck && paymentMethods[payment.method].electronicCheck.accountHolderName || paymentMethods[payment.method].paymentCard.cardHolderName}}</dd>
+                                <dt ng-show="paymentMethods[payment.method].electronicCheck.routingNumber">Routing #:</dt>
+                                <dd ng-show="paymentMethods[payment.method].electronicCheck.routingNumber">{{paymentMethods[payment.method].electronicCheck.routingNumber}}</dd>
+                                <dt>Number:</dt>
+                                <dd>{{paymentMethods[payment.method].electronicCheck && paymentMethods[payment.method].electronicCheck.accountNumber || paymentMethods[payment.method].paymentCard.cardNumber}}</dd>
+                                <dt ng-show="paymentMethods[payment.method].paymentCard.cardExpirationDate">Exp. Date:</dt>
+                                <dd ng-show="paymentMethods[payment.method].paymentCard.cardExpirationDate">{{paymentMethods[payment.method].paymentCard.cardExpirationDate}}</dd>
+                            </dl>
+                        </div>
                     </div>
-                </div>
-            </fieldset>
+                </span>
+            </rx-form-item>
         </div>
     </div>
 </rx-modal-form>
