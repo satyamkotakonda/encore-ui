@@ -19,22 +19,18 @@ angular.module('billingApp')
     * </pre>    
     */
     .controller('OverviewCtrl', function ($scope, $routeParams, Transaction, Account,
-        Period, Payment, PaymentMethod, PageTracking, DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES) {
+        Period, Payment, PaymentMethod, PageTracking, rxSortUtil,
+        DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES) {
 
         // Action for clearing the filters
         var clearFilter = function clearFilter () {
                 this.filter = undefined;
             },
             // Action for setting the sort
-            sortField = function sortField (field, reverse) {
-                this.sort.field = field;
-                this.sort.reverse = reverse;
+            sortCol = function sortCol (predicate) {
+                return rxSortUtil.sortCol($scope, predicate);
             },
             itemsPerPage = 11,
-            defaultSort = {
-                field: 'date',
-                reverse: true
-            },
             setPayment = function setPayment (amount) {
                 this.payment.amount = parseFloat(amount).toFixed(2);
             },
@@ -52,7 +48,9 @@ angular.module('billingApp')
         $scope.pager.itemsPerPage = itemsPerPage; // Set the items per page
 
         // Set the default sort of the transactions
-        $scope.sort = defaultSort;
+        //$scope.sort = defaultSort;
+        $scope.sort = rxSortUtil.getDefault('date', true);
+        $scope.sortCol = sortCol;
 
         // Default Date Format
         $scope.defaultDateFormat = DATE_FORMAT;
@@ -61,7 +59,6 @@ angular.module('billingApp')
         $scope.postPayment = postPayment;
         $scope.setPayment = setPayment;
         $scope.clearFilter = clearFilter;
-        $scope.sortField = sortField;
         $scope.equalCurrency = equalCurrency;
 
         // Get Account & Transactions Info
