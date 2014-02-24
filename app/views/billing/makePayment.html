@@ -28,11 +28,11 @@
         <div class="payment-field">
             <rx-form-item label="Payment Options">
                 <span class="field-select">
-                    <select ng-model="payment.methodIndex" ng-required="true">
-                        <option ng-repeat="payment in paymentMethods" value="{{$index}}" ng-disabled="payment.disabled == 'true'">
-                            {{payment.electronicCheck && 'ACH' || 'Credit Card'}} - 
-                            {{payment.electronicCheck && payment.electronicCheck.accountType || payment.paymentCard.cardType}}
-                            {{payment.electronicCheck && payment.electronicCheck.accountNumber || payment.paymentCard.cardNumber}}
+                    <select ng-model="payment.methodIndex" ng-required="true" ng-change="setPaymentMethod()">
+                        <option ng-repeat="pmt in paymentMethods" value="{{$index}}" ng-disabled="pmt.disabled == 'true'">
+                            {{pmt.electronicCheck && 'ACH' || 'Credit Card'}} - 
+                            {{pmt.electronicCheck && pmt.electronicCheck.accountType || pmt.paymentCard.cardType}}
+                            {{pmt.electronicCheck && pmt.electronicCheck.accountNumber || pmt.paymentCard.cardNumber}}
                         </option>
                     </select>
                     <div class="payment-option-desc">
