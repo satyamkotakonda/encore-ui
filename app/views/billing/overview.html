@@ -87,46 +87,39 @@
         <div class="section billing-transactions">
             <div class="billing-filters">
                 <span class="filter">
-                    <rx-form-input
-                        type="text"
-                        label="Reference #"
-                        required="false"
-                        model="filter.reference"
-                        field-id="filterReferenceNumber"
-                    ></rx-form-input>
+                    <rx-form-item label="Reference #">
+                        <input type="text" ng-model="filter.reference" ng-required="true" />
+                    </rx-form-item>
                 </span>
                 <span class="filter">
-                    <fieldset class="form-item">
-                        <label for="filterType" class="field-label">Type:</label>
-                        <div class="field-select">
-                            <select name="filterType" id="filterType" ng-model="filter.type" >
+                    <rx-form-item label="Type">
+                        <span class="field-select">
+                            <select ng-model="filter.type" >
                                 <option value="">Any</option>
                                 <option ng-repeat="t in filterData.types" value="{{t}}">{{t}}</option>
                             </select>
-                        </div>
-                    </fieldset>
+                        </span>
+                    </rx-form-item>
                 </span>
                 <span class="filter">
-                    <fieldset class="form-item">
-                        <label for="filterStatus" class="field-label">Status:</label>
-                        <div class="field-select">
-                            <select name="filterStatus" id="filterStatus" ng-model="filter.status" >
+                    <rx-form-item label="Status">
+                        <span class="field-select">
+                            <select ng-model="filter.status" >
                                 <option value="">Any</option>
                                 <option ng-repeat="s in filterData.statuses" value="{{s}}">{{s}}</option>
                             </select>
-                        </div>
-                    </fieldset>
+                        </span>
+                    </rx-form-item>
                 </span>    
                 <span class="filter">
-                    <fieldset class="form-item">
-                        <label for="filterPeriod" class="field-label">Range:</label>
-                        <div class="field-select">
-                            <select name="filterPeriod" id="filterPeriod" ng-model="filter.period" >
+                    <rx-form-item label="Range">
+                        <span class="field-select">
+                            <select ng-model="filter.period" >
                                 <option value="">Any</option>
                                 <option ng-repeat="p in filterData.periods" value="{{p.startDate}}">{{p.endDate ? 'Period Ending On: ' + ( p.endDate | date:'MM / dd / yyyy') : 'Current' }}</option>
                             </select>
-                        </div>
-                    </fieldset>
+                        </span>
+                    </rx-form-item>
                 </span>
                 <div class="flush-right">
                     <button class="button button-blue" ng-click="clearFilter()">Clear Filter</button>
