@@ -74,7 +74,9 @@ angular.module('billingApp')
         $scope.user = 'Test Username';
         // Payment Object for making payment transactions
         $scope.payment = {};
-        $scope.filter = {};
+
+        // Transaction Filter for the list of transactions
+        $scope.transactionFilter = {};
 
         // Replace with service layer calls
         // This is most likely done differently, from an API call maybe? similar concept though.
