@@ -4,8 +4,9 @@ var gulp        = require('gulp'),
     less        = require('gulp-less'),
     jshint      = require('gulp-jshint'),
     jscs        = require('gulp-jscs'),
-    stylish     = require('jshint-stylish'),
     livereload  = require('gulp-livereload'),
+    open        = require('gulp-open'),
+    stylish     = require('jshint-stylish'),
     express     = require('express'),
     request   = require('request'),
     consolidate = require('consolidate'),
@@ -65,7 +66,7 @@ gulp.task('jscs', function () {
 
 gulp.task('lint', function () {
     gulp.run('jshint');
-    //gulp.run('jscs'); // commented out due to error in plugin
+    gulp.run('jscs');
 });
 
 gulp.task('test', function () {
@@ -82,11 +83,17 @@ gulp.task('server', function () {
     return startServer();
 });
 
+gulp.task('open', function () {
+    return gulp.src('app/index.html')
+        .pipe(open('', {url: 'http://localhost:9000', app: 'google chrome'}));
+});
+
 gulp.task('default', function () {
+    startServer();
+    gulp.run('stubApi');
     gulp.run('lint');
     gulp.run('test');
-    gulp.run('stubApi');
-    startServer();
+    gulp.run('open');
     var server = livereload();
 
     gulp.watch('app/**/*.js', ['lint','test'])
