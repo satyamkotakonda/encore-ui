@@ -102,6 +102,7 @@ angular.module('billingSvcs', ['ngResource'])
             }
         );
     })
+    .constant('NON_NUMERIC_REGEX', /[^0-9.]/)
     .constant('DATE_FORMAT', 'MM / dd / yyyy')
     .constant('TRANSACTION_TYPES', ['Payment', 'Invoice', 'Reversal', 'Adjustment'])
     .constant('TRANSACTION_STATUSES', ['Paid', 'Settled', 'Unpaid']);
