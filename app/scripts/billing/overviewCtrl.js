@@ -20,7 +20,7 @@ angular.module('billingApp')
     */
     .controller('OverviewCtrl', function ($scope, $routeParams, Transaction, Account,
         Period, Payment, PaymentMethod, PageTracking, rxSortUtil,
-        DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES) {
+        DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, NON_NUMERIC_REGEX) {
 
         // Action for clearing the filters
         var clearFilter = function clearFilter () {
@@ -41,8 +41,14 @@ angular.module('billingApp')
                 payment.methodId = $scope.paymentMethods[payment.method].methodId;
                 delete payment.method;
                 $scope.paymentResult = Payment.post({ id: $routeParams.accountNumber, payment: payment });
+            },
+            cleanPaymentAmount = function cleanPaymentAmount (newval, oldval) {
+                if (newval === oldval) {
+                    return;
+                }
+                $scope.payment.amount = newval.replace(NON_NUMERIC_REGEX, '');
             };
-
+        
         // Create an instance of the PageTracking component
         $scope.pager = PageTracking.createInstance();
         $scope.pager.itemsPerPage = itemsPerPage; // Set the items per page
@@ -78,4 +84,6 @@ angular.module('billingApp')
             statuses: TRANSACTION_STATUSES,
             periods: Period.list({ id: $routeParams.accountNumber })
         };
+
+        $scope.$watch('payment.amount', cleanPaymentAmount);
     });
