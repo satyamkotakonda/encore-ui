@@ -1,0 +1,19 @@
+/*
+
+# Mixins
+These are common mixins that will be re-used the less code
+
+*/
+
+.box-sizing(@box) {
+    -webkit-box-sizing: @box;
+    -moz-box-sizing: @box;
+    -ms-box-sizing: @box;
+    box-sizing: @box;
+}
+
+.clearfix() {
+    zoom: 1;
+    &:before { content: ''; display: block; }
+    &:after { content: ''; display: table; clear: both; }
+}

@@ -1,0 +1,214 @@
+@import 'vars';
+@import 'common';
+@import 'mixins';
+
+/*
+ List for summarized items that can be used to choose from
+ ```
+ <div class="summary-list">
+     <div class="summary-item pull-left" ng-click="setPayment(account.balance)" ng-class="{active: equalCurrency(account.balance, payment.amount)}">
+         <strong class="header">Account Balance</strong>
+         <p>$1,313.00</p>
+         <div class="arrow-down"></div>
+     </div>
+     <div class="summary-item pull-left" ng-click="setPayment(account.currentDue)" ng-class="{active: equalCurrency(account.currentDue, payment.amount)}">
+         <strong class="header">Due Today</strong>
+         <p>$11.03m</p>
+         <div class="arrow-down"></div>
+     </div>
+ </div>
+ ```
+*/
+.summary-list {
+    .clearfix();
+    .summary-item {
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+        
+        width: 30%;
+        margin: 0 0 0 5%;
+        padding: 15px 0;
+        
+        background-color: @actionGrey;
+        color: @summaryItemText;
+        &:first-child {
+            margin-left: 0;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+        .header {
+            text-transform: uppercase;
+            font-size: @fontSize - 0.2;
+        }
+        p {
+            font-size: @fontSize + 0.8;
+            font-weight: 100;
+            margin: 0;
+            line-height: @lineHeight;
+        }
+        .arrow-down {
+            width: 0; 
+            height: 0; 
+            margin: 5px auto 0;
+            border-left: 9px solid transparent;
+            border-right: 9px solid transparent;
+            border-top: 8px solid @summaryItemText;
+        }
+        &:hover,
+        &.active {
+            background-color: @actionBlue;
+            color: @summaryItemHover;
+            .header {
+                color: @summaryItemHeaderHover;
+            }
+            .arrow-down {
+                border-left: 9px solid transparent;
+                border-right: 9px solid transparent;
+                border-top: 8px solid @summaryItemArrowHover;
+            }
+        }
+    }
+}
+
+/*
+ Overrides for the make a payment modal of the summary list and the form-items
+ Also append a description panel below the payment method dropdown
+ ```
+ <div class="summary-list">
+     <div class="summary-item pull-left" ng-click="setPayment(account.balance)" ng-class="{active: equalCurrency(account.balance, payment.amount)}">
+         <strong class="header">Account Balance</strong>
+         <p>$1,313.00</p>
+         <div class="arrow-down"></div>
+     </div>
+     <div class="summary-item pull-left" ng-click="setPayment(account.currentDue)" ng-class="{active: equalCurrency(account.currentDue, payment.amount)}">
+         <strong class="header">Due Today</strong>
+         <p>$11.03m</p>
+         <div class="arrow-down"></div>
+     </div>
+ </div>
+ <div class="payment-field payment-amount">
+     <rx-form-item label="Payment Amount" prefix="$">
+         <input type="text" ng-model="payment.amount" ng-required="true" ng-blur="setPayment(payment.amount)" />
+     </rx-form-item>
+ </div>
+ <div class="payment-field payment-method">
+     <rx-form-item label="Payment Options">
+         <span class="field-select">
+             <select ng-model="payment.methodIndex" ng-required="true" ng-change="setPaymentMethod()">
+                 <option ng-repeat="pmt in paymentMethods" value="{{$index}}" ng-disabled="pmt.disabled == 'true'">
+                     {{pmt.electronicCheck && 'ACH' || 'Credit Card'}} - 
+                     {{pmt.electronicCheck && pmt.electronicCheck.accountType || pmt.paymentCard.cardType}}
+                     {{pmt.electronicCheck && pmt.electronicCheck.accountNumber || pmt.paymentCard.cardNumber}}
+                 </option>
+             </select>
+             <div class="payment-option-desc">
+                 <div ng-show="payment.method.electronicCheck">
+                     <dl class="list-definition">
+                         <dt>Account Type:</dt>
+                         <dd>{{payment.method.electronicCheck.accountType}}</dd>
+                         <dt>Name:</dt>
+                         <dd>{{payment.method.electronicCheck.accountHolderName}}</dd>
+                         <dt>Routing #:</dt>
+                         <dd>{{payment.method.electronicCheck.routingNumber}}</dd>
+                         <dt>Number:</dt>
+                         <dd>{{payment.method.electronicCheck.accountNumber}}</dd>
+                     </dl>
+                 </div>
+             </div>
+         </span>
+     </rx-form-item>
+ </div>
+ ```
+*/
+
+.payment-action {
+    .summary-list {
+        margin-bottom: @lineHeight;
+        .summary-item {
+            background-color: #e6e6e6;
+            p {
+                line-height: @lineHeight - 0.3;
+            }
+            &:hover, &.active {
+                background-color: @actionBlue;
+            }
+        }
+    }
+    .payment-field {
+        margin-bottom: @fontSize;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        .form-item {
+            .field-label {
+                font-weight: 500;
+                font-size: @fontSize;
+                width: 30%;
+            }
+            .field-prefix {
+                font-size: @fontSize + 0.7;
+                font-weight: 300;
+                vertical-align: top;
+                line-height: @lineHeight - 0.5;
+            }
+            .field-input {
+                margin: 0;
+            }
+        }
+        &.payment-amount {
+            input {
+                background-color: #e8f3ff;
+                border: 1px #dbeafc solid;
+                border-radius: 0;
+                font-size: 1.6em;
+                letter-spacing: -0.05em;
+                padding: 3px 6px;
+                width: 63.275%;
+            }
+        }
+        &.payment-method {
+            .field-select {
+                margin: 0;
+                margin-left: 30%;
+                width: 70%;
+                display: block;
+                select {
+                    width: 100%;
+                    max-width: 100%;
+                    border: 1px solid @inputBorder;
+                    border-radius: 0;
+                    padding: 10px 7px;
+                    margin: 0;
+                }
+                &:before {
+                    top: 16%;
+                }
+                .payment-option-desc {
+                    border: 1px solid @inputBorder;
+                    min-height: 100px;
+                    border-top: 0;
+                    background-color: @accentGrey;
+                    .box-sizing(border-box);
+                    .clearfix();
+                    div {
+                        padding: 1em 2.5em;
+                        .list-definition {
+                            margin: 0;                        
+                            dt {
+                                width: 30%;
+                                min-width: inherit;
+                                line-height: @lineHeight - 0.3;
+                            }
+                            dd {
+                                padding-left: 10px;
+                                line-height: @lineHeight - 0.3;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

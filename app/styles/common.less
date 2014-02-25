@@ -1,0 +1,201 @@
+/*
+
+# Common Styles
+These are common styles that will be re-used across the site
+
+*/
+
+@import 'vars';
+@import 'mixins';
+
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+/* 
+ Common to align numeric/currency values to the right
+ ```
+  <table style="width: 100%">
+     <tr>
+         <td class="currency">$100.00</td>
+     </tr>
+ </table>
+<div>
+    <p class="numeric">10000</p>
+    <p class="currency">$120.10</p>
+</div>
+```
+ */
+.currency,
+.numeric {
+    text-align: right;
+}
+
+/*
+ Horizontal Sections for a page
+ ```
+ <div class="section">...</div>
+ ```
+ */
+.section {
+    margin: 0 0 20px;
+    clear: both;
+    .clearfix();   
+}
+
+// These will be included in encore-ui, should be removed from here once so.
+/*
+ Headers/Subheader titles
+ ```
+ <h2 class="page-title">Billing Overview</h2>
+ <h3 class="page-subtitle">On account {{account.name}}</h3>
+ ....
+ <h3 class="section-title">Account Aging</h3>
+ <h3 class="section-title">
+     Billed Items
+     <a href="#" class="pull-right"><small>Download Transactions</small></a>
+ </h3>
+ 
+ ```
+ */
+.page-title,
+.section-title {
+    font-weight: 400;
+    font-size: 1.4em;
+    color: #323232;
+}
+.page-title {
+    margin-top: 0;
+}
+.page-subtitle {
+    font-weight: 500;
+    margin: -10px 0 10px;
+    font-size: 1.0em;
+    color: #aaa;
+}
+.section-title {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.section-title a small {
+    font-weight: 300;
+}
+
+/*
+Data Definition List for common key/value descriptions
+
+```
+<dl class="list-definition pull-left">
+    <dt class="accent">Current Amount Due:</dt>
+    <dd class="accent accent-group">
+        <span class="accent-text">
+            $2,1124.00
+        </span>
+        <span class="accent-action">
+            <rx-modal-action 
+                template-url="/views/billing/makePayment.html"
+                post-hook="postPayment(payment)"
+                class="payment-trigger">
+                Pay Bill
+            </rx-modal-action>
+        </span>
+    </dd>
+    <dt>Account Balance:</dt>
+    <dd>$13,313,131,313</dd>
+</dl>
+```
+*/
+
+.list-definition {
+    font-size: @fontSize;
+    color: #727272;
+    dt {
+        line-height: @lineHeight;
+        float: left;
+        min-width: 170px;
+        font-weight: 500;
+        text-align: right;
+        letter-spacing: -0.04em;
+        clear: left;
+        &.accent {
+            padding-right: 0;
+            padding-left: 0;
+            border-right: 0;
+        }
+    }
+    dd {
+        line-height: @lineHeight;
+        float: left;
+        font-weight: 400;
+        text-align: left;
+        margin: 0;
+        padding-left: @spacing;
+        clear: right;
+    }
+    .accent {
+        font-size: @fontSize + 0.15;
+        line-height: @lineHeight + 0.7em;
+        border: 1px #aaa solid;
+        margin-bottom: 0.5em;
+    }
+    .accent-group {
+        border: 0;
+        margin-bottom: 0.5em;
+        padding-left: 0;
+        .accent-text {
+            border: 1px #aaa solid;
+            border-left: 0;
+            border-right: 0;
+            padding-right: @spacing;
+            padding-left: @spacing - 1;
+            float: left;
+        }
+        .accent-action {
+            float: left;
+            border: 0;
+            line-height: 0;
+            
+            .modal-link {
+                font-size: @fontSize - 0.1em;
+                line-height: @lineHeight + 1.1em;
+                padding: 0 @spacing;
+            }
+        }
+    }
+}
+
+/*
+ Container for filters that sits on top of a list of items
+ ```
+ <div class="detail-filters">
+     <span class="filter">
+         <rx-form-item label="Reference #">
+             <input type="text" ng-model="listFilter.reference" ng-required="true" />
+         </rx-form-item>
+     </span>
+     <span class="filter">
+         <rx-form-item label="Type">
+             <span class="field-select">
+                 <select ng-model="listFilter.type" >
+                     <option value="">Any</option>
+                     <option ng-repeat="t in filterData.types" value="{{t}}">{{t}}</option>
+                 </select>
+             </span>
+         </rx-form-item>
+     </span>
+ </div>
+ ```
+*/
+.detail-filters {
+    .clearfix();
+    padding: 15px 20px;
+    .filter {
+        float: left;
+        margin-right: 10px;
+    }
+}
