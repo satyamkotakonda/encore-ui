@@ -7,33 +7,10 @@ var gulp        = require('gulp'),
     livereload  = require('gulp-livereload'),
     open        = require('gulp-open'),
     stylish     = require('jshint-stylish'),
-    express     = require('express'),
-    request   = require('request'),
-    consolidate = require('consolidate'),
     Stubby      = require('stubby').Stubby,
     service     = new Stubby(),
+    server      = require('./gulpTasks/server'),
     mockApi     = require('./test/api-mocks/requests/billing.js');
-
-var startServer = function () {
-    var port = 9000,
-        app = express();
-
-    app.all('/api/*', function (req, res) {
-        console.info('Mocked: ', req.url);
-        var url = 'http://localhost:3000/api/' + req.url;
-        req.pipe(request(url)).pipe(res);
-    });
-
-    app.use(express.static(__dirname + '/app'));
-    app.engine('.html', consolidate.hogan);
-    app.use(function (req, res) {
-        res.render(__dirname + '/app/index.html');
-        return;
-    });
-
-    app.listen(port);
-    console.log('Listening on port: ' +  port);
-};
 
 gulp.task('less', function () {
     return gulp.src('app/styles/*.less')
@@ -80,7 +57,8 @@ gulp.task('test', function () {
 
 gulp.task('server', function () {
     gulp.run('stubApi');
-    return startServer();
+    server();
+    return;
 });
 
 gulp.task('open', function () {
