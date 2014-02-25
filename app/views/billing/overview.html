@@ -185,7 +185,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="txn in transactions | orderBy:sort.predicate:sort.reverse | TransactionTable:transactionFilter | Paginate:pager" class="{{ txn.type.toLowerCase() }}">
+                    <tr ng-repeat="txn in transactions | orderBy:sort.predicate:sort.reverse | TransactionTable:transactionFilter | Paginate:pager" class="{{ txn.type | lowercase }}">
                         <td>{{ txn.reference }}</td>
                         <td>{{ txn.date | date: defaultDateFormat }}</td>
                         <td>{{ txn.type }}</td>
