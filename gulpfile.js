@@ -7,10 +7,8 @@ var gulp        = require('gulp'),
     livereload  = require('gulp-livereload'),
     open        = require('gulp-open'),
     stylish     = require('jshint-stylish'),
-    Stubby      = require('stubby').Stubby,
-    service     = new Stubby(),
-    server      = require('./gulpTasks/server'),
-    mockApi     = require('./test/api-mocks/requests/billing.js');
+    stubby      = require('./gulpTasks/stubby'),
+    server      = require('./gulpTasks/server');
 
 gulp.task('less', function () {
     return gulp.src('app/styles/*.less')
@@ -20,14 +18,7 @@ gulp.task('less', function () {
 });
 
 gulp.task('stubApi', function () {
-    service.start({
-        stubs: 3000,
-        data: mockApi
-    }, function (error) {
-        if (error) {
-            console.error(error);
-        }
-    });
+    stubby();
 });
 
 gulp.task('jshint', function () {
@@ -67,8 +58,7 @@ gulp.task('open', function () {
 });
 
 gulp.task('default', function () {
-    startServer();
-    gulp.run('stubApi');
+    gulp.run('server');
     gulp.run('lint');
     gulp.run('test');
     gulp.run('open');
