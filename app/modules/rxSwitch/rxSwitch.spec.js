@@ -32,7 +32,5 @@ describe('rxSwitch', function () {
         expect(el.find('div').attr('class').split(' ').indexOf('on')).to.be.gt(-1);
         expect(el.find('div').find('div')).not.be.empty;
         expect(el.find('div').find('div').attr('class')).to.be.eq('knob');
-        
-        //expect(el.find('label').text()).to.contain('Name');
     });
 });
