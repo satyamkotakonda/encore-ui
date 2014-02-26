@@ -48,7 +48,12 @@
                 <dt>Billing Cycle:</dt>
                 <dd>{{account.cycle}} Months</dd>
                 <dt>Paperless Billing:</dt>
-                <dd>{{account.paperless ? 'ON' : 'OFF'}}</dd>
+                <dd>
+                    <rx-switch
+                        readonly="true"
+                        model="account.paperless">
+                    </rx-switch>
+                </dd>
             </dl>
         </div>
         <hr />
