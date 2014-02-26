@@ -1,0 +1,57 @@
+.rx-switch {
+    @offStateColor: #b3b3b3;
+    @borderColor: darken(@offStateColor, 10%);
+    @onStateColor: #00ac31;
+    @knobColor: #e1e1e1;
+    @knobBorderColor: darken(@knobColor, 10%);
+
+    display: inline-block;
+
+    border: 1px @borderColor solid;
+    border-radius: 7px;
+    background-color: @offStateColor;
+    color: white;
+    font-size: 15px;
+    line-height: 16px;
+    padding: 0;
+    padding-left: 0;
+    padding-right: 6px;
+
+    height: 20px;
+
+    min-width: 55px;
+    
+    cursor: pointer;
+    position: relative;
+    text-align: right;
+
+    .user-select(none);
+    .box-sizing(border-box);
+    transition: all 0.1s ease-out;
+    &.readonly {
+        cursor: default;
+    }
+    &.on {
+        background-color: @onStateColor;
+        text-align: left;
+        padding-left: 6px; 
+        padding-right: 0;
+        .knob {
+            right: -3px;
+        }
+    }
+    .knob {
+        position: absolute;
+        display: inline-block;
+        top: -1px;
+
+        width: 18px;
+        height: 18px;
+        border-radius: 10px;
+        background-color: @knobColor;
+        border: 1px @knobBorderColor solid;
+
+        transition: all 0.1s ease-out;
+        right: 37px;
+    }
+}
