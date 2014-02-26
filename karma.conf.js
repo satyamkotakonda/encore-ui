@@ -27,8 +27,10 @@ module.exports = function(config) {
             'bower_components/mousetrap/mousetrap.js',
             'bower_components/mousetrap-bind-element/mousetrap-bind-element.js',
             'bower_components/momentjs/moment.js',
+            'modules/**/*.js',
             'scripts/**/*.js',
             '../test/browser-helpers.js',
+            'modules/**/*.html',
             'views/**/*.html',// templates
         ],
 
