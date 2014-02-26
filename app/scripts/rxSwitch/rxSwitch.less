@@ -4,6 +4,10 @@
     @onStateColor: #00ac31;
     @knobColor: #e1e1e1;
     @knobBorderColor: darken(@knobColor, 10%);
+    @minWidth: 55px;
+    @knobSize: 20px;
+    @height: @knobSize + 2;
+    @lineHeight: @knobSize - 2;
 
     display: inline-block;
 
@@ -11,15 +15,14 @@
     border-radius: 7px;
     background-color: @offStateColor;
     color: white;
+
     font-size: 15px;
-    line-height: 16px;
-    padding: 0;
-    padding-left: 0;
-    padding-right: 6px;
+    line-height: @lineHeight;
+    
+    padding: 0 6px;
+    height: @height;
 
-    height: 20px;
-
-    min-width: 55px;
+    min-width: @minWidth;
     
     cursor: pointer;
     position: relative;
@@ -34,8 +37,6 @@
     &.on {
         background-color: @onStateColor;
         text-align: left;
-        padding-left: 6px; 
-        padding-right: 0;
         .knob {
             right: -3px;
         }
@@ -45,13 +46,13 @@
         display: inline-block;
         top: -1px;
 
-        width: 18px;
-        height: 18px;
-        border-radius: 10px;
+        width: @knobSize;
+        height: @knobSize;
+        border-radius: (@knobSize/2)+1;
         background-color: @knobColor;
         border: 1px @knobBorderColor solid;
 
         transition: all 0.1s ease-out;
-        right: 37px;
+        right: @minWidth - @knobSize;
     }
 }
