@@ -6,9 +6,12 @@ describe('rxSwitch', function () {
 
     beforeEach(function () {
         module('rxSwitch');
-        module('templates/rxSwitch.html');
+        module('modules/rxSwitch/templates/rxSwitch.html');
 
-        inject(function ($rootScope, $compile) {
+        inject(function ($rootScope, $compile, $templateCache) {
+            var template = $templateCache.get('modules/rxSwitch/templates/rxSwitch.html');
+            $templateCache.put('/modules/rxSwitch/templates/rxSwitch.html', template);
+
             rootScope = $rootScope;
             compile = $compile;
             scope = $rootScope.$new();
