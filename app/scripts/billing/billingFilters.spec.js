@@ -16,13 +16,25 @@ describe('BillingFilters', function () {
     });
 
     it('TransactionTable filter should filter results', function () {
-        var actions = createTransactions();
+        var actions = createTransactions(),
+            now = new Date(),
+            startTestDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()),
+            endTestDate = new Date(startTestDate);
+
+        startTestDate.setMonth(now.getMonth() - 1);
+        endTestDate.setMonth(now.getMonth() - 3);
+
         expect(actions).to.not.be.empty;
-        expect(table(actions, { type: 'Payment' }).length).to.be.eq(1);
-        expect(table(actions, { status: 'Paid' }).length).to.be.eq(3);
+        expect(table(actions, { type: 'Payment' }).length).to.be.eq(3);
+        expect(table(actions, { status: 'Paid' }).length).to.be.eq(5);
         expect(table(actions, { reference: '76' }).length).to.be.eq(2);
-        expect(table(actions, { reference: '0', status: 'Paid' }).length).to.be.eq(2);
-        expect(table(actions, { date: '-1' }).length).to.be.eq(5);
+        expect(table(actions, { reference: '0', status: 'Paid' }).length).to.be.eq(4);
+        expect(table(actions, { period: '-1' }).length).to.be.eq(4);
+        expect(table(actions, { period: '-3' }).length).to.be.eq(9);
+        expect(table(actions, { period: startTestDate.toJSON() }).length).to.be.eq(4);
+        expect(table(actions, { period: endTestDate.toJSON() }).length).to.be.eq(9);
+        expect(table(actions, { period: startTestDate.toJSON() + '|' + endTestDate.toJSON() }).length).to.be.eq(8);
+
     });
 
     it('CurrencySuffix filter should exist', function () {
@@ -40,12 +52,22 @@ describe('BillingFilters', function () {
 
     createTransactions = function () {
         var today = new Date(),
-            lastMonth = new Date(),
+            lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate()),
+            lastMonth1Day = new Date(lastMonth),
             threeMonth = new Date();
-        lastMonth.setMonth(today.getMonth() - 1);
+        lastMonth1Day.setHours(lastMonth.getHours() - lastMonth.getTimezoneOffset() / 60);
+        lastMonth1Day.setSeconds(lastMonth.getSeconds() - 1);
         threeMonth.setMonth(today.getMonth() - 3);
 
         return [
+            {
+                'reference': '81931301',
+                'date': today.toJSON(),
+                'type': 'Payment',
+                'status': 'Settled',
+                'amount': -11.378992513054982,
+                'balance': 0
+            },
             {
                 'reference': '50977603',
                 'date': lastMonth.toJSON(),
@@ -69,6 +91,30 @@ describe('BillingFilters', function () {
                 'status': 'Paid',
                 'amount': -11.772235081996769,
                 'balance': -7.648627933580428
+            },
+            {
+                'reference': '98975138',
+                'date': lastMonth1Day.toJSON(),
+                'type': 'Payment',
+                'status': 'Settled',
+                'amount': -5.772235081996769,
+                'balance': -4.648627933580428
+            },
+            {
+                'reference': '72341094',
+                'date': lastMonth1Day.toJSON(),
+                'type': 'Invoice',
+                'status': 'Paid',
+                'amount': -1.772235081996769,
+                'balance': -1.648627933580428
+            },
+            {
+                'reference': '41400002',
+                'date': lastMonth1Day.toJSON(),
+                'type': 'Adjustment',
+                'status': 'Paid',
+                'amount': -31.772235081996769,
+                'balance': -3.648627933580428
             },
             {
                 'reference': '59896376',
