@@ -1,4 +1,5 @@
 .rx-switch {
+
     @offStateColor: #b3b3b3;
     @borderColor: darken(@offStateColor, 10%);
     @onStateColor: #00ac31;
@@ -28,9 +29,15 @@
     position: relative;
     text-align: right;
 
+    transition: all 0.1s ease-out;
+
+    -webkit-box-shadow: inset 1px 2px 5px -2px rgba(0,0,0,0.65);
+    -moz-box-shadow: inset 1px 2px 5px -2px rgba(0,0,0,0.65);
+    box-shadow: inset 1px 2px 5px -2px rgba(0,0,0,0.65);
+
     .user-select(none);
     .box-sizing(border-box);
-    transition: all 0.1s ease-out;
+    
     &.readonly {
         cursor: default;
     }
@@ -42,6 +49,8 @@
         }
     }
     .knob {
+        transition: all 0.1s ease-out;
+
         position: absolute;
         display: inline-block;
         top: -1px;
@@ -52,7 +61,7 @@
         background-color: @knobColor;
         border: 1px @knobBorderColor solid;
 
-        transition: all 0.1s ease-out;
+        
         right: @minWidth - @knobSize;
     }
 }
