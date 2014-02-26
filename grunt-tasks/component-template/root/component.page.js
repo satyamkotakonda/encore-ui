@@ -8,7 +8,7 @@ var {%= name %} = {
 exports.{%= name %} = {
 
     initialize: function ({%= name %}Element) {
-        page.rootElement = {
+        {%= name %}.rootElement = {
             get: function () { return {%= name %}Element; }
         };
         return Page.create({%= name %});
