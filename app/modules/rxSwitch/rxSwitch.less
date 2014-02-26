@@ -9,18 +9,19 @@
     @knobSize: 20px;
     @height: @knobSize + 2;
     @lineHeight: @knobSize - 2;
+    @edgeSpacing: 6px;
 
     display: inline-block;
 
     border: 1px @borderColor solid;
-    border-radius: 7px;
+    border-radius: 9px;
     background-color: @offStateColor;
     color: white;
 
     font-size: 15px;
     line-height: @lineHeight;
     
-    padding: 0 6px;
+    padding: 0 @edgeSpacing;
     height: @height;
 
     min-width: @minWidth;
@@ -45,7 +46,7 @@
         background-color: @onStateColor;
         text-align: left;
         .knob {
-            right: -3px;
+            right: @edgeSpacing * -1;
         }
     }
     .knob {
@@ -60,8 +61,7 @@
         border-radius: (@knobSize/2)+1;
         background-color: @knobColor;
         border: 1px @knobBorderColor solid;
-
-        
-        right: @minWidth - @knobSize;
+       
+        right: (@minWidth - @knobSize);
     }
 }
