@@ -121,7 +121,10 @@
                         <span class="field-select">
                             <select ng-model="transactionFilter.period" >
                                 <option value="">Any</option>
-                                <option ng-repeat="p in filterData.periods" value="{{p.startDate}}">{{p.endDate ? 'Period Ending On: ' + ( p.endDate | date:'MM / dd / yyyy') : 'Current' }}</option>
+                                <option value="-1">1 Month</option>
+                                <option value="-3">3 Months</option>
+                                <option value="-6">6 Months</option>
+                                <option ng-repeat="p in filterData.periods" value="{{p.startDate}}|{{p.endDate}}">{{p.endDate ? 'Period Ending On: ' + ( p.endDate | date:'MM / dd / yyyy') : 'Current Billing Period' }}</option>
                             </select>
                         </span>
                     </rx-form-item>
