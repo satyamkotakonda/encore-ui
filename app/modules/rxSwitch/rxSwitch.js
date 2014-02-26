@@ -1,4 +1,4 @@
-angular.module('billing.ui.rxSwitch', [])
+angular.module('rxSwitch', [])
 /**
  *
  * @ngdoc directive
@@ -10,7 +10,7 @@ angular.module('billing.ui.rxSwitch', [])
 .directive('rxSwitch', function () {
     return {
         restrict: 'E',
-        templateUrl: '/scripts/rxSwitch/templates/rxSwitch.html',
+        templateUrl: 'templates/rxSwitch.html',
         scope: {
             model: '=',
             readonly: '@'
