@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-	karma       = require('gulp-karma');
+	karma = require('gulp-karma');
 
 module.exports = function () {
     return gulp.src('app/app.js')
