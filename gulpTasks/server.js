@@ -2,7 +2,7 @@ var express = require('express'),
     consolidate = require('consolidate'),
     request = require('request');
 
-module.exports = function () {
+module.exports = function (cb) {
     var port = 9000,
         app = express(),
         appDirectory = __dirname.replace('gulpTasks', 'app');
@@ -24,4 +24,5 @@ module.exports = function () {
 
     app.listen(port);
     console.log('Listening on port: ' +  port);
+    cb();
 };
