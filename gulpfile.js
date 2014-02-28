@@ -1,21 +1,29 @@
 var gulp        = require('gulp'),
     livereload  = require('gulp-livereload'),
-    open        = require('gulp-open');
+    open        = require('gulp-open'),
+    less        = require('./gulpTasks/less'),
+    jshint      = require('./gulpTasks/jshint'),
+    jscs        = require('./gulpTasks/jscs'),
+    karma       = require('./gulpTasks/karma'),
+    stubby      = require('./gulpTasks/stubby'),
+    server      = require('./gulpTasks/server');
 
-gulp.task('less', require('./gulpTasks/less'));
-gulp.task('jshint', require('./gulpTasks/jshint'));
-gulp.task('jscs', require('./gulpTasks/jscs'));
+gulp.task('less', less);
+gulp.task('jshint', jshint);
+gulp.task('jscs', jscs);
+gulp.task('test', karma);
+gulp.task('stubApi', stubby);
+gulp.task('server', ['stubApi'], server);
+
 gulp.task('lint', ['jshint', 'jscs']);
-gulp.task('test', require('./gulpTasks/karma'));
-gulp.task('stubApi', require('./gulpTasks/stubby'));
-gulp.task('server', ['stubApi'], require('./gulpTasks/server'));
 
-gulp.task('open', function () {
-    return gulp.src('app/index.html')
+gulp.task('open', ['server'], function (cb) {
+    gulp.src('app/index.html')
         .pipe(open('', { url: 'http://localhost:9000', app: 'google chrome' }));
+    cb();
 });
 
-gulp.task('default', ['lint', 'test', 'less', 'server'], function () {
+gulp.task('default', ['lint', 'test', 'less', 'open'], function () {
     var server = livereload();
 
     gulp.watch('app/**/*.js', ['lint','test'])
@@ -27,8 +35,4 @@ gulp.task('default', ['lint', 'test', 'less', 'server'], function () {
         .on('change', function (file) {
             server.changed(file.path);
         });
-    
-    gulp.run('open');
-
-    //cb();
 });
