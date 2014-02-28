@@ -24,15 +24,17 @@ gulp.task('open', ['server'], function (cb) {
 });
 
 gulp.task('default', ['lint', 'test', 'less', 'open'], function () {
-    var server = livereload();
+    var server = livereload(),
+        fileChange = function (file) {
+            server.changed(file.path);
+        };
 
     gulp.watch('app/**/*.js', ['lint','test'])
-        .on('change', function (file) {
-            server.changed(file.path);
-        });
+        .on('change', fileChange);
+
+    gulp.watch('app/**/*.html')
+        .on('change', fileChange);
 
     gulp.watch('app/styles/*.less', ['less'])
-        .on('change', function (file) {
-            server.changed(file.path);
-        });
+        .on('change', fileChange);
 });
