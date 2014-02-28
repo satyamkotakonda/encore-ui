@@ -8,8 +8,7 @@ module.exports = function (cb) {
         data: mockApi
     }, function (error) {
         if (error) {
-            console.error(error);
-            throw new Error(error);
+            cb(error);
         }
     });
     cb();
