@@ -105,4 +105,9 @@ gulp.task('default', function () {
         .on('change', function (file) {
             server.changed(file.path);
         });
+
+    gulp.watch('app/views/**/*.html', [])
+        .on('change', function (file) {
+            server.changed(file.path);
+        });
 });
