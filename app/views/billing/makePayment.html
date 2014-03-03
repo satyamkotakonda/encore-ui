@@ -4,17 +4,17 @@
     subtitle="{{user}}">
     <div class="payment-action">
         <div class="summary-list">
-            <div class="summary-item pull-left" ng-click="setPayment(account.balance)" ng-class="{active: equalCurrency(account.balance, payment.amount)}">
+            <div class="summary-item pull-left" ng-click="setPayment(account.balance)" ng-class="{active: account.balance == payment.amount}">
                 <strong class="header">Account Balance</strong>
                 <p>{{account.balance | CurrencySuffix }}</p>
                 <div class="arrow-down"></div>
             </div>
-            <div class="summary-item pull-left" ng-click="setPayment(account.currentDue)" ng-class="{active: equalCurrency(account.currentDue, payment.amount)}">
+            <div class="summary-item pull-left" ng-click="setPayment(account.currentDue)" ng-class="{active: account.currentDue == payment.amount}">
                 <strong class="header">Due Today</strong>
                 <p>{{account.currentDue | CurrencySuffix }}</p>
                 <div class="arrow-down"></div>
             </div>
-            <div class="summary-item pull-left" ng-click="setPayment(account.pastDue)" ng-class="{active: equalCurrency(account.pastDue, payment.amount)}">
+            <div class="summary-item pull-left" ng-click="setPayment(account.pastDue)" ng-class="{active: account.pastDue == payment.amount}">
                 <strong class="header">Past Due</strong>
                 <p>{{account.pastDue | CurrencySuffix }}</p>
                 <div class="arrow-down"></div>
