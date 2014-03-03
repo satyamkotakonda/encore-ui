@@ -1,0 +1,215 @@
+<rx-nav></rx-nav>
+
+<div class="page-content">
+    <rx-related-menu state="menuShown" collapsable="false" position="left">
+        <rx-user-details user="user"></rx-user-details>
+        <rx-product-resources user="user"></rx-product-resources>
+    </rx-related-menu>
+    <div class="main-content">
+        <div class="section billing-header">
+            <div class="pull-left">
+                <h2 class="page-title">Billing Overview</h2>
+                <h3 class="page-subtitle">On account {{account.name}}</h3>
+            </div>
+            <rx-modal-action 
+                template-url="/views/billing/makePayment.html"
+                post-hook="postPayment(payment)"
+                class="button button-green payment-trigger pull-right">
+                + Make a Payment
+            </rx-modal-action>
+        </div>
+        <hr />
+        <div class="section billing-info">
+            <dl class="list-definition pull-left">
+                <dt class="accent">Current Amount Due:</dt>
+                <dd class="accent accent-group">
+                    <span class="accent-text">
+                        {{account.currentDue | currency }}
+                    </span>
+                    <span class="accent-action">
+                        <rx-modal-action 
+                            template-url="/views/billing/makePayment.html"
+                            post-hook="postPayment(payment)"
+                            class="payment-trigger">
+                            Pay Bill
+                        </rx-modal-action>
+                    </span>
+                </dd>
+                <dt>Account Balance:</dt>
+                <dd>{{account.balance | currency }}</dd>
+                <dt>Past Due:</dt>
+                <dd>{{account.pastDue | currency }}</dd>
+            </dl>
+            <dl class="list-definition pull-right">
+                <dt>Currency:</dt>
+                <dd>{{account.currencyType}}</dd>
+                <dt>Terms:</dt>
+                <dd>{{account.terms}}</dd>
+                <dt>Billing Cycle:</dt>
+                <dd>{{account.cycle}} Months</dd>
+                <dt>Paperless Billing:</dt>
+                <dd>
+                    <rx-switch
+                        readonly="true"
+                        model="account.paperless">
+                    </rx-switch>
+                </dd>
+            </dl>
+        </div>
+        <hr />
+        <h3 class="section-title">Account Aging</h3>
+        <div class="section account-aging">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Current</th>
+                        <th>1 - 30 Days</th>
+                        <th>31 - 60 Days</th>
+                        <th>61 - 90 Days</th>
+                        <th>91 - 120 Days</th>
+                        <th>121 - 180 Days</th>
+                        <th>181+ Days</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr />
+        <h3 class="section-title">
+            Billed Items
+            <a href="#" class="pull-right"><small>Download Transactions</small></a>
+        </h3>
+        <div class="section billing-transactions">
+            <div class="detail-filters">
+                <span class="filter">
+                    <rx-form-item label="Reference #">
+                        <input type="text" ng-model="transactionFilter.reference" ng-required="true" />
+                    </rx-form-item>
+                </span>
+                <span class="filter">
+                    <rx-form-item label="Type">
+                        <span class="field-select">
+                            <select ng-model="transactionFilter.type" >
+                                <option value="">Any</option>
+                                <option ng-repeat="t in filterData.types" value="{{t}}">{{t}}</option>
+                            </select>
+                        </span>
+                    </rx-form-item>
+                </span>
+                <span class="filter">
+                    <rx-form-item label="Status">
+                        <span class="field-select">
+                            <select ng-model="transactionFilter.status" >
+                                <option value="">Any</option>
+                                <option ng-repeat="s in filterData.statuses" value="{{s}}">{{s}}</option>
+                            </select>
+                        </span>
+                    </rx-form-item>
+                </span>    
+                <span class="filter">
+                    <rx-form-item label="Range">
+                        <span class="field-select">
+                            <select ng-model="transactionFilter.period" >
+                                <option value="">Any</option>
+                                <option value="-1">1 Month</option>
+                                <option value="-3">3 Months</option>
+                                <option value="-6">6 Months</option>
+                                <option ng-repeat="p in filterData.periods" value="{{p.startDate}}|{{p.endDate}}">{{p.endDate ? 'Period Ending On: ' + ( p.endDate | date:'MM / dd / yyyy') : 'Current Billing Period' }}</option>
+                            </select>
+                        </span>
+                    </rx-form-item>
+                </span>
+                <div class="pull-right">
+                    <button class="button button-blue" ng-click="clearFilter()">Clear Filter</button>
+                </div>
+            </div>
+            <table class="table transaction-list">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <rx-sortable-column
+                                sort-method="sortCol"
+                                sort-property="reference"
+                                predicate="sort.predicate"
+                                reverse="sort.reverse">
+                                Reference #
+                            </rx-sortable-column>
+                        </th>
+                        <th scope="col">
+                            <rx-sortable-column
+                                sort-method="sortCol"
+                                sort-property="date"
+                                predicate="sort.predicate"
+                                reverse="sort.reverse">
+                                Date
+                            </rx-sortable-column>
+                        </th>
+                        <th scope="col">
+                            <rx-sortable-column
+                                sort-method="sortCol"
+                                sort-property="type"
+                                predicate="sort.predicate"
+                                reverse="sort.reverse">
+                                Type
+                            </rx-sortable-column>
+                        </th>
+                        <th scope="col">
+                            <rx-sortable-column
+                                sort-method="sortCol"
+                                sort-property="status"
+                                predicate="sort.predicate"
+                                reverse="sort.reverse">
+                                Status
+                            </rx-sortable-column>
+                        </th>
+                        <th scope="col">
+                            <rx-sortable-column
+                                sort-method="sortCol"
+                                sort-property="amount"
+                                predicate="sort.predicate"
+                                reverse="sort.reverse">
+                                Transaction Amount
+                            </rx-sortable-column>
+                        </th>
+                        <th scope="col">
+                            <rx-sortable-column
+                                sort-method="sortCol"
+                                sort-property="balance"
+                                predicate="sort.predicate"
+                                reverse="sort.reverse">
+                                Balance
+                            </rx-sortable-column>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="txn in transactions | orderBy:sort.predicate:sort.reverse | TransactionTable:transactionFilter | Paginate:pager" class="{{ txn.type | lowercase }}">
+                        <td>{{ txn.reference }}</td>
+                        <td>{{ txn.date | date: defaultDateFormat }}</td>
+                        <td>{{ txn.type }}</td>
+                        <td class="{{ txn.status | lowercase }}">{{ txn.status }}</td>
+                        <td class="currency">{{ txn.amount | currency }}</td>
+                        <td class="currency">{{ txn.balance | currency }}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="paginate-area">
+                        <td colspan="6">
+                            <rx-paginate page-tracking="pager"></rx-paginate>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

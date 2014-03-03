@@ -22,6 +22,7 @@
         "catch"
     ],
     "requireParenthesesAroundIIFE": true,
+    "requireLeftStickedOperators": ["-"],
     "requireSpacesInFunctionExpression": {
         "beforeOpeningRoundBrace": true,
         "beforeOpeningCurlyBrace": true
@@ -35,7 +36,6 @@
     "disallowLeftStickedOperators": [
         "?",
         "+",
-        "-",
         "/",
         "*",
         "=",
@@ -95,7 +95,7 @@
     "disallowKeywordsOnNewLine": ["else"],
     "validateJSDoc": {
         "checkParamNames": true,
-        "checkRedundantParams": true,
+        "checkRedundantParams": false,
         "requireParamTypes": true
     },
     "excludeFiles": ["app/scripts/lib/**"]

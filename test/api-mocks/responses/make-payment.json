@@ -1,0 +1,13 @@
+{
+    "payment": {
+        "responseMessage": "Approved",
+        "id": "6e81bfc6-81bf-4c68-8ae2-7ad2e58641f6",
+        "amount": "22.65",
+        "submissionDate": "2013-05-26T16:32:52.000-05:00",
+        "status": "POSTED",
+        "gatewayTxRefNum": "4C3213241331117CD265DE7ADA3967A15218542B",
+        "billingTxRefNum": "600000C4AD16EF3D9548462A468E9419D76053A5",
+        "comments": "balance adjustment payment",
+        "methodId": "urn:uuid:fa093563-73db-4fe4-8f3a-def53dde8f5d"
+    }
+}

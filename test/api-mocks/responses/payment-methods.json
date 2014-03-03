@@ -1,0 +1,76 @@
+{
+    "methods": {
+        "method": [{
+            "id": "urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479",
+            "isDefault": "true",
+            "disabled": "false",
+            "creationDate": "2012-09-25T13:13:48.018Z",
+            "paymentCard": {
+                "cardHolderName": "Card Rich",
+                "cardExpirationDate": "11/2014",
+                "cardNumber": "XXXXXXXXXXXX3456",
+                "cardType": "VISA"
+            }
+        }, {
+            "id": "urn:uuid:4620b3d4-62ad-4d84-87cc-22a5ef13062f",
+            "disabled": "false",
+            "creationDate": "2011-10-25T15:13:48.000Z",
+            "electronicCheck": {
+                "accountNumber": "XXXXXX7845",
+                "accountType": "CONSUMER_CHECKING",
+                "routingNumber": "031200730",
+                "accountHolderName": "Check Rich"
+            }
+        }, {
+            "id": "urn:uuid:4438ef26-a369-47ed-8682-f82df74f0be0",
+            "disabled": "true",
+            "creationDate": "2011-11-25T15:13:48.000Z",
+            "electronicCheck": {
+                "accountNumber": "XXXXXX1234",
+                "accountType": "CONSUMER_CHECKING",
+                "routingNumber": "111000025",
+                "accountHolderName": "Check Rich"
+            }
+        }, {
+            "id": "urn:uuid:4e73e8ca-a0e7-4f9a-b50f-cc49f9caed52",
+            "disabled": "false",
+            "creationDate": "2012-12-25T13:13:48.018Z",
+            "paymentCard": {
+                "cardHolderName": "Card Rich",
+                "cardExpirationDate": "11/2014",
+                "cardNumber": "XXXXXXXXXXXX4124",
+                "cardType": "VISA"
+            }
+        }, {
+            "id": "urn:uuid:934b6339-4eae-4add-a446-8d43e46cfd4a",
+            "disabled": "true",
+            "creationDate": "2013-09-25T13:13:48.018Z",
+            "paymentCard": {
+                "cardHolderName": "Card Rich",
+                "cardExpirationDate": "11/2015",
+                "cardNumber": "XXXXXXXXXXXX5213",
+                "cardType": "VISA"
+            }
+        }, {
+            "id": "urn:uuid:8e05baa3-0f15-402e-b2db-1811d92ffc12",
+            "disabled": "false",
+            "creationDate": "2014-09-25T13:13:48.018Z",
+            "paymentCard": {
+                "cardHolderName": "Card Rich",
+                "cardExpirationDate": "11/2016",
+                "cardNumber": "XXXXXXXXXXXX2341",
+                "cardType": "VISA"
+            }
+        }, {
+            "id": "urn:uuid:02e80014-4ba4-4b9d-b0be-b547e2a8a3a8",
+            "disabled": "false",
+            "creationDate": "2013-10-25T15:13:48.000Z",
+            "electronicCheck": {
+                "accountNumber": "XXXXXX7318",
+                "accountType": "CONSUMER_CHECKING",
+                "routingNumber": "031200730",
+                "accountHolderName": "Check Rich"
+            }
+        }]
+    }
+}

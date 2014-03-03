@@ -11,26 +11,27 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'bower_components/jquery/jquery.min.js',
             'bower_components/angular/angular.js',
+            'bower_components/jquery/jquery.min.js',
             'bower_components/angular-animate/angular-animate.js',
             'bower_components/angular-cookies/angular-cookies.js',
             'bower_components/angular-mocks/angular-mocks.js',
             'bower_components/angular-resource/angular-resource.js',
             'bower_components/angular-route/angular-route.js',
             'bower_components/angular-sanitize/angular-sanitize.js',
-            'https://95c7050854423f809e66-6999ba0e7a4f47d417515fb3f08fa9b8.ssl.cf1.rackcdn.com/0.0.1/encore-ui-tpls.min.js',
+            'http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.js',
+            'https://95c7050854423f809e66-6999ba0e7a4f47d417515fb3f08fa9b8.ssl.cf1.rackcdn.com/0.0.4/encore-ui-tpls.min.js',
             'bower_components/angular-xeditable/dist/js/xeditable.js',
             'bower_components/angular-rx-data-table/dist/scripts/rx-data-table.js',
             'bower_components/lodash/dist/lodash.js',
             'bower_components/mousetrap/mousetrap.js',
             'bower_components/mousetrap-bind-element/mousetrap-bind-element.js',
             'bower_components/momentjs/moment.js',
-            'scripts/**/*.js',
             'modules/**/*.js',
+            'scripts/**/*.js',
             '../test/browser-helpers.js',
+            'modules/**/*.html',
             'views/**/*.html',// templates
-            'modules/**/*.html'
         ],
 
         // list of files to exclude
@@ -47,11 +48,19 @@ module.exports = function(config) {
 
         // test results reporter to use
         // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-        reporters: ['progress', 'coverage'],
+        reporters: ['dots', 'coverage', 'threshold'],
 
         coverageReporter: {
             type : 'html',
             dir : '../coverage/'
+        },
+
+
+        thresholdReporter: {
+            statements: 90,
+            branches: 60,
+            functions: 85,
+            lines: 90
         },
 
         // web server port
