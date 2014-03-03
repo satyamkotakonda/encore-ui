@@ -3,6 +3,7 @@
     title="Make a Payment"
     subtitle="{{user}}">
     <div class="payment-action">
+<!-- 
         <div class="summary-list">
             <div class="summary-item pull-left" ng-click="setPayment(account.balance)" ng-class="{active: account.balance == payment.amount}">
                 <strong class="header">Account Balance</strong>
@@ -20,49 +21,31 @@
                 <div class="arrow-down"></div>
             </div>
         </div>
+ -->
         <div class="payment-field payment-amount">
             <rx-form-item label="Payment Amount" prefix="$">
                 <input type="text" ng-model="payment.amount" ng-required="true" ng-blur="setPayment(payment.amount)" />
             </rx-form-item>
         </div>
         <div class="payment-field payment-method">
-            <rx-form-item label="Payment Options">
-                <span class="field-select">
-                    <select ng-model="payment.methodIndex" ng-required="true" ng-change="setPaymentMethod()">
-                        <option ng-repeat="pmt in paymentMethods" value="{{$index}}" ng-disabled="pmt.disabled == 'true'">
-                            {{pmt.electronicCheck && 'ACH' || 'Credit Card'}} - 
-                            {{pmt.electronicCheck && pmt.electronicCheck.accountType || pmt.paymentCard.cardType}}
-                            {{pmt.electronicCheck && pmt.electronicCheck.accountNumber || pmt.paymentCard.cardNumber}}
-                        </option>
-                    </select>
-                    <div class="payment-option-desc">
-                        <div ng-show="payment.method.electronicCheck">
-                            <dl class="list-definition">
-                                <dt>Account Type:</dt>
-                                <dd>{{payment.method.electronicCheck.accountType}}</dd>
-                                <dt>Name:</dt>
-                                <dd>{{payment.method.electronicCheck.accountHolderName}}</dd>
-                                <dt>Routing #:</dt>
-                                <dd>{{payment.method.electronicCheck.routingNumber}}</dd>
-                                <dt>Number:</dt>
-                                <dd>{{payment.method.electronicCheck.accountNumber}}</dd>
-                            </dl>
-                        </div>
-                        <div ng-show="payment.method.paymentCard">
-                            <dl class="list-definition">
-                                <dt>Card Type:</dt>
-                                <dd>{{payment.method.paymentCard.cardType}}</dd>
-                                <dt>Name:</dt>
-                                <dd>{{payment.method.paymentCard.cardHolderName}}</dd>
-                                <dt>Number:</dt>
-                                <dd>{{payment.method.paymentCard.cardNumber}}</dd>
-                                <dt>Exp. Date:</dt>
-                                <dd>{{payment.method.paymentCard.cardExpirationDate}}</dd>
-                            </dl>
-                        </div>
-                    </div>
-                </span>
-            </rx-form-item>
+            <div class="tab-menu">
+                <ul>
+                    <li ng-class="{'tab-selected': paymentMethodFilter == 'default'}"><a href="#">Primary</a></li>
+                    <li ng-class="{'tab-selected': paymentMethodFilter == 'paymentCard'}"><a href="#">Credit Card</a></li>
+                    <li ng-class="{'tab-selected': paymentMethodFilter == 'electronicCheck'}"><a href="#">ACH</a></li>
+                    <li ng-class="{'tab-selected': paymentMethodFilter == 'invoice'}"><a href="#">Invoice</a></li>
+                </ul>
+            </div>
+            {{payment.methodId}}
+            <rx-form-option-table
+                data="paymentMethods"
+                columns="paymentCardColumns"
+                type="radio"
+                model="payment.methodId"
+                selected="payment.methodId"
+                field-id="paymentMethodTable"
+                ></rx-form-option-table>
+
         </div>
     </div>
 </rx-modal-form>
