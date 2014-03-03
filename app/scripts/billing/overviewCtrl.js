@@ -36,9 +36,6 @@ angular.module('billingApp')
             setPaymentMethod = function () {
                 $scope.payment.method = $scope.paymentMethods[$scope.payment.methodIndex];
             },
-            equalCurrency = function (amount, amount2) {
-                return parseFloat(amount).toFixed(2) === parseFloat(amount2).toFixed(2);
-            },
             postPayment = function (payment) {
                 payment = { amount: payment.amount, methodId: payment.method.id };
                 $scope.paymentResult = Payment.post({ id: $routeParams.accountNumber, payment: payment });
@@ -65,7 +62,6 @@ angular.module('billingApp')
         $scope.setPayment = setPayment;
         $scope.setPaymentMethod = setPaymentMethod;
         $scope.clearFilter = clearFilter;
-        $scope.equalCurrency = equalCurrency;
 
         // Get Account & Transactions Info
         $scope.account = Account.get({ id: $routeParams.accountNumber });

@@ -6,12 +6,12 @@
  List for summarized items that can be used to choose from
  ```
  <div class="summary-list">
-     <div class="summary-item pull-left" ng-click="setPayment(account.balance)" ng-class="{active: equalCurrency(account.balance, payment.amount)}">
+     <div class="summary-item pull-left" ng-click="setPayment(account.balance)" ng-class="{active: account.balance == payment.amount}">
          <strong class="header">Account Balance</strong>
          <p>$1,313.00</p>
          <div class="arrow-down"></div>
      </div>
-     <div class="summary-item pull-left" ng-click="setPayment(account.currentDue)" ng-class="{active: equalCurrency(account.currentDue, payment.amount)}">
+     <div class="summary-item pull-left" ng-click="setPayment(account.currentDue)" ng-class="{active: account.currentDue == payment.amount}">
          <strong class="header">Due Today</strong>
          <p>$11.03m</p>
          <div class="arrow-down"></div>
@@ -77,12 +77,12 @@
  Also append a description panel below the payment method dropdown
  ```
  <div class="summary-list">
-     <div class="summary-item pull-left" ng-click="setPayment(account.balance)" ng-class="{active: equalCurrency(account.balance, payment.amount)}">
+     <div class="summary-item pull-left" ng-click="setPayment(account.balance)" ng-class="{active: account.balance == payment.amount}">
          <strong class="header">Account Balance</strong>
          <p>$1,313.00</p>
          <div class="arrow-down"></div>
      </div>
-     <div class="summary-item pull-left" ng-click="setPayment(account.currentDue)" ng-class="{active: equalCurrency(account.currentDue, payment.amount)}">
+     <div class="summary-item pull-left" ng-click="setPayment(account.currentDue)" ng-class="{active: account.currentDue == payment.amount}">
          <strong class="header">Due Today</strong>
          <p>$11.03m</p>
          <div class="arrow-down"></div>
