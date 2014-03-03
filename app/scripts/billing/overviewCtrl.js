@@ -18,7 +18,7 @@ angular.module('billingApp')
     *       Account, Period, PageTracking)
     * </pre>    
     */
-    .controller('OverviewCtrl', function ($scope, $routeParams, Transaction, Account,
+    .controller('OverviewCtrl', function ($scope, $routeParams, $q, Transaction, Account,
         Period, Payment, PaymentMethod, PageTracking, rxSortUtil,
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, NON_NUMERIC_REGEX) {
 
@@ -30,14 +30,15 @@ angular.module('billingApp')
             sortCol = function (predicate) {
                 return rxSortUtil.sortCol($scope, predicate);
             },
-            setPayment = function (amount) {
-                $scope.payment.amount = parseFloat(amount).toFixed(2);
-            },
-            setPaymentMethod = function () {
-                $scope.payment.method = $scope.paymentMethods[$scope.payment.methodIndex];
+            setPaymentInfo = function (data) {
+                // Get Current Due from Account Information
+                $scope.payment.amount = parseFloat(data[0].currentDue).toFixed(2);
+                // Get the Primary Payment Method's ID
+                $scope.payment.methodId = _(data[1]).where({ isDefault: 'true' })
+                                                    .pluck('id').value().join();
             },
             postPayment = function (payment) {
-                payment = { amount: payment.amount, methodId: payment.method.id };
+                payment = { amount: payment.amount, methodId: payment.methodId };
                 $scope.paymentResult = Payment.post({ id: $routeParams.accountNumber, payment: payment });
             },
             cleanPaymentAmount = function (newval, oldval) {
@@ -59,8 +60,6 @@ angular.module('billingApp')
 
         // Assign template actions
         $scope.postPayment = postPayment;
-        $scope.setPayment = setPayment;
-        $scope.setPaymentMethod = setPaymentMethod;
         $scope.clearFilter = clearFilter;
 
         // Get Account & Transactions Info
@@ -68,10 +67,29 @@ angular.module('billingApp')
         $scope.transactions = Transaction.list({ id: $routeParams.accountNumber });
         $scope.paymentMethods = PaymentMethod.list({ id: $routeParams.accountNumber });
 
+        // Set defaults for the make a payment modal. 
+        $q.all([$scope.account.$promise, $scope.paymentMethods.$promise]).then(setPaymentInfo);
+
         $scope.user = 'Test Username';
 
         // Payment Object for making payment transactions
         $scope.payment = {};
+
+        $scope.paymentMethodFilter = 'default';
+        // Columns for Card Payment Methods
+        $scope.paymentCardColumns = [{
+            'label': 'Card Type',
+            'key': 'paymentCard.cardType'
+        },{
+            'label': 'Ending In',
+            'key': 'paymentCard.accountNumber'
+        },{
+            'label': 'Cardholder Name',
+            'key': 'paymentCard.cardHolderName'
+        },{
+            'label': 'Exp. Date',
+            'key': 'paymentCard.cardExpirationDate'
+        }];
 
         // Transaction Filter for the list of transactions
         $scope.transactionFilter = {};
@@ -85,4 +103,5 @@ angular.module('billingApp')
         };
 
         $scope.$watch('payment.amount', cleanPaymentAmount);
+        window.w = $scope;
     });
