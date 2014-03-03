@@ -3,19 +3,19 @@
     title="Make a Payment"
     subtitle="{{user}}">
     <div class="payment-action">
-        <div class="account-summary">
-            <div class="amount flush-left" ng-click="setPayment(account.balance)" ng-class="{active: equalCurrency(account.balance, payment.amount)}">
-                <strong>Account Balance</strong>
+        <div class="summary-list">
+            <div class="summary-item pull-left" ng-click="setPayment(account.balance)" ng-class="{active: account.balance == payment.amount}">
+                <strong class="header">Account Balance</strong>
                 <p>{{account.balance | CurrencySuffix }}</p>
                 <div class="arrow-down"></div>
             </div>
-            <div class="amount flush-left" ng-click="setPayment(account.currentDue)" ng-class="{active: equalCurrency(account.currentDue, payment.amount)}">
-                <strong>Due Today</strong>
+            <div class="summary-item pull-left" ng-click="setPayment(account.currentDue)" ng-class="{active: account.currentDue == payment.amount}">
+                <strong class="header">Due Today</strong>
                 <p>{{account.currentDue | CurrencySuffix }}</p>
                 <div class="arrow-down"></div>
             </div>
-            <div class="amount flush-left" ng-click="setPayment(account.pastDue)" ng-class="{active: equalCurrency(account.pastDue, payment.amount)}">
-                <strong>Past Due</strong>
+            <div class="summary-item pull-left" ng-click="setPayment(account.pastDue)" ng-class="{active: account.pastDue == payment.amount}">
+                <strong class="header">Past Due</strong>
                 <p>{{account.pastDue | CurrencySuffix }}</p>
                 <div class="arrow-down"></div>
             </div>
@@ -25,7 +25,7 @@
                 <input type="text" ng-model="payment.amount" ng-required="true" ng-blur="setPayment(payment.amount)" />
             </rx-form-item>
         </div>
-        <div class="payment-field">
+        <div class="payment-field payment-method">
             <rx-form-item label="Payment Options">
                 <span class="field-select">
                     <select ng-model="payment.methodIndex" ng-required="true" ng-change="setPaymentMethod()">
@@ -37,7 +37,7 @@
                     </select>
                     <div class="payment-option-desc">
                         <div ng-show="payment.method.electronicCheck">
-                            <dl>
+                            <dl class="list-definition">
                                 <dt>Account Type:</dt>
                                 <dd>{{payment.method.electronicCheck.accountType}}</dd>
                                 <dt>Name:</dt>
@@ -49,7 +49,7 @@
                             </dl>
                         </div>
                         <div ng-show="payment.method.paymentCard">
-                            <dl>
+                            <dl class="list-definition">
                                 <dt>Card Type:</dt>
                                 <dd>{{payment.method.paymentCard.cardType}}</dd>
                                 <dt>Name:</dt>

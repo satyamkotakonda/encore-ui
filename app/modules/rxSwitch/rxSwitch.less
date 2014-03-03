@@ -1,0 +1,67 @@
+.rx-switch {
+
+    @offStateColor: #b3b3b3;
+    @borderColor: darken(@offStateColor, 10%);
+    @onStateColor: #00ac31;
+    @knobColor: #e1e1e1;
+    @knobBorderColor: darken(@knobColor, 10%);
+    @minWidth: 55px;
+    @knobSize: 20px;
+    @height: @knobSize + 2;
+    @lineHeight: @knobSize - 2;
+    @edgeSpacing: 6px;
+
+    display: inline-block;
+
+    border: 1px @borderColor solid;
+    border-radius: 9px;
+    background-color: @offStateColor;
+    color: white;
+
+    font-size: 15px;
+    line-height: @lineHeight;
+    
+    padding: 0 @edgeSpacing 0 @edgeSpacing + (@edgeSpacing / 2);
+    height: @height;
+
+    min-width: @minWidth;
+    
+    cursor: pointer;
+    position: relative;
+    text-align: right;
+
+    transition: all 0.1s ease-out;
+
+    -webkit-box-shadow: inset 1px 2px 5px -2px rgba(0,0,0,0.65);
+    -moz-box-shadow: inset 1px 2px 5px -2px rgba(0,0,0,0.65);
+    box-shadow: inset 1px 2px 5px -2px rgba(0,0,0,0.65);
+
+    .user-select(none);
+    .box-sizing(border-box);
+    
+    &.readonly {
+        cursor: default;
+    }
+    &.on {
+        background-color: @onStateColor;
+        text-align: left;
+        .knob {
+            right: @edgeSpacing * -1;
+        }
+    }
+    .knob {
+        transition: all 0.1s ease-out;
+
+        position: absolute;
+        display: inline-block;
+        top: -1px;
+
+        width: @knobSize;
+        height: @knobSize;
+        border-radius: (@knobSize/2)+1;
+        background-color: @knobColor;
+        border: 1px @knobBorderColor solid;
+       
+        right: (@minWidth - @knobSize);
+    }
+}

@@ -15,13 +15,16 @@ angular.module('billingApp')
     *     - **date** {Date} - The date the transaction occurred.
     */
     .filter('TransactionTable', function () {
-        var getFilterDate = function getStartDate (start) {
-                var filterDate, now;
+        var getFilterDate = function (start) {
+                var filterDate;
+                //console.log(start);
                 if (!isNaN(start)) {
-                    now = new Date();
-                    filterDate = new Date().setMonth(now.getMonth() + parseInt(start));
+                    filterDate = new Date();
+                    filterDate = new Date(filterDate.getFullYear(), filterDate.getMonth() + parseInt(start),
+                        filterDate.getDate());
                 } else {
                     filterDate = new Date(start);
+                    filterDate = new Date(filterDate.getFullYear(), filterDate.getMonth(), filterDate.getDate());
                 }
                 return filterDate;
             },
@@ -40,9 +43,14 @@ angular.module('billingApp')
                         return true;
                     }
                     var tdate = new Date(transaction.date),
-                        filterDate = getFilterDate(filter.period);
-
-                    return filterDate < tdate;
+                        filterDate = filter.period.split('|').map(getFilterDate);
+                    if (filterDate.length === 1) {
+                        filterDate.push(new Date());
+                    }
+                    if (filterDate[0] > filterDate[1]) {
+                        filterDate.sort(function () { return -1; });
+                    }
+                    return filterDate[0] <= tdate && tdate <= filterDate[1];
                 }
             };
         

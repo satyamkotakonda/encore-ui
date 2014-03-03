@@ -27,8 +27,10 @@ module.exports = function(config) {
             'bower_components/mousetrap/mousetrap.js',
             'bower_components/mousetrap-bind-element/mousetrap-bind-element.js',
             'bower_components/momentjs/moment.js',
+            'modules/**/*.js',
             'scripts/**/*.js',
             '../test/browser-helpers.js',
+            'modules/**/*.html',
             'views/**/*.html',// templates
         ],
 
@@ -51,6 +53,14 @@ module.exports = function(config) {
         coverageReporter: {
             type : 'html',
             dir : '../coverage/'
+        },
+
+
+        thresholdReporter: {
+            statements: 90,
+            branches: 60,
+            functions: 85,
+            lines: 90
         },
 
         // web server port

@@ -30,15 +30,11 @@ angular.module('billingApp')
             sortCol = function (predicate) {
                 return rxSortUtil.sortCol($scope, predicate);
             },
-            itemsPerPage = 10,
             setPayment = function (amount) {
                 $scope.payment.amount = parseFloat(amount).toFixed(2);
             },
             setPaymentMethod = function () {
                 $scope.payment.method = $scope.paymentMethods[$scope.payment.methodIndex];
-            },
-            equalCurrency = function (amount, amount2) {
-                return parseFloat(amount).toFixed(2) === parseFloat(amount2).toFixed(2);
             },
             postPayment = function (payment) {
                 payment = { amount: payment.amount, methodId: payment.method.id };
@@ -53,7 +49,6 @@ angular.module('billingApp')
 
         // Create an instance of the PageTracking component
         $scope.pager = PageTracking.createInstance();
-        $scope.pager.itemsPerPage = itemsPerPage; // Set the items per page
 
         // Set the default sort of the transactions
         $scope.sort = rxSortUtil.getDefault('date', true);
@@ -67,7 +62,6 @@ angular.module('billingApp')
         $scope.setPayment = setPayment;
         $scope.setPaymentMethod = setPaymentMethod;
         $scope.clearFilter = clearFilter;
-        $scope.equalCurrency = equalCurrency;
 
         // Get Account & Transactions Info
         $scope.account = Account.get({ id: $routeParams.accountNumber });
