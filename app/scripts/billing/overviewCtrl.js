@@ -30,7 +30,6 @@ angular.module('billingApp')
             sortCol = function (predicate) {
                 return rxSortUtil.sortCol($scope, predicate);
             },
-            itemsPerPage = 10,
             setPayment = function (amount) {
                 $scope.payment.amount = parseFloat(amount).toFixed(2);
             },
@@ -53,7 +52,6 @@ angular.module('billingApp')
 
         // Create an instance of the PageTracking component
         $scope.pager = PageTracking.createInstance();
-        $scope.pager.itemsPerPage = itemsPerPage; // Set the items per page
 
         // Set the default sort of the transactions
         $scope.sort = rxSortUtil.getDefault('date', true);
