@@ -279,7 +279,6 @@ Horizontal Tab Menu based on pure
     </ul>
 </div>
 ```
-
 */
 .tab-menu {
     @activeColor: #3e80c1;
@@ -306,13 +305,11 @@ Horizontal Tab Menu based on pure
             }
         }
         a {
-            &:hover {
-                &:extend(.tab-menu li.tab-selected a);
-            }
             background: @tabColor;
             color: @tabTextColor;
             padding: 15px 30px;
         }
+        a:hover:extend(.tab-menu li.tab-selected a){}
     }
     
 }
