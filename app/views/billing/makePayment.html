@@ -30,16 +30,15 @@
         <div class="payment-field payment-method">
             <div class="tab-menu">
                 <ul>
-                    <li ng-class="{'tab-selected': paymentMethodFilter == 'default'}"><a href="#">Primary</a></li>
-                    <li ng-class="{'tab-selected': paymentMethodFilter == 'paymentCard'}"><a href="#">Credit Card</a></li>
-                    <li ng-class="{'tab-selected': paymentMethodFilter == 'electronicCheck'}"><a href="#">ACH</a></li>
-                    <li ng-class="{'tab-selected': paymentMethodFilter == 'invoice'}"><a href="#">Invoice</a></li>
+                    <li ng-class="{'tab-selected': paymentMethodType == 'default'}"><a ng-click="setPaymentMethodFilter('default')" href="#">Primary</a></li>
+                    <li ng-class="{'tab-selected': paymentMethodType == 'card'}"><a ng-click="setPaymentMethodFilter('card')" href="#">Credit Card</a></li>
+                    <li ng-class="{'tab-selected': paymentMethodType == 'ach'}"><a ng-click="setPaymentMethodFilter('ach')" href="#">ACH</a></li>
+                    <li ng-class="{'tab-selected': paymentMethodType == 'invoice'}"><a ng-click="setPaymentMethodFilter('invoice')" href="#">Invoice</a></li>
                 </ul>
             </div>
-            {{payment.methodId}}
             <rx-form-option-table
-                data="paymentMethods"
-                columns="paymentCardColumns"
+                data="paymentMethodChoice"
+                columns="paymentMethodColumns"
                 type="radio"
                 model="payment.methodId"
                 selected="payment.methodId"
