@@ -2,49 +2,37 @@
     submitText="Confirm Payment"
     title="Make a Payment"
     subtitle="{{user}}">
-    <div class="payment-action">
-<!-- 
-        <div class="summary-list">
-            <div class="summary-item pull-left" ng-click="setPayment(account.balance)" ng-class="{active: account.balance == payment.amount}">
-                <strong class="header">Account Balance</strong>
-                <p>{{account.balance | CurrencySuffix }}</p>
-                <div class="arrow-down"></div>
-            </div>
-            <div class="summary-item pull-left" ng-click="setPayment(account.currentDue)" ng-class="{active: account.currentDue == payment.amount}">
-                <strong class="header">Due Today</strong>
-                <p>{{account.currentDue | CurrencySuffix }}</p>
-                <div class="arrow-down"></div>
-            </div>
-            <div class="summary-item pull-left" ng-click="setPayment(account.pastDue)" ng-class="{active: account.pastDue == payment.amount}">
-                <strong class="header">Past Due</strong>
-                <p>{{account.pastDue | CurrencySuffix }}</p>
-                <div class="arrow-down"></div>
-            </div>
-        </div>
- -->
+    <div class="payment-post-form">
         <div class="payment-field payment-amount">
             <rx-form-item label="Payment Amount" prefix="$">
-                <input type="text" ng-model="payment.amount" ng-required="true" ng-blur="setPayment(payment.amount)" />
+                <input type="text" ng-model="payment.amount" ng-required="true" />
             </rx-form-item>
         </div>
         <div class="payment-field payment-method">
             <div class="tab-menu">
                 <ul>
-                    <li ng-class="{'tab-selected': paymentMethodType == 'default'}"><a ng-click="setPaymentMethodFilter('default')" href="#">Primary</a></li>
-                    <li ng-class="{'tab-selected': paymentMethodType == 'card'}"><a ng-click="setPaymentMethodFilter('card')" href="#">Credit Card</a></li>
-                    <li ng-class="{'tab-selected': paymentMethodType == 'ach'}"><a ng-click="setPaymentMethodFilter('ach')" href="#">ACH</a></li>
-                    <li ng-class="{'tab-selected': paymentMethodType == 'invoice'}"><a ng-click="setPaymentMethodFilter('invoice')" href="#">Invoice</a></li>
+                    <li ng-class="{'tab-selected': methodType == 'default'}">
+                        <a ng-click="changeMethodType('default')" href="#">Primary</a>
+                    </li>
+                    <li ng-class="{'tab-selected': methodType == 'card'}">
+                        <a ng-click="changeMethodType('card')" href="#">Credit Card</a>
+                    </li>
+                    <li ng-class="{'tab-selected': methodType == 'ach'}">
+                        <a ng-click="changeMethodType('ach')" href="#">ACH</a>
+                    </li>
+                    <li ng-class="{'tab-selected': methodType == 'invoice'}">
+                        <a ng-click="changeMethodType('invoice')" href="#">Invoice</a>
+                    </li>
                 </ul>
             </div>
             <rx-form-option-table
-                data="paymentMethodChoice"
-                columns="paymentMethodColumns"
+                data="methodList"
+                columns="methodListCols"
                 type="radio"
                 model="payment.methodId"
                 selected="payment.methodId"
                 field-id="paymentMethodTable"
                 ></rx-form-option-table>
-
         </div>
     </div>
 </rx-modal-form>
