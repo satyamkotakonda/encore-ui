@@ -14,7 +14,7 @@ These are common styles that will be re-used across the site
     float: right;
 }
 
-/* 
+/*
  Common to align numeric/currency values to the right
  ```
   <table style="width: 100%">
@@ -42,7 +42,7 @@ These are common styles that will be re-used across the site
 .section {
     margin: 0 0 20px;
     clear: both;
-    .clearfix();   
+    .clearfix();
 }
 
 // These will be included in encore-ui, should be removed from here once so.
@@ -57,7 +57,7 @@ These are common styles that will be re-used across the site
      Billed Items
      <a href="#" class="pull-right"><small>Download Transactions</small></a>
  </h3>
- 
+
  ```
  */
 .page-title,
@@ -94,10 +94,10 @@ Data Definition List for common key/value descriptions
             $2,1124.00
         </span>
         <span class="accent-action">
-            <rx-modal-action 
+            <rx-modal-action
                 template-url="/views/billing/makePayment.html"
                 post-hook="postPayment(payment)"
-                class="payment-trigger">
+                class="payment-action">
                 Pay Bill
             </rx-modal-action>
         </span>
@@ -156,12 +156,8 @@ Data Definition List for common key/value descriptions
             float: left;
             border: 0;
             line-height: 0;
-            
-            .modal-link {
-                font-size: @fontSize - 0.1em;
-                line-height: @lineHeight + 1.1em;
-                padding: 0 @spacing;
-            }
+            font-size: @fontSize - 0.1em;
+            line-height: @lineHeight + 1.1em;
         }
     }
 }
@@ -220,11 +216,11 @@ Data Definition List for common key/value descriptions
         display: inline-block;
         text-align: center;
         cursor: pointer;
-        
+
         width: 30%;
         margin: 0 0 0 5%;
         padding: 15px 0;
-        
+
         background-color: @actionGrey;
         color: @summaryItemText;
         &:first-child {
@@ -244,8 +240,8 @@ Data Definition List for common key/value descriptions
             line-height: @lineHeight;
         }
         .arrow-down {
-            width: 0; 
-            height: 0; 
+            width: 0;
+            height: 0;
             margin: 5px auto 0;
             border-left: 9px solid transparent;
             border-right: 9px solid transparent;
@@ -309,7 +305,39 @@ Horizontal Tab Menu based on pure
             color: @tabTextColor;
             padding: 15px 30px;
         }
-        a:hover:extend(.tab-menu li.tab-selected a){}
+        a:hover,
+        a:focus,
+        a:visited,
+        a:active {
+            &:extend(.tab-menu li.tab-selected a);
+        }
     }
-    
+}
+
+/*
+ Styles for expected payment-action look & feel
+ ```
+ <rx-modal-action
+   template-url="/views/billing/makePayment.html"
+   post-hook="postPayment(payment)"
+   class="payment-action">
+   Pay Bill
+ </rx-modal-action>
+ ```
+ */
+.payment-action {
+    color: @actionGreen;
+    background: transparent;
+    cursor: pointer;
+    &:hover,
+    &:active,
+    &:visited,
+    &:focus {
+        text-decoration: none;
+        color: #fff;
+    }
+    &.button {
+        color: #fff;
+        backgorund: @actionGreen;
+    }
 }
