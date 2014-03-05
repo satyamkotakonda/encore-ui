@@ -11,17 +11,16 @@ angular.module('billingApp')
     * @requires billingSvcs.Account - Service for CRUD operations for the Account resource.
     * @requires billingSvcs.Period - Service for CRUD operations for the Period resource.
     * @requires encore.paginate:PageTracking - Service which creates an object for pagination.
-    * 
+    *
     * @example
     * <pre>
     * .controller('OverviewCtrl', function ($scope, $routeParams, Transaction,
     *       Account, Period, PageTracking)
-    * </pre>    
+    * </pre>
     */
     .controller('OverviewCtrl', function ($scope, $routeParams, $q, $filter, Transaction, Account,
         Period, Payment, PaymentMethod, PageTracking, rxSortUtil,
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, NON_NUMERIC_REGEX) {
-        var filter = $filter('filter');
 
         // Action for clearing the filters
         var clearFilter = function () {
@@ -33,35 +32,25 @@ angular.module('billingApp')
             },
             setPaymentInfo = function (data) {
                 // Get Current Due from Account Information
-                $scope.payment.amount = parseFloat(data[0].currentDue).toFixed(2);
+                $scope.paymentAmount = parseFloat(data[0].currentDue).toFixed(2);
                 // Get the Primary Payment Method's ID
-                $scope.payment.methodId = _(data[1]).where({ isDefault: 'true' })
+                $scope.paymentMethodId = _(data[1]).where({ isDefault: 'true' })
                                                     .pluck('id').value().join();
-                setPaymentMethodFilter('default');
             },
-            postPayment = function (payment) {
-                payment = { amount: payment.amount, methodId: payment.methodId };
-                $scope.paymentResult = Payment.post({ id: $routeParams.accountNumber, payment: payment });
+            postPayment = function (amount, methodId) {
+                $scope.paymentResult = Payment.post({
+                    id: $routeParams.accountNumber,
+                    payment: {
+                        amount: amount,
+                        methodId: methodId
+                    }
+                });
             },
             cleanPaymentAmount = function (newval, oldval) {
                 if (newval === oldval) {
                     return;
                 }
                 $scope.payment.amount = newval.replace(NON_NUMERIC_REGEX, '');
-            },
-            setPaymentMethodFilter = function (filterVal) {
-                $scope.paymentMethodType = filterVal;
-                $scope.paymentMethodChoice = filter($scope.paymentMethods, $scope.paymentMethodInfo[filterVal].filter);
-                if (filterVal === 'default') {
-                    if ($scope.paymentMethodChoice[0].paymentCard) {
-                        filterVal = 'card';
-                    } else if ($scope.paymentMethodChoice[0].electronicCheck) {
-                        filterVal = 'ach';
-                    } else if ($scope.paymentMethodChoice[0].invoice) {
-                        filterVal = 'invoice';
-                    }
-                }
-                $scope.paymentMethodColumns = $scope.paymentMethodInfo[filterVal].columns;
             };
 
         // Create an instance of the PageTracking component
@@ -83,66 +72,11 @@ angular.module('billingApp')
         $scope.transactions = Transaction.list({ id: $routeParams.accountNumber });
         $scope.paymentMethods = PaymentMethod.list({ id: $routeParams.accountNumber });
 
-        // Set defaults for the make a payment modal. 
+        // Set defaults for the make a payment modal.
         $q.all([$scope.account.$promise, $scope.paymentMethods.$promise]).then(setPaymentInfo);
 
         $scope.user = 'Test Username';
 
-        // Payment Object for making payment transactions
-        $scope.paymentMethodType = null;
-        $scope.paymentMethodInfo = {
-            'default': {
-                filter: {
-                    'isDefault': 'true'
-                }
-            },
-            'card': {
-                filter: {
-                    'paymentCard': '!!'
-                },
-                columns: [{
-                    'label': 'Card Type',
-                    'key': 'paymentCard.cardType'
-                },{
-                    'label': 'Ending In',
-                    'key': 'paymentCard.accountNumber'
-                },{
-                    'label': 'Cardholder Name',
-                    'key': 'paymentCard.cardHolderName'
-                },{
-                    'label': 'Exp. Date',
-                    'key': 'paymentCard.cardExpirationDate'
-                }]
-            },
-            'ach': {
-                filter: {
-                    'electronicCheck': '!!'
-                },
-                columns: [{
-                    'label': 'Account Type',
-                    'key': 'electronicCheck.accountType'
-                },{
-                    'label': 'Account #',
-                    'key': 'electronicCheck.accountNumber'
-                },{
-                    'label': 'Routing #',
-                    'key': 'electronicCheck.routingNumber'
-                },{
-                    'label': 'Name on Account',
-                    'key': 'electronicCheck.accountHolderName'
-                }]
-            },
-            'invoice': {
-                filter: {
-                    'invoice': '!!'
-                },
-                columns: []
-            }
-        };
-        $scope.setPaymentMethodFilter = setPaymentMethodFilter;
-        $scope.payment = {};
-        
-        
         // Transaction Filter for the list of transactions
         $scope.transactionFilter = {};
 
