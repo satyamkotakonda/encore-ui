@@ -1,7 +1,7 @@
 <!-- Sample HTML goes here as a live example of how to the component can be used -->
 <div class="payment-action-trigger">
     <rx-modal-action
-        template-url="/views/payment/makePayment.html"
+        template-url="/views/payment/makePaymentForm.html"
         pre-hook="payment.amount=amount; payment.methodId=methodId;"
         post-hook="postHook(payment.amount, payment.methodId)"
         classes="payment-action {{classes}}">
