@@ -29,7 +29,7 @@ angular.module('billingApp')
                 $scope.changeMethodType = function (filterVal) {
                     $scope.methodType = filterVal;
                     $scope.methodList = filter($scope.methods, PAYMENT_TYPE_FILTERS[filterVal]).map(flattenObj);
-                    if (filterVal === 'default') {
+                    if (filterVal === 'default' && $scope.methodList.length > 0) {
                         if ($scope.methodList[0].paymentCard) {
                             filterVal = 'card';
                         } else if ($scope.methodList[0].electronicCheck) {
