@@ -20,7 +20,7 @@ angular.module('billingApp')
     */
     .controller('OverviewCtrl', function ($scope, $routeParams, $q, Transaction, Account,
         Period, Payment, PaymentMethod, PageTracking, rxSortUtil,
-        DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, NON_NUMERIC_REGEX) {
+        DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES) {
 
         // Action for clearing the filters
         var clearFilter = function () {
