@@ -1,14 +1,18 @@
 /**
  * @ngdoc directive
- * @name billingApp:rxMakePaymentModal
+ * @name billingApp:rxPaymentAction
  * @restrict E
  *
  * @description
  * Sets the trigger for the make payment modal to be popped up.
  */
 angular.module('billingApp')
-    .directive('rxMakePaymentAction', function ($filter) {
-        var filter = $filter('filter');
+    .directive('rxPaymentAction', function ($filter) {
+        var filter = $filter('filter'),
+            flattenObj = function (method) {
+                var details = _.pairs(method[_.findKey(method, _.isObject)]);
+                return _(method).pairs().concat(details).zipObject().value();
+            };
         return {
             restrict: 'E',
             templateUrl: '/views/payment/makePaymentAction.html',
@@ -24,7 +28,7 @@ angular.module('billingApp')
             controller: function ($scope, PAYMENT_TYPE_FILTERS, PAYMENT_TYPE_COLUMNS) {
                 $scope.changeMethodType = function (filterVal) {
                     $scope.methodType = filterVal;
-                    $scope.methodList = filter($scope.methods, PAYMENT_TYPE_FILTERS[filterVal]);
+                    $scope.methodList = filter($scope.methods, PAYMENT_TYPE_FILTERS[filterVal]).map(flattenObj);
                     if (filterVal === 'default') {
                         if ($scope.methodList[0].paymentCard) {
                             filterVal = 'card';
@@ -36,6 +40,7 @@ angular.module('billingApp')
                     }
                     $scope.methodListCols = PAYMENT_TYPE_COLUMNS[filterVal];
                 };
+                // Set default as the active view
                 if ($scope.methods.$promise) {
                     $scope.methods.$promise.then(function () {
                         $scope.changeMethodType('default');
@@ -45,44 +50,40 @@ angular.module('billingApp')
                 }
             }
         };
-    }).constant('PAYMENT_TYPE_FILTERS', {
+    })
+    .constant('PAYMENT_TYPE_FILTERS', {
         'default': { 'isDefault': 'true' },
         'card':    { 'paymentCard': '!!' },
         'ach':     { 'electronicCheck': '!!' },
         'invoice': { 'invoice': '!!' }
-    }).constant('PAYMENT_TYPE_COLUMNS', {
+    })
+    .constant('PAYMENT_TYPE_COLUMNS', {
         'default': [],
         'card': [{
-            'label': 'id',
-            'key': 'id'
-        },{
             'label': 'Card Type',
-            'key': 'paymentCard.cardType'
+            'key': 'cardType'
         },{
             'label': 'Ending In',
-            'key': 'paymentCard.accountNumber'
+            'key': 'cardNumber'
         },{
             'label': 'Cardholder Name',
-            'key': 'paymentCard.cardHolderName'
+            'key': 'cardHolderName'
         },{
             'label': 'Exp. Date',
-            'key': 'paymentCard.cardExpirationDate'
+            'key': 'cardExpirationDate'
         }],
         'ach': [{
-            'label': 'id',
-            'key': 'id'
-        },{
             'label': 'Account Type',
-            'key': 'electronicCheck.accountType'
+            'key': 'accountType'
         },{
             'label': 'Account #',
-            'key': 'electronicCheck.accountNumber'
+            'key': 'accountNumber'
         },{
             'label': 'Routing #',
-            'key': 'electronicCheck.routingNumber'
+            'key': 'routingNumber'
         },{
             'label': 'Name on Account',
-            'key': 'electronicCheck.accountHolderName'
+            'key': 'accountHolderName'
         }],
         'invoice': []
     });
