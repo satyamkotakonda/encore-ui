@@ -31,7 +31,6 @@ angular.module('billingApp')
                 return rxSortUtil.sortCol($scope, predicate);
             },
             setPaymentInfo = function (data) {
-                console.log(data);
                 // Get Current Due from Account Information
                 $scope.paymentAmount = parseFloat(data[0].currentDue).toFixed(2);
                 // Get the Primary Payment Method's ID
