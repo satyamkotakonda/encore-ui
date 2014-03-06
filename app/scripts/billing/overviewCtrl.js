@@ -89,5 +89,4 @@ angular.module('billingApp')
         };
 
         $scope.$watch('payment.amount', cleanPaymentAmount);
-        window.w = $scope;
     });
