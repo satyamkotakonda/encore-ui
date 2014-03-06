@@ -21,7 +21,7 @@
                         {{account.currentDue | currency }}
                     </span>
                     <span class="accent-action">
-                        <rx-make-payment-action
+                        <rx-payment-action
                             post-hook="postPayment"
                             user="{{user}}"
                             classes="button button-green pull-right"
@@ -29,7 +29,7 @@
                             payment-method-id="{{paymentMethodId}}"
                             payment-methods="paymentMethods">
                             <strong>+</strong> Make a Payment
-                        </rx-make-payment-action>
+                        </rx-payment-action>
                     </span>
                 </dd>
                 <dt>Account Balance:</dt>
