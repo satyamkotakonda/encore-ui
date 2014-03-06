@@ -31,6 +31,7 @@ angular.module('billingApp')
                 return rxSortUtil.sortCol($scope, predicate);
             },
             setPaymentInfo = function (data) {
+                console.log(data);
                 // Get Current Due from Account Information
                 $scope.paymentAmount = parseFloat(data[0].currentDue).toFixed(2);
                 // Get the Primary Payment Method's ID
@@ -45,12 +46,6 @@ angular.module('billingApp')
                         methodId: methodId
                     }
                 });
-            },
-            cleanPaymentAmount = function (newval, oldval) {
-                if (newval === oldval) {
-                    return;
-                }
-                $scope.payment.amount = newval.replace(NON_NUMERIC_REGEX, '');
             };
 
         // Create an instance of the PageTracking component
@@ -74,6 +69,7 @@ angular.module('billingApp')
 
         // Set defaults for the make a payment modal.
         $q.all([$scope.account.$promise, $scope.paymentMethods.$promise]).then(setPaymentInfo);
+        console.log([$scope.account.$promise, $scope.paymentMethods.$promise]);
 
         $scope.user = 'Test Username';
 
@@ -87,6 +83,4 @@ angular.module('billingApp')
             statuses: TRANSACTION_STATUSES,
             periods: Period.list({ id: $routeParams.accountNumber })
         };
-
-        $scope.$watch('payment.amount', cleanPaymentAmount);
     });
