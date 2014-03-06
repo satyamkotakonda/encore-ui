@@ -15,7 +15,7 @@ angular.module('billingApp')
             };
         return {
             restrict: 'E',
-            templateUrl: '/views/payment/makePaymentAction.html',
+            templateUrl: '/views/payment/paymentAction.html',
             transclude: true,
             scope: {
                 user: '@',
