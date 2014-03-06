@@ -18,7 +18,7 @@ angular.module('billingApp')
     *       Account, Period, PageTracking)
     * </pre>
     */
-    .controller('OverviewCtrl', function ($scope, $routeParams, $q, $filter, Transaction, Account,
+    .controller('OverviewCtrl', function ($scope, $routeParams, $q, Transaction, Account,
         Period, Payment, PaymentMethod, PageTracking, rxSortUtil,
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, NON_NUMERIC_REGEX) {
 
