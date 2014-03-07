@@ -1,7 +1,7 @@
 /* jshint node: true */
 
 describe('rxPaymentAction', function () {
-    var el, scope, directiveScope, compile, rootScope, deferred, paymentMethod,
+    var el, scope, directiveScope, compile, rootScope,
         user = 'test', amount = '2000.00', methodId = 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479',
         paymentMethods = [{
             id: 'id1',
@@ -33,23 +33,19 @@ describe('rxPaymentAction', function () {
         module('billingApp');
         module('views/payment/paymentAction.html');
 
-        inject(function ($rootScope, $compile, $templateCache, $q, PaymentMethod) {
-            var template = $templateCache.get('views/payment/paymentAction.html'),
-                deferred = $q.defer();
+        inject(function ($rootScope, $compile, $templateCache) {
+            var template = $templateCache.get('views/payment/paymentAction.html');
 
             $templateCache.put('/views/payment/paymentAction.html', template);
-            paymentMethods.$promise = deferred.promise;
-            paymentMethod = PaymentMethod;
-            paymentMethod.list = sinon.stub().returns(paymentMethods);
+            paymentMethods.$promise = true;
             rootScope = $rootScope;
             compile = $compile;
             scope = $rootScope.$new();
             scope.user = user;
             scope.amount = amount;
             scope.methodId = methodId;
-            scope.methods = paymentMethod.list();
+            scope.methods = paymentMethods;
             scope.postPayment = postPayment;
-            deferred.resolve();
         });
 
         el = helpers.createDirective(validTemplate, compile, scope);
