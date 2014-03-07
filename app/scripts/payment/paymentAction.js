@@ -20,46 +20,42 @@ angular.module('billingApp')
             scope: {
                 user: '@',
                 classes: '@',
-                amount: '@paymentAmount',
-                methodId: '@paymentMethodId',
-                methods: '=paymentMethods',
+                amount: '@',
+                methodId: '@',
+                methods: '=',
                 postHook: '='
             },
-            controller: function ($scope, PAYMENT_TYPE_FILTERS, PAYMENT_TYPE_COLUMNS) {
-                $scope.changeMethodType = function (filterVal) {
-                    $scope.methodType = filterVal;
-                    $scope.methodList = filter($scope.methods, PAYMENT_TYPE_FILTERS[filterVal]).map(flattenObj);
-                    if (filterVal === 'default' && $scope.methodList.length > 0) {
-                        if ($scope.methodList[0].paymentCard) {
-                            filterVal = 'card';
-                        } else if ($scope.methodList[0].electronicCheck) {
-                            filterVal = 'ach';
-                        } else if ($scope.methodList[0].invoice) {
-                            filterVal = 'invoice';
-                        }
-                    }
-                    $scope.methodListCols = PAYMENT_TYPE_COLUMNS[filterVal];
+            controller: function ($scope, $q, PAYMENT_TYPE_FILTERS, PAYMENT_TYPE_COLUMNS) {
+                $scope.payment = {};
+                $scope.setDefaultValues = function (amount, methodId) {
+                    $scope.payment.amount = amount;
+                    $scope.payment.methodId = methodId;
                 };
+                $scope.changeMethodType = function (methodType) {
+                    $scope.methodType = methodType;
+                    $scope.methodList = filter($scope.methods, PAYMENT_TYPE_FILTERS[methodType]).map(flattenObj);
+                    if (methodType === 'default' && $scope.methodList.length > 0) {
+                        methodType = _.findKey($scope.methodList[0], _.isObject);
+                    }
+                    $scope.methodListCols = PAYMENT_TYPE_COLUMNS[methodType];
+                };
+
                 // Set default as the active view
-                if ($scope.methods.$promise) {
-                    $scope.methods.$promise.then(function () {
-                        $scope.changeMethodType('default');
-                    });
-                } else {
+                $q.when($scope.methods.$promise).then(function () {
                     $scope.changeMethodType('default');
-                }
+                });
             }
         };
     })
     .constant('PAYMENT_TYPE_FILTERS', {
         'default': { 'isDefault': 'true' },
-        'card':    { 'paymentCard': '!!' },
-        'ach':     { 'electronicCheck': '!!' },
+        'paymentCard':    { 'paymentCard': '!!' },
+        'electronicCheck':     { 'electronicCheck': '!!' },
         'invoice': { 'invoice': '!!' }
     })
     .constant('PAYMENT_TYPE_COLUMNS', {
         'default': [],
-        'card': [{
+        'paymentCard': [{
             'label': 'Card Type',
             'key': 'cardType'
         },{
@@ -72,7 +68,7 @@ angular.module('billingApp')
             'label': 'Exp. Date',
             'key': 'cardExpirationDate'
         }],
-        'ach': [{
+        'electronicCheck': [{
             'label': 'Account Type',
             'key': 'accountType'
         },{
