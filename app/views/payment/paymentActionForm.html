@@ -14,11 +14,11 @@
                     <li ng-class="{'tab-selected': methodType == 'default'}">
                         <a ng-click="changeMethodType('default')" href="#">Primary</a>
                     </li>
-                    <li ng-class="{'tab-selected': methodType == 'card'}">
-                        <a ng-click="changeMethodType('card')" href="#">Credit Card</a>
+                    <li ng-class="{'tab-selected': methodType == 'paymentCard'}">
+                        <a ng-click="changeMethodType('paymentCard')" href="#">Credit paymentCard</a>
                     </li>
-                    <li ng-class="{'tab-selected': methodType == 'ach'}">
-                        <a ng-click="changeMethodType('ach')" href="#">ACH</a>
+                    <li ng-class="{'tab-selected': methodType == 'electronicCheck'}">
+                        <a ng-click="changeMethodType('electronicCheck')" href="#">ACH</a>
                     </li>
                     <li ng-class="{'tab-selected': methodType == 'invoice'}">
                         <a ng-click="changeMethodType('invoice')" href="#">Invoice</a>
@@ -31,8 +31,8 @@
                 type="radio"
                 model="payment.methodId"
                 selected="payment.methodId"
-                field-id="paymentMethodTable"
-                ></rx-form-option-table>
+                field-id="paymentMethodTable">
+                </rx-form-option-table>
         </div>
     </div>
 </rx-modal-form>
