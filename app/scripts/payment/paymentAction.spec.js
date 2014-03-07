@@ -1,7 +1,7 @@
 /* jshint node: true */
 
 describe('rxPaymentAction', function () {
-    var el, scope, instScope, compile, rootScope,
+    var el, scope, directiveScope, compile, rootScope, deferred, paymentMethod,
         user = 'test', amount = '2000.00', methodId = 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479',
         paymentMethods = [{
             id: 'id1',
@@ -20,9 +20,9 @@ describe('rxPaymentAction', function () {
         validTemplate = '<rx-payment-action' +
                         '    post-hook="postPayment"' +
                         '    user="{{user}}"' +
-                        '    payment-amount="{{paymentAmount}}"' +
-                        '    payment-method-id="{{paymentMethodId}}"' +
-                        '    payment-methods="paymentMethods">' +
+                        '    amount="{{amount}}"' +
+                        '    method-id="{{methodId}}"' +
+                        '    methods="methods">' +
                         '    <strong>+</strong> Make a Payment' +
                         '</rx-payment-action>';
     var postPayment = function (amount, methodId) {
@@ -33,25 +33,32 @@ describe('rxPaymentAction', function () {
         module('billingApp');
         module('views/payment/paymentAction.html');
 
-        inject(function ($rootScope, $compile, $templateCache) {
-            var template = $templateCache.get('views/payment/paymentAction.html');
-            $templateCache.put('/views/payment/paymentAction.html', template);
+        inject(function ($rootScope, $compile, $templateCache, $q, PaymentMethod) {
+            var template = $templateCache.get('views/payment/paymentAction.html'),
+                deferred = $q.defer();
 
+            $templateCache.put('/views/payment/paymentAction.html', template);
+            paymentMethods.$promise = deferred.promise;
+            paymentMethod = PaymentMethod;
+            paymentMethod.list = sinon.stub().returns(paymentMethods);
             rootScope = $rootScope;
             compile = $compile;
             scope = $rootScope.$new();
             scope.user = user;
-            scope.paymentAmount = amount;
-            scope.paymentMethodId = methodId;
-            scope.paymentMethods = paymentMethods;
+            scope.amount = amount;
+            scope.methodId = methodId;
+            scope.methods = paymentMethod.list();
             scope.postPayment = postPayment;
+            deferred.resolve();
         });
 
         el = helpers.createDirective(validTemplate, compile, scope);
+        directiveScope = el.find('div').scope();
     });
 
     afterEach(function () {
         el = null;
+        directiveScope = null;
     });
 
     it('should render template correctly', function () {
@@ -60,46 +67,46 @@ describe('rxPaymentAction', function () {
         expect(el.find('div').attr('class').split(' ').indexOf('rx-payment-action')).to.be.gt(-1);
     });
 
-    it('should have the default payment-amount set', function () {
-        expect(el).not.be.empty;
-        expect(el.attr('payment-amount')).to.be.eq('2000.00');
+    it('should have the default amount set', function () {
+        expect(el.attr('amount')).to.be.eq('2000.00');
     });
 
-    it('should have the default payment-method-id set', function () {
-        expect(el).not.be.empty;
-        expect(el.attr('payment-method-id')).to.be.eq('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
+    it('should have the default method-id set', function () {
+        expect(el.attr('method-id')).to.be.eq('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
+    });
+
+    it('should set the initial payment final amount/method-id values', function () {
+        directiveScope.setDefaultValues('3000.45', 'urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7');
+        expect(directiveScope.payment.amount).to.be.eq('3000.45');
+        expect(directiveScope.payment.methodId).to.be.eq('urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7');
     });
 
     it('should call post-hook with the final amount/method-id values', function () {
-        expect(el).not.be.empty;
-        expect(el.find('div')).not.be.empty;
-        var hookResponse = el.find('div').scope().postHook('3000.45', 'urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7');
+        directiveScope.changeMethodType('default');
+        var hookResponse = directiveScope.postHook('3000.45', 'urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7');
         expect(hookResponse[0]).to.be.eq('3000.45');
         expect(hookResponse[1]).to.be.eq('urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7');
     });
 
     it('should filter/change columns based on the default method type', function () {
-        instScope = el.find('div').scope();
-        instScope.changeMethodType('default');
-        expect(instScope.methodType).to.be.eq('default');
-        expect(instScope.methodList.length).to.be.eq(1);
-        expect(instScope.methodListCols.length).to.be.eq(4);
+        directiveScope.changeMethodType('default');
+        expect(directiveScope.methodType).to.be.eq('default');
+        expect(directiveScope.methodList.length).to.be.eq(1);
+        expect(directiveScope.methodListCols.length).to.be.eq(4);
     });
 
     it('should filter/change columns based on the card method type', function () {
-        instScope = el.find('div').scope();
-        instScope.changeMethodType('card');
-        expect(instScope.methodType).to.be.eq('card');
-        expect(instScope.methodList.length).to.be.eq(2);
-        expect(instScope.methodListCols.length).to.be.eq(4);
+        directiveScope.changeMethodType('paymentCard');
+        expect(directiveScope.methodType).to.be.eq('paymentCard');
+        expect(directiveScope.methodList.length).to.be.eq(2);
+        expect(directiveScope.methodListCols.length).to.be.eq(4);
     });
 
     it('should filter/change columns based on the ach method type', function () {
-        instScope = el.find('div').scope();
-        instScope.changeMethodType('ach');
-        expect(instScope.methodType).to.be.eq('ach');
-        expect(instScope.methodList.length).to.be.eq(1);
-        expect(instScope.methodListCols.length).to.be.eq(4);
+        directiveScope.changeMethodType('electronicCheck');
+        expect(directiveScope.methodType).to.be.eq('electronicCheck');
+        expect(directiveScope.methodList.length).to.be.eq(1);
+        expect(directiveScope.methodListCols.length).to.be.eq(4);
     });
 
 });
