@@ -3,6 +3,7 @@
     title="Make a Payment"
     subtitle="{{user}}">
     <div class="payment-post-form">
+        <rx-notifications stack="makePayment"></rx-notifications>
         <div class="payment-field payment-amount">
             <rx-form-item label="Payment Amount" prefix="$">
                 <input type="text" ng-model="payment.amount" ng-required="true" />

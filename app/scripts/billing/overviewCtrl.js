@@ -19,8 +19,9 @@ angular.module('billingApp')
     * </pre>
     */
     .controller('OverviewCtrl', function ($scope, $routeParams, $q, Transaction, Account,
-        Period, Payment, PaymentMethod, PageTracking, rxSortUtil,
-        DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES) {
+        Period, Payment, PaymentMethod, PageTracking, rxSortUtil, rxPromiseNotifications,
+        DefaultPaymentMethod,
+        DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES) {
 
         // Action for clearing the filters
         var resetPager = function () {
@@ -39,8 +40,8 @@ angular.module('billingApp')
                 $scope.paymentAmount = $scope.account.currentDue;
 
                 // Get the Primary Payment Method's ID
-                $scope.paymentMethodId = _($scope.paymentMethods).where({ isDefault: 'true' })
-                                                                .pluck('id').value().join();
+                var method = DefaultPaymentMethod($scope.paymentMethods);
+                $scope.paymentMethodId = method.id;
             },
             postPayment = function (amount, methodId) {
                 $scope.paymentResult = Payment.post({
@@ -50,6 +51,11 @@ angular.module('billingApp')
                         methodId: methodId
                     }
                 });
+                rxPromiseNotifications.add($scope.paymentResult.$promise, {
+                    loading: STATUS_MESSAGES.payment.load,
+                    success: STATUS_MESSAGES.payment.success,
+                    error: STATUS_MESSAGES.payment.error
+                }, 'makePayment');
             };
 
         // Create an instance of the PageTracking component
@@ -71,6 +77,18 @@ angular.module('billingApp')
         $scope.account = Account.get({ id: $routeParams.accountNumber });
         $scope.transactions = Transaction.list({ id: $routeParams.accountNumber });
         $scope.paymentMethods = PaymentMethod.list({ id: $routeParams.accountNumber });
+        $scope.billingPeriods = Period.list({ id: $routeParams.accountNumber });
+
+        // Group the promises in $q.all for a global error message if any errors occur
+        rxPromiseNotifications.add($q.all([
+            $scope.account.$promise,
+            $scope.transactions.$promise,
+            $scope.paymentMethods.$promise,
+            $scope.billingPeriods.$promise
+        ]), {
+            loading: '',
+            error: STATUS_MESSAGES.overview.error
+        }, 'overviewPage');
 
         // Set defaults for the make a payment modal.
         $q.all([$scope.account.$promise, $scope.paymentMethods.$promise]).then(setPaymentInfo);
@@ -85,7 +103,7 @@ angular.module('billingApp')
         $scope.filterData = {
             types: TRANSACTION_TYPES,
             statuses: TRANSACTION_STATUSES,
-            periods: Period.list({ id: $routeParams.accountNumber })
+            periods: $scope.billingPeriods
         };
 
     });
