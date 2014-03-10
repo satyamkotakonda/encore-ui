@@ -11,12 +11,6 @@
                 <h2 class="page-title">Billing Overview</h2>
                 <h3 class="page-subtitle">On account {{account.name}}</h3>
             </div>
-            <rx-modal-action 
-                template-url="/views/billing/makePayment.html"
-                post-hook="postPayment(payment)"
-                class="button button-green payment-trigger pull-right">
-                + Make a Payment
-            </rx-modal-action>
         </div>
         <hr />
         <div class="section billing-info">
@@ -27,12 +21,15 @@
                         {{account.currentDue | currency }}
                     </span>
                     <span class="accent-action">
-                        <rx-modal-action 
-                            template-url="/views/billing/makePayment.html"
-                            post-hook="postPayment(payment)"
-                            class="payment-trigger">
-                            Pay Bill
-                        </rx-modal-action>
+                        <rx-payment-action
+                            post-hook="postPayment"
+                            user="{{user}}"
+                            classes="button button-green pull-right"
+                            amount="{{paymentAmount}}"
+                            method-id="{{paymentMethodId}}"
+                            methods="paymentMethods">
+                            <strong>+</strong> Make a Payment
+                        </rx-payment-action>
                     </span>
                 </dd>
                 <dt>Account Balance:</dt>

@@ -4,10 +4,7 @@
 These are common styles that will be re-used across the site
 
 */
-
-@import 'vars';
-@import 'mixins';
-
+@import (less, reference) '../bower_components/pure/menus.css';
 
 .pull-left {
     float: left;
@@ -17,7 +14,7 @@ These are common styles that will be re-used across the site
     float: right;
 }
 
-/* 
+/*
  Common to align numeric/currency values to the right
  ```
   <table style="width: 100%">
@@ -45,7 +42,7 @@ These are common styles that will be re-used across the site
 .section {
     margin: 0 0 20px;
     clear: both;
-    .clearfix();   
+    .clearfix();
 }
 
 // These will be included in encore-ui, should be removed from here once so.
@@ -60,7 +57,7 @@ These are common styles that will be re-used across the site
      Billed Items
      <a href="#" class="pull-right"><small>Download Transactions</small></a>
  </h3>
- 
+
  ```
  */
 .page-title,
@@ -97,10 +94,10 @@ Data Definition List for common key/value descriptions
             $2,1124.00
         </span>
         <span class="accent-action">
-            <rx-modal-action 
+            <rx-modal-action
                 template-url="/views/billing/makePayment.html"
                 post-hook="postPayment(payment)"
-                class="payment-trigger">
+                class="payment-action">
                 Pay Bill
             </rx-modal-action>
         </span>
@@ -159,12 +156,8 @@ Data Definition List for common key/value descriptions
             float: left;
             border: 0;
             line-height: 0;
-            
-            .modal-link {
-                font-size: @fontSize - 0.1em;
-                line-height: @lineHeight + 1.1em;
-                padding: 0 @spacing;
-            }
+            font-size: @fontSize - 0.1em;
+            line-height: @lineHeight + 1.1em;
         }
     }
 }
@@ -197,5 +190,154 @@ Data Definition List for common key/value descriptions
     .filter {
         float: left;
         margin-right: 10px;
+    }
+}
+
+/*
+ List for summarized items that can be used to choose from
+ ```
+ <div class="summary-list">
+     <div class="summary-item pull-left" ng-click="setPayment(account.balance)" ng-class="{active: account.balance == payment.amount}">
+         <strong class="header">Account Balance</strong>
+         <p>$1,313.00</p>
+         <div class="arrow-down"></div>
+     </div>
+     <div class="summary-item pull-left" ng-click="setPayment(account.currentDue)" ng-class="{active: account.currentDue == payment.amount}">
+         <strong class="header">Due Today</strong>
+         <p>$11.03m</p>
+         <div class="arrow-down"></div>
+     </div>
+ </div>
+ ```
+*/
+.summary-list {
+    .clearfix();
+    .summary-item {
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+
+        width: 30%;
+        margin: 0 0 0 5%;
+        padding: 15px 0;
+
+        background-color: @actionGrey;
+        color: @summaryItemText;
+        &:first-child {
+            margin-left: 0;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+        .header {
+            text-transform: uppercase;
+            font-size: @fontSize - 0.2;
+        }
+        p {
+            font-size: @fontSize + 0.8;
+            font-weight: 100;
+            margin: 0;
+            line-height: @lineHeight;
+        }
+        .arrow-down {
+            width: 0;
+            height: 0;
+            margin: 5px auto 0;
+            border-left: 9px solid transparent;
+            border-right: 9px solid transparent;
+            border-top: 8px solid @summaryItemText;
+        }
+        &:hover,
+        &.active {
+            background-color: @actionBlue;
+            color: @summaryItemHover;
+            .header {
+                color: @summaryItemHeaderHover;
+            }
+            .arrow-down {
+                border-left: 9px solid transparent;
+                border-right: 9px solid transparent;
+                border-top: 8px solid @summaryItemArrowHover;
+            }
+        }
+    }
+}
+
+/*
+Horizontal Tab Menu based on pure
+```
+<div class="tab-menu">
+    <ul>
+        <li class="tab-selected"><a href="#">Default</a></li>
+        <li><a href="#">Card</a></li>
+        <li><a href="#">ACH</a></li>
+        <li><a href="#">Invoice</a></li>
+    </ul>
+</div>
+```
+*/
+.tab-menu {
+    @activeColor: #3e80c1;
+    @activeTextColor: #fff;
+    @tabColor: desaturate(darken(@activeColor, 12%), 15%);
+    @tabTextColor: darken(@activeTextColor, 13%);
+    &:extend(.pure-menu all);
+    &:extend(.pure-menu-open all);
+    &:extend(.pure-menu-horizontal all);
+    .clearfix();
+    border-bottom: 1px @tabColor solid;
+    ul {
+        .clearfix();
+        border-bottom: 9px @activeColor solid;
+    }
+    li {
+        margin: 0;
+        float: left;
+        &.tab-selected {
+            &:extend(.pure-menu-selected all);
+            a {
+                background: @activeColor;
+                color: @activeTextColor;
+            }
+        }
+        a {
+            background: @tabColor;
+            color: @tabTextColor;
+            padding: 15px 30px;
+        }
+        a:hover,
+        a:focus,
+        a:visited,
+        a:active {
+            &:extend(.tab-menu li.tab-selected a);
+        }
+    }
+}
+
+/*
+ Styles for expected payment-action look & feel
+ ```
+ <rx-modal-action
+   template-url="/views/billing/makePayment.html"
+   post-hook="postPayment(payment)"
+   class="payment-action">
+   Pay Bill
+ </rx-modal-action>
+ ```
+ */
+.payment-action {
+    color: @actionGreen;
+    background: transparent;
+    cursor: pointer;
+    &:hover,
+    &:active,
+    &:visited,
+    &:focus {
+        text-decoration: none;
+        color: #fff;
+    }
+    &.button {
+        color: #fff;
+        backgorund: @actionGreen;
     }
 }

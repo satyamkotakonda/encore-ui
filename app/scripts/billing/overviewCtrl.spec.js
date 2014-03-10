@@ -16,7 +16,7 @@ describe('Billing: OverviewCtrl', function () {
             payment = Payment;
             transaction.list = sinon.stub();
             period.list = sinon.stub();
-            account.get = sinon.stub();
+            account.get = sinon.stub().returns({});
             paymentMethod.list = sinon.stub().returns([{}]);
             payment.post = sinon.stub();
 

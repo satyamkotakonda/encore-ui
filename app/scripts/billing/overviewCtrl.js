@@ -11,16 +11,16 @@ angular.module('billingApp')
     * @requires billingSvcs.Account - Service for CRUD operations for the Account resource.
     * @requires billingSvcs.Period - Service for CRUD operations for the Period resource.
     * @requires encore.paginate:PageTracking - Service which creates an object for pagination.
-    * 
+    *
     * @example
     * <pre>
     * .controller('OverviewCtrl', function ($scope, $routeParams, Transaction,
     *       Account, Period, PageTracking)
-    * </pre>    
+    * </pre>
     */
-    .controller('OverviewCtrl', function ($scope, $routeParams, Transaction, Account,
+    .controller('OverviewCtrl', function ($scope, $routeParams, $q, Transaction, Account,
         Period, Payment, PaymentMethod, PageTracking, rxSortUtil,
-        DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, NON_NUMERIC_REGEX) {
+        DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES) {
 
         // Action for clearing the filters
         var clearFilter = function () {
@@ -30,21 +30,22 @@ angular.module('billingApp')
             sortCol = function (predicate) {
                 return rxSortUtil.sortCol($scope, predicate);
             },
-            setPayment = function (amount) {
-                $scope.payment.amount = parseFloat(amount).toFixed(2);
+            setPaymentInfo = function () {
+                // Get Current Due from Account Information
+                $scope.paymentAmount = $scope.account.currentDue;
+
+                // Get the Primary Payment Method's ID
+                $scope.paymentMethodId = _($scope.paymentMethods).where({ isDefault: 'true' })
+                                                                .pluck('id').value().join();
             },
-            setPaymentMethod = function () {
-                $scope.payment.method = $scope.paymentMethods[$scope.payment.methodIndex];
-            },
-            postPayment = function (payment) {
-                payment = { amount: payment.amount, methodId: payment.method.id };
-                $scope.paymentResult = Payment.post({ id: $routeParams.accountNumber, payment: payment });
-            },
-            cleanPaymentAmount = function (newval, oldval) {
-                if (newval === oldval) {
-                    return;
-                }
-                $scope.payment.amount = newval.replace(NON_NUMERIC_REGEX, '');
+            postPayment = function (amount, methodId) {
+                $scope.paymentResult = Payment.post({
+                    id: $routeParams.accountNumber,
+                    payment: {
+                        amount: amount,
+                        methodId: methodId
+                    }
+                });
             };
 
         // Create an instance of the PageTracking component
@@ -59,8 +60,6 @@ angular.module('billingApp')
 
         // Assign template actions
         $scope.postPayment = postPayment;
-        $scope.setPayment = setPayment;
-        $scope.setPaymentMethod = setPaymentMethod;
         $scope.clearFilter = clearFilter;
 
         // Get Account & Transactions Info
@@ -68,10 +67,10 @@ angular.module('billingApp')
         $scope.transactions = Transaction.list({ id: $routeParams.accountNumber });
         $scope.paymentMethods = PaymentMethod.list({ id: $routeParams.accountNumber });
 
-        $scope.user = 'Test Username';
+        // Set defaults for the make a payment modal.
+        $q.all([$scope.account.$promise, $scope.paymentMethods.$promise]).then(setPaymentInfo);
 
-        // Payment Object for making payment transactions
-        $scope.payment = {};
+        $scope.user = 'Test Username';
 
         // Transaction Filter for the list of transactions
         $scope.transactionFilter = {};
@@ -83,6 +82,4 @@ angular.module('billingApp')
             statuses: TRANSACTION_STATUSES,
             periods: Period.list({ id: $routeParams.accountNumber })
         };
-
-        $scope.$watch('payment.amount', cleanPaymentAmount);
     });

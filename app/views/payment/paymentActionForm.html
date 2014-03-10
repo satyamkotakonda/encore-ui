@@ -1,0 +1,38 @@
+<rx-modal-form
+    submitText="Confirm Payment"
+    title="Make a Payment"
+    subtitle="{{user}}">
+    <div class="payment-post-form">
+        <div class="payment-field payment-amount">
+            <rx-form-item label="Payment Amount" prefix="$">
+                <input type="text" ng-model="payment.amount" ng-required="true" />
+            </rx-form-item>
+        </div>
+        <div class="payment-field payment-method">
+            <div class="tab-menu">
+                <ul>
+                    <li ng-class="{'tab-selected': methodType == 'default'}">
+                        <a ng-click="changeMethodType('default')" href="#">Primary</a>
+                    </li>
+                    <li ng-class="{'tab-selected': methodType == 'paymentCard'}">
+                        <a ng-click="changeMethodType('paymentCard')" href="#">Credit Card</a>
+                    </li>
+                    <li ng-class="{'tab-selected': methodType == 'electronicCheck'}">
+                        <a ng-click="changeMethodType('electronicCheck')" href="#">ACH</a>
+                    </li>
+                    <li ng-class="{'tab-selected': methodType == 'invoice'}">
+                        <a ng-click="changeMethodType('invoice')" href="#">Invoice</a>
+                    </li>
+                </ul>
+            </div>
+            <rx-form-option-table
+                data="methodList"
+                columns="methodListCols"
+                type="radio"
+                model="payment.methodId"
+                selected="payment.methodId"
+                field-id="paymentMethodTable">
+                </rx-form-option-table>
+        </div>
+    </div>
+</rx-modal-form>
