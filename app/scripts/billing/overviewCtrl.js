@@ -32,7 +32,7 @@ angular.module('billingApp')
             },
             setPaymentInfo = function (data) {
                 // Get Current Due from Account Information
-                $scope.paymentAmount = parseFloat(data[0].currentDue).toFixed(2);
+                $scope.paymentAmount = data[0].currentDue;
                 // Get the Primary Payment Method's ID
                 $scope.paymentMethodId = _(data[1]).where({ isDefault: 'true' })
                                                     .pluck('id').value().join();
