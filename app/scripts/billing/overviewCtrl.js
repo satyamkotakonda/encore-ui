@@ -23,8 +23,12 @@ angular.module('billingApp')
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES) {
 
         // Action for clearing the filters
-        var clearFilter = function () {
+        var resetPager = function () {
+                $scope.pager.pageNumber = 0;
+            },
+            clearFilter = function () {
                 $scope.transactionFilter = {};
+                resetPager();
             },
             // Action for setting the sort
             sortCol = function (predicate) {
@@ -50,6 +54,7 @@ angular.module('billingApp')
 
         // Create an instance of the PageTracking component
         $scope.pager = PageTracking.createInstance();
+        $scope.resetPager = resetPager;
 
         // Set the default sort of the transactions
         $scope.sort = rxSortUtil.getDefault('date', true);
@@ -82,4 +87,5 @@ angular.module('billingApp')
             statuses: TRANSACTION_STATUSES,
             periods: Period.list({ id: $routeParams.accountNumber })
         };
+
     });

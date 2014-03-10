@@ -90,13 +90,13 @@
             <div class="detail-filters">
                 <span class="filter">
                     <rx-form-item label="Reference #">
-                        <input type="text" ng-model="transactionFilter.reference" ng-required="true" />
+                        <input type="text" ng-model="transactionFilter.reference" ng-change="resetPager()" />
                     </rx-form-item>
                 </span>
                 <span class="filter">
                     <rx-form-item label="Type">
                         <span class="field-select">
-                            <select ng-model="transactionFilter.type" >
+                            <select ng-model="transactionFilter.type" ng-change="resetPager()" >
                                 <option value="">Any</option>
                                 <option ng-repeat="t in filterData.types" value="{{t}}">{{t}}</option>
                             </select>
@@ -106,17 +106,17 @@
                 <span class="filter">
                     <rx-form-item label="Status">
                         <span class="field-select">
-                            <select ng-model="transactionFilter.status" >
+                            <select ng-model="transactionFilter.status" ng-change="resetPager()" >
                                 <option value="">Any</option>
                                 <option ng-repeat="s in filterData.statuses" value="{{s}}">{{s}}</option>
                             </select>
                         </span>
                     </rx-form-item>
-                </span>    
+                </span>
                 <span class="filter">
                     <rx-form-item label="Range">
                         <span class="field-select">
-                            <select ng-model="transactionFilter.period" >
+                            <select ng-model="transactionFilter.period" ng-change="resetPager()" >
                                 <option value="">Any</option>
                                 <option value="-1">1 Month</option>
                                 <option value="-3">3 Months</option>
