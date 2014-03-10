@@ -30,12 +30,13 @@ angular.module('billingApp')
             sortCol = function (predicate) {
                 return rxSortUtil.sortCol($scope, predicate);
             },
-            setPaymentInfo = function (data) {
+            setPaymentInfo = function () {
                 // Get Current Due from Account Information
-                $scope.paymentAmount = data[0].currentDue;
+                $scope.paymentAmount = $scope.account.currentDue;
+
                 // Get the Primary Payment Method's ID
-                $scope.paymentMethodId = _(data[1]).where({ isDefault: 'true' })
-                                                    .pluck('id').value().join();
+                $scope.paymentMethodId = _($scope.paymentMethods).where({ isDefault: 'true' })
+                                                                .pluck('id').value().join();
             },
             postPayment = function (amount, methodId) {
                 $scope.paymentResult = Payment.post({
