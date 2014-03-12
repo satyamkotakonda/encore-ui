@@ -1,6 +1,32 @@
 angular.module('billingSvcs', ['ngResource'])
    /**
     * @ngdoc service
+    * @name billingSvcs.Transform
+    * @description
+    *
+    * Transform a Json message into an object and fetch a specific path from it. (Or all of it)
+    */
+   .factory('Transform', function () {
+        var fromPath = function (obj, path) {
+            obj = _.reduce(path, function (val, key) {
+                return _.has(val, key) ? val[key] : false;
+            }, obj);
+            return obj;
+        };
+        return function (path, msgPath) {
+            // Pre parse the path into an array
+            // Set path to empty string if not given
+            var splitPath = _.isEmpty(path) ? [] : path.split('.'),
+                msgSplitPath = _.isEmpty(msgPath) ? [] : msgPath.split('.');
+            return function (data) {
+                var json = angular.fromJson(data),
+                    errorMsg = fromPath(json, msgSplitPath);
+                return errorMsg ? errorMsg : fromPath(json, splitPath);
+            };
+        };
+    })
+   /**
+    * @ngdoc service
     * @name billingSvcs.Transaction
     * @description
     * Transaction Service for interaction with Billing API
@@ -36,11 +62,8 @@ angular.module('billingSvcs', ['ngResource'])
     *
     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
     */
-    .factory('Period', function ($resource) {
-        var transform = function (data) {
-            var json = angular.fromJson(data);
-            return json.msg ? json.msg : json.billingPeriods.billingPeriod;
-        };
+    .factory('Period', function ($resource, Transform) {
+        var transform = Transform('billingPeriods.billingPeriod', 'details');
         return $resource('/api/accounts/:id/billing-periods',
             {
                 id: '@id',
@@ -60,11 +83,8 @@ angular.module('billingSvcs', ['ngResource'])
      *
      * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
      */
-    .factory('Payment', function ($resource) {
-        var transform = function (data) {
-            var json = angular.fromJson(data);
-            return json.msg ? json.msg : json.payments.payment;
-        };
+    .factory('Payment', function ($resource, Transform) {
+        var transform = Transform('payments.payment', 'papi:badRequest.details');
         return $resource('/api/accounts/:id/payment',
             {
                 id: '@id',
@@ -86,11 +106,8 @@ angular.module('billingSvcs', ['ngResource'])
      *
      * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
      */
-    .factory('PaymentMethod', function ($resource) {
-        var transform = function (data) {
-            var json = angular.fromJson(data);
-            return json.msg ? json.msg : json.methods.method;
-        };
+    .factory('PaymentMethod', function ($resource, Transform) {
+        var transform = Transform('methods.method', 'papi:badRequest.details');
         return $resource('/api/accounts/:id/methods',
             {
                 id: '@id',
@@ -102,7 +119,28 @@ angular.module('billingSvcs', ['ngResource'])
             }
         );
     })
-    .constant('NON_NUMERIC_REGEX', /[^0-9.]/)
+    /**
+     * @ngdoc service
+     * @name billingSvcs.DefaultPaymentMethod
+     * @description
+     *
+     * From a list of payment methods return the one marked as isDefault: 'true'
+     */
+    .factory('DefaultPaymentMethod', function () {
+        return function (methods) {
+            return _.find(methods, { isDefault: 'true' });
+        };
+    })
     .constant('DATE_FORMAT', 'MM / dd / yyyy')
     .constant('TRANSACTION_TYPES', ['Payment', 'Invoice', 'Reversal', 'Adjustment'])
-    .constant('TRANSACTION_STATUSES', ['Paid', 'Settled', 'Unpaid']);
+    .constant('TRANSACTION_STATUSES', ['Paid', 'Settled', 'Unpaid'])
+    .constant('STATUS_MESSAGES', {
+        overview: {
+            error: 'There was an error Loading Information'
+        },
+        payment: {
+            error: 'There was an error Posting the Payment Request',
+            load: 'Posting Payment',
+            success: 'The Payment was Successfully Submitted'
+        }
+    });

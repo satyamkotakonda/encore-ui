@@ -6,6 +6,7 @@
         <rx-product-resources user="user"></rx-product-resources>
     </rx-related-menu>
     <div class="main-content">
+        <rx-notifications stack="overviewPage"></rx-notifications>
         <div class="section billing-header">
             <div class="pull-left">
                 <h2 class="page-title">Billing Overview</h2>
@@ -18,7 +19,12 @@
                 <dt class="accent">Current Amount Due:</dt>
                 <dd class="accent accent-group">
                     <span class="accent-text">
-                        {{account.currentDue | currency }}
+                        <span ng-if="account.currentDue">
+                            {{account.currentDue | currency }}
+                        </span>
+                        <span ng-if="!account.currentDue">
+                            N/A
+                        </span>
                     </span>
                     <span class="accent-action">
                         <rx-payment-action
@@ -33,17 +39,22 @@
                     </span>
                 </dd>
                 <dt>Account Balance:</dt>
-                <dd>{{account.balance | currency }}</dd>
+                <dd ng-if="account.balance">{{account.balance | currency }}</dd>
+                <dd ng-if="!account.balance">N/A</dd>
                 <dt>Past Due:</dt>
-                <dd>{{account.pastDue | currency }}</dd>
+                <dd ng-if="account.pastDue">{{account.pastDue | currency }}</dd>
+                <dd ng-if="!account.pastDue">N/A</dd>
             </dl>
             <dl class="list-definition pull-right">
                 <dt>Currency:</dt>
-                <dd>{{account.currencyType}}</dd>
+                <dd ng-if="account.currencyType">{{account.currencyType}}</dd>
+                <dd ng-if="!account.currencyType">N/A</dd>
                 <dt>Terms:</dt>
-                <dd>{{account.terms}}</dd>
+                <dd ng-if="account.terms">{{account.terms}}</dd>
+                <dd ng-if="!account.terms">N/A</dd>
                 <dt>Billing Cycle:</dt>
-                <dd>{{account.cycle}} Months</dd>
+                <dd ng-if="account.cycle">{{account.cycle}} Months</dd>
+                <dd ng-if="!account.cycle">N/A</dd>
                 <dt>Paperless Billing:</dt>
                 <dd>
                     <rx-switch
