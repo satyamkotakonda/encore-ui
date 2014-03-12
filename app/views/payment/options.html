@@ -1,0 +1,194 @@
+<rx-nav></rx-nav>
+
+<div class="page-content">
+    <rx-related-menu state="menuShown" collapsable="false" position="left">
+        <rx-user-details user="user"></rx-user-details>
+        <rx-product-resources user="user"></rx-product-resources>
+    </rx-related-menu>
+    <div class="main-content">
+    	<div class="section billing-header">
+    	    <div class="pull-left">
+    	        <h2 class="page-title">Payment Options</h2>
+    	        <h3 class="page-subtitle">On account {{account.name}}</h3>
+    	    </div>
+    	</div>
+    	<hr />
+    	<div class="section payment-options payment-default">
+    		<h3 class="section-title">Primary:</h3>
+    		<div class="method-description">
+                <div ng-if="defaultMethod.electronicCheck">
+                	{{defaultMethod.electronicCheck.accountType}} Account - ending in {{defaultMethod.electronicCheck.accountNumber | PaymentMethodNumber:true }}
+                	<strong>Type:</strong>
+                    <span>{{defaultMethod.electronicCheck.accountType}}</span>
+                    <strong>Name on Account:</strong>
+                    <span>{{defaultMethod.electronicCheck.accountHolderName}}</span>
+                    <strong>Routing #:</strong>
+                    <span>{{defaultMethod.electronicCheck.routingNumber}}</span>
+                    </dl>
+                </div>
+                <div ng-if="defaultMethod.paymentCard">
+                	<p class="heading">
+                		{{defaultMethod.paymentCard.cardType}} Card - ending in <strong>{{defaultMethod.paymentCard.cardNumber | PaymentMethodNumber:true }}</strong>
+                	</p>
+                	<p>
+                		<strong>Type:</strong>
+                		{{defaultMethod.paymentCard.cardType}}
+            		</p>
+                    <p>
+                    	<strong>Name on Card:</strong> {{defaultMethod.paymentCard.cardHolderName}}
+                	</p>
+                    <p>
+                    	<strong>Expiration:</strong> {{defaultMethod.paymentCard.cardExpirationDate}}
+                	</p>
+                    </dl>
+                </div>
+    		</div>
+    		<div class="method-actions">
+    			<ul>
+    				<li><a href="#">Change Primary</a></li>
+    				<li><a href="#">Make A Payment</a></li>
+				</ul>
+    		</div>
+    	</div>
+    	<hr />
+    	<div class="section payment-options">
+    		<h1 class="section-title">Other Payment Options</h1>
+    		<h3 class="section-title">Credit Cards</h3>
+	    	<table class="table detail-list">
+	    	    <thead>
+	    	        <tr>
+	    	            <th scope="col">
+	    	                <rx-sortable-column
+	    	                    sort-method="sortCol"
+	    	                    sort-property="paymentCard.cardType"
+	    	                    predicate="sort.predicate"
+	    	                    reverse="sort.reverse">
+	    	                    Card Type
+	    	                </rx-sortable-column>
+	    	            </th>
+	    	            <th scope="col">
+	    	                <rx-sortable-column
+	    	                    sort-method="sortCol"
+	    	                    sort-property="paymentCard.cardNumber"
+	    	                    predicate="sort.predicate"
+	    	                    reverse="sort.reverse">
+	    	                    Card Number
+	    	                </rx-sortable-column>
+	    	            </th>
+	    	            <th scope="col">
+	    	                <rx-sortable-column
+	    	                    sort-method="sortCol"
+	    	                    sort-property="paymentCard.cardHolderName"
+	    	                    predicate="sort.predicate"
+	    	                    reverse="sort.reverse">
+	    	                    Cardholder Name
+	    	                </rx-sortable-column>
+	    	            </th>
+	    	            <th scope="col">
+	    	                <rx-sortable-column
+	    	                    sort-method="sortCol"
+	    	                    sort-property="paymentCard.cardExpirationDate"
+	    	                    predicate="sort.predicate"
+	    	                    reverse="sort.reverse">
+	    	                    Expiration Date
+	    	                </rx-sortable-column>
+	    	            </th>
+	    	            <th scope="col">
+	    	                <rx-sortable-column
+	    	                    sort-method="sortCol"
+	    	                    sort-property="disabled"
+	    	                    predicate="sort.predicate"
+	    	                    reverse="sort.reverse">
+	    	                    Status
+	    	                </rx-sortable-column>
+	    	            </th>
+	    	            <th></th>
+	    	        </tr>
+	    	    </thead>
+	    	    <tbody>
+	    	        <tr ng-repeat="card in paymentMethods | orderBy:sort.predicate:sort.reverse | PaymentMethodType:'paymentCard'">
+						<td>{{ card.paymentCard.cardType }}</td>
+						<td>{{ card.paymentCard.cardNumber | PaymentMethodNumber }}</td>
+						<td>{{ card.paymentCard.cardHolderName }}</td>
+						<td>{{ card.paymentCard.cardExpirationDate }}</td>
+						<td>
+							{{ card.disabled == 'true' && 'Disabled' || 'Enabled'}}
+							<span ng-if="card.isDefault == 'true'" class="primary">
+								(Primary)
+							</span>
+						</td>
+	    	            <td></td>
+	    	        </tr>
+	    	    </tbody>
+	    	</table>
+	    	<h3 class="section-title">ACH Accounts</h3>
+	    	<table class="table detail-list">
+	    	    <thead>
+	    	        <tr>
+	    	            <th scope="col">
+	    	                <rx-sortable-column
+	    	                    sort-method="sortCol"
+	    	                    sort-property="electronicCheck.accountType"
+	    	                    predicate="sort.predicate"
+	    	                    reverse="sort.reverse">
+	    	                    Account Type
+	    	                </rx-sortable-column>
+	    	            </th>
+	    	            <th scope="col">
+	    	                <rx-sortable-column
+	    	                    sort-method="sortCol"
+	    	                    sort-property="electronicCheck.accountNumber"
+	    	                    predicate="sort.predicate"
+	    	                    reverse="sort.reverse">
+	    	                    Account Number
+	    	                </rx-sortable-column>
+	    	            </th>
+	    	            <th scope="col">
+	    	                <rx-sortable-column
+	    	                    sort-method="sortCol"
+	    	                    sort-property="electronicCheck.routingNumber"
+	    	                    predicate="sort.predicate"
+	    	                    reverse="sort.reverse">
+	    	                    Routing Number
+	    	                </rx-sortable-column>
+	    	            </th>
+	    	            <th scope="col">
+	    	                <rx-sortable-column
+	    	                    sort-method="sortCol"
+	    	                    sort-property="electronicCheck.accountHolderName"
+	    	                    predicate="sort.predicate"
+	    	                    reverse="sort.reverse">
+	    	                    Name on Account
+	    	                </rx-sortable-column>
+	    	            </th>
+	    	            <th scope="col">
+	    	                <rx-sortable-column
+	    	                    sort-method="sortCol"
+	    	                    sort-property="disabled"
+	    	                    predicate="sort.predicate"
+	    	                    reverse="sort.reverse">
+	    	                    Status
+	    	                </rx-sortable-column>
+	    	            </th>
+	    	            <th></th>
+	    	        </tr>
+	    	    </thead>
+	    	    <tbody>
+	    	        <tr ng-repeat="card in paymentMethods | orderBy:sort.predicate:sort.reverse |  PaymentMethodType:'electronicCheck'">
+						<td>{{ card.electronicCheck.accountType }}</td>
+						<td>{{ card.electronicCheck.accountNumber | PaymentMethodNumber:false:6 }}</td>
+						<td>{{ card.electronicCheck.routingNumber }}</td>
+						<td>{{ card.electronicCheck.accountHolderName }}</td>
+						<td>
+							{{ card.disabled == 'true' && 'Disabled' || 'Enabled'}}
+							<span ng-if="card.isDefault == 'true'" class="primary">
+								(Primary)
+							</span>
+						</td>
+	    	            <td></td>
+	    	        </tr>
+	    	    </tbody>
+	    	</table>
+    	</div>
+    </div>
+</div>
