@@ -45,3 +45,57 @@
         width: 90px;
     }
 }
+
+/*
+ Overrides for the .detail-list of payment options
+ */
+.payment-options {
+    & > * {
+        padding: 10px 0;
+    }
+    .detail-list {
+        margin-bottom: 40px;
+        .primary {
+            color: #0e7fff;
+        }
+        thead {
+            th:nth-child(2) {
+                width: 160px;
+            }
+        }
+    }
+
+}
+.payment-default {
+    padding: 25px 0;
+    .section-title {
+        display: block;
+        float: left;
+        line-height: inherit;
+        margin: 0;
+        margin-right: 40px;
+    }
+    .method-description {
+        float: left;
+        font-size: 1.3em;
+        font-weight: 300;
+        color: @headingDark;
+        padding-right: 40px;
+        border-right: 1px #ccc solid;
+        .heading {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        strong {
+            font-weight: 400;
+            color: @actionGrey;
+        }
+        p {
+            margin: 0;
+        }
+    }
+    .method-actions {
+        float: left;
+        margin-left: 50px;
+    }
+}
