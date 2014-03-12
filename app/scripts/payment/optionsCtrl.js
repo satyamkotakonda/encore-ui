@@ -79,4 +79,5 @@ angular.module('billingApp')
             loading: '',
             error: STATUS_MESSAGES.overview.error
         }, 'optionsPage');
+
     });
