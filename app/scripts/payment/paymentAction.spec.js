@@ -84,25 +84,4 @@ describe('rxPaymentAction', function () {
         expect(hookResponse[1]).to.be.eq('urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7');
     });
 
-    it('should filter/change columns based on the default method type', function () {
-        directiveScope.changeMethodType('isDefault');
-        expect(directiveScope.methodType).to.be.eq('isDefault');
-        expect(directiveScope.methodList.length).to.be.eq(1);
-        expect(directiveScope.methodListCols.length).to.be.eq(4);
-    });
-
-    it('should filter/change columns based on the card method type', function () {
-        directiveScope.changeMethodType('paymentCard');
-        expect(directiveScope.methodType).to.be.eq('paymentCard');
-        expect(directiveScope.methodList.length).to.be.eq(2);
-        expect(directiveScope.methodListCols.length).to.be.eq(4);
-    });
-
-    it('should filter/change columns based on the ach method type', function () {
-        directiveScope.changeMethodType('electronicCheck');
-        expect(directiveScope.methodType).to.be.eq('electronicCheck');
-        expect(directiveScope.methodList.length).to.be.eq(1);
-        expect(directiveScope.methodListCols.length).to.be.eq(4);
-    });
-
 });

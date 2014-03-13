@@ -20,7 +20,7 @@ angular.module('billingApp')
             STATUS_MESSAGES) {
 
         // Set the default sort of the usage
-        $scope.sort = rxSortUtil.getDefault('name | ProductName');
+        $scope.sort = rxSortUtil.getDefault('name | ProductName', false);
 
         /**
         * Get Charges Info

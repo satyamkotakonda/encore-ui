@@ -16,8 +16,8 @@ angular.module('billingApp')
     * </pre>
     */
     .filter('ProductName', function (PRODUCT_CONSTANTS) {
-        return function (value) {
-            return PRODUCT_CONSTANTS[value];
+        return function (name) {
+            return PRODUCT_CONSTANTS[name];
         };
     })
     /**

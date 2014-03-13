@@ -85,7 +85,7 @@ angular.module('billingSvcs', ['ngResource'])
     */
     .factory('EstimatedCharges', function ($resource, Transform) {
         var transform = Transform('estimatedCharges.estimatedCharge', 'details');
-        return $resource('/api/accounts/:id/billing-periods/:periodId/estimatedCharges',
+        return $resource('/api/accounts/billing/:id/billing-periods/:periodId/estimatedCharges',
             {
                 id: '@id',
                 periodId: '@periodId'
@@ -104,8 +104,8 @@ angular.module('billingSvcs', ['ngResource'])
      * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
      */
     .factory('Payment', function ($resource, Transform) {
-        var transform = Transform('payments.payment', 'papi:badRequest.details');
-        return $resource('/api/accounts/payments/:id',
+        var transform = Transform('payments.payment', 'badRequest.details');
+        return $resource('/api/accounts/billing/:id/payments',
             {
                 id: '@id',
                 marker: 0,
@@ -115,27 +115,6 @@ angular.module('billingSvcs', ['ngResource'])
                 list: { method: 'GET', isArray: true, transformResponse: transform },
                 // I realize this seems redundant, but verbally Payment.post makes more sense than Payment.save
                 post: { method: 'POST' }
-            }
-        );
-    })
-    /**
-     * @ngdoc service
-     * @name billingSvcs.PaymentMethod
-     * @description
-     * Payment Service for interaction with Billing API
-     *
-     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
-     */
-    .factory('PaymentMethod', function ($resource, Transform) {
-        var transform = Transform('methods.method', 'papi:badRequest.details');
-        return $resource('/api/accounts/payments/:id/methods',
-            {
-                id: '@id',
-                marker: 0,
-                showDisabled: true
-            },
-            {
-                list: { method: 'GET', isArray: true, transformResponse: transform }
             }
         );
     })
