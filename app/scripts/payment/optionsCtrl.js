@@ -17,12 +17,19 @@ angular.module('billingApp')
         var getDefaultMethod = function (paymentMethods) {
                 $scope.defaultMethod = DefaultPaymentMethod(paymentMethods);
             },
-            sortCol = function (predicate) {
-                return rxSortUtil.sortCol($scope, predicate);
+            sortCol = function (sort) {
+                return function (predicate) {
+                    var reverse = ($scope[sort].predicate === predicate) ? !$scope[sort].reverse : false;
+                    $scope[sort] = { reverse: reverse, predicate: predicate };
+                };
             };
 
-        $scope.sortCol = sortCol;
-        $scope.sort = rxSortUtil.getDefault('isDefault');
+        $scope.cardSortCol = sortCol('cardSort');
+        $scope.cardSort = rxSortUtil.getDefault('isDefault', true);
+
+        $scope.achSortCol = sortCol('achSort');
+        $scope.achSort = rxSortUtil.getDefault('isDefault', true);
+
         $scope.account = Account.get({ id: $routeParams.accountNumber });
         $scope.paymentMethods = PaymentMethod.list({ id: $routeParams.accountNumber }, getDefaultMethod);
     });
