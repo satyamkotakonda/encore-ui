@@ -62,7 +62,6 @@ angular.module('billingApp')
 
         $scope.changeDefaultMethod = changeDefaultMethod;
         $scope.postPayment = postPayment;
-
         $scope.cardSortCol = sortCol('cardSort');
         $scope.cardSort = rxSortUtil.getDefault('isDefault', true);
 
