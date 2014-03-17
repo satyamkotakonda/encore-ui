@@ -4,7 +4,7 @@ describe('OptionsCtrl', function () {
     var testAccountNumber = '12345',
         paymentMethods = [{
             'id': 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479',
-            'isDefault': 'true',
+            'isDefault': true,
             'paymentCard': {
                 'cardNumber': 'XXXXXXXXXXXX3456',
                 'cardType': 'VISA'
@@ -42,15 +42,26 @@ describe('OptionsCtrl', function () {
         expect(ctrl).to.exist;
     });
 
-    it('OptionsCtrl should have a sort object defined', function () {
-        expect(scope.sort).to.be.a('object');
-        expect(scope.sort).to.have.property('predicate');
-        expect(scope.sort.predicate).to.eq('isDefault');
+    it('OptionsCtrl should have a sort object for payment Cards defined', function () {
+        expect(scope.cardSort).to.be.a('object');
+        expect(scope.cardSort).to.have.property('predicate');
+        expect(scope.cardSort.predicate).to.eq('isDefault');
     });
 
-    it('OptionsCtrl should return a sorting predicate when calling sortCol', function () {
-        scope.sortCol('isDefault');
-        expect(scope.sort.predicate).to.be.eq('isDefault');
+    it('OptionsCtrl should return a payment card sorting predicate when calling sortCol', function () {
+        scope.cardSortCol('isDefault');
+        expect(scope.cardSort.predicate).to.be.eq('isDefault');
+    });
+
+    it('OptionsCtrl should have a sort object for ACH Accounts defined', function () {
+        expect(scope.achSort).to.be.a('object');
+        expect(scope.achSort).to.have.property('predicate');
+        expect(scope.achSort.predicate).to.eq('isDefault');
+    });
+
+    it('OptionsCtrl should return an ACH Account sorting predicate when calling sortCol', function () {
+        scope.achSortCol('isDefault');
+        expect(scope.achSort.predicate).to.be.eq('isDefault');
     });
 
     it('OptionsCtrl should get account info', function () {
