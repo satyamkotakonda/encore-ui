@@ -50,15 +50,15 @@
             <div class="method-actions">
                 <ul>
                     <li>
-                        <rx-payment-default
+                        <rx-payment-set-default
                             post-hook="changeDefault"
                             user="{{user}}"
                             classes="button button-blue"
-                            method-id="{{paymentMethod.id}}"
+                            method-id="{{defaultMethod.id}}"
                             methods="paymentMethods"
                             action-type="change">
                              Change Primary
-                        </rx-payment-default>
+                        </rx-payment-set-default>
                     </li>
                     <li ng-show="defaultMethod">
                         <rx-payment-action
@@ -66,7 +66,7 @@
                             user="{{user}}"
                             classes="button button-green"
                             amount="{{paymentAmount}}"
-                            method-id="{{paymentMethod.id}}"
+                            method-id="{{defaultMethod.id}}"
                             methods="paymentMethods">
                             <strong>+</strong> Make a Payment
                         </rx-payment-action>
