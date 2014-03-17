@@ -4,7 +4,7 @@ describe('OptionsCtrl', function () {
     var testAccountNumber = '12345',
         paymentMethods = [{
             'id': 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479',
-            'isDefault': true,
+            'isDefault': 'true',
             'paymentCard': {
                 'cardNumber': 'XXXXXXXXXXXX3456',
                 'cardType': 'VISA'
