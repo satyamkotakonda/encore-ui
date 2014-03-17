@@ -5,7 +5,7 @@ describe('rxPaymentAction', function () {
         user = 'test', amount = '2000.00', methodId = 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479',
         paymentMethods = [{
             id: 'id1',
-            isDefault: 'true',
+            isDefault: true,
             paymentCard: { number: '1234' }
         }, {
             id: 'id2',
@@ -78,15 +78,15 @@ describe('rxPaymentAction', function () {
     });
 
     it('should call post-hook with the final amount/method-id values', function () {
-        directiveScope.changeMethodType('default');
+        directiveScope.changeMethodType('isDefault');
         var hookResponse = directiveScope.postHook('3000.45', 'urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7');
         expect(hookResponse[0]).to.be.eq('3000.45');
         expect(hookResponse[1]).to.be.eq('urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7');
     });
 
     it('should filter/change columns based on the default method type', function () {
-        directiveScope.changeMethodType('default');
-        expect(directiveScope.methodType).to.be.eq('default');
+        directiveScope.changeMethodType('isDefault');
+        expect(directiveScope.methodType).to.be.eq('isDefault');
         expect(directiveScope.methodList.length).to.be.eq(1);
         expect(directiveScope.methodListCols.length).to.be.eq(4);
     });

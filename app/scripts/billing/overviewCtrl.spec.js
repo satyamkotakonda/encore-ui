@@ -8,7 +8,7 @@ describe('Billing: OverviewCtrl', function () {
         module('billingApp');
 
         inject(function ($controller, $rootScope, $httpBackend, Account, Transaction, Period,
-                Payment, PaymentMethod, PageTracking, $filter, $q) {
+                Payment, PaymentMethod, PageTracking, $q) {
             var getResourceMock = function (data) {
                 var deferred = $q.defer();
                 data.$promise = deferred.promise;
@@ -25,7 +25,7 @@ describe('Billing: OverviewCtrl', function () {
                 currentDue: '2124.00'
             };
             paymentMethods = [{
-                isDefault: 'true',
+                isDefault: true,
                 id: 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479'
             }];
 
@@ -39,7 +39,6 @@ describe('Billing: OverviewCtrl', function () {
 
             ctrl = $controller('OverviewCtrl',{
                 $scope: scope,
-                $filter: $filter,
                 Transaction: transaction,
                 Account: account,
                 Period: period,
@@ -105,7 +104,7 @@ describe('Billing: OverviewCtrl', function () {
         });
 
         expect(scope.paymentAmount).to.be.eq('2124.00');
-        expect(scope.paymentMethodId).to.be.eq('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
+        expect(scope.paymentMethod.id).to.be.eq('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
     });
 
     it('OverviewCtrl should clear transaction filters', function () {
