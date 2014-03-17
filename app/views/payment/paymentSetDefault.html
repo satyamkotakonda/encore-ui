@@ -1,0 +1,10 @@
+<!-- Sample HTML goes here as a live example of how to the component can be used -->
+<div class="rx-payment-set-default">
+    <rx-modal-action
+        template-url="/views/payment/paymentSetDefaultForm.html"
+        pre-hook="setDefaultValues(methodId)"
+        post-hook="postHook(payment.methodId)"
+        classes="payment-action {{classes}}">
+        <span ng-transclude></span>
+    </rx-modal-action>
+</div>
