@@ -25,10 +25,10 @@ angular.module('billingApp')
             };
 
         $scope.cardSortCol = sortCol('cardSort');
-        $scope.cardSort = rxSortUtil.getDefault('isDefault', true);
+        $scope.cardSort = rxSortUtil.getDefault('isDefault', false);
 
         $scope.achSortCol = sortCol('achSort');
-        $scope.achSort = rxSortUtil.getDefault('isDefault', true);
+        $scope.achSort = rxSortUtil.getDefault('isDefault', false);
 
         $scope.account = Account.get({ id: $routeParams.accountNumber });
         $scope.paymentMethods = PaymentMethod.list({ id: $routeParams.accountNumber }, getDefaultMethod);
