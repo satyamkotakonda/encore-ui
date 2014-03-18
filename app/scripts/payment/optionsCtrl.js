@@ -63,10 +63,10 @@ angular.module('billingApp')
         $scope.changeDefaultMethod = changeDefaultMethod;
         $scope.postPayment = postPayment;
         $scope.cardSortCol = sortCol('cardSort');
-        $scope.cardSort = rxSortUtil.getDefault('isDefault', false);
+        $scope.cardSort = rxSortUtil.getDefault('isDefault', true);
 
         $scope.achSortCol = sortCol('achSort');
-        $scope.achSort = rxSortUtil.getDefault('isDefault', false);
+        $scope.achSort = rxSortUtil.getDefault('isDefault', true);
 
         $scope.account = Account.get({ id: $routeParams.accountNumber });
         $scope.paymentMethods = listPaymentMethods();
@@ -78,5 +78,4 @@ angular.module('billingApp')
             loading: '',
             error: STATUS_MESSAGES.overview.error
         }, 'optionsPage');
-
     });
