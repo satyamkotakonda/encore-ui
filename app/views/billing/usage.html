@@ -1,0 +1,57 @@
+<rx-nav></rx-nav>
+
+<div class="page-content">
+    <rx-related-menu state="menuShown" collapsable="false" position="left">
+        <rx-user-details user="user"></rx-user-details>
+        <rx-product-resources user="user"></rx-product-resources>
+    </rx-related-menu>
+    <div class="main-content">
+        <div class="section usage-header">
+            <h2 class="page-title">Current Charges & Usage</h2>
+            <h3 class="page-subtitle">On account {{account.name}}</h3>
+        </div>
+        <hr />
+        <div class="section usage-info">
+            <div class="section billing-cycle">
+            </div>
+            <div class="section billing-usage">
+                <table class="table usage-list">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <rx-sortable-column
+                                    sort-method="sortCol"
+                                    sort-property="product"
+                                    predicate="sort.predicate"
+                                    reverse="sort.reverse">
+                                    Product
+                                </rx-sortable-column>
+                            </th>
+                            <th scope="col">
+                                <rx-sortable-column
+                                    sort-method="sortCol"
+                                    sort-property="charge"
+                                    predicate="sort.predicate"
+                                    reverse="sort.reverse">
+                                    Usage Charges
+                                </rx-sortable-column>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="paginate-area">
+                            <td colspan="6">
+                              <rx-paginate page-tracking="pager"></rx-paginate>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <hr />
+        </div>
+    </div>
+</div>
