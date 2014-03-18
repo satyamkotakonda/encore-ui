@@ -6,6 +6,7 @@
         <rx-product-resources user="user"></rx-product-resources>
     </rx-related-menu>
     <div class="main-content">
+        <rx-notifications stack="optionsPage"></rx-notifications>
         <div class="section billing-header">
             <div class="pull-left">
                 <h2 class="page-title">Payment Options</h2>
@@ -137,7 +138,7 @@
                         <td>{{ card.paymentCard.cardExpirationDate }}</td>
                         <td>
                             {{ card.disabled == 'true' && 'Disabled' || 'Enabled'}}
-                            <span ng-if="card.isDefault == 'true'" class="primary">
+                            <span ng-if="card.isDefault == true" class="primary">
                                 (Primary)
                             </span>
                         </td>
