@@ -11,8 +11,8 @@ angular.module('billingApp')
     *       Account, Period, PageTracking)
     * </pre>
     */
-    .controller('OptionsCtrl', function ($scope, $routeParams, Account, PaymentMethod,
-            DefaultPaymentMethod, rxSortUtil) {
+    .controller('OptionsCtrl', function ($scope, $routeParams, $q, Account, PaymentMethod,
+            DefaultPaymentMethod, rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
 
         var getDefaultMethod = function (paymentMethods) {
                 $scope.defaultMethod = DefaultPaymentMethod(paymentMethods);
@@ -25,11 +25,18 @@ angular.module('billingApp')
             };
 
         $scope.cardSortCol = sortCol('cardSort');
-        $scope.cardSort = rxSortUtil.getDefault('isDefault', false);
+        $scope.cardSort = rxSortUtil.getDefault('isDefault', true);
 
         $scope.achSortCol = sortCol('achSort');
-        $scope.achSort = rxSortUtil.getDefault('isDefault', false);
+        $scope.achSort = rxSortUtil.getDefault('isDefault', true);
 
         $scope.account = Account.get({ id: $routeParams.accountNumber });
         $scope.paymentMethods = PaymentMethod.list({ id: $routeParams.accountNumber }, getDefaultMethod);
+        rxPromiseNotifications.add($q.all([
+            $scope.account.$promise,
+            $scope.paymentMethods.$promise
+        ]), {
+            loading: '',
+            error: STATUS_MESSAGES.overview.error
+        }, 'optionsPage');
     });
