@@ -5,21 +5,19 @@ module.exports = {
         port: 9000,
         hostname: 'localhost'
     },
-    proxies: [
-        {
-            context: '/api',
-            host: 'localhost',
-            port: 3000,
-            https: false,
-            changeOrigin: false,
-            rewrite: {
-                '/api': '/api'
-            }
+    proxies: [{
+        context: '/api',
+        host: 'localhost',
+        port: 3000,
+        https: false,
+        changeOrigin: false,
+        rewrite: {
+            '/api': '/api'
         }
-    ],
+    }],
     livereload: {
         options: {
-            middleware: function(cnct) {
+            middleware: function (cnct) {
                 return [
                     config.proxyRequest,
                     config.modRewrite(['!\\.\\w+$ /']),
@@ -32,7 +30,7 @@ module.exports = {
     },
     test: {
         options: {
-            middleware: function(cnct) {
+            middleware: function (cnct) {
                 return [
                     config.proxyRequest,
                     config.modRewrite(['!\\.\\w+$ /']),
@@ -45,7 +43,7 @@ module.exports = {
     },
     dist: {
         options: {
-            middleware: function(cnct) {
+            middleware: function (cnct) {
                 return [
                     config.mountFolder(cnct, config.dist)
                 ];

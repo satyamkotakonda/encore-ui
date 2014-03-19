@@ -2,7 +2,7 @@ module.exports = [
     //Get Billing Transactions for Account
     {
         request: {
-            url: '/api/accounts/12345/transactions',
+            url: '/api/accounts/billing/(.*)/transactions',
             method: 'GET'
         },
         response : {
@@ -16,7 +16,7 @@ module.exports = [
     //Get Billing Periods for an account
     {
         request: {
-            url: '/api/accounts/12345/billing-periods',
+            url: '/api/accounts/billing/(.*)/billing-periods',
             method: 'GET'
         },
         response : {
@@ -30,7 +30,7 @@ module.exports = [
     //Get Available Payment Methods
     {
         request: {
-            url: '/api/accounts/12345/methods',
+            url: '/api/accounts/payments/(.*)/methods',
             method: 'GET'
         },
         response: {
@@ -45,7 +45,7 @@ module.exports = [
     //Get Account Info
     {
         request: {
-            url: '/api/accounts/12345',
+            url: '/api/accounts/billing/(.*)',
             method: 'GET'
         },
         response : {
@@ -59,7 +59,7 @@ module.exports = [
     //Post a payment to account
     {
         request: {
-            url: '/api/accounts/12345/payment',
+            url: '/api/accounts/payments/(.*)',
             method: 'POST'
         },
         response: {
