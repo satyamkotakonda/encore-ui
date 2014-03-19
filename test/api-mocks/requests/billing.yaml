@@ -18,6 +18,16 @@
             content-type: application/json
         file: test/api-mocks/responses/periods.json
 
+# Get Estimated Charges for an account
+-   request:
+        url: ^/api/accounts/12345/billing-periods/(.*)/estimatedCharges$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/charges.json
+
 # Get Account Info
 -   request:
         url: ^/api/accounts/12345$

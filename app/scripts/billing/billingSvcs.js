@@ -75,6 +75,26 @@ angular.module('billingSvcs', ['ngResource'])
             }
         );
     })
+   /**
+    * @ngdoc service
+    * @name billingSvcs.EstimatedCharges
+    * @description
+    * Estimated Charges Service for interaction with Billing API
+    *
+    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    */
+    .factory('EstimatedCharges', function ($resource, Transform) {
+        var transform = Transform('estimatedCharges.estimatedCharge', 'details');
+        return $resource('/api/accounts/:id/billing-periods/:period-id/estimatedCharges',
+            {
+                id: '@id',
+                period-id: '@period-id'
+            },
+            {
+                list: { method: 'GET', isArray: true, transformResponse: transform }
+            }
+        );
+    })
     /**
      * @ngdoc service
      * @name billingSvcs.Payment
@@ -100,7 +120,7 @@ angular.module('billingSvcs', ['ngResource'])
     })
     /**
      * @ngdoc service
-     * @name billingSvcs.Payment
+     * @name billingSvcs.PaymentMethod
      * @description
      * Payment Service for interaction with Billing API
      *
