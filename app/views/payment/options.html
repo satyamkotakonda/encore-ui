@@ -19,11 +19,11 @@
             <div ng-show="defaultMethod" class="method-description">
                 <div ng-if="defaultMethod.electronicCheck">
                     <p class="heading">
-                        {{defaultMethod.electronicCheck.accountType}} Account - ending in <strong>{{defaultMethod.electronicCheck.accountNumber | PaymentMethodNumber:true }}</strong>
+                        {{defaultMethod.electronicCheck.accountType | AccountTypeFormat}} Account - ending in <strong>{{defaultMethod.electronicCheck.accountNumber | PaymentMethodNumber:true }}</strong>
                     </p>
                     <p>
                         <strong>Type:</strong>
-                        {{defaultMethod.electronicCheck.accountType}}
+                        {{defaultMethod.electronicCheck.accountType | AccountTypeFormat}}
                     </p>
                     <p>
                         <strong>Name on Account:</strong> {{defaultMethod.electronicCheck.accountHolderName}}
@@ -200,7 +200,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="card in paymentMethods | orderBy:achSort.predicate:achSort.reverse |  PaymentMethodType:'electronicCheck'">
-                        <td>{{ card.electronicCheck.accountType }}</td>
+                        <td>{{ card.electronicCheck.accountType | AccountTypeFormat }}</td>
                         <td>{{ card.electronicCheck.accountNumber }}</td>
                         <td>{{ card.electronicCheck.routingNumber }}</td>
                         <td>{{ card.electronicCheck.accountHolderName }}</td>
