@@ -34,7 +34,7 @@
                 </div>
                 <div ng-if="defaultMethod.paymentCard">
                     <p class="heading">
-                        {{defaultMethod.paymentCard.cardType}} Card - ending in <strong>{{defaultMethod.paymentCard.cardNumber | PaymentMethodNumber:true }}</strong>
+                        {{defaultMethod.paymentCard.cardType}} Card - ending in <strong>{{defaultMethod.paymentCard.cardNumber | PaymentMethodNumber }}</strong>
                     </p>
                     <p>
                         <strong>Type:</strong>
@@ -52,7 +52,7 @@
                 <ul>
                     <li>
                         <rx-payment-set-default
-                            post-hook="changeDefault"
+                            post-hook="changeDefaultMethod"
                             user="{{user}}"
                             classes="button button-blue"
                             method-id="{{defaultMethod.id}}"
@@ -61,7 +61,7 @@
                              Change Primary
                         </rx-payment-set-default>
                     </li>
-                    <li ng-show="defaultMethod">
+                    <li>
                         <rx-payment-action
                             post-hook="postPayment"
                             user="{{user}}"
@@ -133,11 +133,11 @@
                 <tbody>
                     <tr ng-repeat="card in paymentMethods | orderBy:cardSort.predicate:cardSort.reverse | PaymentMethodType:'paymentCard'">
                         <td>{{ card.paymentCard.cardType }}</td>
-                        <td>{{ card.paymentCard.cardNumber }}</td>
+                        <td>{{ card.paymentCard.cardNumber | CardNumberFormat:card.paymentCard.cardType }}</td>
                         <td>{{ card.paymentCard.cardHolderName }}</td>
                         <td>{{ card.paymentCard.cardExpirationDate }}</td>
                         <td>
-                            {{ card.disabled == 'true' && 'Disabled' || 'Enabled'}}
+                            {{ card.disabled == true && 'Disabled' || 'Enabled'}}
                             <span ng-if="card.isDefault == true" class="primary">
                                 (Primary)
                             </span>
@@ -199,14 +199,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="card in paymentMethods | orderBy:achSort.predicate:achSort.reverse |  PaymentMethodType:'electronicCheck'">
-                        <td>{{ card.electronicCheck.accountType | AccountTypeFormat }}</td>
-                        <td>{{ card.electronicCheck.accountNumber }}</td>
-                        <td>{{ card.electronicCheck.routingNumber }}</td>
-                        <td>{{ card.electronicCheck.accountHolderName }}</td>
+                    <tr ng-repeat="ach in paymentMethods | orderBy:achSort.predicate:achSort.reverse |  PaymentMethodType:'electronicCheck'">
+                        <td>{{ ach.electronicCheck.accountType | AccountTypeFormat }}</td>
+                        <td>{{ ach.electronicCheck.accountNumber | AccountNumberFormat }}</td>
+                        <td>{{ ach.electronicCheck.routingNumber }}</td>
+                        <td>{{ ach.electronicCheck.accountHolderName }}</td>
                         <td>
-                            {{ card.disabled == 'true' && 'Disabled' || 'Enabled'}}
-                            <span ng-if="card.isDefault == 'true'" class="primary">
+                            {{ ach.disabled == true && 'Disabled' || 'Enabled'}}
+                            <span ng-if="ach.isDefault == true" class="primary">
                                 (Primary)
                             </span>
                         </td>
