@@ -28,7 +28,7 @@ angular.module('billingApp')
 
                 // Set default as the active view
                 $q.when($scope.methods.$promise).then(function () {
-                    PaymentFormUtil.filterDefault($scope);
+                    PaymentFormUtil.formFilter($scope)('paymentCard');
                 });
             }
         };
