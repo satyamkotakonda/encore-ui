@@ -69,6 +69,7 @@ angular.module('billingApp')
     * XXXXXXX1234 -> *******1234
     * {{ ach.electronicCheck.accountNumber | AccountNumberFormat:'#' }}
     * XXXXXXX1234 -> #######1234
+    * Filter for formatting a card number
     *
     * @param {String} value - number to be formatted
     * @param {String} maskCharacter - character to use for masking
