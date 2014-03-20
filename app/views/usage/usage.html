@@ -39,15 +39,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr ng-repeat="charge in charges">
+                            <td>{{ charge.offeringCode }}</td>
+                            <td>{{ charge.amount | currency }}</td>
                         </tr>
                     </tbody>
                     <tfoot>
-                        <tr class="paginate-area">
-                            <td colspan="6">
-                              <rx-paginate page-tracking="pager"></rx-paginate>
-                            </td>
-                        </tr>
                     </tfoot>
                 </table>
             </div>

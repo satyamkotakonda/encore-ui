@@ -85,10 +85,10 @@ angular.module('billingSvcs', ['ngResource'])
     */
     .factory('EstimatedCharges', function ($resource, Transform) {
         var transform = Transform('estimatedCharges.estimatedCharge', 'details');
-        return $resource('/api/accounts/:id/billing-periods/:period-id/estimatedCharges',
+        return $resource('/api/accounts/:id/billing-periods/:periodId/estimatedCharges',
             {
                 id: '@id',
-                period-id: '@period-id'
+                periodId: '@periodId'
             },
             {
                 list: { method: 'GET', isArray: true, transformResponse: transform }

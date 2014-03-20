@@ -1,4 +1,4 @@
-angular.module('billingApp')
+/*angular.module('billingApp')*/
     /**
     * @ngdoc filter
     * @name encore.filter:UsageTable
@@ -12,5 +12,5 @@ angular.module('billingApp')
     *     - **product** {String} - Product that the account is charged for.
     *     - **charge** {String} - Total charge for the usage of the given product.
     */
-    .filter('UsageTable', function () {
-    })
+    /*.filter('UsageTable', function () {
+    })*/
