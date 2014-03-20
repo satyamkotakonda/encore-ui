@@ -1,4 +1,12 @@
 angular.module('encore.ui.rxLogout', [])
+.service('Auth', function () {
+    // temp hack to get rid of error
+    return {
+        logout: function (success) {
+            return success;
+        }
+    };
+})
 .directive('rxLogout', function ($rootScope, Auth) {
     return {
         restrict: 'A',
@@ -10,6 +18,7 @@ angular.module('encore.ui.rxLogout', [])
 
             // TODO: Handle failure
             $scope.logout = function () {
+                // temp hack to get rid of error
                 Auth.logout(success);
             };
         },
