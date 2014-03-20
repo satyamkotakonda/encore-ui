@@ -1,12 +1,11 @@
 describe('Billing: billingSvcs', function () {
-    var transform, defaultPaymentMethod, paymentMethods, testData, testError, emptyTransform;
+    var transform, paymentMethods, testData, testError, emptyTransform;
     beforeEach(function () {
         module('billingSvcs');
 
-        inject(function (Transform, DefaultPaymentMethod) {
+        inject(function (Transform) {
             transform = Transform('test.path', 'test.error');
             emptyTransform = Transform();
-            defaultPaymentMethod = DefaultPaymentMethod;
             testData = JSON.stringify({ test: { path: true }});
             testError = JSON.stringify({ test: { path: true, error: 'Error' }});
             paymentMethods = [{ isDefault: 'true', id: 'payment-id-1' },
@@ -27,10 +26,6 @@ describe('Billing: billingSvcs', function () {
 
     it('billingSvcs Transform should return the parsed object if no path is given', function () {
         expect(JSON.stringify(emptyTransform(testData))).to.be.eq(testData);
-    });
-
-    it('billingSvcs DefaultPaymentMethod should return 1 paymentMethod', function () {
-        expect(defaultPaymentMethod(paymentMethods)).to.be.a('object');
     });
 
 });

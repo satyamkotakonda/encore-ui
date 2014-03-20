@@ -7,10 +7,20 @@ angular.module('billingApp')
     *
     * @requires $scope - The $scope variable for interacting with the UI.
     * @requires $routeParams - AngularJS service which provides access to route paramters
+    * @requires $q - AngularJS q implementation for working with promises
     * @requires billingSvcs.Transaction - Service for CRUD operations for the Transaction resource.
     * @requires billingSvcs.Account - Service for CRUD operations for the Account resource.
     * @requires billingSvcs.Period - Service for CRUD operations for the Period resource.
+    * @requires billingSvcs.Payment - Service for CRUD operations for the Payment resource.
+    * @requires billingSvcs.PaymentMethod - Service for CRUD operations for the PaymentMethod resource.
     * @requires encore.paginate:PageTracking - Service which creates an object for pagination.
+    * @requires encore.rxSortableColumn:rxSortUtil - Service which provides column sort related functions
+    * @requires encore.rxNotify:rxPromiseNotifications - Service which provides notifications for promises
+    * @requires billingSvcs.DefaultPaymentMethod - Service which facilitates retrieval of default payment method
+    * @requires billingSvcs.DATE_FORMAT - Constant that defines the default format for dates
+    * @requires billingSvcs.TRANSACTION_TYPES - Constant list of the different types of transactions
+    * @requires billingSvcs.TRANSACTION_STATUSES - Constant list of different transaction statuses
+    * @requires billingSvcs.STATUS_MESSAGES - Constant object defining messaging to be used throughout the app
     *
     * @example
     * <pre>
@@ -40,8 +50,7 @@ angular.module('billingApp')
                 $scope.paymentAmount = $scope.account.currentDue;
 
                 // Get the Primary Payment Method's ID
-                var method = DefaultPaymentMethod($scope.paymentMethods);
-                $scope.paymentMethodId = method.id;
+                $scope.paymentMethod = DefaultPaymentMethod($scope.paymentMethods);
             },
             postPayment = function (amount, methodId) {
                 $scope.paymentResult = Payment.post({

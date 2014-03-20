@@ -34,7 +34,7 @@ angular.module('billingSvcs', ['ngResource'])
     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
     */
     .factory('Transaction', function ($resource) {
-        return $resource('/api/accounts/:id/transactions',
+        return $resource('/api/accounts/billing/:id/transactions',
             {
                 id: '@id'
             },
@@ -52,7 +52,7 @@ angular.module('billingSvcs', ['ngResource'])
     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
     */
     .factory('Account', function ($resource) {
-        return $resource('/api/accounts/:id');
+        return $resource('/api/accounts/billing/:id');
     })
    /**
     * @ngdoc service
@@ -64,7 +64,7 @@ angular.module('billingSvcs', ['ngResource'])
     */
     .factory('Period', function ($resource, Transform) {
         var transform = Transform('billingPeriods.billingPeriod', 'details');
-        return $resource('/api/accounts/:id/billing-periods',
+        return $resource('/api/accounts/billing/:id/billing-periods',
             {
                 id: '@id',
                 marker: 0,
@@ -105,7 +105,7 @@ angular.module('billingSvcs', ['ngResource'])
      */
     .factory('Payment', function ($resource, Transform) {
         var transform = Transform('payments.payment', 'papi:badRequest.details');
-        return $resource('/api/accounts/:id/payment',
+        return $resource('/api/accounts/payments/:id',
             {
                 id: '@id',
                 marker: 0,
@@ -128,28 +128,16 @@ angular.module('billingSvcs', ['ngResource'])
      */
     .factory('PaymentMethod', function ($resource, Transform) {
         var transform = Transform('methods.method', 'papi:badRequest.details');
-        return $resource('/api/accounts/:id/methods',
+        return $resource('/api/accounts/payments/:id/methods',
             {
                 id: '@id',
                 marker: 0,
-                limit: 10
+                showDisabled: true
             },
             {
                 list: { method: 'GET', isArray: true, transformResponse: transform }
             }
         );
-    })
-    /**
-     * @ngdoc service
-     * @name billingSvcs.DefaultPaymentMethod
-     * @description
-     *
-     * From a list of payment methods return the one marked as isDefault: 'true'
-     */
-    .factory('DefaultPaymentMethod', function () {
-        return function (methods) {
-            return _.find(methods, { isDefault: 'true' });
-        };
     })
     .constant('DATE_FORMAT', 'MM / dd / yyyy')
     .constant('TRANSACTION_TYPES', ['Payment', 'Invoice', 'Reversal', 'Adjustment'])
