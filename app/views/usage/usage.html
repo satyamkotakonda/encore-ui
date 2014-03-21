@@ -39,9 +39,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="charge in charges">
-                            <td>{{ charge.offeringCode }}</td>
-                            <td>{{ charge.amount | currency }}</td>
+                        <tr ng-repeat="charge in charges | UsageTotal">
+                            <td>{{ charge.name | ProductName }}</td>
+                            <td>{{ charge.total| currency }}</td>
                         </tr>
                     </tbody>
                     <tfoot>
