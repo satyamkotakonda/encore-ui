@@ -22,7 +22,13 @@ angular.module('billingApp')
         // Set the default sort of the usage
         $scope.sort = rxSortUtil.getDefault('product', true);
 
-        // Get Charges Info
+        /**
+        * Get Charges Info
+        *
+        * Here we find the current billing period from the list we retrieve.
+        * We use the period's ID to make a call to receive the estimated
+        * charges for the current billing period of the account.
+        */
         var getCharges = function (periods) {
             $scope.currentPeriod = _.find(periods, { 'current': true });
             $scope.charges = EstimatedCharges.list({
