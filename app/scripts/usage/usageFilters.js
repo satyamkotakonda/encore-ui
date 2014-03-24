@@ -17,14 +17,14 @@ angular.module('billingApp')
         };
     })
     /**
-     * @ngdoc filter
-     * @name encore.filter:UsageTotal
-     * @description
-     * Filter that formats the list of products to consolidate multiple type entries, and return a
-     * value representing the total amount due per product type.
-     *
-     * @param {Array} products - A list of products with their estimated charges and usage.
-     */
+    * @ngdoc filter
+    * @name encore.filter:UsageTotal
+    * @description
+    * Filter that formats the list of products to consolidate multiple type entries, and return a
+    * value representing the total amount due per product type.
+    *
+    * @param {Array} products - A list of products with their estimated charges and usage.
+    */
     .filter('UsageTotal', function () {
         return function (products) {
             if (!products) { return []; }

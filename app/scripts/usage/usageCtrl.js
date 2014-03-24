@@ -8,23 +8,23 @@ angular.module('billingApp')
     * @requires $scope - The $scope variable for interacting with the UI.
     * @requires $routeParams - AngularJS service which provides access to route paramters
     * @requires billingSvcs.EstimatedCharges - Service for CRUD operations for the Estimated Charges resource.
-    * @requires encore.paginate:PageTracking - Service which creates an object for pagination.
+    * @requires billingSvcs.STATUS_MESSAGES - Constant object defining messaging to be used throughout the app
     *
     * @example
     * <pre>
-    * .controller('UsageCtrl', function ($scope, $routeParams, EstimatedCharges, PageTracking)
+    * .controller('UsageCtrl', function ($scope, $routeParams, EstimatedCharges)
     * </pre>
     */
-    .controller('UsageCtrl', function ($scope, $routeParams, $q, EstimatedCharges, PageTracking,
-        Period, rxSortUtil, rxPromiseNotifications,
-        STATUS_MESSAGES) {
+    .controller('UsageCtrl', function ($scope, $routeParams, $q, EstimatedCharges,
+            Period, rxSortUtil, rxPromiseNotifications,
+            STATUS_MESSAGES) {
 
         // Set the default sort of the usage
         $scope.sort = rxSortUtil.getDefault('product', true);
 
         // Get Charges Info
-        var getCharges = function () {
-            $scope.currentPeriod = _.find($scope.periods, { 'current': true });
+        var getCharges = function (periods) {
+            $scope.currentPeriod = _.find(periods, { 'current': true });
             $scope.charges = EstimatedCharges.list({
                 id: $routeParams.accountNumber,
                 periodId: $scope.currentPeriod.id
