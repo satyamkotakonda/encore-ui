@@ -35,4 +35,8 @@ describe('UsageFilters', function () {
         expect(total(data)[0].name).to.be.eq('LBAAS');
         expect(total(data)[0].total).to.be.eq(600);
     });
+
+    it('UsageTotal filter should return nothing if nothing is given', function () {
+        expect(_.isEqual(total(), [])).to.be.eq(true);
+    });
 });
