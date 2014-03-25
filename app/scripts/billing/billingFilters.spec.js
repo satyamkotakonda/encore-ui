@@ -9,7 +9,7 @@ describe('BillingFilters', function () {
             currencySuffix = $filter('CurrencySuffix');
         });
     });
-    
+
     it('TransactionTable filter should exist', function () {
         expect(table).to.exist;
         expect(table).to.not.be.empty;

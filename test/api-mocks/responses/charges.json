@@ -1,0 +1,286 @@
+{
+    "estimatedCharges": {
+        "estimatedCharge": [
+            {
+                "offeringCode": "DBAAS",
+                "quantity": "10.00",
+                "amount": "1000.00",
+                "unitOfMeasure": "HRS",
+                "rate": ".40",
+                "chargeType": "UPTIME"
+            },
+            {
+                "offeringCode": "DBAAS",
+                "amount": "3.09",
+                "usage_metric": "STORAGE",
+                "quantity": "3000.00",
+                "rate": ".50",
+                "unitOfMeasure": "GB_HRS"
+            },
+            {
+                "offeringCode": "MAAS",
+                "amount": "3.09",
+                "chargeType": "NUM_CHKS_HRS",
+                "quantity": "3000.00",
+                "rate": "2.00",
+                "unitOfMeasure": "CHKS_HRS"
+            },
+            {
+                "offeringCode": "CBCKUP",
+                "amount": "40.00",
+                "chargeType": "USG_PER_DAY",
+                "quantity": "20.00",
+                "rate": "2.00",
+                "unitOfMeasure": "NO_OF_DAYS"
+            },
+            {
+                "offeringCode": "CBS",
+                "amount": ".23",
+                "chargeType": "STORAGE_BKUPS",
+                "quantity": "64921600",
+                "rate": ".00021",
+                "unitOfMeasure": "GB_HRS"
+            },
+            {
+                "offeringCode": "CBS",
+                "amount": ".87",
+                "chargeType": "STORAGE_VOLUME",
+                "quantity": "64921600",
+                "rate": ".00082",
+                "unitOfMeasure": "GB_HRS"
+            },
+            {
+                "offeringCode": "CFILES",
+                "amount": ".23",
+                "chargeType": "BWOUT",
+                "quantity": "64.00",
+                "unitOfMeasure": "GB"
+            },
+            {
+                "offeringCode": "CFILES",
+                "amount": ".87",
+                "chargeType": "CDNBWOUT",
+                "quantity": "200.00",
+                "unitOfMeasure": "GB"
+            },
+            {
+                "offeringCode": "CFILES",
+                "amount": ".87",
+                "chargeType": "STORAGE",
+                "quantity": "25.00",
+                "unitOfMeasure": "GB"
+            },
+            {
+                "offeringCode": "NXTGEN",
+                "amount": ".87",
+                "chargeType": "UPTIME",
+                "quantity": "25",
+                "unitOfMeasure": "HRS"
+            },
+            {
+                "offeringCode": "NXTGEN",
+                "amount": "3.14",
+                "chargeType": "BWOUT",
+                "quantity": "12.00",
+                "rate": ".12",
+                "unitOfMeasure": "GB"
+            },
+            {
+                "offeringCode": "NXTGEN",
+                "amount": "3.14",
+                "chargeType": "STORAGE_IMAGE",
+                "quantity": "12.00",
+                "rate": ".12",
+                "unitOfMeasure": "GB"
+            },
+            {
+                "offeringCode": "LBAAS",
+                "rate": ".015",
+                "quantity": "12.00",
+                "amount": "3.14",
+                "unitOfMeasure": "HRS",
+                "chargeType": "UPTIME"
+            },
+            {
+                "offeringCode": "LBAAS",
+                "rate": ".05",
+                "quantity": "12.00",
+                "amount": "3.14",
+                "unitOfMeasure": "HRS",
+                "chargeType": "UPTIME_SSL_INSTANCE"
+            },
+            {
+                "offeringCode": "LBAAS",
+                "rate": ".015",
+                "quantity": "12.00",
+                "amount": "3.14",
+                "unitOfMeasure": "HRS",
+                "chargeType": "UPTIME_100_CONC_CONNS"
+            },
+            {
+                "offeringCode": "LBAAS",
+                "rate": ".12",
+                "quantity": "12.00",
+                "amount": "3.14",
+                "unitOfMeasure": "GB",
+                "chargeType": "BWOUT"
+            },
+            {
+                "offeringCode": "CSITES",
+                "rate": "150.00",
+                "quantity": "1.00",
+                "amount": "150.00",
+                "unitOfMeasure": "COUNT",
+                "chargeType": "SITES_SUBSCRIPTION"
+            },
+            {
+                "offeringCode": "CSITES",
+                "rate": "0.00",
+                "quantity": "200.00",
+                "allocatedQuantity": "300.00",
+                "amount": "0.00",
+                "unitOfMeasure": "GB",
+                "chargeType": "BWOUT"
+            },
+            {
+                "offeringCode": "CSITES",
+                "rate": ".12",
+                "quantity": "12.00",
+                "amount": "3.14",
+                "unitOfMeasure": "GB",
+                "chargeType": "BWOUT_OVERAGE"
+            },
+            {
+                "offeringCode": "CSITES",
+                "rate": "0.00",
+                "quantity": "200.00",
+                "allocatedQuantity": "300.00",
+                "amount": "0.00",
+                "unitOfMeasure": "GB",
+                "chargeType": "STORAGE"
+            },
+            {
+                "offeringCode": "CSITES",
+                "rate": ".12",
+                "quantity": "12.00",
+                "amount": "3.14",
+                "unitOfMeasure": "GB",
+                "chargeType": "STORAGE_OVERAGE"
+            },
+            {
+                "offeringCode": "CSITES",
+                "rate": "0.00",
+                "quantity": "200.00",
+                "allocatedQuantity": "300.00",
+                "amount": "0.00",
+                "unitOfMeasure": "COUNT",
+                "chargeType": "COMPUTE_CYCLE"
+            },
+            {
+                "offeringCode": "CSITES",
+                "rate": ".12",
+                "quantity": "12.00",
+                "amount": "3.14",
+                "unitOfMeasure": "COUNT",
+                "chargeType": "COMPUTE_CYCLE_OVERAGE"
+            },
+            {
+                "offeringCode": "CSITES",
+                "quantity": "10.00",
+                "amount": "20.00",
+                "unitOfMeasure": "COUNT",
+                "chargeType": "SSL_SITES"
+            },
+            {
+                "offeringCode": "CSITES",
+                "rate": "5.00",
+                "quantity": "225.00",
+                "rateForQuantity": "100.00",
+                "amount": "10.00",
+                "unitOfMeasure": "MB",
+                "chargeType": "STORAGE_MSSQL"
+            },
+            {
+                "offeringCode": "FSTGEN",
+                "amount": ".87",
+                "chargeType": "UPTIME",
+                "quantity": "25",
+                "unitOfMeasure": "HRS"
+            },
+            {
+                "offeringCode": "FSTGEN",
+                "amount": "3.14",
+                "chargeType": "BWOUT",
+                "quantity": "12.00",
+                "rate": ".12",
+                "unitOfMeasure": "GB"
+            },
+            {
+                "offeringCode": "FSTGEN",
+                "amount": "200.00",
+                "chargeType": "ADDITIONAL_IPS",
+                "quantity": "20.00",
+                "rate": "0.010",
+                "unitOfMeasure": "IP_HRS"
+            },
+            {
+                "offeringCode": "CLOUDBIGDATA",
+                "amount": "3.14",
+                "chargeType": "BWOUT",
+                "quantity": "12.00",
+                "rate": ".12",
+                "unitOfMeasure": "GB"
+            },
+            {
+                "offeringCode": "CLOUDBIGDATA",
+                "amount": ".87",
+                "chargeType": "UPTIME",
+                "quantity": "25",
+                "unitOfMeasure": "HRS"
+            },
+            {
+                "offeringCode": "CLOUDQUEUES",
+                "rate": "0.00",
+                "amount": "0.00",
+                "chargeType": "API_REQUESTS",
+                "quantity": "2000.00",
+                "allocatedQuantity": "10000.00",
+                "unitOfMeasure": "COUNT"
+            },
+            {
+                "offeringCode": "CLOUDQUEUES",
+                "rate": "0.01",
+                "rateForQuantity": "1000.00",
+                "amount": "0.02",
+                "chargeType": "API_REQUESTS_OVERAGE",
+                "quantity": "2000.00",
+                "unitOfMeasure": "COUNT"
+            },
+            {
+                "offeringCode": "CLOUDQUEUES",
+                "amount": "3.14",
+                "chargeType": "BWOUT",
+                "quantity": "12.00",
+                "rate": ".12",
+                "unitOfMeasure": "GB"
+            },
+            {
+                "amount": "100.00",
+                "chargeType": "MANAGED_SERVICE_LEVEL",
+                "quantity": "1.00",
+                "rate": "100.00",
+                "unitOfMeasure": "COUNT"
+            }
+        ],
+        "atom:link": [
+            {
+                "rel": "next",
+                "href": "http://billing.api.rackspace.com/{account_id}/estimated-charges?marker=0&limit=10"
+            },
+            {
+                "rel": "prev",
+                "href": "http://billing.api.rackspace.com/{account_id}/estimated-charges?marker=0&limit=10"
+            }
+        ]
+    }
+}

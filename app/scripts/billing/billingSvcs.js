@@ -75,6 +75,26 @@ angular.module('billingSvcs', ['ngResource'])
             }
         );
     })
+   /**
+    * @ngdoc service
+    * @name billingSvcs.EstimatedCharges
+    * @description
+    * Estimated Charges Service for interaction with Billing API
+    *
+    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    */
+    .factory('EstimatedCharges', function ($resource, Transform) {
+        var transform = Transform('estimatedCharges.estimatedCharge', 'details');
+        return $resource('/api/accounts/:id/billing-periods/:periodId/estimatedCharges',
+            {
+                id: '@id',
+                periodId: '@periodId'
+            },
+            {
+                list: { method: 'GET', isArray: true, transformResponse: transform }
+            }
+        );
+    })
     /**
      * @ngdoc service
      * @name billingSvcs.Payment
@@ -100,7 +120,7 @@ angular.module('billingSvcs', ['ngResource'])
     })
     /**
      * @ngdoc service
-     * @name billingSvcs.Payment
+     * @name billingSvcs.PaymentMethod
      * @description
      * Payment Service for interaction with Billing API
      *
@@ -121,14 +141,4 @@ angular.module('billingSvcs', ['ngResource'])
     })
     .constant('DATE_FORMAT', 'MM / dd / yyyy')
     .constant('TRANSACTION_TYPES', ['Payment', 'Invoice', 'Reversal', 'Adjustment'])
-    .constant('TRANSACTION_STATUSES', ['Paid', 'Settled', 'Unpaid'])
-    .constant('STATUS_MESSAGES', {
-        overview: {
-            error: 'There was an error Loading Information'
-        },
-        payment: {
-            error: 'There was an error Posting the Payment Request',
-            load: 'Posting Payment',
-            success: 'The Payment was Successfully Submitted'
-        }
-    });
+    .constant('TRANSACTION_STATUSES', ['Paid', 'Settled', 'Unpaid']);
