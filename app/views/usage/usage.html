@@ -21,7 +21,7 @@
                             <th scope="col">
                                 <rx-sortable-column
                                     sort-method="sortCol"
-                                    sort-property="product"
+                                    sort-property="name | ProductName"
                                     predicate="sort.predicate"
                                     reverse="sort.reverse">
                                     Product
@@ -30,7 +30,7 @@
                             <th scope="col">
                                 <rx-sortable-column
                                     sort-method="sortCol"
-                                    sort-property="charge"
+                                    sort-property="total"
                                     predicate="sort.predicate"
                                     reverse="sort.reverse">
                                     Usage Charges
@@ -39,7 +39,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="charge in charges | UsageTotal">
+                        <tr ng-repeat="charge in charges | UsageTotal | orderBy:sort.predicate:sort.reverse">
                             <td>{{ charge.name | ProductName }}</td>
                             <td>{{ charge.total| currency }}</td>
                         </tr>

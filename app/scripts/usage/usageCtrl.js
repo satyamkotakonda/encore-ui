@@ -20,7 +20,7 @@ angular.module('billingApp')
             STATUS_MESSAGES) {
 
         // Set the default sort of the usage
-        $scope.sort = rxSortUtil.getDefault('product', true);
+        $scope.sort = rxSortUtil.getDefault('name | ProductName');
 
         /**
         * Get Charges Info
@@ -35,6 +35,10 @@ angular.module('billingApp')
                 id: $routeParams.accountNumber,
                 periodId: $scope.currentPeriod.id
             });
+        };
+
+        $scope.sortCol = function (predicate) {
+            return rxSortUtil.sortCol($scope, predicate);
         };
 
         $scope.periods = Period.list({ id: $routeParams.accountNumber }, getCharges);
