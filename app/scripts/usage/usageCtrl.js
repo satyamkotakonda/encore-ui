@@ -28,6 +28,7 @@ angular.module('billingApp')
         * Here we find the current billing period from the list we retrieve.
         * We use the period's ID to make a call to receive the estimated
         * charges for the current billing period of the account.
+        * Right now, there is no Current Charges Billing API.
         */
         var getCharges = function (periods) {
             $scope.currentPeriod = _.find(periods, { 'current': true });

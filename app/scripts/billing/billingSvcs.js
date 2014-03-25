@@ -141,14 +141,4 @@ angular.module('billingSvcs', ['ngResource'])
     })
     .constant('DATE_FORMAT', 'MM / dd / yyyy')
     .constant('TRANSACTION_TYPES', ['Payment', 'Invoice', 'Reversal', 'Adjustment'])
-    .constant('TRANSACTION_STATUSES', ['Paid', 'Settled', 'Unpaid'])
-    .constant('STATUS_MESSAGES', {
-        overview: {
-            error: 'There was an error Loading Information'
-        },
-        payment: {
-            error: 'There was an error Posting the Payment Request',
-            load: 'Posting Payment',
-            success: 'The Payment was Successfully Submitted'
-        }
-    });
+    .constant('TRANSACTION_STATUSES', ['Paid', 'Settled', 'Unpaid']);
