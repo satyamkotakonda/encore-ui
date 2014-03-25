@@ -2,7 +2,7 @@ angular.module('billingApp')
     /**
     * @ngdoc filter
     * @name encore.filter:ProductName
-    * @param {Object} PRODUCT_CONSTANTS - Mapping of our product names to the values we receive.
+    * @require {Object} PRODUCT_CONSTANTS - Mapping of our product names to the values we receive.
     * @description
     * Filter that formats the given product value to display its full name.
     *
