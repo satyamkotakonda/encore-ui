@@ -1,0 +1,151 @@
+/*
+ rxPopover stylesheets for container, trigger, and content. Sample showing the popover
+ positioned to the left of the trigger.
+
+ rx-popover-container contains variables that control the background/border colors, as
+ well as the width of the border and the arrow.  Updating these will control the look and
+ feel of the popover bubble.
+
+ The top value for the rx-popover-container is calculated dynamically in javascript due to
+ the size of the content being unknown.
+ ```
+<rx-popover position="left" class="ng-isolate-scope">
+    <div class="rx-popover rx-popover-left" ng-transclude="">
+        <rx-popover-trigger class="ng-scope">
+            <div class="rx-popover-trigger" ng-mouseover="show()" ng-mouseout="hide()" ng-transclude="">
+                This is a trigger
+            </div>
+        </rx-popover-trigger>
+        <rx-popover-content class="ng-scope">
+            <div class="rx-popover-container" ng-mouseover="show()" ng-mouseout="hide()" ng-show="active" style="top: -36px;">
+                <div class="arrow"></div>
+                <div class="popover-content" ng-transclude="">
+                    This is the popover Content
+                </div>
+            </div>
+        </rx-popover-content>
+    </div>
+</rx-popover>
+
+```
+ */
+.rx-popover {
+    display: inline-block;
+    position: relative;
+    .clearfix();
+}
+.rx-popover-trigger {
+    cursor: pointer;
+}
+
+.rx-popover-container {
+    @backgroundColor: #FEFEFE;
+    @borderColor: #EFEFEF;
+    @arrowSize: 11px;
+    @borderWidth: 3px;
+    z-index: 10;
+    position: absolute;
+    display: block;
+    .arrow,
+    .arrow:after {
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        z-index: 3;
+        border-color: transparent;
+        border-style: solid;
+    }
+    .arrow {
+        border-width: @arrowSize + @borderWidth;
+    }
+    .arrow:after {
+        border-width: @arrowSize;
+        content: " ";
+    }
+
+    .popover-content {
+        display: block;
+        color: black;
+        border: @borderColor @borderWidth solid;
+        background-color: @backgroundColor;
+        padding: 5px;
+        border-radius: 6px;
+        box-shadow: 0 0 10px #afafaf;
+    }
+    .rx-popover-left & {
+        right: 100%;
+        margin-right: @arrowSize/2;
+        .arrow {
+            top: 50%;
+            right: @arrowSize * -1;
+            margin-top: (@arrowSize + @borderWidth) * -1;
+            border-right-width: 0;
+            border-left-color: @borderColor;
+            &:after {
+                border-right-width: 0;
+                right: @borderWidth * 1.5;
+                margin-top: @arrowSize * -1;
+                border-left-color: @backgroundColor;
+            }
+
+        }
+    }
+    .rx-popover-right & {
+        left: 100%;
+        margin-left: @arrowSize/2;
+        .arrow {
+            top: 50%;
+            left: @arrowSize * -1;
+            margin-top: (@arrowSize + @borderWidth) * -1;
+            border-left-width: 0;
+            border-right-color: @borderColor;
+            &:after {
+                border-left-width: 0;
+                left: @borderWidth * 1.5;
+                margin-top: @arrowSize * -1;
+                border-right-color: @backgroundColor;
+            }
+
+        }
+    }
+    .rx-popover-top & {
+        bottom: 100%;
+        left: 0;
+        right: 0;
+        margin: 0 auto @arrowSize/2;
+        .arrow {
+            left: 50%;
+            bottom: @arrowSize * -1;
+            margin-left: (@arrowSize + @borderWidth) * -1;
+            border-bottom-width: 0;
+            border-top-color: @borderColor;
+            &:after {
+                border-bottom-width: 0;
+                bottom: @borderWidth * 1.5;
+                margin-left: @arrowSize * -1;
+                border-top-color: @backgroundColor;
+            }
+
+        }
+    }
+    .rx-popover-bottom & {
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin: @arrowSize/2 auto 0;
+        .arrow {
+            left: 50%;
+            top: @arrowSize * -1;
+            margin-left: (@arrowSize + @borderWidth) * -1;
+            border-top-width: 0;
+            border-bottom-color: @borderColor;
+            &:after {
+                border-top-width: 0;
+                top: @borderWidth * 1.5;
+                margin-left: @arrowSize * -1;
+                border-bottom-color: @backgroundColor;
+            }
+        }
+    }
+}

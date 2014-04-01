@@ -1,6 +1,7 @@
 module.exports = {
     scripts: {
-        files: ['Gruntfile.js', 'app/scripts/**/*.js', '!app/scripts/**/*.spec.js', '!app/scripts/debug.js'],
+        files: ['Gruntfile.js', 'app/scripts/**/*.js', '!app/scripts/**/*.spec.js', '!app/scripts/debug.js',
+                'app/modules/**/*.js', '!app/modules/**/*.spec.js'],
         tasks: ['jshint:scripts','jscs:scripts', 'test:unit'],
         options: {
             livereload: true
@@ -14,14 +15,14 @@ module.exports = {
         }
     },
     css: {
-        files: ['app/styles/**/*.less'],
+        files: ['app/styles/**/*.less', 'app/modules/**/*.less'],
         tasks: ['less'],
         options: {
             livereload: true
         }
     },
     html: {
-        files: ['app/index.html', 'app/views/{,*/}*.html'],
+        files: ['app/index.html', 'app/views/{,*/}*.html', 'app/modules/**/*.html'],
         options: {
             livereload: true
         }

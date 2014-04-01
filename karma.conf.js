@@ -42,6 +42,7 @@ module.exports = function(config) {
             'views/**/*.html': 'ng-html2js',
             'modules/**/*.html': 'ng-html2js',
             // TODO figure out how to filter 'lib' folder
+            'modules/**/!(*.spec).js': ['coverage'],
             'scripts/**/!(*.spec).js': ['coverage']
         },
 
