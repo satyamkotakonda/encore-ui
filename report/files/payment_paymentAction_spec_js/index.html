@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - payment/paymentAction.spec.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>payment/paymentAction.spec.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">69.94</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">106</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">16.99</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.24</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/* jshint node: true */
+
+describe(&#039;rxPaymentAction&#039;, function () {
+    var el, scope, directiveScope, compile, rootScope,
+        user = &#039;test&#039;, amount = &#039;2000.00&#039;, methodId = &#039;urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479&#039;,
+        paymentMethods = [{
+            id: &#039;id1&#039;,
+            isDefault: true,
+            paymentCard: { number: &#039;1234&#039; }
+        }, {
+            id: &#039;id2&#039;,
+            electronicCheck: { number: &#039;1234&#039; }
+        }, {
+            id: &#039;id3&#039;,
+            paymentCard: { number: &#039;1234&#039; }
+        }, {
+            id: &#039;id4&#039;,
+            invoice: { number: &#039;1234&#039; }
+        }],
+        validTemplate = &#039;&lt;rx-payment-action&#039; +
+                        &#039;    post-hook=&quot;postPayment&quot;&#039; +
+                        &#039;    user=&quot;{{user}}&quot;&#039; +
+                        &#039;    amount=&quot;{{amount}}&quot;&#039; +
+                        &#039;    method-id=&quot;{{methodId}}&quot;&#039; +
+                        &#039;    methods=&quot;methods&quot;&gt;&#039; +
+                        &#039;    &lt;strong&gt;+&lt;/strong&gt; Make a Payment&#039; +
+                        &#039;&lt;/rx-payment-action&gt;&#039;;
+    var postPayment = function (amount, methodId) {
+        return [amount, methodId];
+    };
+
+    beforeEach(function () {
+        module(&#039;billingApp&#039;);
+        module(&#039;views/payment/paymentAction.html&#039;);
+
+        inject(function ($rootScope, $compile, $templateCache) {
+            var template = $templateCache.get(&#039;views/payment/paymentAction.html&#039;);
+
+            $templateCache.put(&#039;/views/payment/paymentAction.html&#039;, template);
+            paymentMethods.$promise = true;
+            rootScope = $rootScope;
+            compile = $compile;
+            scope = $rootScope.$new();
+            scope.user = user;
+            scope.amount = amount;
+            scope.methodId = methodId;
+            scope.methods = paymentMethods;
+            scope.postPayment = postPayment;
+        });
+
+        el = helpers.createDirective(validTemplate, compile, scope);
+        directiveScope = el.find(&#039;div&#039;).scope();
+    });
+
+    afterEach(function () {
+        el = null;
+        directiveScope = null;
+    });
+
+    it(&#039;should render template correctly&#039;, function () {
+        expect(el).not.be.empty;
+        expect(el.find(&#039;div&#039;)).not.be.empty;
+        expect(el.find(&#039;div&#039;).attr(&#039;class&#039;).split(&#039; &#039;).indexOf(&#039;rx-payment-action&#039;)).to.be.gt(-1);
+    });
+
+    it(&#039;should have the default amount set&#039;, function () {
+        expect(el.attr(&#039;amount&#039;)).to.be.eq(&#039;2000.00&#039;);
+    });
+
+    it(&#039;should have the default method-id set&#039;, function () {
+        expect(el.attr(&#039;method-id&#039;)).to.be.eq(&#039;urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479&#039;);
+    });
+
+    it(&#039;should set the initial payment final amount/method-id values&#039;, function () {
+        directiveScope.setDefaultValues(&#039;3000.45&#039;, &#039;urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7&#039;);
+        expect(directiveScope.payment.amount).to.be.eq(&#039;3000.45&#039;);
+        expect(directiveScope.payment.methodId).to.be.eq(&#039;urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7&#039;);
+    });
+
+    it(&#039;should call post-hook with the final amount/method-id values&#039;, function () {
+        directiveScope.changeMethodType(&#039;isDefault&#039;);
+        var hookResponse = directiveScope.postHook(&#039;3000.45&#039;, &#039;urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7&#039;);
+        expect(hookResponse[0]).to.be.eq(&#039;3000.45&#039;);
+        expect(hookResponse[1]).to.be.eq(&#039;urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7&#039;);
+    });
+
+    it(&#039;should filter/change columns based on the default method type&#039;, function () {
+        directiveScope.changeMethodType(&#039;isDefault&#039;);
+        expect(directiveScope.methodType).to.be.eq(&#039;isDefault&#039;);
+        expect(directiveScope.methodList.length).to.be.eq(1);
+        expect(directiveScope.methodListCols.length).to.be.eq(4);
+    });
+
+    it(&#039;should filter/change columns based on the card method type&#039;, function () {
+        directiveScope.changeMethodType(&#039;paymentCard&#039;);
+        expect(directiveScope.methodType).to.be.eq(&#039;paymentCard&#039;);
+        expect(directiveScope.methodList.length).to.be.eq(2);
+        expect(directiveScope.methodListCols.length).to.be.eq(4);
+    });
+
+    it(&#039;should filter/change columns based on the ach method type&#039;, function () {
+        directiveScope.changeMethodType(&#039;electronicCheck&#039;);
+        expect(directiveScope.methodType).to.be.eq(&#039;electronicCheck&#039;);
+        expect(directiveScope.methodList.length).to.be.eq(1);
+        expect(directiveScope.methodListCols.length).to.be.eq(4);
+    });
+
+});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
