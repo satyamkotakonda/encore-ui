@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - billing/billingFilters.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>billing/billingFilters.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">72.40</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">95</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">38.54</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">0.73</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">angular.module(&#039;billingApp&#039;)
+    /**
+    * @ngdoc filter
+    * @name encore.filter:TransactionTable
+    * @description
+    * Filter which refines the collection of transactions based on the criteria provided. If no criteria are selected,
+    * the filter will return the entire collection of transactions.  The filter leverages an &#039;AND&#039; search so as more
+    * criteria are selected more results will be filtered out.
+    *
+    * @param {Array} transactions - collection of transactions to be filtered.
+    * @param {Object} filter - Object which includes the criteria for filtering the list of transactions.
+    *     - **reference** {String} - Reference id for the transaction.
+    *     - **type** {String} - Type of the transaction.
+    *     - **status** {String} - Current state of the transaction.
+    *     - **date** {Date} - The date the transaction occurred.
+    */
+    .filter(&#039;TransactionTable&#039;, function () {
+        var getFilterDate = function (start) {
+                var filterDate;
+                if (!isNaN(start)) {
+                    filterDate = new Date();
+                    filterDate = new Date(filterDate.getFullYear(), filterDate.getMonth() + parseInt(start),
+                        filterDate.getDate());
+                } else {
+                    filterDate = new Date(start);
+                    filterDate = new Date(filterDate.getFullYear(), filterDate.getMonth(), filterDate.getDate());
+                }
+                return filterDate;
+            },
+            tFilter = {
+                isRefMatch: function (transaction, filter) {
+                    return filter.reference ? _.contains(transaction.reference, filter.reference) : true;
+                },
+                isType: function (transaction, filter) {
+                    return filter.type ? filter.type === transaction.type : true;
+                },
+                isStatus: function (transaction, filter) {
+                    return filter.status ? filter.status === transaction.status : true;
+                },
+                isInRange: function (transaction, filter) {
+                    if (!filter.period) {
+                        return true;
+                    }
+                    var tdate = new Date(transaction.date),
+                        filterDate = filter.period.split(&#039;|&#039;).map(getFilterDate);
+                    if (filterDate.length === 1) {
+                        filterDate.push(new Date());
+                    }
+                    // Sort from earliest to latest
+                    filterDate = _.sortBy(filterDate);
+                    return filterDate[0] &lt;= tdate &amp;&amp; tdate &lt;= filterDate[1];
+                }
+            };
+
+        return function (transactions, filter) {
+            filter = filter ? filter : {};
+            return _.filter(transactions, function (transaction) {
+                return tFilter.isRefMatch(transaction, filter) &amp;&amp;
+                    tFilter.isType(transaction, filter) &amp;&amp;
+                    tFilter.isStatus(transaction, filter) &amp;&amp;
+                    tFilter.isInRange(transaction, filter);
+            });
+        };
+    })
+    /**
+    * @ngdoc filter
+    * @name encore.filter:CurrencySuffix
+    * @param {$filter} $filter - Angular filterProvider for getting the currency filter
+    * @description
+    * Filter that formats a currency value shortened by a metric prefix (thousand/million/billion), if the value is less
+    * than 10000 don&#039;t attempt to shorten it, this is meant for numbeers too big to display on UI.
+    *
+    * Ranges based on the shortscale of the metric prefixes
+    * Idea from:
+    * http://stackoverflow.com/questions/17633462/format-a-javascript-number-with-a-metric-prefix-like-1-5k-1m-1g-etc
+    * Information from:
+    * http://en.wikipedia.org/wiki/SI_prefix
+    *
+    * @param {Number} value - number to be formatted
+    */
+    .filter(&#039;CurrencySuffix&#039;, function ($filter) {
+        var currencyFilter = $filter(&#039;currency&#039;),
+            units = [&#039;k&#039;, &#039;m&#039;, &#039;b&#039;, &#039;t&#039;];
+
+        return function (value) {
+            var modulus = (value &lt; 0) ? -1 : 1, unit = false;
+            value = Math.abs(value);
+            if (value &gt; 9999) {
+                unit = Math.floor(Math.log(value) / Math.log(1000));
+                value = value / Math.pow(1000, unit);
+            }
+            return currencyFilter(modulus * value) + (units[unit - 1] || &#039;&#039;);
+        };
+
+    });</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@ module.exports = {
     test: [],
     dist: [
         'imagemin',
-        'svgmin'
-        // 'htmlmin'
+        'svgmin',
+        'htmlmin'
     ]
 };

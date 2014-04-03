@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - billing/overviewCtrl.spec.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>billing/overviewCtrl.spec.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">71.30</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">120</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">13.70</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.36</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">describe(&#039;Billing: OverviewCtrl&#039;, function () {
+    var scope, ctrl, account, transaction, period, payment, paymentMethod, PageTrackingObject,
+        accountData, paymentMethods;
+
+    var testAccountNumber = &#039;12345&#039;;
+
+    beforeEach(function () {
+        module(&#039;billingApp&#039;);
+
+        inject(function ($controller, $rootScope, $httpBackend, Account, Transaction, Period,
+                Payment, PaymentMethod, PageTracking, $q) {
+            var getResourceMock = function (data) {
+                var deferred = $q.defer();
+                data.$promise = deferred.promise;
+                data.$deferred = deferred;
+                return data;
+            };
+            scope = $rootScope.$new();
+            transaction = Transaction;
+            account = Account;
+            period = Period;
+            paymentMethod = PaymentMethod;
+            payment = Payment;
+            accountData = {
+                currentDue: &#039;2124.00&#039;
+            };
+            paymentMethods = [{
+                isDefault: true,
+                id: &#039;urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479&#039;
+            }];
+
+            period.list = sinon.stub(period, &#039;list&#039;).returns(getResourceMock([]));
+            account.get = sinon.stub(account, &#039;get&#039;).returns(getResourceMock(accountData));
+            payment.post = sinon.stub(payment, &#039;post&#039;).returns(getResourceMock({}));
+            transaction.list = sinon.stub(transaction, &#039;list&#039;).returns(getResourceMock([]));
+            paymentMethod.list = sinon.stub(paymentMethod, &#039;list&#039;).returns(getResourceMock(paymentMethods));
+
+            PageTrackingObject = PageTracking.createInstance().constructor;
+
+            ctrl = $controller(&#039;OverviewCtrl&#039;,{
+                $scope: scope,
+                Transaction: transaction,
+                Account: account,
+                Period: period,
+                Payment: payment,
+                PaymentMethod: paymentMethod,
+                $routeParams: { accountNumber: testAccountNumber },
+                PageTracking: PageTracking,
+                TRANSACTION_TYPES: [],
+                TRANSACTION_STATUSES: []
+            });
+        });
+    });
+
+    it(&#039;OverviewCtrl should exist&#039;, function () {
+        expect(ctrl).to.exist;
+    });
+
+    it(&#039;OverviewCtrl should have a sort object defined&#039;, function () {
+        expect(scope.sort).to.be.a(&#039;object&#039;);
+        expect(scope.sort).to.have.property(&#039;predicate&#039;);
+        expect(scope.sort.predicate).to.eq(&#039;date&#039;);
+    });
+
+    it(&#039;OverviewCtrl should have a default date format&#039;, function () {
+        expect(scope.defaultDateFormat).to.be.eq(&#039;MM / dd / yyyy&#039;);
+    });
+
+    it(&#039;OverviewCtrl should have a pager defined by PageTracking&#039;, function () {
+        expect(scope.pager).to.be.an.instanceof(PageTrackingObject);
+    });
+
+    it(&#039;OverviewCtrl should have default values&#039;, function () {
+        expect(scope.filterData.types).to.be.an(&#039;array&#039;);
+        expect(scope.filterData.statuses).to.be.an(&#039;array&#039;);
+        expect(scope.sort).to.deep.eq({ predicate: &#039;date&#039;, reverse: true });
+    });
+
+    it(&#039;OverviewCtrl should get list of transactions&#039;, function () {
+        sinon.assert.calledOnce(transaction.list);
+    });
+
+    it(&#039;OverviewCtrl should get list of payment methods&#039;, function () {
+        sinon.assert.calledOnce(paymentMethod.list);
+    });
+
+    it(&#039;OverviewCtrl should get list of billing periods&#039;, function () {
+        sinon.assert.calledOnce(period.list);
+    });
+
+    it(&#039;OverviewCtrl should get account info&#039;, function () {
+        sinon.assert.calledOnce(account.get);
+    });
+
+    it(&#039;OverviewCtrl should post a payment&#039;, function () {
+        scope.postPayment({ amount: 12314, method: { id: &#039;urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479&#039; }});
+        sinon.assert.calledOnce(payment.post);
+    });
+
+    it(&#039;OverviewCtrl should set default values once account and payment methods have been succesful&#039;, function () {
+        scope.$apply(function () {
+            scope.account.$deferred.resolve(accountData);
+            scope.paymentMethods.$deferred.resolve(paymentMethods);
+        });
+
+        expect(scope.paymentAmount).to.be.eq(&#039;2124.00&#039;);
+        expect(scope.paymentMethod.id).to.be.eq(&#039;urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479&#039;);
+    });
+
+    it(&#039;OverviewCtrl should clear transaction filters&#039;, function () {
+        scope.clearFilter();
+        expect(scope.transactionFilter).to.be.a(&#039;object&#039;);
+        expect(scope.transactionFilter).to.be.empty;
+    });
+
+    it(&#039;OverviewCtrl should return a sorting predicate when calling sortCol&#039;, function () {
+        scope.sortCol(&#039;date&#039;);
+        expect(scope.sort.predicate).to.be.eq(&#039;date&#039;);
+    });
+});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
