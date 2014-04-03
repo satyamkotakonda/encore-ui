@@ -63,7 +63,8 @@
     "fs-extra": "^0.8.1",
     "grunt-stubby": "~0.1.4",
     "stubby": "~0.2.3",
-    "styledocco": "^0.6.6"
+    "styledocco": "^0.6.6",
+    "grunt-contrib-htmlmin": "^0.2.0"
   },
   "repository": {
     "type": "git",
