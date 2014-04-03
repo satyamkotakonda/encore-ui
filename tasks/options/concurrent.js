@@ -2,8 +2,8 @@ module.exports = {
     server: [],
     test: [],
     dist: [
-        'imagemin',
-        'svgmin'
+        // 'imagemin',
+        // 'svgmin'
         // 'htmlmin'
     ]
 };
