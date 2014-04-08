@@ -12,10 +12,10 @@ angular.module('billingApp')
     * </pre>
     */
     .controller('OptionsCtrl', function ($scope, $routeParams, $q, Account, PaymentMethod,
-            Payment, DefaultPaymentMethod, rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
+            Payment, DefaultPaymentMethodFilter, rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
 
         var getDefaultMethod = function (paymentMethods) {
-                $scope.defaultMethod = DefaultPaymentMethod(paymentMethods);
+                $scope.defaultMethod = DefaultPaymentMethodFilter(paymentMethods);
             },
             listPaymentMethods = function () {
                 return PaymentMethod.list({
