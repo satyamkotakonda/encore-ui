@@ -9,7 +9,7 @@ module.exports = {
     },
     specs: {
         files: ['app/scripts/**/*.spec.js'],
-        tasks: ['jshint:specs','jscs:scripts', 'test:unit'],
+        tasks: ['jshint:specs','jscs:specs', 'test:unit'],
         options: {
             livereload: false
         }

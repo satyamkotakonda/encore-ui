@@ -53,7 +53,7 @@ describe('Usage: UsageCtrl', function () {
         expect(scope.sort.predicate).to.eq('name | ProductName');
     });
 
-    it('UsageCtrl should have default values', function() {
+    it('UsageCtrl should have default values', function () {
         expect(scope.sort).to.deep.eq({ predicate: 'name | ProductName', reverse: false });
         expect(scope.periods).to.be.an('array');
     });
