@@ -8,7 +8,7 @@ describe('Billing: billingSvcs', function () {
             emptyTransform = Transform();
             testData = JSON.stringify({ test: { path: true }});
             testError = JSON.stringify({ test: { path: true, error: 'Error' }});
-            paymentMethods = [{ isDefault: 'true', id: 'payment-id-1' },
+            paymentMethods = [{ isDefault: true, id: 'payment-id-1' },
                               { id: 'payment-id-2' },
                               { id: 'payment-id-3' },
                               { id: 'payment-id-4' }];

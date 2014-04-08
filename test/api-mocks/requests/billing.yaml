@@ -20,7 +20,7 @@
 
 # Get Estimated Charges for an account
 -   request:
-        url: ^/api/accounts/12345/billing-periods/(.*)/estimatedCharges$
+        url: ^/api/accounts/billing/(.*)/billing-periods/(.*)/estimatedCharges$
         method: GET
     response:
         status: 200
@@ -49,11 +49,21 @@
         file: test/api-mocks/responses/payment-methods.json
 
 # Post a payment to account
--   request:
-        url: ^/api/accounts/payments/(.*)$
+-   request: 
+        url: ^/api/accounts/(.*)/payment$
         method: POST
     response:
         status: 200
         headers:
             content-type: application/json
         file: test/api-mocks/responses/make-payment.json
+
+# Get Account Info
+-   request:
+        url: ^/api/accounts/(.*)$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/account.json

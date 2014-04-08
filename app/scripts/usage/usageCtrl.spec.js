@@ -50,11 +50,11 @@ describe('Usage: UsageCtrl', function () {
     it('UsageCtrl should have a sort object defined', function () {
         expect(scope.sort).to.be.a('object');
         expect(scope.sort).to.have.property('predicate');
-        expect(scope.sort.predicate).to.eq('product');
+        expect(scope.sort.predicate).to.eq('name | ProductName');
     });
 
-    it('UsageCtrl should have default values', function () {
-        expect(scope.sort).to.deep.eq({ predicate: 'product', reverse: true });
+    it('UsageCtrl should have default values', function() {
+        expect(scope.sort).to.deep.eq({ predicate: 'name | ProductName', reverse: false });
         expect(scope.periods).to.be.an('array');
     });
 

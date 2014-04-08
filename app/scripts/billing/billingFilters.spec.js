@@ -15,6 +15,11 @@ describe('BillingFilters', function () {
         expect(table).to.not.be.empty;
     });
 
+    it('TransactionTable filter should return same number of rows passed when no filter applied', function () {
+        var actions = createTransactions();
+        expect(table(actions).length).to.be.eq(actions.length);
+    });
+
     it('TransactionTable filter should filter results', function () {
         var actions = createTransactions(),
             now = new Date(),
@@ -34,7 +39,6 @@ describe('BillingFilters', function () {
         expect(table(actions, { period: startTestDate.toJSON() }).length).to.be.eq(4);
         expect(table(actions, { period: endTestDate.toJSON() }).length).to.be.eq(9);
         expect(table(actions, { period: startTestDate.toJSON() + '|' + endTestDate.toJSON() }).length).to.be.eq(8);
-
     });
 
     it('CurrencySuffix filter should exist', function () {

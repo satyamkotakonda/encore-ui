@@ -16,7 +16,7 @@ angular.module('billingApp')
     * @requires encore.paginate:PageTracking - Service which creates an object for pagination.
     * @requires encore.rxSortableColumn:rxSortUtil - Service which provides column sort related functions
     * @requires encore.rxNotify:rxPromiseNotifications - Service which provides notifications for promises
-    * @requires billingSvcs.DefaultPaymentMethod - Service which facilitates retrieval of default payment method
+    * @requires billingSvcs.DefaultPaymentMethodFilter - Service which facilitates retrieval of default payment method
     * @requires billingSvcs.DATE_FORMAT - Constant that defines the default format for dates
     * @requires billingSvcs.TRANSACTION_TYPES - Constant list of the different types of transactions
     * @requires billingSvcs.TRANSACTION_STATUSES - Constant list of different transaction statuses
@@ -30,7 +30,7 @@ angular.module('billingApp')
     */
     .controller('OverviewCtrl', function ($scope, $routeParams, $q, Transaction, Account,
         Period, Payment, PaymentMethod, PageTracking, rxSortUtil, rxPromiseNotifications,
-        DefaultPaymentMethod,
+        DefaultPaymentMethodFilter,
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES) {
 
         // Action for clearing the filters
@@ -50,7 +50,7 @@ angular.module('billingApp')
                 $scope.paymentAmount = $scope.account.currentDue;
 
                 // Get the Primary Payment Method's ID
-                $scope.paymentMethod = DefaultPaymentMethod($scope.paymentMethods);
+                $scope.paymentMethod = DefaultPaymentMethodFilter($scope.paymentMethods);
             },
             postPayment = function (amount, methodId) {
                 $scope.paymentResult = Payment.post({
@@ -96,7 +96,7 @@ angular.module('billingApp')
             $scope.billingPeriods.$promise
         ]), {
             loading: '',
-            error: STATUS_MESSAGES.overview.error
+            error: STATUS_MESSAGES.overview.error + ' Message: "{{_.first(data).message}}"'
         }, 'overviewPage');
 
         // Set defaults for the make a payment modal.

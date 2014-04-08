@@ -6,6 +6,15 @@ module.exports = {
         hostname: 'localhost'
     },
     proxies: [{
+        context: '/api/accounts/payments',
+        host: 'staging.system.payment.pipeline2.api.rackspacecloud.com',
+        port: 443,
+        https: true,
+        changeOrigin: true,
+        rewrite: {
+            '/api/accounts/payments': '/v1/accounts'
+        }
+    }, {
         context: '/api',
         host: 'localhost',
         port: 3000,

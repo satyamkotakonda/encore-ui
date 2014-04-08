@@ -8,7 +8,7 @@ describe('Billing: OverviewCtrl', function () {
         module('billingApp');
 
         inject(function ($controller, $rootScope, $httpBackend, Account, Transaction, Period,
-                Payment, PaymentMethod, PageTracking, $q) {
+                Payment, PaymentMethod, PageTracking, DefaultPaymentMethodFilter, $q) {
             var getResourceMock = function (data) {
                 var deferred = $q.defer();
                 data.$promise = deferred.promise;
@@ -46,6 +46,7 @@ describe('Billing: OverviewCtrl', function () {
                 PaymentMethod: paymentMethod,
                 $routeParams: { accountNumber: testAccountNumber },
                 PageTracking: PageTracking,
+                DefaultPaymentMethodFilter: DefaultPaymentMethodFilter,
                 TRANSACTION_TYPES: [],
                 TRANSACTION_STATUSES: []
             });
