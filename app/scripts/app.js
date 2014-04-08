@@ -20,7 +20,7 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui.tpls', 'encore
                 templateUrl: '/views/usage/usage.html',
                 controller: 'UsageCtrl'
             })
-            .when('/billing/payments/:accountNumber', {
+            .when('/billing/payments/:accountNumber/options', {
                 templateUrl: '/views/payment/options.html',
                 controller: 'OptionsCtrl'
             })
