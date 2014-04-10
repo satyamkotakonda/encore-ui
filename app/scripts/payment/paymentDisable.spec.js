@@ -2,9 +2,9 @@
 
 describe('rxPaymentDisable', function () {
     var el, scope, directiveScope, compile, rootScope,
-        user = 'test', methodId = 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479',
+        user = 'test',
         paymentMethods = [{
-            id: 'id1',
+            id: 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479',
             isDefault: true,
             disabled: false,
             paymentCard: { number: '1234' }
@@ -21,7 +21,6 @@ describe('rxPaymentDisable', function () {
         validTemplate = '<rx-payment-disable' +
                         '    post-hook="postPayment"' +
                         '    user="{{user}}"' +
-                        '    method-id="{{methodId}}"' +
                         '    method="method">' +
                         '    <strong>+</strong> Make a Payment' +
                         '</rx-payment-disable>';
@@ -42,7 +41,6 @@ describe('rxPaymentDisable', function () {
             compile = $compile;
             scope = $rootScope.$new();
             scope.user = user;
-            scope.methodId = methodId;
             scope.method = paymentMethods[0];
             scope.postPayment = postPayment;
         });
@@ -63,18 +61,7 @@ describe('rxPaymentDisable', function () {
     });
 
     it('should have the default method-id set', function () {
-        expect(el.attr('method-id')).to.be.eq('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
-    });
-
-    it('should set the initial payment final amount/method-id values', function () {
-        directiveScope.setDefaultValues('urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7');
-        expect(directiveScope.payment.methodId).to.be.eq('urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7');
-    });
-
-    it('should call post-hook with the final amount/method-id values', function () {
-        directiveScope.changeMethodType('isDefault');
-        var hookResponse = directiveScope.postHook('urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7');
-        expect(hookResponse).to.be.eq('urn:uuid:baa17695-a4b3-4c5a-bdbe-361d1bf205c7');
+        expect(scope.method.id).to.be.eq('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
     });
 
 });
