@@ -15,7 +15,6 @@ angular.module('billingApp')
             scope: {
                 user: '@',
                 classes: '@',
-                methodId: '@',
                 method: '=',
                 postHook: '='
             }
