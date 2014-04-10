@@ -1,12 +1,30 @@
-/**
- * @ngdoc directive
- * @name billingApp:rxPaymentSetDefault
- * @restrict E
- *
- * @description
- * Sets the trigger for the make payment modal to be popped up.
- */
 angular.module('billingApp')
+    /**
+     * @ngdoc directive
+     * @name billingApp:rxPaymentSetDefault
+     * @restrict E
+     *
+     * @description
+     * Sets the trigger for the make payment modal to be popped up.
+     * @param {String} user - User performing the action, for display purposes only
+     * @param {Array} methods - Methods model for displaying payment method options
+     * @param {String} postHook - Function to be called when submitting form
+     * @param {String} classes - CSS Classes to be added to the trigger
+     * @param {String} methodId - Default payment method ID
+     *
+     * @example
+     * <pre>
+     *    <rx-payment-set-default
+     *        post-hook="changeDefaultMethod"
+     *        user="{{user}}"
+     *        classes="button button-blue"
+     *        method-id="{{defaultMethod.id}}"
+     *        methods="paymentMethods"
+     *        action-type="change">
+     *         Change Primary
+     *    </rx-payment-set-default>
+     * </pre>
+     */
     .directive('rxPaymentSetDefault', function () {
         return {
             restrict: 'E',

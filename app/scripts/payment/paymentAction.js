@@ -1,12 +1,30 @@
-/**
- * @ngdoc directive
- * @name billingApp:rxPaymentAction
- * @restrict E
- *
- * @description
- * Sets the trigger for the make payment modal to be popped up.
- */
 angular.module('billingApp')
+    /**
+     * @ngdoc directive
+     * @name billingApp:rxPaymentAction
+     * @restrict E
+     *
+     * @description
+     * Sets the trigger for the make payment modal to be popped up.
+     * @param {String} user - User performing the action, for display purposes only
+     * @param {Array} methods - Methods model for displaying payment method options
+     * @param {String} postHook - Function to be called when submitting form
+     * @param {String} classes - CSS Classes to be added to the trigger
+     * @param {String} methodId - Default payment method ID
+     *
+     * @example
+     * <pre>
+     *    <rx-payment-action
+     *        post-hook="postPayment"
+     *        user="{{user}}"
+     *        classes="button button-green"
+     *        amount="{{paymentAmount}}"
+     *        method-id="{{defaultMethod.id}}"
+     *        methods="paymentMethods">
+     *        <strong>+</strong> Make a Payment
+     *    </rx-payment-action>
+     * </pre>
+     */
     .directive('rxPaymentAction', function () {
         return {
             restrict: 'E',
