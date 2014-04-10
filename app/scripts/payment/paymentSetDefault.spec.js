@@ -18,13 +18,13 @@ describe('rxPaymentSetDefault', function () {
             invoice: { number: '1234' }
         }],
         validTemplate = '<rx-payment-set-default' +
-                        '    post-hook="postPayment"' +
+                        '    post-hook="changeDefault"' +
                         '    user="{{user}}"' +
                         '    method-id="{{methodId}}"' +
                         '    methods="methods">' +
-                        '    <strong>+</strong> Make a Payment' +
+                        '    Set as Primary' +
                         '</rx-payment-set-default>';
-    var postPayment = function (methodId) {
+    var changeDefault = function (methodId) {
         return methodId;
     };
 
@@ -43,7 +43,7 @@ describe('rxPaymentSetDefault', function () {
             scope.user = user;
             scope.methodId = methodId;
             scope.methods = paymentMethods;
-            scope.postPayment = postPayment;
+            scope.changeDefault = changeDefault;
         });
 
         el = helpers.createDirective(validTemplate, compile, scope);

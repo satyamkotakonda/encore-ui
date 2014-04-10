@@ -19,12 +19,12 @@ describe('rxPaymentDisable', function () {
             invoice: { number: '1234' }
         }],
         validTemplate = '<rx-payment-disable' +
-                        '    post-hook="postPayment"' +
+                        '    post-hook="disablePayment"' +
                         '    user="{{user}}"' +
                         '    method="method">' +
-                        '    <strong>+</strong> Make a Payment' +
+                        '    Disable' +
                         '</rx-payment-disable>';
-    var postPayment = function (methodId) {
+    var disablePayment = function (methodId) {
         return methodId;
     };
 
@@ -42,7 +42,7 @@ describe('rxPaymentDisable', function () {
             scope = $rootScope.$new();
             scope.user = user;
             scope.method = paymentMethods[0];
-            scope.postPayment = postPayment;
+            scope.disablePayment = disablePayment;
         });
 
         el = helpers.createDirective(validTemplate, compile, scope);
