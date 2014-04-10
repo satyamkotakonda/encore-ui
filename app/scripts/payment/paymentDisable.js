@@ -18,13 +18,6 @@ angular.module('billingApp')
                 methodId: '@',
                 method: '=',
                 postHook: '='
-            },
-            controller: function ($scope, $q, PaymentFormUtil) {
-                $scope.payment = {};
-                $scope.setDefaultValues = function (methodId) {
-                    $scope.payment.methodId = methodId;
-                };
-                $scope.changeMethodType = PaymentFormUtil.formFilter($scope);
             }
         };
     });
