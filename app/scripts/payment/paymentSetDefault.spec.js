@@ -1,7 +1,7 @@
 /* jshint node: true */
 
 describe('rxPaymentSetDefault', function () {
-    var el, scope, directiveScope, compile, rootScope,
+    var el, scope, directiveScope, compile, rootScope, mainEl,
         user = 'test', methodId = 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479',
         paymentMethods = [{
             id: 'id1',
@@ -47,7 +47,8 @@ describe('rxPaymentSetDefault', function () {
         });
 
         el = helpers.createDirective(validTemplate, compile, scope);
-        directiveScope = el.find('div').scope();
+        mainEl = helpers.getChildDiv(el, 'rx-payment-set-default', 'class');
+        directiveScope = mainEl.scope();
     });
 
     afterEach(function () {
@@ -55,10 +56,22 @@ describe('rxPaymentSetDefault', function () {
         directiveScope = null;
     });
 
-    it('should render template correctly', function () {
+    // Make sure that the template being rendered has the modal-action trigger
+    it('should render the trigger action template correctly', function () {
+        var linkContainer, linkAction;
         expect(el).not.be.empty;
-        expect(el.find('div')).not.be.empty;
-        expect(el.find('div').attr('class').split(' ').indexOf('rx-payment-set-default')).to.be.gt(-1);
+        expect(mainEl).not.be.empty;
+        expect(mainEl.hasClass('rx-payment-set-default')).to.be.true;
+        expect(mainEl.children().length).to.be.gt(0);
+
+        linkContainer = mainEl.find('span');
+        expect(linkContainer).not.be.empty;
+        expect(linkContainer.hasClass('rx-modal-action')).to.be.true;
+        expect(linkContainer.children().length).to.be.gt(0);
+
+        linkAction = linkContainer.find('a');
+        expect(linkAction).not.be.empty;
+        expect(linkAction.hasClass('payment-action')).to.be.true;
     });
 
     it('should have the default method-id set', function () {
