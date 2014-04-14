@@ -12,16 +12,16 @@
         <div class="payment-field payment-method">
             <div class="tab-menu">
                 <ul>
-                    <li ng-class="{'tab-selected': methodType == 'isDefault'}">
+                    <li ng-class="{'tab-selected': methodType === 'isDefault'}">
                         <a ng-click="changeMethodType('isDefault')" href="#">Primary</a>
                     </li>
-                    <li ng-class="{'tab-selected': methodType == 'paymentCard'}">
+                    <li ng-class="{'tab-selected': methodType === 'paymentCard'}">
                         <a ng-click="changeMethodType('paymentCard')" href="#">Credit Card</a>
                     </li>
-                    <li ng-class="{'tab-selected': methodType == 'electronicCheck'}">
+                    <li ng-class="{'tab-selected': methodType === 'electronicCheck'}">
                         <a ng-click="changeMethodType('electronicCheck')" href="#">ACH</a>
                     </li>
-                    <li ng-class="{'tab-selected': methodType == 'invoice'}">
+                    <li ng-class="{'tab-selected': methodType === 'invoice'}">
                         <a ng-click="changeMethodType('invoice')" href="#">Invoice</a>
                     </li>
                 </ul>
