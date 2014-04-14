@@ -1,7 +1,8 @@
-describe('Billing: billingSvcs', function () {
+describe('Billing: paymentSvcs', function () {
     var transform, paymentMethods, testData, testError, emptyTransform;
     beforeEach(function () {
         module('billingSvcs');
+        module('paymentSvcs');
 
         inject(function (Transform) {
             transform = Transform('test.path', 'test.error');
@@ -15,17 +16,17 @@ describe('Billing: billingSvcs', function () {
         });
     });
 
-    it('billingSvcs Transform should return a function to transform data', function () {
+    it('paymentSvcs Transform should return a function to transform data', function () {
         expect(transform).to.be.a('function');
     });
 
-    it('billingSvcs Transform should correctly return the values from the parsed object', function () {
+    it('paymentSvcs Transform should correctly return the values from the parsed object', function () {
         expect(transform(testData)).to.be.eq(true);
         expect(transform(testError)).to.be.eq('Error');
     });
 
-    it('billingSvcs Transform should return the parsed object if no path is given', function () {
-        expect(JSON.stringify(emptyTransform(testData))).to.eq(testData);
+    it('paymentSvcs Transform should return the parsed object if no path is given', function () {
+        expect(JSON.stringify(emptyTransform(testData))).to.deep.eq(testData);
     });
 
 });

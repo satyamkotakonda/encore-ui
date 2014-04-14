@@ -1,20 +1,12 @@
 <rx-modal-form
-    submitText="Confirm Payment"
-    title="Make a Payment"
+    submitText="Save Primary Payment"
+    title="Change Primary Payment Option"
     subtitle="{{userName}}">
     <div class="payment-post-form">
-        <rx-notifications stack="makePayment"></rx-notifications>
-        <div class="payment-field payment-amount">
-            <rx-form-item label="Payment Amount" prefix="$">
-                <input type="text" ng-model="payment.amount" ng-required="true" />
-            </rx-form-item>
-        </div>
+        <rx-notifications stack="primaryPaymentChange"></rx-notifications>
         <div class="payment-field payment-method">
             <div class="tab-menu">
                 <ul>
-                    <li ng-class="{'tab-selected': methodType === 'isDefault'}">
-                        <a ng-click="changeMethodType('isDefault')" href="#">Primary</a>
-                    </li>
                     <li ng-class="{'tab-selected': methodType === 'paymentCard'}">
                         <a ng-click="changeMethodType('paymentCard')" href="#">Credit Card</a>
                     </li>

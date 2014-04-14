@@ -102,7 +102,7 @@ angular.module('billingApp')
         // Set defaults for the make a payment modal.
         $q.all([$scope.account.$promise, $scope.paymentMethods.$promise]).then(setPaymentInfo);
 
-        $scope.user = 'Test Username';
+        $scope.userName = 'Test Username';
 
         // Transaction Filter for the list of transactions
         $scope.transactionFilter = {};

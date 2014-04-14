@@ -1,0 +1,28 @@
+<rx-modal-form
+    submitText="Disable Payment Option"
+    title="Disable Payment Option"
+    subtitle="{{userName}}">
+    <div class="payment-disable-form">
+        <rx-notifications stack="disablePaymentOption"></rx-notifications>
+        <h3 class="section-title">Disabling:</h3>
+        <div ng-if="method.electronicCheck" class="method-description">
+            {{ method.electronicCheck.accountType}}
+            -
+            ending in
+            <strong>{{ method.electronicCheck.accountNumber | PaymentMethodNumber}}</strong>
+             -
+            {{ method.electronicCheck.accountHolderName }}
+        </div>
+        <div ng-if="method.paymentCard" class="method-description">
+            {{ method.paymentCard.cardType}}
+            -
+            ending in
+            <strong>{{ method.paymentCard.cardNumber | PaymentMethodNumber}}</strong>
+             -
+            {{ method.paymentCard.cardHolderName }}
+        </div>
+    </div>
+    <div class="msg-warn">
+        <strong>Warning:</strong> This will disable the payment option.  This cannot be undone
+    </div>
+</rx-modal-form>

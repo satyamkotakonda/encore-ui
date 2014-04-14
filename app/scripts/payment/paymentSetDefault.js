@@ -1,7 +1,7 @@
 angular.module('billingApp')
     /**
      * @ngdoc directive
-     * @name billingApp:rxPaymentAction
+     * @name billingApp:rxPaymentSetDefault
      * @restrict E
      *
      * @description
@@ -14,42 +14,39 @@ angular.module('billingApp')
      *
      * @example
      * <pre>
-     *    <rx-payment-action
-     *        post-hook="postPayment"
+     *    <rx-payment-set-default
+     *        post-hook="changeDefaultMethod"
      *        userName="{{userName}}"
-     *        classes="button button-green"
-     *        amount="{{paymentAmount}}"
+     *        classes="button button-blue"
      *        method-id="{{defaultMethod.id}}"
-     *        methods="paymentMethods">
-     *        <strong>+</strong> Make a Payment
-     *    </rx-payment-action>
+     *        methods="paymentMethods"
+     *        action-type="change">
+     *         Change Primary
+     *    </rx-payment-set-default>
      * </pre>
      */
-    .directive('rxPaymentAction', function () {
+    .directive('rxPaymentSetDefault', function () {
         return {
             restrict: 'E',
-            templateUrl: '/views/payment/paymentAction.html',
+            templateUrl: '/views/payment/paymentSetDefault.html',
             transclude: true,
             scope: {
                 userName: '@',
                 classes: '@',
-                amount: '@',
                 methodId: '@',
                 methods: '=',
                 postHook: '='
             },
             controller: function ($scope, $q, PaymentFormUtil) {
                 $scope.payment = {};
-                $scope.setDefaultValues = function (amount, methodId) {
-                    $scope.payment.amount = amount;
+                $scope.setDefaultValues = function (methodId) {
                     $scope.payment.methodId = methodId;
                 };
-
                 $scope.changeMethodType = PaymentFormUtil.formFilter($scope);
 
                 // Set default as the active view
                 $q.when($scope.methods.$promise).then(function () {
-                    PaymentFormUtil.filterDefault($scope);
+                    PaymentFormUtil.formFilter($scope)('paymentCard');
                 });
             }
         };
