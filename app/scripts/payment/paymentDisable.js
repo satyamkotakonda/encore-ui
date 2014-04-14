@@ -8,7 +8,7 @@ angular.module('billingApp')
      * Sets the trigger for the make payment modal to be popped up.
      *
      * @scope
-     * @param {String} user - User performing the action, for display purposes only
+     * @param {String} userName - User performing the action, for display purposes only
      * @param {Object} method - Method model for displaying Payment Method information and use in postHook
      * @param {String} postHook - Function to be called when submitting form
      *
@@ -16,7 +16,7 @@ angular.module('billingApp')
      * <pre>
      *      <rx-payment-disable
      *          post-hook="disablePayment"
-     *          user="{{user}}"
+     *          userName="{{userName}}"
      *          method="method">
      *          Disable
      *      </rx-payment-disable>
@@ -28,7 +28,7 @@ angular.module('billingApp')
             templateUrl: '/views/payment/paymentDisable.html',
             transclude: true,
             scope: {
-                user: '@',
+                userName: '@',
                 method: '=',
                 postHook: '='
             }

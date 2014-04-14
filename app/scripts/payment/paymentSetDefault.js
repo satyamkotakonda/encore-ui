@@ -6,7 +6,7 @@ angular.module('billingApp')
      *
      * @description
      * Sets the trigger for the make payment modal to be popped up.
-     * @param {String} user - User performing the action, for display purposes only
+     * @param {String} userName - User performing the action, for display purposes only
      * @param {Array} methods - Methods model for displaying payment method options
      * @param {String} postHook - Function to be called when submitting form
      * @param {String} classes - CSS Classes to be added to the trigger
@@ -16,7 +16,7 @@ angular.module('billingApp')
      * <pre>
      *    <rx-payment-set-default
      *        post-hook="changeDefaultMethod"
-     *        user="{{user}}"
+     *        userName="{{userName}}"
      *        classes="button button-blue"
      *        method-id="{{defaultMethod.id}}"
      *        methods="paymentMethods"
@@ -31,7 +31,7 @@ angular.module('billingApp')
             templateUrl: '/views/payment/paymentSetDefault.html',
             transclude: true,
             scope: {
-                user: '@',
+                userName: '@',
                 classes: '@',
                 methodId: '@',
                 methods: '=',
