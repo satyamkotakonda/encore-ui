@@ -25,7 +25,7 @@ describe('Billing: billingSvcs', function () {
     });
 
     it('billingSvcs Transform should return the parsed object if no path is given', function () {
-        expect(JSON.stringify(emptyTransform(testData))).to.deep.eq(testData);
+        expect(JSON.stringify(emptyTransform(testData))).to.eq(testData);
     });
 
 });
