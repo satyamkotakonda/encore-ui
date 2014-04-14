@@ -1,7 +1,7 @@
 /* jshint node: true */
 
 describe('rxPaymentAction', function () {
-    var el, scope, directiveScope, compile, rootScope,
+    var el, scope, directiveScope, compile, rootScope, mainEl,
         user = 'test', amount = '2000.00', methodId = 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479',
         paymentMethods = [{
             id: 'id1',
@@ -49,7 +49,8 @@ describe('rxPaymentAction', function () {
         });
 
         el = helpers.createDirective(validTemplate, compile, scope);
-        directiveScope = el.find('div').scope();
+        mainEl = helpers.getChildDiv(el, 'rx-payment-action', 'class');
+        directiveScope = mainEl.scope();
     });
 
     afterEach(function () {
@@ -57,10 +58,22 @@ describe('rxPaymentAction', function () {
         directiveScope = null;
     });
 
+    // Make sure that the template being rendered has the modal-action trigger
     it('should render template correctly', function () {
+        var linkContainer, linkAction;
         expect(el).not.be.empty;
-        expect(el.find('div')).not.be.empty;
-        expect(el.find('div').attr('class').split(' ').indexOf('rx-payment-action')).to.be.gt(-1);
+        expect(mainEl).not.be.empty;
+        expect(mainEl.hasClass('rx-payment-action')).to.be.true;
+        expect(mainEl.children().length).to.be.gt(0);
+
+        linkContainer = mainEl.find('span');
+        expect(linkContainer).not.be.empty;
+        expect(linkContainer.hasClass('rx-modal-action')).to.be.true;
+        expect(linkContainer.children().length).to.be.gt(0);
+
+        linkAction = linkContainer.find('a');
+        expect(linkAction).not.be.empty;
+        expect(linkAction.hasClass('payment-action')).to.be.true;
     });
 
     it('should have the default amount set', function () {

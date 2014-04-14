@@ -55,6 +55,7 @@ describe('rxPaymentDisable', function () {
         directiveScope = null;
     });
 
+    // Make sure that the template being rendered has the modal-action trigger
     it('should render the trigger action template correctly', function () {
         var linkContainer, linkAction;
         expect(el).not.be.empty;
