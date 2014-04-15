@@ -16,11 +16,11 @@ angular.module('rxSwitch', [])
             readonly: '@'
         },
         controller: function ($scope) {
-            $scope.switch = function (model) {
+            $scope.invert = function (model) {
                 if ($scope.readonly && $scope.readonly === 'true') {
                     return;
                 }
-                $scope.model = !!!model;
+                $scope.model = !model;
             };
         }
     };
