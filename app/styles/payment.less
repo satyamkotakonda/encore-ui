@@ -66,6 +66,35 @@
     }
 
 }
+.payment-change,
+.payment-disable,
+.payment-post {
+    display: block;
+    width: 150px;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 7px;
+    vertical-align: top;
+}
+
+.payment-change {
+    color: #0950a3;
+    &:hover {
+        color: #0950a3;
+    }
+}
+
+.payment-post {
+    margin: 10px 7px;
+}
+.payment-disable {
+    color: #ff0d03;
+    &:hover {
+        color: #ff0d03;
+    }
+}
+
 .payment-default {
     padding: 25px 0;
     .section-title {
@@ -102,5 +131,12 @@
         .button {
             width: 100%;
         }
+    }
+}
+
+.payment-disable-form {
+    &:extend(.payment-default all);
+    .method-description {
+        border-right: 0;
     }
 }
