@@ -1,5 +1,5 @@
 describe('OptionsCtrl', function () {
-    var scope, ctrl, account, paymentMethod, defaultPaymentMethod;
+    var scope, ctrl, account, payment, paymentMethod, defaultPaymentMethod;
 
     var testAccountNumber = '12345',
         paymentMethods = [{
@@ -9,29 +9,45 @@ describe('OptionsCtrl', function () {
                 'cardNumber': 'XXXXXXXXXXXX3456',
                 'cardType': 'VISA'
             }
-        }];
+        }],
+        accountInfo = {
+            currentDue: 2124.00
+        };
 
     beforeEach(function () {
         module('billingApp');
 
-        inject(function ($controller, $rootScope, $q, Account, PaymentMethod,
-            DefaultPaymentMethod) {
+        inject(function ($controller, $rootScope, $q, Account, Payment, PaymentMethod,
+            DefaultPaymentMethodFilter) {
             var getResourceMock = function (data) {
-                var deferred = $q.defer();
-                data.$promise = deferred.promise;
-                data.$deferred = deferred;
-                return data;
-            };
+                    var deferred = $q.defer();
+                    data.$promise = deferred.promise;
+                    data.$deferred = deferred;
+                    return data;
+                },
+                getResourceCallBackMock = function (data) {
+                    return function (param, success) {
+                        success(data);
+                        return getResourceMock(data);
+                    };
+                };
 
             scope = $rootScope.$new();
             account = Account;
+            payment = Payment;
             paymentMethod = PaymentMethod;
-            defaultPaymentMethod = DefaultPaymentMethod;
+            defaultPaymentMethod = DefaultPaymentMethodFilter;
 
-            account.get = sinon.stub(account, 'get').returns(getResourceMock({}));
-            paymentMethod.list = function (param, success) {
-                success(paymentMethods);
-                return getResourceMock(paymentMethods);
+            account.get = getResourceCallBackMock(accountInfo);
+            payment.post = sinon.stub(payment, 'post').returns(getResourceMock({}));
+            paymentMethod.list = getResourceCallBackMock(paymentMethods);
+            paymentMethod.disable = function (param, data, success) {
+                success({});
+                return getResourceMock({});
+            };
+            paymentMethod.changeDefault = function (param, data, success) {
+                success({});
+                return getResourceMock({});
             };
 
             ctrl = $controller('OptionsCtrl', {
@@ -39,7 +55,7 @@ describe('OptionsCtrl', function () {
                 $routeParams: { accountNumber: testAccountNumber },
                 Account: account,
                 PaymentMethod: paymentMethod,
-                DefaultPaymentMethod: defaultPaymentMethod
+                DefaultPaymentMethodFilter: defaultPaymentMethod
             });
         });
     });
@@ -88,11 +104,27 @@ describe('OptionsCtrl', function () {
         expect(scope.achSort.reverse).to.be.eq(true);
     });
 
-    it('OptionsCtrl should get account info', function () {
-        sinon.assert.calledOnce(account.get);
+    it('OptionsCtrl should set the paymentAmount upon success of getting account info', function () {
+        expect(scope.paymentAmount).to.not.be.empty;
     });
 
     it('OptionsCtrl should set the defaultMethod upon success of getting payment methods', function () {
         expect(scope.defaultMethod).to.not.be.empty;
     });
+
+    it('OptionsCtrl should post a payment', function () {
+        scope.postPayment(12314, 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
+        sinon.assert.calledOnce(payment.post);
+    });
+
+    it('OptionsCtrl should disable a payment method', function () {
+        scope.disableMethod('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
+        //sinon.assert.calledOnce(payment.disable);
+    });
+
+    it('OptionsCtrl should post a payment', function () {
+        scope.changeDefaultMethod('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
+        //sinon.assert.calledOnce(payment.changeDefault);
+    });
+
 });
