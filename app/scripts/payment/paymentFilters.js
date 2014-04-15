@@ -149,9 +149,9 @@ angular.module('billingApp')
     .factory('PaymentFormUtil', function ($filter, PAYMENT_TYPE_COLUMNS) {
         var paymentUtil = {},
             paymentMethodTypeFilter = $filter('PaymentMethodType'),
-            flattenObj = function (method) {
-                var details = _.pairs(method[_.findKey(method, _.isObject)]);
-                return _(method).pairs().concat(details).zipObject().value();
+            setValue = function (method) {
+                method.value = method.id;
+                return method;
             };
 
         // Find the type of method a payment option is. If no key is found, return the second/default parameter
@@ -165,8 +165,8 @@ angular.module('billingApp')
                 $scope.methodType = methodType;
 
                 // Filter the list of payment methods by it's method type (electronicCard/paymentCard/default)
-                // Map it to flatten the object due to rxFormOptionTable not able to display values in nested obj
-                $scope.methodList = paymentMethodTypeFilter($scope.methods, methodType).map(flattenObj);
+                // Map it to setValue to set the id value of the object
+                $scope.methodList = paymentMethodTypeFilter($scope.methods, methodType).map(setValue);
 
                 // If we are filtering for the default paymentMethod, we must find out (if any present)
                 // what type of payment method it is (card/ach).
@@ -196,29 +196,29 @@ angular.module('billingApp')
         'isDefault': [],
         'paymentCard': [{
             'label': 'Card Type',
-            'key': 'cardType'
+            'key': '{{ paymentCard.cardType }}'
         },{
             'label': 'Ending In',
-            'key': 'cardNumber'
+            'key': '{{ paymentCard.cardNumber | PaymentMethodNumber }}'
         },{
             'label': 'Cardholder Name',
-            'key': 'cardHolderName'
+            'key': '{{ paymentCard.cardHolderName }}'
         },{
             'label': 'Exp. Date',
-            'key': 'cardExpirationDate'
+            'key': '{{ paymentCard.expirationDate }}'
         }],
         'electronicCheck': [{
             'label': 'Account Type',
-            'key': 'accountType'
+            'key': '{{ electronicCheck.accountType | AccountTypeFormat }}'
         },{
             'label': 'Account #',
-            'key': 'accountNumber'
+            'key': '{{ electronicCheck.accountNumber | PaymentMethodNumber }}'
         },{
             'label': 'Routing #',
-            'key': 'routingNumber'
+            'key': '{{ electronicCheck.routingNumber }}'
         },{
             'label': 'Name on Account',
-            'key': 'accountHolderName'
+            'key': '{{ electronicCheck.accountHolderName }}'
         }],
         'invoice': []
     })
