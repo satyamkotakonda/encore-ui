@@ -17,6 +17,9 @@ angular.module('billingApp')
         var getDefaultMethod = function (paymentMethods) {
                 $scope.defaultMethod = DefaultPaymentMethodFilter(paymentMethods);
             },
+            getCurrentDue = function (account) {
+                $scope.paymentAmount = account.currentDue;
+            },
             listPaymentMethods = function () {
                 return PaymentMethod.list({
                     id: $routeParams.accountNumber,
@@ -28,6 +31,19 @@ angular.module('billingApp')
                     var reverse = ($scope[sort].predicate === predicate) ? !$scope[sort].reverse : false;
                     $scope[sort] = { reverse: reverse, predicate: predicate };
                 };
+            },
+            disableMethod = function (methodId) {
+                var disableMethodResult = PaymentMethod.disable({
+                    id: $routeParams.accountNumber,
+                    methodId: methodId
+                }, null, function () {
+                    $scope.paymentMethods = listPaymentMethods();
+                });
+                rxPromiseNotifications.add(disableMethodResult.$promise, {
+                    loading: STATUS_MESSAGES.payment.load,
+                    success: STATUS_MESSAGES.payment.success,
+                    error: STATUS_MESSAGES.payment.error
+                }, 'disablePaymentOption');
             },
             changeDefaultMethod = function (methodId) {
                 var changeDefaultResult = PaymentMethod.changeDefault({
@@ -62,13 +78,15 @@ angular.module('billingApp')
 
         $scope.changeDefaultMethod = changeDefaultMethod;
         $scope.postPayment = postPayment;
+        $scope.disableMethod = disableMethod;
+
         $scope.cardSortCol = sortCol('cardSort');
         $scope.cardSort = rxSortUtil.getDefault('isDefault', true);
 
         $scope.achSortCol = sortCol('achSort');
         $scope.achSort = rxSortUtil.getDefault('isDefault', true);
 
-        $scope.account = Account.get({ id: $routeParams.accountNumber });
+        $scope.account = Account.get({ id: $routeParams.accountNumber }, getCurrentDue);
         $scope.paymentMethods = listPaymentMethods();
 
         rxPromiseNotifications.add($q.all([
