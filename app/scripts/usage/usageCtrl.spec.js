@@ -64,4 +64,9 @@ describe('Usage: UsageCtrl', function () {
         });
         sinon.assert.calledOnce(estimatedCharges.list);
     });
+
+    it('OverviewCtrl should return a sorting predicate when calling sortCol', function () {
+        scope.sortCol('amount');
+        expect(scope.sort.predicate).to.be.eq('amount');
+    });
 });
