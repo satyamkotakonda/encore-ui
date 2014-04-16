@@ -42,11 +42,15 @@ describe('OptionsCtrl', function () {
             payment.post = sinon.stub(payment, 'post').returns(getResourceMock({}));
             paymentMethod.list = getResourceCallBackMock(paymentMethods);
             paymentMethod.disable = function (param, data, success) {
-                success({});
+                if (success) {
+                    success({});
+                }
                 return getResourceMock({});
             };
             paymentMethod.changeDefault = function (param, data, success) {
-                success({});
+                if (success) {
+                    success({});
+                }
                 return getResourceMock({});
             };
 
