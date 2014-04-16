@@ -64,7 +64,12 @@
             }
         }
     }
+}
 
+.payment-action {
+    img {
+        vertical-align: bottom;
+    }
 }
 .payment-change,
 .payment-disable,
@@ -75,7 +80,6 @@
     font-size: 14px;
     font-weight: bold;
     margin: 5px 7px;
-    vertical-align: top;
 }
 
 .payment-change {
@@ -86,7 +90,11 @@
 }
 
 .payment-post {
+    color: #00ac31;
     margin: 10px 7px;
+    &:hover {
+        color: #00ac31;
+    }
 }
 .payment-disable {
     color: #ff0d03;
@@ -136,7 +144,9 @@
 
 .payment-disable-form {
     &:extend(.payment-default all);
+    .clearfix();
     .method-description {
         border-right: 0;
+        clear: right;
     }
 }
