@@ -57,7 +57,7 @@
                             classes="button button-blue"
                             method-id="{{defaultMethod.id}}"
                             methods="paymentMethods">
-                            <img src="/images/payment-default-white.png" />&nbsp;Change Primary
+                            <img src="/images/icon-change_set_white.png" />&nbsp;Change Primary
                         </rx-payment-set-default>
                     </li>
                     <li>
@@ -68,7 +68,7 @@
                             amount="{{paymentAmount}}"
                             method-id="{{defaultMethod.id}}"
                             methods="paymentMethods">
-                            <strong>+</strong> Make a Payment
+                            <img src="/images/icon-add_white.png" /> Make a Payment
                         </rx-payment-action>
                     </li>
                 </ul>
@@ -142,44 +142,43 @@
                             </span>
                         </td>
                         <td>
-                            <rx-popover position="left">
+                            <rx-popover position="left" ng-show="!card.disabled">
                                 <rx-popover-trigger>
-                                    <img src="/images/cogwheel.png" style="width: 20px; height: 20px;" />
+                                    <img src="/images/icon-cog.png" />
                                 </rx-popover-trigger>
                                 <rx-popover-content>
                                     <ul>
                                         <li>
                                             <rx-payment-set-default
-                                                ng-show="!card.disabled && card.isDefault != true"
+                                                ng-show="card.isDefault != true"
                                                 post-hook="changeDefaultMethod"
                                                 user="{{user}}"
                                                 classes="payment-change"
                                                 method-id="{{card.id}}"
                                                 methods="paymentMethods">
-                                                 <img src="/images/payment-default.png" /> Set as Primary
+                                                 <img src="/images/icon-change_set.png" /> Set as Primary
                                             </rx-payment-set-default>
                                         </li>
                                         <li>
                                             <rx-payment-action
-                                                ng-show="!card.disabled"
                                                 post-hook="postPayment"
                                                 user="{{user}}"
                                                 classes="payment-post"
                                                 amount="{{paymentAmount}}"
                                                 method-id="{{card.id}}"
                                                 methods="paymentMethods">
-                                                <img src="/images/payment-post.png" /> Make Payment with
+                                                <img src="/images/icon-add.png" /> Make Payment with
                                             </rx-payment-action>
                                         </li>
                                         <li>
                                             <rx-payment-disable
-                                                ng-show="!card.disabled && card.isDefault != true"
+                                                ng-show="card.isDefault != true"
                                                 post-hook="disableMethod"
                                                 user="{{user}}"
                                                 classes="payment-disable"
                                                 method-id="{{card.id}}"
                                                 method="card">
-                                                <img src="/images/payment-disable.png" /> Disable
+                                                <img src="/images/icon-disable.png" /> Disable
                                             </rx-payment-disable>
                                         </li>
                                     </ul>
@@ -254,43 +253,42 @@
                             </span>
                         </td>
                         <td>
-                            <rx-popover position="left">
+                            <rx-popover position="left" ng-show="!card.disabled">
                                 <rx-popover-trigger>
-                                    <img src="/images/cogwheel.png" style="width: 20px; height: 20px;" />
+                                    <img src="/images/icon-cog.png" />
                                 </rx-popover-trigger>
                                 <rx-popover-content>
                                     <ul>
                                         <li>
                                             <rx-payment-set-default
-                                                ng-show="!ach.disabled && ach.isDefault != true"
+                                                ng-show="ach.isDefault != true"
                                                 post-hook="changeDefaultMethod"
                                                 user="{{user}}"
                                                 classes="payment-change"
                                                 method-id="{{ach.id}}"
                                                 methods="paymentMethods">
-                                                 <img src="/images/payment-default.png" /> Set as Primary
+                                                 <img src="/images/icon-change_set.png" /> Set as Primary
                                             </rx-payment-set-default>
                                         </li>
                                         <li>
                                             <rx-payment-action
-                                                ng-show="!ach.disabled"
                                                 post-hook="postPayment"
                                                 user="{{user}}"
                                                 classes="payment-post"
                                                 amount="{{paymentAmount}}"
                                                 method-id="{{ach.id}}"
                                                 methods="paymentMethods">
-                                                <img src="/images/payment-post.png" /> Make Payment with
+                                                <img src="/images/icon-add.png" /> Make Payment with
                                             </rx-payment-action>
                                         </li>
                                         <li>
                                             <rx-payment-disable
-                                                ng-show="!ach.disabled && ach.isDefault != true"
+                                                ng-show="ach.isDefault != true"
                                                 post-hook="disableMethod"
                                                 user="{{user}}"
                                                 classes="payment-disable"
                                                 method="ach">
-                                                <img src="/images/payment-disable.png" /> Disable
+                                                <img src="/images/icon-disable.png" /> Disable
                                             </rx-payment-disable>
                                         </li>
                                     </ul>
