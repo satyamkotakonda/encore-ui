@@ -30,7 +30,8 @@ angular.module('billingApp')
             scope: {
                 userName: '@',
                 method: '=',
-                postHook: '='
+                postHook: '=',
+                classes: '@'
             }
         };
     });
