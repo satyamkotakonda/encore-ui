@@ -13,11 +13,11 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
             appRoute = '/' + appName;
 
         $rootScope.billingMenu = [{
-            title: 'Example Menu',
+            title: 'Billing',
             children: [
                 {
                     href: appRoute + '/overview/' + accountNumber,
-                    linkText: 'Billing Overview'
+                    linkText: 'Overview'
                 },
                 {
                     href: appRoute + '/usage/' + accountNumber,
