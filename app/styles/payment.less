@@ -12,6 +12,9 @@
 */
 
 @paymentOptionDefaultColor: #0e7fff;
+@paymentChangeColor: #0950a3;
+@paymentPostColor: #00ac31;
+@paymentDisableColor: #ff0d03;
 
 .payment-field {
     margin-bottom: @fontSize;
@@ -74,6 +77,10 @@
     }
 }
 
+.payment-action-options {
+    text-align: left;
+}
+
 .payment-action {
     img {
         vertical-align: bottom;
@@ -86,28 +93,28 @@
     width: 150px;
     white-space: nowrap;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: normal;
     margin: 5px 7px;
 }
 
 .payment-change {
-    color: #0950a3;
+    color: @paymentChangeColor;
     &:hover {
-        color: #0950a3;
+        color: @paymentChangeColor;
     }
 }
 
 .payment-post {
-    color: #00ac31;
+    color: @paymentPostColor;
     margin: 10px 7px;
     &:hover {
-        color: #00ac31;
+        color: @paymentPostColor;
     }
 }
 .payment-disable {
-    color: #ff0d03;
+    color: @paymentDisableColor;
     &:hover {
-        color: #ff0d03;
+        color: @paymentDisableColor;
     }
 }
 
