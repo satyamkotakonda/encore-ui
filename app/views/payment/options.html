@@ -90,7 +90,7 @@
                                 Card Type
                             </rx-sortable-column>
                         </th>
-                        <th scope="col">
+                        <th class="method-number" scope="col">
                             <rx-sortable-column
                                 sort-method="cardSortCol"
                                 sort-property="paymentCard.cardNumber"
@@ -108,7 +108,7 @@
                                 Cardholder Name
                             </rx-sortable-column>
                         </th>
-                        <th scope="col">
+                        <th class="method-number" scope="col">
                             <rx-sortable-column
                                 sort-method="cardSortCol"
                                 sort-property="paymentCard.expirationDate"
@@ -117,7 +117,7 @@
                                 Expiration Date
                             </rx-sortable-column>
                         </th>
-                        <th scope="col">
+                        <th class="status" scope="col">
                             <rx-sortable-column
                                 sort-method="cardSortCol"
                                 sort-property="disabled"
@@ -135,13 +135,13 @@
                         <td>{{ card.paymentCard.cardNumber | CardNumberFormat:card.paymentCard.cardType }}</td>
                         <td>{{ card.paymentCard.cardHolderName }}</td>
                         <td>{{ card.paymentCard.expirationDate }}</td>
-                        <td>
-                            {{ card.disabled == true && 'Disabled' || 'Enabled'}}
-                            <span ng-if="card.isDefault == true" class="primary">
+                        <td class="status">
+                            {{ card.disabled && 'Disabled' || 'Enabled'}}
+                            <span ng-if="card.isDefault" class="primary">
                                 (Primary)
                             </span>
                         </td>
-                        <td>
+                        <td class="method-action">
                             <rx-popover position="left" ng-show="!card.disabled">
                                 <rx-popover-trigger>
                                     <img src="/images/icon-cog.png" />
@@ -150,7 +150,7 @@
                                     <ul>
                                         <li>
                                             <rx-payment-set-default
-                                                ng-show="card.isDefault != true"
+                                                ng-show="!card.isDefault"
                                                 post-hook="changeDefaultMethod"
                                                 user="{{user}}"
                                                 classes="payment-change"
@@ -172,7 +172,7 @@
                                         </li>
                                         <li>
                                             <rx-payment-disable
-                                                ng-show="card.isDefault != true"
+                                                ng-show="!card.isDefault"
                                                 post-hook="disableMethod"
                                                 user="{{user}}"
                                                 classes="payment-disable"
@@ -201,7 +201,7 @@
                                 Account Type
                             </rx-sortable-column>
                         </th>
-                        <th scope="col">
+                        <th class="method-number" scope="col">
                             <rx-sortable-column
                                 sort-method="achSortCol"
                                 sort-property="electronicCheck.accountNumber"
@@ -210,7 +210,7 @@
                                 Account Number
                             </rx-sortable-column>
                         </th>
-                        <th scope="col">
+                        <th class="method-number" scope="col">
                             <rx-sortable-column
                                 sort-method="achSortCol"
                                 sort-property="electronicCheck.routingNumber"
@@ -228,7 +228,7 @@
                                 Name on Account
                             </rx-sortable-column>
                         </th>
-                        <th scope="col">
+                        <th class="status" scope="col">
                             <rx-sortable-column
                                 sort-method="achSortCol"
                                 sort-property="disabled"
@@ -246,13 +246,13 @@
                         <td>{{ ach.electronicCheck.accountNumber | AccountNumberFormat }}</td>
                         <td>{{ ach.electronicCheck.routingNumber }}</td>
                         <td>{{ ach.electronicCheck.accountHolderName }}</td>
-                        <td>
-                            {{ ach.disabled == true && 'Disabled' || 'Enabled'}}
-                            <span ng-if="ach.isDefault == true" class="primary">
+                        <td class="status">
+                            {{ ach.disabled && 'Disabled' || 'Enabled'}}
+                            <span ng-if="ach.isDefault" class="primary">
                                 (Primary)
                             </span>
                         </td>
-                        <td>
+                        <td class="method-action">
                             <rx-popover position="left" ng-show="!card.disabled">
                                 <rx-popover-trigger>
                                     <img src="/images/icon-cog.png" />
@@ -261,7 +261,7 @@
                                     <ul>
                                         <li>
                                             <rx-payment-set-default
-                                                ng-show="ach.isDefault != true"
+                                                ng-show="!ach.isDefault"
                                                 post-hook="changeDefaultMethod"
                                                 user="{{user}}"
                                                 classes="payment-change"
@@ -283,7 +283,7 @@
                                         </li>
                                         <li>
                                             <rx-payment-disable
-                                                ng-show="ach.isDefault != true"
+                                                ng-show="!ach.isDefault"
                                                 post-hook="disableMethod"
                                                 user="{{user}}"
                                                 classes="payment-disable"
