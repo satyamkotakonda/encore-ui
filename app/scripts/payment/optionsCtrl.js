@@ -26,6 +26,8 @@ angular.module('billingApp')
     .controller('OptionsCtrl', function ($scope, $routeParams, $q, Account, PaymentMethod,
             Payment, DefaultPaymentMethodFilter, rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
 
+        $scope.userName = 'Test Username';
+
         // Get filter the paymentMethods and retrieve the default one (callback)
         var getDefaultMethod = function (paymentMethods) {
                 $scope.defaultMethod = DefaultPaymentMethodFilter(paymentMethods);

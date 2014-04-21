@@ -35,6 +35,8 @@ angular.module('billingApp')
         DefaultPaymentMethodFilter,
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES) {
 
+        $scope.userName = 'Test Username';
+
         // Action for clearing the filters
         var resetPager = function () {
                 $scope.pager.pageNumber = 0;
@@ -103,8 +105,6 @@ angular.module('billingApp')
 
         // Set defaults for the make a payment modal.
         $q.all([$scope.account.$promise, $scope.paymentMethods.$promise]).then(setPaymentInfo);
-
-        $scope.userName = 'Test Username';
 
         // Transaction Filter for the list of transactions
         $scope.transactionFilter = {};
