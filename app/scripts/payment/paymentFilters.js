@@ -131,7 +131,7 @@ angular.module('billingApp')
     .filter('AccountTypeFormat', function () {
         return function (accountType) {
             return accountType.split('_').map(function (word) {
-                return word.toUpperCase().substr(0, 1) + word.toLowerCase().substr(1);
+                return word.toUpperCase();
             }).join(' ');
         };
     })
