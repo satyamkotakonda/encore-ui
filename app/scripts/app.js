@@ -3,32 +3,11 @@ var accountNumber = '020-5955321';
 angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.tpls', 'encore.ui.rxForm',
         'encore.ui.rxPaginate', 'encore.ui.rxModalAction', 'encore.ui.rxSortableColumn', 'encore.ui.rxNotify',
         'rxSwitch', 'encore.ui.rxPopover', 'billingSvcs', 'paymentSvcs', 'constants', 'productConstants'])
-    .run(function ($http, $rootScope) {
+    .run(function ($http) {
         //TODO: Integrate rxAuth/rxLogin so that we no longer have to temporarily store the token key
-        $http.defaults.headers.common['X-Auth-Token'] = '2184d781eafa4c949e9d68df6c75f818';
+        $http.defaults.headers.common['X-Auth-Token'] = 'f59469862eb74aac8d7e1aaa5c088765';
         // Forces JSON only
         $http.defaults.headers.common['Accept'] = 'application/json';
-
-        var appName = 'billing',
-            appRoute = '/' + appName;
-
-        $rootScope.billingMenu = [{
-            title: 'Billing',
-            children: [
-                {
-                    href: appRoute + '/overview/' + accountNumber,
-                    linkText: 'Overview'
-                },
-                {
-                    href: appRoute + '/usage/' + accountNumber,
-                    linkText: 'Usages & Charges'
-                },
-                {
-                    href: appRoute + '/payment/' + accountNumber + '/options',
-                    linkText: 'Payment Options'
-                }
-            ]
-        }];
     })
     .config(function ($routeProvider, $locationProvider) {
         //TODO: To be replaced once account search is implemented, only temporary for dev
@@ -51,4 +30,31 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
             });
 
         $locationProvider.html5Mode(true).hashPrefix('!');
+    })
+    .controller('navBillingCtrl', function ($scope, $routeParams, $route) {
+        console.log('HUSSAM!');
+        var appName = 'billing',
+            appRoute = '/' + appName;
+        $scope.params = $routeParams;
+        $scope.$watch('params', function () {
+            var accountNumber = $routeParams.accountNumber;
+            $scope.billingMenu = [{
+                title: 'Billing',
+                children: [
+                    {
+                        href: appRoute + '/overview/' + accountNumber,
+                        linkText: 'Overview'
+                    },
+                    {
+                        href: appRoute + '/usage/' + accountNumber,
+                        linkText: 'Usages & Charges'
+                    },
+                    {
+                        href: appRoute + '/payment/' + accountNumber + '/options',
+                        linkText: 'Payment Options'
+                    }
+                ]
+            }];
+        }, true);
+
     });
