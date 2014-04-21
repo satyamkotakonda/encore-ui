@@ -11,6 +11,8 @@
  ```
 */
 
+@paymentOptionDefaultColor: #0e7fff;
+
 .payment-field {
     margin-bottom: @fontSize;
     .form-item {
@@ -56,12 +58,18 @@
     .detail-list {
         margin-bottom: 40px;
         .primary {
-            color: #0e7fff;
+            color: @paymentOptionDefaultColor;
         }
-        thead {
-            th:nth-child(2) {
-                width: 160px;
-            }
+        .method-number {
+            width: 160px;
+        }
+        .status {
+            width: 130px;
+            text-align: center;
+        }
+        .method-action {
+            width: 20px;
+            text-align: center;
         }
     }
 }
