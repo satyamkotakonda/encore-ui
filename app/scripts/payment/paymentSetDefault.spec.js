@@ -2,7 +2,7 @@
 
 describe('rxPaymentSetDefault', function () {
     var el, scope, directiveScope, compile, rootScope, mainEl,
-        user = 'test', methodId = 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479',
+        userName = 'test', methodId = 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479',
         paymentMethods = [{
             id: 'id1',
             isDefault: true,
@@ -19,8 +19,8 @@ describe('rxPaymentSetDefault', function () {
         }],
         validTemplate = '<rx-payment-set-default' +
                         '    post-hook="changeDefault"' +
-                        '    user="{{user}}"' +
-                        '    method-id="{{methodId}}"' +
+                        '    user-name="userName"' +
+                        '    method-id="methodId"' +
                         '    methods="methods">' +
                         '    Set as Primary' +
                         '</rx-payment-set-default>';
@@ -40,7 +40,7 @@ describe('rxPaymentSetDefault', function () {
             rootScope = $rootScope;
             compile = $compile;
             scope = $rootScope.$new();
-            scope.user = user;
+            scope.userName = userName;
             scope.methodId = methodId;
             scope.methods = paymentMethods;
             scope.changeDefault = changeDefault;
@@ -75,7 +75,7 @@ describe('rxPaymentSetDefault', function () {
     });
 
     it('should have the default method-id set', function () {
-        expect(el.attr('method-id')).to.be.eq('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
+        expect(scope.methodId).to.be.eq('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
     });
 
     it('should set the initial payment final amount/method-id values', function () {

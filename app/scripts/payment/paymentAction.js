@@ -31,10 +31,10 @@ angular.module('billingApp')
             templateUrl: '/views/payment/paymentAction.html',
             transclude: true,
             scope: {
-                userName: '@',
+                userName: '=',
                 classes: '@',
-                amount: '@',
-                methodId: '@',
+                amount: '=',
+                methodId: '=',
                 methods: '=',
                 postHook: '='
             },
