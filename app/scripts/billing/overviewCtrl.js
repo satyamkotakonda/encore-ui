@@ -16,7 +16,7 @@ angular.module('billingApp')
     * @requires encore.paginate:PageTracking - Service which creates an object for pagination.
     * @requires encore.rxSortableColumn:rxSortUtil - Service which provides column sort related functions
     * @requires encore.rxNotify:rxPromiseNotifications - Service which provides notifications for promises
-    * @requires billingSvcs.DefaultPaymentMethodFilter - Service which facilitates retrieval of default payment method
+    * @requires billingSvcs.DefaultPaymentMethodFilter - Filter which facilitates retrieval of default payment method
     * @requires billingSvcs.DATE_FORMAT - Constant that defines the default format for dates
     * @requires billingSvcs.TRANSACTION_TYPES - Constant list of the different types of transactions
     * @requires billingSvcs.TRANSACTION_STATUSES - Constant list of different transaction statuses
@@ -24,8 +24,10 @@ angular.module('billingApp')
     *
     * @example
     * <pre>
-    * .controller('OverviewCtrl', function ($scope, $routeParams, Transaction,
-    *       Account, Period, PageTracking)
+    * .controller('OverviewCtrl', function ($scope, $routeParams, $q, Transaction, Account,
+    *   Period, Payment, PaymentMethod, PageTracking, rxSortUtil, rxPromiseNotifications,
+    *   DefaultPaymentMethodFilter,
+    *   DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES)
     * </pre>
     */
     .controller('OverviewCtrl', function ($scope, $routeParams, $q, Transaction, Account,
