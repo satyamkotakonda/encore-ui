@@ -1,4 +1,4 @@
-<rx-page title="'Billing Overview'" subtitle="'On account ' + account.name">
+<rx-page title="'Billing - Overview'" subtitle="'On account ' + account.name">
     <rx-notifications stack="overviewPage"></rx-notifications>
     <div class="section billing-info">
         <dl class="list-definition pull-left">
@@ -15,10 +15,10 @@
                 <span class="accent-action">
                     <rx-payment-action
                         post-hook="postPayment"
-                        userName="{{userName}}"
+                        userName="userName"
                         classes="button button-green"
-                        amount="{{paymentAmount}}"
-                        method-id="{{paymentMethod.id}}"
+                        amount="paymentAmount"
+                        method-id="paymentMethod.id"
                         methods="paymentMethods">
                         <strong>+</strong> Make a Payment
                     </rx-payment-action>
