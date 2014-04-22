@@ -1,9 +1,10 @@
 var config = require('../util/config.js');
 
 module.exports = {
-    html: ['dist/{,*/}*.html'],
-    css: ['dist/styles/{,*/}*.css'],
+    config: config,
+    html: ['<%= usemin.config.appDest %>/{,*/}*.html'],
+    css: ['<%= usemin.config.appDest %>/styles/{,*/}*.css'],
     options: {
-        dirs: ['dist']
+        dirs: ['<%= usemin.config.appDest %>']
     }
 };

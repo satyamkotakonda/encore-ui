@@ -7,7 +7,7 @@ module.exports = {
             expand: true,
             cwd: '<%= imagemin.config.app %>/images',
             src: '{,*/}*.{png,jpg,jpeg}',
-            dest: '<%= imagemin.config.dist %>/images'
+            dest: '<%= imagemin.config.appDest %>/images'
         }]
     }
 };
