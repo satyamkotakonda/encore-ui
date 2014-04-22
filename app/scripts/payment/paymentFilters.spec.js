@@ -114,7 +114,7 @@ describe('PaymentFilters', function () {
         var accountType = accountTypeFormatFilter('CONSUMER_CHECKING');
         expect(accountType).to.not.be.empty;
         expect(accountType.split(' ').length).to.be.eq(2);
-        expect(accountType).to.be.eq('Consumer Checking');
+        expect(accountType).to.be.eq('CONSUMER CHECKING');
     });
 
     it('PaymentMethodNumber Filter Should return the unmasked numbers', function () {

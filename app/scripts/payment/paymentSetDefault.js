@@ -31,9 +31,9 @@ angular.module('billingApp')
             templateUrl: '/views/payment/paymentSetDefault.html',
             transclude: true,
             scope: {
-                userName: '@',
+                userName: '=',
                 classes: '@',
-                methodId: '@',
+                methodId: '=',
                 methods: '=',
                 postHook: '='
             },

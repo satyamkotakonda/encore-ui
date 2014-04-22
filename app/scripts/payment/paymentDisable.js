@@ -28,9 +28,10 @@ angular.module('billingApp')
             templateUrl: '/views/payment/paymentDisable.html',
             transclude: true,
             scope: {
-                userName: '@',
+                userName: '=',
                 method: '=',
-                postHook: '='
+                postHook: '=',
+                classes: '@'
             }
         };
     });

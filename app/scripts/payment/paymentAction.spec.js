@@ -2,7 +2,7 @@
 
 describe('rxPaymentAction', function () {
     var el, scope, directiveScope, compile, rootScope, mainEl,
-        user = 'test', amount = '2000.00', methodId = 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479',
+        userName = 'test', amount = '2000.00', methodId = 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479',
         paymentMethods = [{
             id: 'id1',
             isDefault: true,
@@ -19,9 +19,9 @@ describe('rxPaymentAction', function () {
         }],
         validTemplate = '<rx-payment-action' +
                         '    post-hook="postPayment"' +
-                        '    user="{{user}}"' +
-                        '    amount="{{amount}}"' +
-                        '    method-id="{{methodId}}"' +
+                        '    user-name="userName"' +
+                        '    amount="amount"' +
+                        '    method-id="methodId"' +
                         '    methods="methods">' +
                         '    <strong>+</strong> Make a Payment' +
                         '</rx-payment-action>';
@@ -41,7 +41,7 @@ describe('rxPaymentAction', function () {
             rootScope = $rootScope;
             compile = $compile;
             scope = $rootScope.$new();
-            scope.user = user;
+            scope.userName = userName;
             scope.amount = amount;
             scope.methodId = methodId;
             scope.methods = paymentMethods;
@@ -77,11 +77,11 @@ describe('rxPaymentAction', function () {
     });
 
     it('should have the default amount set', function () {
-        expect(el.attr('amount')).to.be.eq('2000.00');
+        expect(scope.amount).to.be.eq('2000.00');
     });
 
     it('should have the default method-id set', function () {
-        expect(el.attr('method-id')).to.be.eq('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
+        expect(scope.methodId).to.be.eq('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
     });
 
     it('should set the initial payment final amount/method-id values', function () {

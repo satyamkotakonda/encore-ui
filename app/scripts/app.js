@@ -4,7 +4,7 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui.tpls', 'encore
         'encore.ui.rxPopover', 'billingSvcs', 'paymentSvcs', 'constants', 'productConstants'])
     .run(function ($http) {
         //TODO: Integrate rxAuth/rxLogin so that we no longer have to temporarily store the token key
-        $http.defaults.headers.common['X-Auth-Token'] = '0da16a959bf7458ea6968729639b4041';
+        $http.defaults.headers.common['X-Auth-Token'] = '2184d781eafa4c949e9d68df6c75f818';
         // Forces JSON only
         $http.defaults.headers.common['Accept'] = 'application/json';
     })
@@ -19,6 +19,10 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui.tpls', 'encore
             .when('/billing/usage/:accountNumber', {
                 templateUrl: '/views/usage/usage.html',
                 controller: 'UsageCtrl'
+            })
+            .when('/billing/payment/:accountNumber/options', {
+                templateUrl: '/views/payment/options.html',
+                controller: 'OptionsCtrl'
             })
             .otherwise({
                 //this is temporary until we get a more solid solution

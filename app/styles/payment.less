@@ -1,3 +1,10 @@
+/*
+ Colors for different elements/properties in payments
+ */
+@paymentOptionDefaultColor: @infoBlue;
+@paymentChangeColor: @actionBlue;
+@paymentPostColor: @actionGreen;
+@paymentDisableColor: @actionRed;
 
 /*
  Overrides for the make a payment modal of the summary list and the form-items
@@ -10,7 +17,6 @@
  </div>
  ```
 */
-
 .payment-field {
     margin-bottom: @fontSize;
     .form-item {
@@ -43,5 +49,128 @@
         letter-spacing: -0.05em;
         //padding: 3px 6px;
         width: 90px;
+    }
+}
+
+/*
+ Overrides for the .detail-list of payment options
+ */
+.payment-options {
+    & > * {
+        padding: 10px 0;
+    }
+    .detail-list {
+        margin-bottom: 40px;
+        .primary {
+            color: @paymentOptionDefaultColor;
+        }
+        .method-number {
+            width: 160px;
+        }
+        .status {
+            width: 130px;
+            text-align: center;
+        }
+        .method-action {
+            width: 20px;
+            text-align: center;
+        }
+    }
+}
+
+.payment-action-options {
+    text-align: left;
+}
+
+.payment-action {
+    img {
+        vertical-align: bottom;
+    }
+}
+.payment-change,
+.payment-disable,
+.payment-post {
+    display: block;
+    width: 150px;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 5px 7px;
+}
+
+.payment-change {
+    color: @paymentChangeColor;
+    &:hover {
+        color: @paymentChangeColor;
+    }
+}
+
+.payment-post {
+    color: @paymentPostColor;
+    margin: 10px 7px;
+    &:hover {
+        color: @paymentPostColor;
+    }
+}
+.payment-disable {
+    color: @paymentDisableColor;
+    &:hover {
+        color: @paymentDisableColor;
+    }
+}
+
+.payment-default {
+    padding: 25px 0;
+    .section-title {
+        display: block;
+        float: left;
+        line-height: inherit;
+        margin: 0;
+        margin-right: 40px;
+    }
+    .method-description {
+        padding-right: 40px;
+        margin-right: 40px;
+        float: left;
+
+        font-size: 1.3em;
+        font-weight: 300;
+        color: @headingDark;
+        border-right: 1px #ccc solid;
+        .heading {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        strong {
+            font-weight: 400;
+            color: @actionGrey;
+        }
+        p {
+            margin: 0;
+        }
+    }
+    .method-actions {
+        float: left;
+        width: 10%;
+        .button {
+            width: 100%;
+        }
+    }
+}
+
+.payment-disable-form {
+    &:extend(.payment-default all);
+    .clearfix();
+    .method-description {
+        border-right: 0;
+        clear: right;
+    }
+}
+
+.payment-disable-warn {
+    .clearfix();
+    img {
+        width: 15px;
+        vertical-align: bottom;
     }
 }

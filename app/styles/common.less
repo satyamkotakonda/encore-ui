@@ -340,3 +340,31 @@ Horizontal Tab Menu based on pure
         backgorund: @actionGreen;
     }
 }
+
+/*
+ Styles for detail lists in tables
+ ```
+ <table class="detail-list">
+    <thead>
+        <tr><th>Heading 1</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>Cell 1</td></tr>
+    </tbody>
+</table>
+ ```
+ */
+.detail-list {
+    background: white;
+    thead {
+        tr {
+            th:first-child {
+                width: 160px;
+            }
+        }
+    }
+
+    tr, td {
+        padding: 15px;
+    }
+}

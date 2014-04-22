@@ -2,7 +2,7 @@
 
 describe('rxPaymentDisable', function () {
     var el, scope, directiveScope, compile, rootScope, mainEl,
-        user = 'test',
+        userName = 'test',
         paymentMethods = [{
             id: 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479',
             isDefault: true,
@@ -20,7 +20,7 @@ describe('rxPaymentDisable', function () {
         }],
         validTemplate = '<rx-payment-disable' +
                         '    post-hook="disablePayment"' +
-                        '    user="{{user}}"' +
+                        '    user-name="userName"' +
                         '    method="method">' +
                         '    Disable' +
                         '</rx-payment-disable>';
@@ -40,7 +40,7 @@ describe('rxPaymentDisable', function () {
             rootScope = $rootScope;
             compile = $compile;
             scope = $rootScope.$new();
-            scope.user = user;
+            scope.userName = userName;
             scope.method = paymentMethods[0];
             scope.disablePayment = disablePayment;
         });
