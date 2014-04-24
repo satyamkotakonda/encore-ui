@@ -1,13 +1,15 @@
 var config = require('../util/config.js');
 
 module.exports = {
-    config: config,
+    options: {
+    	config: config
+    },
     dist: {
         files: [{
             expand: true,
-            cwd: '<%= imagemin.config.app %>/images',
+            cwd: '<%= imagemin.options.config.app %>/images',
             src: '{,*/}*.{png,jpg,jpeg}',
-            dest: '<%= imagemin.config.appDest %>/images'
+            dest: '<%= imagemin.options.config.appDest %>/images'
         }]
     }
 };
