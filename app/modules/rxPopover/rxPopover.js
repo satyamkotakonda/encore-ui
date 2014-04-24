@@ -42,13 +42,20 @@ angular.module('encore.ui.rxPopover', [])
         template: '<div class="rx-popover-trigger" ng-mouseover="show()" ng-mouseout="hide()" ng-transclude></div>',
         transclude: true,
         scope: false,
-        link: function (scope) {
+        link: function (scope, el) {
+            var triggerContent = el.children(':first');
             scope.active = false;
             scope.show = function () {
                 scope.active = true;
             };
             scope.hide = function () {
                 scope.active = false;
+            };
+            scope.getTrigger = function () {
+                return triggerContent;
+            };
+            scope.getTriggerHeight = function () {
+                return triggerContent.prop('offsetHeight');
             };
         }
     };
@@ -73,19 +80,26 @@ angular.module('encore.ui.rxPopover', [])
         scope: false,
         link: function (scope, el, attrs, popoverCtrl) {
             var position = popoverCtrl.getPosition(),
-                content, trigger, height, triggerHeight,
-                top;
+                content = el.children(':first');
 
-            if (position === 'left' || position === 'right') {
-                content = el.children('div:first');
-                trigger = el.parent().find('rx-popover-trigger').children('div:first');
+            scope.getContent = function () {
+                return content;
+            };
+            scope.getContentHeight = function () {
+                return content.prop('offsetHeight');
+            };
+            scope.setContentTop = function () {
+                var top, height, triggerHeight;
 
-                triggerHeight = trigger.prop('offsetHeight');
-                height = content.prop('offsetHeight');
-                top = Math.floor((height - triggerHeight) / -2);
+                if (_.contains(['left', 'right'], position)) {
+                    triggerHeight = scope.getTriggerHeight();
+                    height = scope.getContentHeight();
+                    top = Math.round((height - triggerHeight) / -2);
 
-                content.css('top', top + 'px');
-            }
+                    content.css('top', top + 'px');
+                }
+            };
+            scope.getTrigger().on('mouseover', scope.setContentTop);
         }
     };
 });
