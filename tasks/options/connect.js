@@ -38,7 +38,7 @@ module.exports = {
             middleware: function (cnct) {
                 return [
                     config.proxyRequest,
-                    config.modRewrite(['!\\.\\w+$ /']),
+                    config.modRewrite(['!\\.[0-9a-zA-Z_-]+$ /index.html']),
                     config.liveReloadPage,
                     config.mountFolder(cnct, '.tmp'),
                     config.mountFolder(cnct, config.app)
@@ -51,7 +51,7 @@ module.exports = {
             middleware: function (cnct) {
                 return [
                     config.proxyRequest,
-                    config.modRewrite(['!\\.\\w+$ /']),
+                    config.modRewrite(['!\\.[0-9a-zA-Z_-]+$ /index.html']),
                     config.liveReloadPage,
                     config.mountFolder(cnct, '.tmp'),
                     config.mountFolder(cnct, config.app)
@@ -64,7 +64,7 @@ module.exports = {
             middleware: function (cnct) {
                 return [
                     config.proxyRequest,
-                    config.modRewrite(['!\\.\\w+$ /']),
+                    config.modRewrite(['!\\.[0-9a-zA-Z_-]+$ /index.html']),
                     config.liveReloadPage,
                     config.mountFolder(cnct, '.tmp'),
                     config.mountFolder(cnct, config.appDest)
