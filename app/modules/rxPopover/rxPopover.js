@@ -75,7 +75,7 @@ angular.module('encore.ui.rxPopover', [])
         require: '^rxPopover',
         restrict: 'E',
         // Need to make path relative before moving it to encore
-        templateUrl: '/modules/rxPopover/templates/rxPopover.html',
+        templateUrl: '/billing/modules/rxPopover/templates/rxPopover.html',
         transclude: true,
         scope: false,
         link: function (scope, el, attrs, popoverCtrl) {
