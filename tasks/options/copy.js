@@ -37,28 +37,6 @@ module.exports = {
         src: ['**', '!**/*.spec.js', '!**/*.less'],
         dest: '<%= copy.config.appDest %>/'
     },
-    html: {
-        expand:true,
-        cwd: '<%= copy.config.app %>/views',
-        src: ['**'],
-        dest: '<%= copy.config.appDest %>/views'
-    },
-    index:{
-        src: '<%= copy.config.app %>/index.html',
-        dest: '<%= copy.config.appDest %>/index.html'
-    },
-    scripts: {
-        expand:true,
-        cwd: '<%= copy.config.app %>/scripts',
-        src: ['**/*.js', '!**/*.spec.js'],
-        dest: '<%= copy.config.appDest %>/scripts/'
-    },
-    css: {
-        expand:true,
-        cwd: '<%= copy.config.app %>/styles',
-        src: ['app.css'],
-        dest: '<%= copy.config.appDest %>/styles/'
-    },
     plato: {
         files:[{
             expand: true,
