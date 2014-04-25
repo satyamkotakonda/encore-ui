@@ -12,15 +12,15 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
             title: 'Billing',
             children: [
                 {
-                    href: { tld: 'billing', path: 'billing/overview/{{accountNumber}}' },
+                    href: '/billing/overview/{{accountNumber}}',
                     linkText: 'Overview'
                 },
                 {
-                    href: { tld: 'billing', path: 'billing/usage/{{accountNumber}}' },
+                    href: '/billing/usage/{{accountNumber}}',
                     linkText: 'Usages & Charges'
                 },
                 {
-                    href: { tld: 'billing', path: 'billing/payment/{{accountNumber}}/options' },
+                    href: '/billing/payment/{{accountNumber}}/options',
                     linkText: 'Payment Options'
                 }
             ]
@@ -30,15 +30,15 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
         //#TODO: To be replaced once account search is implemented, only temporary for dev
         $routeProvider
             .when('/billing/overview/:accountNumber', {
-                templateUrl: '/views/billing/overview.html',
+                templateUrl: '/billing/views/billing/overview.html',
                 controller: 'OverviewCtrl'
             })
             .when('/billing/usage/:accountNumber', {
-                templateUrl: '/views/usage/usage.html',
+                templateUrl: '/billing/views/usage/usage.html',
                 controller: 'UsageCtrl'
             })
             .when('/billing/payment/:accountNumber/options', {
-                templateUrl: '/views/payment/options.html',
+                templateUrl: '/billing/views/payment/options.html',
                 controller: 'OptionsCtrl'
             })
             .otherwise({

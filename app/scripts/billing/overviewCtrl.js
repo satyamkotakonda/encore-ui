@@ -49,12 +49,12 @@ angular.module('billingApp')
             sortCol = function (predicate) {
                 return rxSortUtil.sortCol($scope, predicate);
             },
-            setPaymentInfo = function () {
-                // Get Current Due from Account Information
-                $scope.paymentAmount = $scope.account.currentDue;
+            setPaymentInfo = function (result) {
+                // Get Current Due from Account Information, first promise of $q.all
+                $scope.paymentAmount = result[0].currentDue;
 
-                // Get the Primary Payment Method's ID
-                $scope.paymentMethod = DefaultPaymentMethodFilter($scope.paymentMethods);
+                // Get the Primary Payment Method's ID, second promise of $q.all
+                $scope.paymentMethod = DefaultPaymentMethodFilter(result[1]);
             },
             postPayment = function (amount, methodId) {
                 $scope.paymentResult = Payment.post({
