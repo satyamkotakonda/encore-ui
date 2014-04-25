@@ -1,7 +1,7 @@
 module.exports = {
     scripts: {
         files: ['Gruntfile.js', 'app/scripts/**/*.js', '!app/scripts/**/*.spec.js', '!app/scripts/debug.js',
-                'app/modules/**/*.js', '!app/modules/**/*.spec.js'],
+                'app/modules/**/*.js'],
         tasks: ['jshint:scripts','jscs:scripts', 'test:unit'],
         options: {
             livereload: true

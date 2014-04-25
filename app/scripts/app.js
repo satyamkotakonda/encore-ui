@@ -1,16 +1,33 @@
 'use strict';
-angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui.tpls', 'encore.ui.rxForm', 'encore.ui.rxPaginate',
-        'encore.ui.rxModalAction', 'encore.ui.rxSortableColumn', 'encore.ui.rxNotify', 'rxSwitch',
-        'encore.ui.rxPopover', 'billingSvcs', 'paymentSvcs', 'constants', 'productConstants'])
-    .run(function ($http) {
-        //TODO: Integrate rxAuth/rxLogin so that we no longer have to temporarily store the token key
-        $http.defaults.headers.common['X-Auth-Token'] = '2184d781eafa4c949e9d68df6c75f818';
+angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.tpls', 'encore.ui.rxForm',
+        'encore.ui.rxPaginate', 'encore.ui.rxModalAction', 'encore.ui.rxSortableColumn', 'encore.ui.rxNotify',
+        'rxSwitch', 'encore.ui.rxPopover', 'billingSvcs', 'paymentSvcs', 'constants', 'productConstants'])
+    .run(function ($http, $rootScope) {
+        //#TODO: Integrate rxAuth/rxLogin so that we no longer have to temporarily store the token key
+        $http.defaults.headers.common['X-Auth-Token'] = 'b7c72d31c6a748da9ba0e6200dd680e7';
         // Forces JSON only
         $http.defaults.headers.common['Accept'] = 'application/json';
+
+        $rootScope.billingMenu = [{
+            title: 'Billing',
+            children: [
+                {
+                    href: { tld: 'billing', path: 'billing/overview/{{accountNumber}}' },
+                    linkText: 'Overview'
+                },
+                {
+                    href: { tld: 'billing', path: 'billing/usage/{{accountNumber}}' },
+                    linkText: 'Usages & Charges'
+                },
+                {
+                    href: { tld: 'billing', path: 'billing/payment/{{accountNumber}}/options' },
+                    linkText: 'Payment Options'
+                }
+            ]
+        }];
     })
     .config(function ($routeProvider, $locationProvider) {
-        //TODO: To be replaced once account search is implemented, only temporary for dev
-        var accountNumber = '020-5955321';
+        //#TODO: To be replaced once account search is implemented, only temporary for dev
         $routeProvider
             .when('/billing/overview/:accountNumber', {
                 templateUrl: '/views/billing/overview.html',
@@ -25,8 +42,8 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui.tpls', 'encore
                 controller: 'OptionsCtrl'
             })
             .otherwise({
-                //this is temporary until we get a more solid solution
-                redirectTo: '/billing/overview/' + accountNumber
+                //#TODO: this is temporary until we get a more solid solution
+                redirectTo: '/billing/overview/020-5955321'
             });
 
         $locationProvider.html5Mode(true).hashPrefix('!');

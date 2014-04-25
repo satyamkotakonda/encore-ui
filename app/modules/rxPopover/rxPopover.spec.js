@@ -38,6 +38,7 @@ describe('rxPopover', function () {
         // get the controller and child scopes
         controller = el.controller('rxPopover');
         contentScope = contentDirectiveEl.scope();
+        contentScope.setContentTop();
     });
 
     afterEach(function () {
@@ -100,6 +101,13 @@ describe('rxPopover', function () {
         expect(contentScope.active).to.be.false;
     });
 
+    it('should get a height for the trigger', function () {
+        expect(contentScope.getTriggerHeight()).to.be.a.number;
+    });
+
+    it('should get a height for the content', function () {
+        expect(contentScope.getTriggerHeight()).to.be.a.number;
+    });
 
     it('should throw error when position is not an expected value', function () {
         var errorWrapper = function () {
@@ -111,11 +119,17 @@ describe('rxPopover', function () {
     it('should calculate top position when positioned left', function () {
         scope = rootScope.$new();
         el = helpers.createDirective(getTemplateString('left'), compile, scope);
-        var content = helpers.getChildDiv(el.find('rx-popover-content'), 'rx-popover-container', 'class'),
-            trigger = helpers.getChildDiv(el.find('rx-popover-trigger'), 'rx-popover-trigger', 'class');
 
-        var height = content.prop('offsetHeight'),
-            triggerHeight = trigger.prop('offsetHeight');
+        rootPopoverEl = helpers.getChildDiv(el, 'rx-popover', 'class');
+        triggerDirectiveEl = rootPopoverEl.find('rx-popover-trigger');
+        contentDirectiveEl = rootPopoverEl.find('rx-popover-content');
+        contentScope = contentDirectiveEl.scope();
+
+        contentScope.setContentTop();
+
+        var content = contentScope.getContent(),
+            height = contentScope.getContentHeight(),
+            triggerHeight = contentScope.getTriggerHeight();
 
         var top = Math.floor((height - triggerHeight)/-2),
             renderedTop = parseInt(content.css('top'));

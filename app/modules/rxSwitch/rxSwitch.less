@@ -20,12 +20,12 @@
 
     font-size: 15px;
     line-height: @lineHeight;
-    
+
     padding: 0 @edgeSpacing 0 @edgeSpacing + (@edgeSpacing / 2);
     height: @height;
 
     min-width: @minWidth;
-    
+
     cursor: pointer;
     position: relative;
     text-align: right;
@@ -38,7 +38,7 @@
 
     .user-select(none);
     .box-sizing(border-box);
-    
+
     &.readonly {
         cursor: default;
     }
@@ -61,7 +61,7 @@
         border-radius: (@knobSize/2)+1;
         background-color: @knobColor;
         border: 1px @knobBorderColor solid;
-       
+
         right: (@minWidth - @knobSize);
     }
 }

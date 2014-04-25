@@ -2,6 +2,8 @@ module.exports = {
     app: 'app',
     dist : 'dist',
     ngdocs: 'ngdocs',
+    appName: 'billing',
+    appDest: 'dist/billing',
     open: {
         hostname: 'localhost',
         port: 9000

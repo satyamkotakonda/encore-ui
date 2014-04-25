@@ -1,4 +1,7 @@
-var config = require('../util/config.js');
+var config = require('../util/config.js'),
+    appLocalRewrite = {};
+
+appLocalRewrite['/'+config.appName] = '';
 
 module.exports = {
     options: {
@@ -6,6 +9,12 @@ module.exports = {
         hostname: 'localhost'
     },
     proxies: [{
+        context: '/' + config.appName,
+        host: 'localhost',
+        port: 9000,
+        rewrite: appLocalRewrite
+    },
+    {
         context: '/api/accounts/payments',
         host: 'staging.system.payment.pipeline2.api.rackspacecloud.com',
         port: 443,
@@ -29,7 +38,7 @@ module.exports = {
             middleware: function (cnct) {
                 return [
                     config.proxyRequest,
-                    config.modRewrite(['!\\.\\w+$ /']),
+                    config.modRewrite(['!\\.[0-9a-zA-Z_-]+$ /index.html']),
                     config.liveReloadPage,
                     config.mountFolder(cnct, '.tmp'),
                     config.mountFolder(cnct, config.app)
@@ -42,7 +51,7 @@ module.exports = {
             middleware: function (cnct) {
                 return [
                     config.proxyRequest,
-                    config.modRewrite(['!\\.\\w+$ /']),
+                    config.modRewrite(['!\\.[0-9a-zA-Z_-]+$ /index.html']),
                     config.liveReloadPage,
                     config.mountFolder(cnct, '.tmp'),
                     config.mountFolder(cnct, config.app)
@@ -54,7 +63,11 @@ module.exports = {
         options: {
             middleware: function (cnct) {
                 return [
-                    config.mountFolder(cnct, config.dist)
+                    config.proxyRequest,
+                    config.modRewrite(['!\\.[0-9a-zA-Z_-]+$ /index.html']),
+                    config.liveReloadPage,
+                    config.mountFolder(cnct, '.tmp'),
+                    config.mountFolder(cnct, config.appDest)
                 ];
             }
         }
