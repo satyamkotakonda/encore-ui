@@ -28,7 +28,7 @@ angular.module('billingApp')
     .directive('rxPaymentSetDefault', function () {
         return {
             restrict: 'E',
-            templateUrl: '/views/payment/paymentSetDefault.html',
+            templateUrl: '/billing/views/payment/paymentSetDefault.html',
             transclude: true,
             scope: {
                 userName: '=',

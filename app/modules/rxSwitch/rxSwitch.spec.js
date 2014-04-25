@@ -11,7 +11,7 @@ describe('rxSwitch', function () {
 
         inject(function ($rootScope, $compile, $templateCache) {
             var template = $templateCache.get('modules/rxSwitch/templates/rxSwitch.html');
-            $templateCache.put('/modules/rxSwitch/templates/rxSwitch.html', template);
+            $templateCache.put('/billing/modules/rxSwitch/templates/rxSwitch.html', template);
 
             rootScope = $rootScope;
             compile = $compile;

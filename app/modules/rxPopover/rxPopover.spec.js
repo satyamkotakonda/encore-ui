@@ -17,7 +17,7 @@ describe('rxPopover', function () {
 
         inject(function ($rootScope, $compile, $templateCache) {
             var mainTemplate = $templateCache.get('modules/rxPopover/templates/rxPopover.html');
-            $templateCache.put('/modules/rxPopover/templates/rxPopover.html', mainTemplate);
+            $templateCache.put('/billing/modules/rxPopover/templates/rxPopover.html', mainTemplate);
 
             rootScope = $rootScope;
             compile = $compile;

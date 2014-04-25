@@ -35,7 +35,7 @@ describe('rxPaymentSetDefault', function () {
         inject(function ($rootScope, $compile, $templateCache) {
             var template = $templateCache.get('views/payment/paymentSetDefault.html');
 
-            $templateCache.put('/views/payment/paymentSetDefault.html', template);
+            $templateCache.put('/billing/views/payment/paymentSetDefault.html', template);
             paymentMethods.$promise = true;
             rootScope = $rootScope;
             compile = $compile;
