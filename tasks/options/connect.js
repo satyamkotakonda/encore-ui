@@ -15,13 +15,23 @@ module.exports = {
         rewrite: appLocalRewrite
     },
     {
-        context: '/api/accounts/payments',
+        context: '/api/billing',
+        host: 'staging.billingv2.pipeline2.api.rackspacecloud.com',
+        port: 443,
+        https: true,
+        changeOrigin: true,
+        rewrite: {
+            '/api/billing': '/v2/accounts'
+        }
+    },
+    {
+        context: '/api/payment',
         host: 'staging.system.payment.pipeline2.api.rackspacecloud.com',
         port: 443,
         https: true,
         changeOrigin: true,
         rewrite: {
-            '/api/accounts/payments': '/v1/accounts'
+            '/api/payment': '/v1/accounts'
         }
     }, {
         context: '/api',
