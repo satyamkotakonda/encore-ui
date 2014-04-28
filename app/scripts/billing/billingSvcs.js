@@ -33,13 +33,16 @@ angular.module('billingSvcs', ['ngResource'])
     *
     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
     */
-    .factory('Transaction', function ($resource) {
-        return $resource('/api/accounts/billing/:id/transactions',
+    .factory('Transaction', function ($resource, Transform) {
+        var transform = Transform('billingSummary.item', 'details');
+        return $resource('/api/billing/:id/billingSummary',
             {
-                id: '@id'
+                id: '@id',
+                marker: 0,
+                limit: 10
             },
             {
-                list: { method: 'GET', isArray: true }
+                list: { method: 'GET', isArray: true, transformResponse: transform }
             }
         );
     })
@@ -52,7 +55,7 @@ angular.module('billingSvcs', ['ngResource'])
     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
     */
     .factory('Account', function ($resource) {
-        return $resource('/api/accounts/billing/:id');
+        return $resource('/api/billing/:id');
     })
    /**
     * @ngdoc service
@@ -64,7 +67,7 @@ angular.module('billingSvcs', ['ngResource'])
     */
     .factory('Period', function ($resource, Transform) {
         var transform = Transform('billingPeriods.billingPeriod', 'details');
-        return $resource('/api/accounts/billing/:id/billing-periods',
+        return $resource('/api/billing/:id/billing-periods',
             {
                 id: '@id',
                 marker: 0,
@@ -85,7 +88,7 @@ angular.module('billingSvcs', ['ngResource'])
     */
     .factory('EstimatedCharges', function ($resource, Transform) {
         var transform = Transform('estimatedCharges.estimatedCharge', 'details');
-        return $resource('/api/accounts/billing/:id/billing-periods/:periodId/estimatedCharges',
+        return $resource('/api/billing/:id/billing-periods/:periodId/estimated_charges',
             {
                 id: '@id',
                 periodId: '@periodId'
@@ -105,7 +108,7 @@ angular.module('billingSvcs', ['ngResource'])
      */
     .factory('Payment', function ($resource, Transform) {
         var transform = Transform('payments.payment', 'badRequest.details');
-        return $resource('/api/accounts/billing/:id/payments',
+        return $resource('/api/billing/:id/payments',
             {
                 id: '@id',
                 marker: 0,
