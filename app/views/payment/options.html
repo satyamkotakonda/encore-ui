@@ -1,7 +1,7 @@
 <rx-page title="'Billing - Payment Options'" subtitle="'On account ' + account.name">
     <rx-notifications stack="optionsPage"></rx-notifications>
     <div class="section payment-options payment-default">
-        <h3 ng-show="defaultMethod" class="section-title">Primary:</h3>
+        <h3 ng-show="defaultMethod" class="section-title default-title">Primary:</h3>
         <div ng-show="defaultMethod" class="method-description">
             <div ng-if="defaultMethod.electronicCheck">
                 <p class="heading">

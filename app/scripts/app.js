@@ -1,10 +1,9 @@
 'use strict';
-angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.tpls', 'encore.ui.rxForm',
-        'encore.ui.rxPaginate', 'encore.ui.rxModalAction', 'encore.ui.rxSortableColumn', 'encore.ui.rxNotify',
+angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.tpls',
         'rxSwitch', 'encore.ui.rxPopover', 'billingSvcs', 'paymentSvcs', 'constants', 'productConstants'])
     .run(function ($http, $rootScope) {
         //#TODO: Integrate rxAuth/rxLogin so that we no longer have to temporarily store the token key
-        $http.defaults.headers.common['X-Auth-Token'] = 'ac5ea4419c6c41669716ddd108dda13f';
+        $http.defaults.headers.common['X-Auth-Token'] = 'b5ca5cad3cea450993a202b033af03c6';
         // Forces JSON only
         $http.defaults.headers.common['Accept'] = 'application/json';
 
@@ -16,12 +15,24 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                     linkText: 'Overview'
                 },
                 {
+                    href: '/billing/transactions/{{accountNumber}}',
+                    linkText: 'Transactions'
+                },
+                {
                     href: '/billing/usage/{{accountNumber}}',
-                    linkText: 'Usages & Charges'
+                    linkText: 'Current Usage'
+                },
+                {
+                    href: '/billing/discounts/{{accountNumber}}',
+                    linkText: 'Discounts'
                 },
                 {
                     href: '/billing/payment/{{accountNumber}}/options',
                     linkText: 'Payment Options'
+                },
+                {
+                    href: '/billing/preferences/{{accountNumber}}',
+                    linkText: 'Preferences'
                 }
             ]
         }];
@@ -43,7 +54,7 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
             })
             .otherwise({
                 //#TODO: this is temporary until we get a more solid solution
-                redirectTo: '/billing/overview/020-5955321'
+                redirectTo: '/billing/overview/020-473500'
             });
 
         $locationProvider.html5Mode(true).hashPrefix('!');

@@ -9,7 +9,7 @@ angular.module('paymentSvcs', ['ngResource'])
      */
     .factory('PaymentMethod', function ($resource, Transform) {
         var transform = Transform('methods.method', 'badRequest.details');
-        return $resource('/api/accounts/payments/:id/methods/:methodId',
+        return $resource('/api/payment/:id/methods/:methodId',
             {
                 id: '@id'
             },
