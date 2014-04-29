@@ -10,6 +10,7 @@ angular.module('billingApp')
     * @requires $q - AngularJS q implementation for working with promises
     * @requires billingSvcs.Transaction - Service for CRUD operations for the Transaction resource.
     * @requires billingSvcs.Account - Service for CRUD operations for the Account resource.
+    * @requires billingSvcs.Balance - Service for CRUD operations for the Balance resource.
     * @requires billingSvcs.Period - Service for CRUD operations for the Period resource.
     * @requires billingSvcs.Payment - Service for CRUD operations for the Payment resource.
     * @requires billingSvcs.PaymentMethod - Service for CRUD operations for the PaymentMethod resource.
@@ -30,7 +31,7 @@ angular.module('billingApp')
     *   DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES)
     * </pre>
     */
-    .controller('OverviewCtrl', function ($scope, $routeParams, $q, Transaction, Account,
+    .controller('OverviewCtrl', function ($scope, $routeParams, $q, Transaction, Account, Balance,
         Period, Payment, PaymentMethod, PageTracking, rxSortUtil, rxPromiseNotifications,
         DefaultPaymentMethodFilter,
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES) {
@@ -51,7 +52,7 @@ angular.module('billingApp')
             },
             setPaymentInfo = function (result) {
                 // Get Current Due from Account Information, first promise of $q.all
-                $scope.paymentAmount = result[0].currentDue;
+                $scope.paymentAmount = result[0].amountDue;
 
                 // Get the Primary Payment Method's ID, second promise of $q.all
                 $scope.paymentMethod = DefaultPaymentMethodFilter(result[1]);
@@ -88,13 +89,14 @@ angular.module('billingApp')
 
         // Get Account & Transactions Info
         $scope.account = Account.get({ id: $routeParams.accountNumber });
+        $scope.balance = Balance.get({ id: $routeParams.accountNumber });
         $scope.transactions = Transaction.list({ id: $routeParams.accountNumber });
         $scope.paymentMethods = PaymentMethod.list({ id: $routeParams.accountNumber });
         $scope.billingPeriods = Period.list({ id: $routeParams.accountNumber });
 
         // Group the promises in $q.all for a global error message if any errors occur
         rxPromiseNotifications.add($q.all([
-            $scope.account.$promise,
+            $scope.balance.$promise,
             $scope.transactions.$promise,
             $scope.paymentMethods.$promise,
             $scope.billingPeriods.$promise
@@ -104,7 +106,7 @@ angular.module('billingApp')
         }, 'overviewPage');
 
         // Set defaults for the make a payment modal.
-        $q.all([$scope.account.$promise, $scope.paymentMethods.$promise]).then(setPaymentInfo);
+        $q.all([$scope.balance.$promise, $scope.paymentMethods.$promise]).then(setPaymentInfo);
 
         // Transaction Filter for the list of transactions
         $scope.transactionFilter = {};

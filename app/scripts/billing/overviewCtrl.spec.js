@@ -1,13 +1,13 @@
 describe('Billing: OverviewCtrl', function () {
-    var scope, ctrl, account, transaction, period, payment, paymentMethod, PageTrackingObject,
-        accountData, paymentMethods;
+    var scope, ctrl, account, balance, transaction, period, payment, paymentMethod, PageTrackingObject,
+        balanceData, paymentMethods;
 
     var testAccountNumber = '12345';
 
     beforeEach(function () {
         module('billingApp');
 
-        inject(function ($controller, $rootScope, $httpBackend, Account, Transaction, Period,
+        inject(function ($controller, $rootScope, $httpBackend, Account, Balance, Transaction, Period,
                 Payment, PaymentMethod, PageTracking, DefaultPaymentMethodFilter, $q) {
             var getResourceMock = function (data) {
                 var deferred = $q.defer();
@@ -18,11 +18,12 @@ describe('Billing: OverviewCtrl', function () {
             scope = $rootScope.$new();
             transaction = Transaction;
             account = Account;
+            balance = Balance;
             period = Period;
             paymentMethod = PaymentMethod;
             payment = Payment;
-            accountData = {
-                currentDue: '2124.00'
+            balanceData = {
+                amountDue: '2124.00'
             };
             paymentMethods = [{
                 isDefault: true,
@@ -30,7 +31,8 @@ describe('Billing: OverviewCtrl', function () {
             }];
 
             period.list = sinon.stub(period, 'list').returns(getResourceMock([]));
-            account.get = sinon.stub(account, 'get').returns(getResourceMock(accountData));
+            account.get = sinon.stub(account, 'get').returns(getResourceMock({}));
+            balance.get = sinon.stub(balance, 'get').returns(getResourceMock(balanceData));
             payment.post = sinon.stub(payment, 'post').returns(getResourceMock({}));
             transaction.list = sinon.stub(transaction, 'list').returns(getResourceMock([]));
             paymentMethod.list = sinon.stub(paymentMethod, 'list').returns(getResourceMock(paymentMethods));
@@ -41,6 +43,7 @@ describe('Billing: OverviewCtrl', function () {
                 $scope: scope,
                 Transaction: transaction,
                 Account: account,
+                Balance: balance,
                 Period: period,
                 Payment: payment,
                 PaymentMethod: paymentMethod,
@@ -100,7 +103,7 @@ describe('Billing: OverviewCtrl', function () {
 
     it('OverviewCtrl should set default values once account and payment methods have been succesful', function () {
         scope.$apply(function () {
-            scope.account.$deferred.resolve(accountData);
+            scope.balance.$deferred.resolve(balanceData);
             scope.paymentMethods.$deferred.resolve(paymentMethods);
         });
 
