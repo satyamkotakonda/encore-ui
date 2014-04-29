@@ -18,8 +18,6 @@ module.exports = {
                 '*.html',
                 'widgets/**/*',
                 'modules/**/*',
-                'bower_components/**/*',
-                'scripts/scripts.js',
                 '!scripts/**/*.spec.js'
             ]
         }, {
