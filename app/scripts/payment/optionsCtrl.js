@@ -9,6 +9,7 @@ angular.module('billingApp')
     * @requires $routeParams - AngularJS service which provides access to route paramters
     * @requires $q - AngularJS q implementation for working with promises.
     * @requires billingSvcs.Account - Account resource for obtaining balance information
+    * @requires billingSvcs.Balance - Service for CRUD operations for the Balance resource.
     * @requires billingSvcs.PaymentMethod - Payment Method resource for all actions with payment methods (List,
     *                           Change Default, Disable)
     * @requires billingSvcs.Payment - Resource for performing payments against an account
@@ -19,11 +20,11 @@ angular.module('billingApp')
     *
     * @example
     * <pre>
-    * .controller('OptionsCtrl', function ($scope, $routeParams, $q, Account, PaymentMethod,
+    * .controller('OptionsCtrl', function ($scope, $routeParams, $q, Account, Balance, PaymentMethod,
     *       Payment, DefaultPaymentMethodFilter, rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
     * </pre>
     */
-    .controller('OptionsCtrl', function ($scope, $routeParams, $q, Account, PaymentMethod,
+    .controller('OptionsCtrl', function ($scope, $routeParams, $q, Account, Balance, PaymentMethod,
             Payment, DefaultPaymentMethodFilter, rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
 
         $scope.userName = 'Test Username';
@@ -33,8 +34,8 @@ angular.module('billingApp')
                 $scope.defaultMethod = DefaultPaymentMethodFilter(paymentMethods);
             },
             // Get the payment amount currently due (callback)
-            getCurrentDue = function (account) {
-                $scope.paymentAmount = account.currentDue;
+            getCurrentDue = function (balance) {
+                $scope.paymentAmount = balance.amountDue;
             },
             // Return the list of payment methods for the account being viewed
             getPaymentMethods = function () {
@@ -118,14 +119,17 @@ angular.module('billingApp')
         $scope.achSort = rxSortUtil.getDefault('isDefault', true);
 
         // Get Account Info
-        $scope.account = Account.get({ id: $routeParams.accountNumber }, getCurrentDue);
+        $scope.account = Account.get({ id: $routeParams.accountNumber });
+
+        // Get Account Info
+        $scope.balance = Balance.get({ id: $routeParams.accountNumber }, getCurrentDue);
 
         // Gets the payment methods
         $scope.paymentMethods = getPaymentMethods();
 
         // Group the promises in $q.all for a global error message if any errors occur
         rxPromiseNotifications.add($q.all([
-            $scope.account.$promise,
+            $scope.balance.$promise,
             $scope.paymentMethods.$promise
         ]), {
             loading: '',

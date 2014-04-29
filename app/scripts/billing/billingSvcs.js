@@ -59,6 +59,25 @@ angular.module('billingSvcs', ['ngResource'])
     })
    /**
     * @ngdoc service
+    * @name billingSvcs.Balance
+    * @description
+    * Balance Service for interaction with Billing API
+    *
+    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    */
+    .factory('Balance', function ($resource, Transform) {
+        var transform = Transform('balance', 'details');
+        return $resource('/api/billing/:id/balance',
+            {
+                id: '@id'
+            },
+            {
+                get: { method: 'GET', transformResponse: transform }
+            }
+        );
+    })
+   /**
+    * @ngdoc service
     * @name billingSvcs.Period
     * @description
     * Period Service for interaction with Billing API

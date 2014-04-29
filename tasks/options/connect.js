@@ -33,7 +33,8 @@ module.exports = {
         rewrite: {
             '/api/payment': '/v1/accounts'
         }
-    }, {
+    },
+    {
         context: '/api',
         host: 'localhost',
         port: 3000,

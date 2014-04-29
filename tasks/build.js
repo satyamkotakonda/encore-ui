@@ -15,10 +15,10 @@ module.exports = function (grunt) {
             //'uglify',
             'rev',
             'usemin',
-            //'docs',
-            //'shell:commitPush',
-            //'copy:plato',
-            //'copyCoverage',
+            // 'docs',
+            // //'shell:commitPush',
+            // 'copy:plato',
+            // 'copyCoverage',
         ]
     );
 };

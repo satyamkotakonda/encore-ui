@@ -5,10 +5,10 @@
             <dt class="accent">Current Amount Due:</dt>
             <dd class="accent accent-group">
                 <span class="accent-text">
-                    <span ng-if="account.currentDue">
-                        {{account.currentDue | currency }}
+                    <span ng-if="balance.amountDue">
+                        {{balance.amountDue | currency }} ({{balance.currency}})
                     </span>
-                    <span ng-if="!account.currentDue">
+                    <span ng-if="!balance.amountDue">
                         N/A
                     </span>
                 </span>
@@ -25,16 +25,16 @@
                 </span>
             </dd>
             <dt>Account Balance:</dt>
-            <dd ng-if="account.balance">{{account.balance | currency }}</dd>
-            <dd ng-if="!account.balance">N/A</dd>
+            <dd ng-if="balance.currentBalance">{{balance.currentBalance | currency }}</dd>
+            <dd ng-if="!balance.currentBalance">N/A</dd>
             <dt>Past Due:</dt>
-            <dd ng-if="account.pastDue">{{account.pastDue | currency }}</dd>
-            <dd ng-if="!account.pastDue">N/A</dd>
+            <dd ng-if="balance.pastDue">{{balance.pastDue | currency }}</dd>
+            <dd ng-if="!balance.pastDue">N/A</dd>
         </dl>
         <dl class="list-definition pull-right">
             <dt>Currency:</dt>
-            <dd ng-if="account.currencyType">{{account.currencyType}}</dd>
-            <dd ng-if="!account.currencyType">N/A</dd>
+            <dd ng-if="balance.currency">{{balance.currency}}</dd>
+            <dd ng-if="!balance.currency">N/A</dd>
             <dt>Terms:</dt>
             <dd ng-if="account.terms">{{account.terms}}</dd>
             <dd ng-if="!account.terms">N/A</dd>
