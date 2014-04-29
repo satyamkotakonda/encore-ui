@@ -1,2490 +1,2182 @@
-[
-  {
-    "reference": "50977603",
-    "date": "2014-01-02T03:42:28.958Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -11.378992513054982,
-    "balance": 0
-  },
-  {
-    "reference": "26034609",
-    "date": "2013-07-14T16:43:38.049Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 4.12360714841634,
-    "balance": 4.12360714841634
-  },
-  {
-    "reference": "59400044",
-    "date": "2013-08-14T05:02:41.214Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": -11.772235081996769,
-    "balance": -7.648627933580428
-  },
-  {
-    "reference": "59896375",
-    "date": "2013-11-12T17:10:15.999Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -7.3051205445081,
-    "balance": -14.953748478088528
-  },
-  {
-    "reference": "62985984",
-    "date": "2013-06-13T23:48:21.690Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": -13.849712662864476,
-    "balance": -28.803461140953004
-  },
-  {
-    "reference": "1050796",
-    "date": "2013-08-16T00:46:14.232Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 12.04257988720201,
-    "balance": -16.760881253750995
-  },
-  {
-    "reference": "70012210",
-    "date": "2013-06-15T01:40:44.293Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": 20.743916863342747,
-    "balance": 3.9830356095917523
-  },
-  {
-    "reference": "68412558",
-    "date": "2013-11-18T22:06:34.485Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": 11.43512897263281,
-    "balance": 15.418164582224563
-  },
-  {
-    "reference": "24505106",
-    "date": "2013-07-23T20:30:26.545Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -15.301039083162323,
-    "balance": 0.11712549906224012
-  },
-  {
-    "reference": "79573685",
-    "date": "2013-11-04T17:30:55.834Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": 17.134638853836805,
-    "balance": 17.251764352899045
-  },
-  {
-    "reference": "63473625",
-    "date": "2013-08-06T01:22:52.913Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 27.760363672859967,
-    "balance": 45.01212802575901
-  },
-  {
-    "reference": "75388699",
-    "date": "2013-10-10T08:09:42.575Z",
-    "type": "Invoice",
-    "status": "Settled",
-    "amount": -17.558544907718897,
-    "balance": 27.453583118040115
-  },
-  {
-    "reference": "38924959",
-    "date": "2013-10-09T23:05:10.198Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -30.64478362980299,
-    "balance": -3.191200511762876
-  },
-  {
-    "reference": "33404806",
-    "date": "2013-10-18T15:52:04.877Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -26.128814719151706,
-    "balance": -29.32001523091458
-  },
-  {
-    "reference": "39276646",
-    "date": "2013-07-04T04:49:09.776Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 32.46788449608721,
-    "balance": 3.147869265172627
-  },
-  {
-    "reference": "32075755",
-    "date": "2013-12-30T07:10:21.455Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -25.720206261612475,
-    "balance": -22.572336996439848
-  },
-  {
-    "reference": "2146299",
-    "date": "2013-10-17T18:21:51.163Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -34.47591519076377,
-    "balance": -57.048252187203616
-  },
-  {
-    "reference": "74058061",
-    "date": "2013-07-12T03:20:07.301Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 29.019991143839434,
-    "balance": -28.028261043364182
-  },
-  {
-    "reference": "2755996",
-    "date": "2013-08-14T10:52:53.394Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -38.14714355324395,
-    "balance": -66.17540459660813
-  },
-  {
-    "reference": "51653462",
-    "date": "2013-07-23T21:18:46.482Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": 33.37659004633315,
-    "balance": -32.79881455027498
-  },
-  {
-    "reference": "60378643",
-    "date": "2013-12-12T07:35:21.960Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": -43.087416897760704,
-    "balance": -75.88623144803569
-  },
-  {
-    "reference": "6959710",
-    "date": "2013-11-12T10:14:19.084Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": 33.46516768075526,
-    "balance": -42.42106376728043
-  },
-  {
-    "reference": "50045377",
-    "date": "2013-08-25T16:28:19.341Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -41.80951986531727,
-    "balance": -84.2305836325977
-  },
-  {
-    "reference": "42650076",
-    "date": "2013-08-25T01:58:41.004Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -40.62026637420058,
-    "balance": -124.85085000679828
-  },
-  {
-    "reference": "42682961",
-    "date": "2014-01-30T17:25:55.809Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": -39.75124646583572,
-    "balance": -164.602096472634
-  },
-  {
-    "reference": "34233157",
-    "date": "2013-07-14T07:31:35.891Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": -50.725928322644904,
-    "balance": -215.3280247952789
-  },
-  {
-    "reference": "12515210",
-    "date": "2013-06-07T05:16:31.580Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -53.312030071159825,
-    "balance": -268.64005486643873
-  },
-  {
-    "reference": "40430360",
-    "date": "2013-07-31T16:12:37.236Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": -52.14856672869064,
-    "balance": -320.78862159512937
-  },
-  {
-    "reference": "77429402",
-    "date": "2013-08-13T15:11:53.646Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": -49.262377040460706,
-    "balance": -370.0509986355901
-  },
-  {
-    "reference": "32339969",
-    "date": "2013-12-10T06:55:47.705Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": 51.99468233180232,
-    "balance": -318.05631630378775
-  },
-  {
-    "reference": "93894867",
-    "date": "2013-11-23T11:30:26.813Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": 52.025287830037996,
-    "balance": -266.03102847374976
-  },
-  {
-    "reference": "3827588",
-    "date": "2013-06-04T02:18:51.427Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -55.30508547881618,
-    "balance": -321.33611395256594
-  },
-  {
-    "reference": "16029742",
-    "date": "2013-11-12T12:28:04.847Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": 50.29023793945089,
-    "balance": -271.04587601311505
-  },
-  {
-    "reference": "51359802",
-    "date": "2013-10-10T05:18:52.150Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 51.15037162019871,
-    "balance": -219.89550439291634
-  },
-  {
-    "reference": "31880678",
-    "date": "2013-08-30T11:23:29.252Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 54.946778546087444,
-    "balance": -164.9487258468289
-  },
-  {
-    "reference": "1090619",
-    "date": "2013-09-04T11:42:17.266Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -65.77445292728953,
-    "balance": -230.72317877411842
-  },
-  {
-    "reference": "74793671",
-    "date": "2013-06-18T20:03:42.118Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": -62.85970511706545,
-    "balance": -293.5828838911839
-  },
-  {
-    "reference": "97411311",
-    "date": "2014-01-24T13:46:40.015Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -57.829788291826844,
-    "balance": -351.4126721830107
-  },
-  {
-    "reference": "4378738",
-    "date": "2014-01-02T05:46:58.257Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": -70.05016231024638,
-    "balance": -421.4628344932571
-  },
-  {
-    "reference": "25717798",
-    "date": "2013-12-26T20:27:04.324Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -61.14980989624747,
-    "balance": -482.61264438950457
-  },
-  {
-    "reference": "1309042",
-    "date": "2014-01-03T06:12:43.328Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": -74.49855591519736,
-    "balance": -557.1112003047019
-  },
-  {
-    "reference": "23736157",
-    "date": "2013-07-14T19:48:12.893Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -62.402589834295206,
-    "balance": -619.5137901389971
-  },
-  {
-    "reference": "20417614",
-    "date": "2013-08-13T05:52:24.540Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": 70.29647035826929,
-    "balance": -549.2173197807278
-  },
-  {
-    "reference": "39966264",
-    "date": "2013-10-04T22:18:24.127Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": -79.17672394355759,
-    "balance": -628.3940437242854
-  },
-  {
-    "reference": "80053995",
-    "date": "2013-11-25T18:29:33.670Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": 78.36796642653644,
-    "balance": -550.026077297749
-  },
-  {
-    "reference": "13701104",
-    "date": "2013-07-03T13:57:03.550Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": -76.63527324213646,
-    "balance": -626.6613505398855
-  },
-  {
-    "reference": "72292591",
-    "date": "2013-08-22T00:03:11.204Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 78.23724261461757,
-    "balance": -548.4241079252679
-  },
-  {
-    "reference": "21324722",
-    "date": "2013-12-11T18:39:11.510Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": 80.36615356989205,
-    "balance": -468.05795435537584
-  },
-  {
-    "reference": "76890097",
-    "date": "2013-09-10T20:04:29.521Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": -77.54670085315593,
-    "balance": -545.6046552085318
-  },
-  {
-    "reference": "70494247",
-    "date": "2013-09-04T12:12:35.140Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -86.8019967097789,
-    "balance": -632.4066519183107
-  },
-  {
-    "reference": "35966101",
-    "date": "2013-07-17T12:01:00.931Z",
-    "type": "Invoice",
-    "status": "Settled",
-    "amount": 83.5726915136911,
-    "balance": -548.8339604046196
-  },
-  {
-    "reference": "19643570",
-    "date": "2013-06-30T02:26:48.648Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": -87.03906669840217,
-    "balance": -635.8730271030217
-  },
-  {
-    "reference": "40986030",
-    "date": "2014-01-09T11:31:07.270Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": 83.88995053782128,
-    "balance": -551.9830765652005
-  },
-  {
-    "reference": "814981",
-    "date": "2013-09-14T15:53:17.373Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 82.62504184548743,
-    "balance": -469.35803471971303
-  },
-  {
-    "reference": "83556247",
-    "date": "2013-06-25T07:17:33.224Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -88.20058294711635,
-    "balance": -557.5586176668294
-  },
-  {
-    "reference": "1323893",
-    "date": "2013-06-13T20:09:24.674Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 83.88176618842408,
-    "balance": -473.6768514784053
-  },
-  {
-    "reference": "26700758",
-    "date": "2013-08-10T05:55:35.336Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": -91.90123817743734,
-    "balance": -565.5780896558426
-  },
-  {
-    "reference": "10441164",
-    "date": "2013-08-05T03:17:30.438Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -100.20479197218083,
-    "balance": -665.7828816280235
-  },
-  {
-    "reference": "5395492",
-    "date": "2013-12-13T16:21:28.067Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": 87.41788523783907,
-    "balance": -578.3649963901844
-  },
-  {
-    "reference": "73623540",
-    "date": "2013-07-01T06:16:11.814Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 96.93009720440023,
-    "balance": -481.43489918578416
-  },
-  {
-    "reference": "75599914",
-    "date": "2013-10-20T21:45:21.147Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 94.9617678928189,
-    "balance": -386.47313129296526
-  },
-  {
-    "reference": "59479603",
-    "date": "2013-06-16T11:06:11.988Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -98.5163094252348,
-    "balance": -484.98944071820006
-  },
-  {
-    "reference": "22099840",
-    "date": "2013-11-02T09:46:43.721Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": 95.68474294804037,
-    "balance": -389.3046977701597
-  },
-  {
-    "reference": "80273531",
-    "date": "2014-02-03T21:54:40.703Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 105.59551360365003,
-    "balance": -283.70918416650966
-  },
-  {
-    "reference": "6343802",
-    "date": "2013-11-28T10:30:22.003Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": 102.6504323668778,
-    "balance": -181.05875179963186
-  },
-  {
-    "reference": "84991322",
-    "date": "2013-11-24T05:18:50.581Z",
-    "type": "Invoice",
-    "status": "Settled",
-    "amount": 102.7863362885546,
-    "balance": -78.27241551107727
-  },
-  {
-    "reference": "88057741",
-    "date": "2013-11-26T18:51:49.778Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": 106.94697173405439,
-    "balance": 28.674556222977117
-  },
-  {
-    "reference": "38668188",
-    "date": "2013-10-31T10:02:23.565Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -112.60522951092571,
-    "balance": -83.9306732879486
-  },
-  {
-    "reference": "80784897",
-    "date": "2013-12-01T04:45:54.335Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": 116.76885781623423,
-    "balance": 32.83818452828564
-  },
-  {
-    "reference": "20802868",
-    "date": "2013-11-02T12:26:25.644Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -110.71944806864485,
-    "balance": -77.88126354035921
-  },
-  {
-    "reference": "40994567",
-    "date": "2013-11-25T17:05:51.942Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -117.32036970206536,
-    "balance": -195.20163324242458
-  },
-  {
-    "reference": "49558690",
-    "date": "2014-02-07T02:49:27.302Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": -116.55922303302214,
-    "balance": -311.7608562754467
-  },
-  {
-    "reference": "51581236",
-    "date": "2013-10-26T06:47:25.410Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": 114.33204910322092,
-    "balance": -197.4288071722258
-  },
-  {
-    "reference": "15556490",
-    "date": "2014-01-25T12:09:08.275Z",
-    "type": "Invoice",
-    "status": "Settled",
-    "amount": -110.73054708587006,
-    "balance": -308.15935425809585
-  },
-  {
-    "reference": "32209835",
-    "date": "2013-12-31T20:58:40.526Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 119.19339927169494,
-    "balance": -188.9659549864009
-  },
-  {
-    "reference": "42245419",
-    "date": "2013-08-25T13:11:37.438Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 126.5753136947751,
-    "balance": -62.3906412916258
-  },
-  {
-    "reference": "48533741",
-    "date": "2013-10-11T20:26:33.839Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": 121.87041842588224,
-    "balance": 59.47977713425644
-  },
-  {
-    "reference": "97347371",
-    "date": "2013-08-02T16:59:27.368Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": -122.18148323195054,
-    "balance": -62.7017060976941
-  },
-  {
-    "reference": "30787844",
-    "date": "2014-01-14T08:36:20.724Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": 128.11223303480074,
-    "balance": 65.41052693710664
-  },
-  {
-    "reference": "5057658",
-    "date": "2013-06-26T17:13:07.037Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 129.14518883242272,
-    "balance": 194.55571576952934
-  },
-  {
-    "reference": "61852921",
-    "date": "2013-11-18T03:23:06.002Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -134.05941732111387,
-    "balance": 60.49629844841547
-  },
-  {
-    "reference": "82295954",
-    "date": "2013-09-29T11:41:27.672Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -127.94148934283294,
-    "balance": -67.44519089441746
-  },
-  {
-    "reference": "45599992",
-    "date": "2013-08-10T12:06:46.207Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": 124.71183581580406,
-    "balance": 57.2666449213866
-  },
-  {
-    "reference": "75293952",
-    "date": "2013-06-29T02:13:49.657Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": -138.62046813871711,
-    "balance": -81.35382321733051
-  },
-  {
-    "reference": "32415844",
-    "date": "2013-11-07T20:03:21.295Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -132.7701635963749,
-    "balance": -214.12398681370541
-  },
-  {
-    "reference": "84304113",
-    "date": "2013-06-17T05:44:55.100Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": 139.41597164492123,
-    "balance": -74.70801516878419
-  },
-  {
-    "reference": "71459889",
-    "date": "2013-09-15T21:10:21.670Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 130.8388641520869,
-    "balance": 56.13084898330271
-  },
-  {
-    "reference": "44684864",
-    "date": "2013-09-18T00:34:51.055Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": 134.95847433060408,
-    "balance": 191.0893233139068
-  },
-  {
-    "reference": "506935",
-    "date": "2013-11-02T05:52:02.930Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": -145.30998872872442,
-    "balance": 45.77933458518237
-  },
-  {
-    "reference": "3784909",
-    "date": "2013-08-30T04:42:18.162Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -136.78680688049644,
-    "balance": -91.00747229531407
-  },
-  {
-    "reference": "69422636",
-    "date": "2013-12-12T21:44:41.379Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -145.15535043901764,
-    "balance": -236.1628227343317
-  },
-  {
-    "reference": "86711699",
-    "date": "2013-08-11T05:19:34.177Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 138.67693064245395,
-    "balance": -97.48589209187776
-  },
-  {
-    "reference": "55856352",
-    "date": "2014-01-22T01:38:39.912Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": 146.5624750633724,
-    "balance": 49.076582971494645
-  },
-  {
-    "reference": "38004182",
-    "date": "2013-09-21T07:29:21.479Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": -148.54398120939732,
-    "balance": -99.46739823790267
-  },
-  {
-    "reference": "79458643",
-    "date": "2013-09-18T04:39:21.403Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 155.49858474894427,
-    "balance": 56.0311865110416
-  },
-  {
-    "reference": "72922747",
-    "date": "2014-01-10T09:48:06.461Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": -154.24125611549243,
-    "balance": -98.21006960445084
-  },
-  {
-    "reference": "58680407",
-    "date": "2013-07-27T06:24:18.689Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -149.56432745070197,
-    "balance": -247.7743970551528
-  },
-  {
-    "reference": "21746121",
-    "date": "2013-10-05T16:33:22.844Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": -156.78205341752619,
-    "balance": -404.556450472679
-  },
-  {
-    "reference": "75878870",
-    "date": "2013-11-30T11:56:09.668Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -148.6147168725729,
-    "balance": -553.1711673452519
-  },
-  {
-    "reference": "93837396",
-    "date": "2013-07-05T20:29:37.877Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": 148.63098489493132,
-    "balance": -404.5401824503206
-  },
-  {
-    "reference": "90625023",
-    "date": "2014-01-24T19:48:38.456Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": 153.00989154959098,
-    "balance": -251.5302909007296
-  },
-  {
-    "reference": "21258586",
-    "date": "2013-11-10T21:06:50.702Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": -158.4413179415278,
-    "balance": -409.9716088422574
-  },
-  {
-    "reference": "12421802",
-    "date": "2013-07-08T02:54:58.875Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": 164.3316341000609,
-    "balance": -245.6399747421965
-  },
-  {
-    "reference": "87060877",
-    "date": "2013-10-21T08:14:38.509Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": -154.73775486275554,
-    "balance": -400.37772960495204
-  },
-  {
-    "reference": "16127900",
-    "date": "2013-07-01T09:33:14.463Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": -163.49407379887998,
-    "balance": -563.871803403832
-  },
-  {
-    "reference": "6494119",
-    "date": "2013-11-21T04:52:33.018Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -162.57214483455755,
-    "balance": -726.4439482383896
-  },
-  {
-    "reference": "89008699",
-    "date": "2014-01-28T20:45:34.535Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": -172.52666644379497,
-    "balance": -898.9706146821845
-  },
-  {
-    "reference": "5644979",
-    "date": "2013-06-27T11:34:49.387Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 173.9932254126761,
-    "balance": -724.9773892695084
-  },
-  {
-    "reference": "37376919",
-    "date": "2013-08-24T20:13:02.801Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 174.45919598615728,
-    "balance": -550.5181932833511
-  },
-  {
-    "reference": "37688367",
-    "date": "2013-08-23T20:49:26.783Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": 165.03609265456907,
-    "balance": -385.48210062878206
-  },
-  {
-    "reference": "33623813",
-    "date": "2014-02-01T06:26:57.419Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": -177.64778470038436,
-    "balance": -563.1298853291664
-  },
-  {
-    "reference": "19976855",
-    "date": "2014-02-06T09:56:11.538Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": 173.2516355321277,
-    "balance": -389.87824979703873
-  },
-  {
-    "reference": "16631318",
-    "date": "2013-07-23T04:14:24.686Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -171.43670180649497,
-    "balance": -561.3149516035337
-  },
-  {
-    "reference": "25509180",
-    "date": "2013-11-21T10:51:41.694Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 180.7985140469391,
-    "balance": -380.5164375565946
-  },
-  {
-    "reference": "4166084",
-    "date": "2013-11-24T17:36:12.147Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": -184.63808458554558,
-    "balance": -565.1545221421402
-  },
-  {
-    "reference": "48023719",
-    "date": "2014-01-01T15:12:04.114Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 177.40616617142223,
-    "balance": -387.74835597071797
-  },
-  {
-    "reference": "28293069",
-    "date": "2014-01-23T19:25:22.559Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": 181.3529248300474,
-    "balance": -206.39543114067055
-  },
-  {
-    "reference": "71612552",
-    "date": "2013-10-06T16:11:55.985Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": 185.40425144322217,
-    "balance": -20.991179697448388
-  },
-  {
-    "reference": "30207276",
-    "date": "2014-01-29T11:28:06.969Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 186.80343640199862,
-    "balance": 165.81225670455024
-  },
-  {
-    "reference": "35174487",
-    "date": "2013-11-17T09:20:50.124Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": -182.40001622610725,
-    "balance": -16.587759521557018
-  },
-  {
-    "reference": "37672424",
-    "date": "2013-08-22T03:17:08.722Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -180.6332942575682,
-    "balance": -197.2210537791252
-  },
-  {
-    "reference": "65018310",
-    "date": "2013-07-28T01:54:52.841Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 188.26410076674074,
-    "balance": -8.956953012384474
-  },
-  {
-    "reference": "9981536",
-    "date": "2013-08-02T04:51:44.888Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": -187.6572556591127,
-    "balance": -196.61420867149718
-  },
-  {
-    "reference": "89899901",
-    "date": "2013-09-16T06:55:58.765Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": 186.30625844048336,
-    "balance": -10.30795023101382
-  },
-  {
-    "reference": "59217753",
-    "date": "2013-12-26T13:57:06.085Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": -186.28638732153922,
-    "balance": -196.59433755255304
-  },
-  {
-    "reference": "20848289",
-    "date": "2013-06-21T05:49:39.119Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": 193.66743615246378,
-    "balance": -2.926901400089264
-  },
-  {
-    "reference": "98820534",
-    "date": "2013-10-08T16:32:06.311Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": 199.71510365232825,
-    "balance": 196.788202252239
-  },
-  {
-    "reference": "67829980",
-    "date": "2013-09-06T20:42:48.850Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": -195.9215273342561,
-    "balance": 0.8666749179828912
-  },
-  {
-    "reference": "31528701",
-    "date": "2013-08-23T19:48:56.033Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": 205.68195574264973,
-    "balance": 206.54863066063263
-  },
-  {
-    "reference": "16977526",
-    "date": "2013-12-30T23:39:18.359Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": 208.05177626456134,
-    "balance": 414.60040692519397
-  },
-  {
-    "reference": "34183980",
-    "date": "2013-06-22T01:50:34.330Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": 201.94170848932117,
-    "balance": 616.5421154145151
-  },
-  {
-    "reference": "39111741",
-    "date": "2013-08-09T16:44:27.794Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -201.77835397864692,
-    "balance": 414.7637614358682
-  },
-  {
-    "reference": "42291922",
-    "date": "2013-08-21T09:23:25.123Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 203.75028363266028,
-    "balance": 618.5140450685285
-  },
-  {
-    "reference": "16322450",
-    "date": "2013-12-06T21:56:06.024Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 206.1689578606747,
-    "balance": 824.6830029292032
-  },
-  {
-    "reference": "10437282",
-    "date": "2013-08-23T07:00:14.656Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": -210.97303614858538,
-    "balance": 613.7099667806178
-  },
-  {
-    "reference": "56928598",
-    "date": "2013-09-28T18:00:44.861Z",
-    "type": "Invoice",
-    "status": "Settled",
-    "amount": 206.58876903704368,
-    "balance": 820.2987358176615
-  },
-  {
-    "reference": "45993797",
-    "date": "2013-09-17T08:03:56.951Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -212.40370331774466,
-    "balance": 607.8950324999169
-  },
-  {
-    "reference": "99325938",
-    "date": "2013-08-22T11:30:14.523Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 215.3359359812457,
-    "balance": 823.2309684811626
-  },
-  {
-    "reference": "41011651",
-    "date": "2013-12-27T05:42:04.761Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 216.57402094616555,
-    "balance": 1039.804989427328
-  },
-  {
-    "reference": "31034126",
-    "date": "2013-08-30T18:05:14.523Z",
-    "type": "Invoice",
-    "status": "Settled",
-    "amount": 212.82912583462894,
-    "balance": 1252.634115261957
-  },
-  {
-    "reference": "92694532",
-    "date": "2014-01-18T21:14:46.283Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": -222.16187149635516,
-    "balance": 1030.472243765602
-  },
-  {
-    "reference": "29106895",
-    "date": "2013-08-10T10:26:48.561Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": 222.07632124400698,
-    "balance": 1252.5485650096089
-  },
-  {
-    "reference": "60179564",
-    "date": "2013-10-22T22:11:11.097Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": 216.74429816147313,
-    "balance": 1469.292863171082
-  },
-  {
-    "reference": "88367192",
-    "date": "2013-11-04T01:39:37.627Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": -216.74929010728374,
-    "balance": 1252.5435730637982
-  },
-  {
-    "reference": "29985619",
-    "date": "2013-12-10T08:39:58.531Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 225.05260562896729,
-    "balance": 1477.5961786927655
-  },
-  {
-    "reference": "73343971",
-    "date": "2014-01-10T14:08:39.811Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -231.69360573403537,
-    "balance": 1245.9025729587302
-  },
-  {
-    "reference": "64139999",
-    "date": "2013-10-02T02:53:13.737Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -223.95575834414922,
-    "balance": 1021.946814614581
-  },
-  {
-    "reference": "65888523",
-    "date": "2013-09-03T14:11:08.352Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": -221.7666249240283,
-    "balance": 800.1801896905527
-  },
-  {
-    "reference": "22672240",
-    "date": "2013-10-24T18:02:26.383Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": 226.07466442789882,
-    "balance": 1026.2548541184515
-  },
-  {
-    "reference": "22204683",
-    "date": "2014-01-03T05:23:55.980Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 225.53315989812836,
-    "balance": 1251.7880140165798
-  },
-  {
-    "reference": "36539542",
-    "date": "2013-09-03T14:37:42.684Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": -231.95778253138997,
-    "balance": 1019.8302314851899
-  },
-  {
-    "reference": "24773472",
-    "date": "2013-08-03T04:20:27.282Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": -228.16240750229917,
-    "balance": 791.6678239828907
-  },
-  {
-    "reference": "95029385",
-    "date": "2013-11-10T15:12:00.862Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": -229.43614073633216,
-    "balance": 562.2316832465585
-  },
-  {
-    "reference": "74496915",
-    "date": "2014-01-22T03:59:30.630Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 237.7142186688725,
-    "balance": 799.945901915431
-  },
-  {
-    "reference": "32027679",
-    "date": "2014-01-02T02:05:00.237Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": -235.25499786855653,
-    "balance": 564.6909040468745
-  },
-  {
-    "reference": "41746132",
-    "date": "2013-07-18T22:29:58.308Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": -244.75740928086452,
-    "balance": 319.93349476600997
-  },
-  {
-    "reference": "32842207",
-    "date": "2013-06-14T04:26:19.055Z",
-    "type": "Invoice",
-    "status": "Settled",
-    "amount": -237.8512463180814,
-    "balance": 82.08224844792858
-  },
-  {
-    "reference": "37452793",
-    "date": "2014-01-20T06:10:29.518Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -240.32194822398014,
-    "balance": -158.23969977605157
-  },
-  {
-    "reference": "77039869",
-    "date": "2013-10-26T21:09:44.809Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": 240.10655919020064,
-    "balance": 81.86685941414908
-  },
-  {
-    "reference": "63782056",
-    "date": "2013-06-27T04:28:39.668Z",
-    "type": "Invoice",
-    "status": "Settled",
-    "amount": -239.17153494106606,
-    "balance": -157.30467552691698
-  },
-  {
-    "reference": "14016947",
-    "date": "2014-02-10T21:52:49.488Z",
-    "type": "Invoice",
-    "status": "Settled",
-    "amount": -247.55740301683545,
-    "balance": -404.86207854375243
-  },
-  {
-    "reference": "13508012",
-    "date": "2013-08-10T12:14:00.235Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 254.13020184240307,
-    "balance": -150.73187670134936
-  },
-  {
-    "reference": "29950760",
-    "date": "2014-02-06T05:34:30.537Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -244.5843533165753,
-    "balance": -395.3162300179247
-  },
-  {
-    "reference": "67064254",
-    "date": "2014-02-13T12:37:43.017Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -247.41150413802825,
-    "balance": -642.7277341559529
-  },
-  {
-    "reference": "25004583",
-    "date": "2013-10-10T07:21:12.850Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": 251.3148246661294,
-    "balance": -391.4129094898235
-  },
-  {
-    "reference": "30919414",
-    "date": "2013-11-05T04:53:31.540Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 250.19926297827624,
-    "balance": -141.21364651154727
-  },
-  {
-    "reference": "12565758",
-    "date": "2013-09-25T10:00:57.565Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": -260.1359510477632,
-    "balance": -401.3495975593105
-  },
-  {
-    "reference": "38554678",
-    "date": "2013-10-31T14:13:34.532Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": 255.4673569353763,
-    "balance": -145.8822406239342
-  },
-  {
-    "reference": "38743000",
-    "date": "2013-11-19T01:39:16.693Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -252.33964615082368,
-    "balance": -398.2218867747579
-  },
-  {
-    "reference": "73869254",
-    "date": "2013-09-05T11:20:21.288Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": -266.88339900481515,
-    "balance": -665.105285779573
-  },
-  {
-    "reference": "78475333",
-    "date": "2013-11-14T20:29:13.720Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 269.2896201554686,
-    "balance": -395.81566562410444
-  },
-  {
-    "reference": "17016609",
-    "date": "2014-02-01T05:55:55.521Z",
-    "type": "Invoice",
-    "status": "Settled",
-    "amount": -258.4286422280129,
-    "balance": -654.2443078521173
-  },
-  {
-    "reference": "63074106",
-    "date": "2013-12-17T20:28:09.391Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": 267.12449795985594,
-    "balance": -387.1198098922614
-  },
-  {
-    "reference": "88662698",
-    "date": "2013-09-22T20:07:05.623Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": 264.6768209785223,
-    "balance": -122.4429889137391
-  },
-  {
-    "reference": "51654906",
-    "date": "2013-10-04T15:41:12.171Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -264.1544115312863,
-    "balance": -386.5974004450254
-  },
-  {
-    "reference": "23211693",
-    "date": "2013-06-28T13:08:29.320Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -265.7089037646074,
-    "balance": -652.3063042096328
-  },
-  {
-    "reference": "72908889",
-    "date": "2013-06-01T20:59:34.899Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -266.35980449826457,
-    "balance": -918.6661087078974
-  },
-  {
-    "reference": "82059190",
-    "date": "2013-07-21T13:50:42.090Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 269.89323524711654,
-    "balance": -648.7728734607808
-  },
-  {
-    "reference": "9826514",
-    "date": "2013-06-02T17:16:08.597Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 281.39570156042464,
-    "balance": -367.3771719003562
-  },
-  {
-    "reference": "28691621",
-    "date": "2013-07-23T16:26:42.273Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 274.39739466668107,
-    "balance": -92.97977723367512
-  },
-  {
-    "reference": "11156315",
-    "date": "2013-11-05T09:12:08.731Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 280.0139828666579,
-    "balance": 187.03420563298278
-  },
-  {
-    "reference": "99391539",
-    "date": "2013-08-21T15:34:51.878Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 277.91403599409387,
-    "balance": 464.94824162707664
-  },
-  {
-    "reference": "54243096",
-    "date": "2013-12-18T21:58:01.110Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 278.3358955308795,
-    "balance": 743.2841371579561
-  },
-  {
-    "reference": "35654702",
-    "date": "2013-06-25T01:38:10.451Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -279.1105683397036,
-    "balance": 464.17356881825253
-  },
-  {
-    "reference": "6266903",
-    "date": "2014-02-05T17:46:21.122Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 286.87040234939195,
-    "balance": 751.0439711676445
-  },
-  {
-    "reference": "46712745",
-    "date": "2013-12-21T13:48:54.900Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -289.49762149946764,
-    "balance": 461.54634966817684
-  },
-  {
-    "reference": "15580913",
-    "date": "2013-07-21T22:23:34.618Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -283.36121816863306,
-    "balance": 178.1851314995438
-  },
-  {
-    "reference": "51032103",
-    "date": "2013-06-17T03:51:36.712Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": -287.5799521508161,
-    "balance": -109.39482065127231
-  },
-  {
-    "reference": "85905915",
-    "date": "2013-06-26T15:09:22.561Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": 296.3404519977048,
-    "balance": 186.9456313464325
-  },
-  {
-    "reference": "71388673",
-    "date": "2013-08-27T12:54:11.740Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 290.3513423879631,
-    "balance": 477.2969737343956
-  },
-  {
-    "reference": "29249020",
-    "date": "2013-09-26T10:41:20.744Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -290.74315249803476,
-    "balance": 186.55382123636082
-  },
-  {
-    "reference": "88019313",
-    "date": "2013-09-07T12:36:49.997Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 293.7880484908819,
-    "balance": 480.34186972724274
-  },
-  {
-    "reference": "26082874",
-    "date": "2013-10-08T07:19:34.293Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": 297.1963552508969,
-    "balance": 777.5382249781396
-  },
-  {
-    "reference": "4349502",
-    "date": "2013-10-20T11:38:29.499Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -290.9331164653413,
-    "balance": 486.6051085127983
-  },
-  {
-    "reference": "51559379",
-    "date": "2013-08-13T17:35:47.543Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 299.97236646618694,
-    "balance": 786.5774749789853
-  },
-  {
-    "reference": "87543354",
-    "date": "2013-07-29T08:05:39.066Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": -298.6928490840364,
-    "balance": 487.88462589494884
-  },
-  {
-    "reference": "77572508",
-    "date": "2013-12-18T19:12:45.084Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 295.56231826753356,
-    "balance": 783.4469441624824
-  },
-  {
-    "reference": "20367067",
-    "date": "2013-07-15T19:39:50.308Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 309.57055969932117,
-    "balance": 1093.0175038618036
-  },
-  {
-    "reference": "70757056",
-    "date": "2013-10-14T09:30:47.142Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": 308.9055132160429,
-    "balance": 1401.9230170778465
-  },
-  {
-    "reference": "59930206",
-    "date": "2013-08-22T15:52:01.351Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -299.91338861896656,
-    "balance": 1102.00962845888
-  },
-  {
-    "reference": "73830147",
-    "date": "2013-07-21T20:20:51.940Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -314.5119067223277,
-    "balance": 787.4977217365522
-  },
-  {
-    "reference": "61891520",
-    "date": "2013-06-18T18:26:31.777Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": -309.59390560607426,
-    "balance": 477.90381613047794
-  },
-  {
-    "reference": "78554975",
-    "date": "2014-01-20T20:38:43.559Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": 308.51783110946417,
-    "balance": 786.4216472399421
-  },
-  {
-    "reference": "3039299",
-    "date": "2013-10-06T03:50:38.553Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": 309.53799506812356,
-    "balance": 1095.9596423080657
-  },
-  {
-    "reference": "43755606",
-    "date": "2013-07-24T00:08:26.662Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 318.7414978318848,
-    "balance": 1414.7011401399504
-  },
-  {
-    "reference": "4690784",
-    "date": "2014-01-09T15:34:32.106Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 322.4134520685766,
-    "balance": 1737.114592208527
-  },
-  {
-    "reference": "55502061",
-    "date": "2013-08-08T22:14:25.759Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 321.75145189720206,
-    "balance": 2058.866044105729
-  },
-  {
-    "reference": "49420130",
-    "date": "2013-06-05T20:58:56.446Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": 324.35919156717137,
-    "balance": 2383.2252356729005
-  },
-  {
-    "reference": "56202026",
-    "date": "2014-01-16T05:36:50.133Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": 319.05183102283627,
-    "balance": 2702.2770666957367
-  },
-  {
-    "reference": "38662878",
-    "date": "2013-07-03T07:06:03.902Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": -325.7362753772177,
-    "balance": 2376.540791318519
-  },
-  {
-    "reference": "34774918",
-    "date": "2013-06-01T09:27:32.465Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -327.66988293849863,
-    "balance": 2048.8709083800204
-  },
-  {
-    "reference": "11760268",
-    "date": "2014-01-08T13:52:39.325Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": -322.2900313404389,
-    "balance": 1726.5808770395815
-  },
-  {
-    "reference": "59877493",
-    "date": "2013-10-13T02:51:34.976Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 329.7209718609229,
-    "balance": 2056.3018489005044
-  },
-  {
-    "reference": "55037613",
-    "date": "2013-06-27T17:30:34.185Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 334.2795885242522,
-    "balance": 2390.5814374247566
-  },
-  {
-    "reference": "10047358",
-    "date": "2013-08-09T05:35:46.953Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": -334.0692320095841,
-    "balance": 2056.5122054151725
-  },
-  {
-    "reference": "54056802",
-    "date": "2013-11-27T19:27:14.685Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": 333.22660137782805,
-    "balance": 2389.7388067930005
-  },
-  {
-    "reference": "78228958",
-    "date": "2014-01-29T14:42:25.886Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -333.73882141755894,
-    "balance": 2055.9999853754416
-  },
-  {
-    "reference": "40299845",
-    "date": "2013-06-11T09:11:30.237Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 337.2372104851529,
-    "balance": 2393.2371958605945
-  },
-  {
-    "reference": "94368350",
-    "date": "2013-12-21T06:17:17.665Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -341.1894703998696,
-    "balance": 2052.047725460725
-  },
-  {
-    "reference": "72495429",
-    "date": "2013-08-19T05:12:44.483Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": -341.06407837732695,
-    "balance": 1710.983647083398
-  },
-  {
-    "reference": "16704225",
-    "date": "2013-10-19T16:57:11.231Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -336.66799165075645,
-    "balance": 1374.3156554326415
-  },
-  {
-    "reference": "95105974",
-    "date": "2013-06-28T10:57:59.092Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": -339.61621444299817,
-    "balance": 1034.6994409896433
-  },
-  {
-    "reference": "35857260",
-    "date": "2013-06-22T14:06:12.175Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -339.01416361285374,
-    "balance": 695.6852773767896
-  },
-  {
-    "reference": "72711223",
-    "date": "2013-11-15T13:35:49.863Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": 341.2244480922818,
-    "balance": 1036.9097254690714
-  },
-  {
-    "reference": "39529834",
-    "date": "2013-12-26T13:55:32.505Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -339.53654521750286,
-    "balance": 697.3731802515686
-  },
-  {
-    "reference": "61129897",
-    "date": "2014-01-27T11:56:44.851Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -348.14657252747566,
-    "balance": 349.2266077240929
-  },
-  {
-    "reference": "75019202",
-    "date": "2013-07-17T04:24:30.282Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 344.5082606419455,
-    "balance": 693.7348683660384
-  },
-  {
-    "reference": "38858647",
-    "date": "2013-08-22T17:32:26.357Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": -345.40404169424437,
-    "balance": 348.33082667179406
-  },
-  {
-    "reference": "98015566",
-    "date": "2014-01-22T13:41:13.701Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": -344.20600964385085,
-    "balance": 4.124817027943209
-  },
-  {
-    "reference": "66092327",
-    "date": "2014-01-19T04:42:48.510Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": -351.9164001233876,
-    "balance": -347.79158309544437
-  },
-  {
-    "reference": "12538510",
-    "date": "2013-08-01T01:42:58.739Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": -357.7435299544595,
-    "balance": -705.5351130499039
-  },
-  {
-    "reference": "42196039",
-    "date": "2014-01-22T21:55:16.417Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -351.3066904535517,
-    "balance": -1056.8418035034556
-  },
-  {
-    "reference": "21936627",
-    "date": "2013-12-31T16:55:45.530Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 359.7553829785902,
-    "balance": -697.0864205248654
-  },
-  {
-    "reference": "97527459",
-    "date": "2013-12-12T18:02:28.305Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 361.50718646286987,
-    "balance": -335.5792340619955
-  },
-  {
-    "reference": "8871903",
-    "date": "2013-09-17T06:42:36.210Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 357.2148980854545,
-    "balance": 21.635664023458958
-  },
-  {
-    "reference": "69777673",
-    "date": "2013-07-04T22:49:47.967Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -365.2822425181512,
-    "balance": -343.6465784946922
-  },
-  {
-    "reference": "23113541",
-    "date": "2013-10-08T10:47:06.219Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": -366.7070785872638,
-    "balance": -710.353657081956
-  },
-  {
-    "reference": "5156508",
-    "date": "2013-10-19T04:08:03.400Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -360.4804203619715,
-    "balance": -1070.8340774439275
-  },
-  {
-    "reference": "58037741",
-    "date": "2013-06-15T10:04:22.272Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -363.94186124252155,
-    "balance": -1434.775938686449
-  },
-  {
-    "reference": "21120906",
-    "date": "2014-01-18T02:02:43.345Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": 365.0345377405174,
-    "balance": -1069.7414009459317
-  },
-  {
-    "reference": "6792884",
-    "date": "2013-06-11T05:50:00.965Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": -373.6681448947638,
-    "balance": -1443.4095458406955
-  },
-  {
-    "reference": "80882287",
-    "date": "2013-10-10T02:20:24.833Z",
-    "type": "Invoice",
-    "status": "Settled",
-    "amount": 376.21729356679134,
-    "balance": -1067.1922522739042
-  },
-  {
-    "reference": "33744660",
-    "date": "2013-10-20T21:44:36.035Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 364.0648376320023,
-    "balance": -703.1274146419019
-  },
-  {
-    "reference": "9968148",
-    "date": "2013-09-28T18:51:37.293Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -376.06216652481817,
-    "balance": -1079.18958116672
-  },
-  {
-    "reference": "34548895",
-    "date": "2013-08-07T07:35:14.697Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 368.5947869592346,
-    "balance": -710.5947942074854
-  },
-  {
-    "reference": "44341439",
-    "date": "2014-02-02T14:43:47.793Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 379.6893180347979,
-    "balance": -330.9054761726875
-  },
-  {
-    "reference": "20952624",
-    "date": "2013-07-31T19:33:59.466Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": 373.8905297520105,
-    "balance": 42.985053579322994
-  },
-  {
-    "reference": "68010007",
-    "date": "2013-10-13T16:54:35.055Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 374.8913734063972,
-    "balance": 417.8764269857202
-  },
-  {
-    "reference": "86638000",
-    "date": "2013-11-07T07:53:33.949Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": 376.87289149314165,
-    "balance": 794.7493184788618
-  },
-  {
-    "reference": "15384946",
-    "date": "2014-02-04T09:12:57.687Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": 374.6583937285468,
-    "balance": 1169.4077122074086
-  },
-  {
-    "reference": "8473032",
-    "date": "2013-08-20T03:49:22.906Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": -388.74564813100733,
-    "balance": 780.6620640764013
-  },
-  {
-    "reference": "70890353",
-    "date": "2013-11-08T20:26:59.937Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 391.07798998919316,
-    "balance": 1171.7400540655944
-  },
-  {
-    "reference": "17643177",
-    "date": "2013-10-04T00:30:31.209Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 381.61605677520856,
-    "balance": 1553.356110840803
-  },
-  {
-    "reference": "40785407",
-    "date": "2013-08-22T00:58:12.036Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -387.96342380158603,
-    "balance": 1165.392687039217
-  },
-  {
-    "reference": "72293470",
-    "date": "2013-11-30T21:30:13.252Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": 390.3950612889603,
-    "balance": 1555.7877483281773
-  },
-  {
-    "reference": "35397308",
-    "date": "2013-08-11T21:31:46.139Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -391.1646169249434,
-    "balance": 1164.6231314032339
-  },
-  {
-    "reference": "31247957",
-    "date": "2013-11-08T15:55:06.002Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": -391.47694698977284,
-    "balance": 773.146184413461
-  },
-  {
-    "reference": "27590989",
-    "date": "2013-07-04T02:07:29.721Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -395.99950876040384,
-    "balance": 377.1466756530572
-  },
-  {
-    "reference": "69083559",
-    "date": "2013-09-26T20:27:24.965Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 396.97449910850264,
-    "balance": 774.1211747615598
-  },
-  {
-    "reference": "973450",
-    "date": "2013-08-19T13:02:36.143Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": 397.26360840629786,
-    "balance": 1171.3847831678577
-  },
-  {
-    "reference": "35281165",
-    "date": "2014-01-05T15:40:06.365Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": -399.5910060661845,
-    "balance": 771.7937771016732
-  },
-  {
-    "reference": "15468820",
-    "date": "2013-12-21T06:46:48.371Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": 396.5914840749465,
-    "balance": 1168.3852611766197
-  },
-  {
-    "reference": "60377887",
-    "date": "2013-10-15T14:05:51.117Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 395.01313466532156,
-    "balance": 1563.3983958419412
-  },
-  {
-    "reference": "41783034",
-    "date": "2013-10-01T20:43:23.784Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -401.2400418233592,
-    "balance": 1162.158354018582
-  },
-  {
-    "reference": "61974228",
-    "date": "2013-11-20T13:35:48.957Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 402.6937476885505,
-    "balance": 1564.8521017071325
-  },
-  {
-    "reference": "22142056",
-    "date": "2013-08-31T15:24:28.456Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": -408.8725024124142,
-    "balance": 1155.9795992947184
-  },
-  {
-    "reference": "49379534",
-    "date": "2013-07-23T23:48:04.042Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": 399.98428728757426,
-    "balance": 1555.9638865822926
-  },
-  {
-    "reference": "34871879",
-    "date": "2013-09-21T14:21:42.211Z",
-    "type": "Invoice",
-    "status": "Settled",
-    "amount": 411.7123730464373,
-    "balance": 1967.67625962873
-  },
-  {
-    "reference": "21515122",
-    "date": "2013-10-23T21:14:06.601Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": 402.27811625157483,
-    "balance": 2369.9543758803047
-  },
-  {
-    "reference": "98401378",
-    "date": "2013-06-03T19:59:26.283Z",
-    "type": "Invoice",
-    "status": "Settled",
-    "amount": 416.8196979830973,
-    "balance": 2786.774073863402
-  },
-  {
-    "reference": "22364924",
-    "date": "2013-06-30T20:36:56.110Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 412.5851679837797,
-    "balance": 3199.3592418471817
-  },
-  {
-    "reference": "54931162",
-    "date": "2013-10-19T07:14:13.207Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -421.14981002616696,
-    "balance": 2778.2094318210147
-  },
-  {
-    "reference": "41219374",
-    "date": "2014-02-06T16:29:52.723Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 408.2698010962922,
-    "balance": 3186.479232917307
-  },
-  {
-    "reference": "27441217",
-    "date": "2013-11-12T09:39:13.985Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": -416.78168410481885,
-    "balance": 2769.697548812488
-  },
-  {
-    "reference": "94028575",
-    "date": "2013-08-22T10:19:54.729Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": -415.9376151384786,
-    "balance": 2353.7599336740095
-  },
-  {
-    "reference": "22597988",
-    "date": "2013-11-30T15:24:25.873Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": 419.5529301627539,
-    "balance": 2773.3128638367634
-  },
-  {
-    "reference": "92044054",
-    "date": "2014-01-14T02:31:39.084Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": 419.3973662573844,
-    "balance": 3192.710230094148
-  },
-  {
-    "reference": "17119543",
-    "date": "2013-11-23T07:44:44.019Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": 423.8434253570158,
-    "balance": 3616.5536554511636
-  },
-  {
-    "reference": "42026007",
-    "date": "2013-10-27T03:58:23.361Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 423.0539170901757,
-    "balance": 4039.6075725413393
-  },
-  {
-    "reference": "4368819",
-    "date": "2013-08-05T00:10:50.765Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -419.8965947495308,
-    "balance": 3619.7109777918085
-  },
-  {
-    "reference": "48673386",
-    "date": "2013-10-20T14:23:37.348Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": -425.8570475061424,
-    "balance": 3193.853930285666
-  },
-  {
-    "reference": "88019826",
-    "date": "2014-01-14T12:49:05.831Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 430.5325491980184,
-    "balance": 3624.3864794836845
-  },
-  {
-    "reference": "60000140",
-    "date": "2013-11-19T16:02:22.458Z",
-    "type": "Adjustment",
-    "status": "Settled",
-    "amount": 423.5986022867728,
-    "balance": 4047.9850817704573
-  },
-  {
-    "reference": "9410900",
-    "date": "2014-02-01T16:34:53.993Z",
-    "type": "Invoice",
-    "status": "Settled",
-    "amount": 437.14020913280547,
-    "balance": 4485.125290903263
-  },
-  {
-    "reference": "369437",
-    "date": "2013-06-26T13:07:22.555Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": 433.59030289482325,
-    "balance": 4918.715593798086
-  },
-  {
-    "reference": "75044560",
-    "date": "2013-06-26T03:13:30.261Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -429.96704663615674,
-    "balance": 4488.748547161929
-  },
-  {
-    "reference": "20024564",
-    "date": "2013-11-03T17:15:38.710Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": -436.79868351412006,
-    "balance": 4051.9498636478093
-  },
-  {
-    "reference": "14994232",
-    "date": "2013-08-30T02:31:48.120Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 436.274214270059,
-    "balance": 4488.224077917868
-  },
-  {
-    "reference": "7332935",
-    "date": "2014-02-06T17:11:05.515Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -444.5885352236219,
-    "balance": 4043.6355426942464
-  },
-  {
-    "reference": "91940617",
-    "date": "2013-08-18T01:32:56.788Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": -433.93626571423374,
-    "balance": 3609.6992769800127
-  },
-  {
-    "reference": "22475005",
-    "date": "2013-12-30T18:02:10.001Z",
-    "type": "Invoice",
-    "status": "Unpaid",
-    "amount": -440.2601277537178,
-    "balance": 3169.439149226295
-  },
-  {
-    "reference": "45498181",
-    "date": "2013-10-31T16:02:43.097Z",
-    "type": "Adjustment",
-    "status": "Paid",
-    "amount": -445.61236478132196,
-    "balance": 2723.826784444973
-  },
-  {
-    "reference": "9822047",
-    "date": "2013-07-08T02:56:58.825Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -443.46008080942556,
-    "balance": 2280.3667036355473
-  },
-  {
-    "reference": "87033223",
-    "date": "2013-08-20T16:59:58.998Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": -450.69770042714663,
-    "balance": 1829.6690032084007
-  },
-  {
-    "reference": "90999392",
-    "date": "2013-08-07T23:01:10.578Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": 448.4244596064091,
-    "balance": 2278.0934628148098
-  },
-  {
-    "reference": "11001797",
-    "date": "2013-09-30T09:09:38.266Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": -444.94188580079935,
-    "balance": 1833.1515770140104
-  },
-  {
-    "reference": "8969093",
-    "date": "2013-07-18T11:22:09.996Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": 458.7238084534183,
-    "balance": 2291.8753854674287
-  },
-  {
-    "reference": "11628406",
-    "date": "2013-08-28T15:37:38.877Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": 451.75798703636974,
-    "balance": 2743.6333725037985
-  },
-  {
-    "reference": "6744401",
-    "date": "2014-01-14T16:47:43.732Z",
-    "type": "Reversal",
-    "status": "Unpaid",
-    "amount": -453.77873596781865,
-    "balance": 2289.85463653598
-  },
-  {
-    "reference": "14205616",
-    "date": "2013-08-21T04:55:54.938Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": -453.1635863080155,
-    "balance": 1836.6910502279643
-  },
-  {
-    "reference": "70406827",
-    "date": "2014-01-06T12:31:51.180Z",
-    "type": "Payment",
-    "status": "Settled",
-    "amount": 455.45261095510796,
-    "balance": 2292.1436611830723
-  },
-  {
-    "reference": "51989058",
-    "date": "2013-09-03T23:54:51.555Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 455.136077408446,
-    "balance": 2747.2797385915183
-  },
-  {
-    "reference": "82773544",
-    "date": "2013-12-11T03:18:04.004Z",
-    "type": "Adjustment",
-    "status": "Unpaid",
-    "amount": 453.9638228989206,
-    "balance": 3201.243561490439
-  },
-  {
-    "reference": "39836389",
-    "date": "2013-07-05T08:56:40.946Z",
-    "type": "Reversal",
-    "status": "Settled",
-    "amount": 464.53592088469304,
-    "balance": 3665.779482375132
-  },
-  {
-    "reference": "30578876",
-    "date": "2013-07-11T21:12:33.317Z",
-    "type": "Invoice",
-    "status": "Paid",
-    "amount": -456.02516547683626,
-    "balance": 3209.7543168982957
-  },
-  {
-    "reference": "20367457",
-    "date": "2013-10-22T02:29:59.034Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 471.9296463718638,
-    "balance": 3681.6839632701594
-  },
-  {
-    "reference": "85643694",
-    "date": "2013-12-30T04:26:16.834Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": -470.3289773056749,
-    "balance": 3211.3549859644845
-  },
-  {
-    "reference": "87849933",
-    "date": "2013-06-21T23:16:09.069Z",
-    "type": "Invoice",
-    "status": "Settled",
-    "amount": -462.22334819915704,
-    "balance": 2749.1316377653275
-  },
-  {
-    "reference": "96882601",
-    "date": "2013-12-02T08:06:10.286Z",
-    "type": "Payment",
-    "status": "Paid",
-    "amount": 463.4646937942598,
-    "balance": 3212.5963315595873
-  },
-  {
-    "reference": "81212045",
-    "date": "2014-01-10T09:24:09.211Z",
-    "type": "Reversal",
-    "status": "Paid",
-    "amount": 476.9976289642509,
-    "balance": 3689.593960523838
-  },
-  {
-    "reference": "72788600",
-    "date": "2013-08-01T04:30:51.081Z",
-    "type": "Payment",
-    "status": "Unpaid",
-    "amount": -466.13121761824004,
-    "balance": 3223.462742905598
-  }
-]
+{
+    "billingSummary": {
+        "item": [{
+            "reference": "50977603",
+            "date": "2014-01-02T03:42:28.958Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -11.378992513054982,
+            "balance": 0
+        }, {
+            "reference": "26034609",
+            "date": "2013-07-14T16:43:38.049Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 4.12360714841634,
+            "balance": 4.12360714841634
+        }, {
+            "reference": "59400044",
+            "date": "2013-08-14T05:02:41.214Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": -11.772235081996769,
+            "balance": -7.648627933580428
+        }, {
+            "reference": "59896375",
+            "date": "2013-11-12T17:10:15.999Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -7.3051205445081,
+            "balance": -14.953748478088528
+        }, {
+            "reference": "62985984",
+            "date": "2013-06-13T23:48:21.690Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": -13.849712662864476,
+            "balance": -28.803461140953004
+        }, {
+            "reference": "1050796",
+            "date": "2013-08-16T00:46:14.232Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 12.04257988720201,
+            "balance": -16.760881253750995
+        }, {
+            "reference": "70012210",
+            "date": "2013-06-15T01:40:44.293Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": 20.743916863342747,
+            "balance": 3.9830356095917523
+        }, {
+            "reference": "68412558",
+            "date": "2013-11-18T22:06:34.485Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": 11.43512897263281,
+            "balance": 15.418164582224563
+        }, {
+            "reference": "24505106",
+            "date": "2013-07-23T20:30:26.545Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -15.301039083162323,
+            "balance": 0.11712549906224012
+        }, {
+            "reference": "79573685",
+            "date": "2013-11-04T17:30:55.834Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": 17.134638853836805,
+            "balance": 17.251764352899045
+        }, {
+            "reference": "63473625",
+            "date": "2013-08-06T01:22:52.913Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 27.760363672859967,
+            "balance": 45.01212802575901
+        }, {
+            "reference": "75388699",
+            "date": "2013-10-10T08:09:42.575Z",
+            "type": "Invoice",
+            "status": "Settled",
+            "amount": -17.558544907718897,
+            "balance": 27.453583118040115
+        }, {
+            "reference": "38924959",
+            "date": "2013-10-09T23:05:10.198Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -30.64478362980299,
+            "balance": -3.191200511762876
+        }, {
+            "reference": "33404806",
+            "date": "2013-10-18T15:52:04.877Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -26.128814719151706,
+            "balance": -29.32001523091458
+        }, {
+            "reference": "39276646",
+            "date": "2013-07-04T04:49:09.776Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 32.46788449608721,
+            "balance": 3.147869265172627
+        }, {
+            "reference": "32075755",
+            "date": "2013-12-30T07:10:21.455Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -25.720206261612475,
+            "balance": -22.572336996439848
+        }, {
+            "reference": "2146299",
+            "date": "2013-10-17T18:21:51.163Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -34.47591519076377,
+            "balance": -57.048252187203616
+        }, {
+            "reference": "74058061",
+            "date": "2013-07-12T03:20:07.301Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 29.019991143839434,
+            "balance": -28.028261043364182
+        }, {
+            "reference": "2755996",
+            "date": "2013-08-14T10:52:53.394Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -38.14714355324395,
+            "balance": -66.17540459660813
+        }, {
+            "reference": "51653462",
+            "date": "2013-07-23T21:18:46.482Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": 33.37659004633315,
+            "balance": -32.79881455027498
+        }, {
+            "reference": "60378643",
+            "date": "2013-12-12T07:35:21.960Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": -43.087416897760704,
+            "balance": -75.88623144803569
+        }, {
+            "reference": "6959710",
+            "date": "2013-11-12T10:14:19.084Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": 33.46516768075526,
+            "balance": -42.42106376728043
+        }, {
+            "reference": "50045377",
+            "date": "2013-08-25T16:28:19.341Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -41.80951986531727,
+            "balance": -84.2305836325977
+        }, {
+            "reference": "42650076",
+            "date": "2013-08-25T01:58:41.004Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -40.62026637420058,
+            "balance": -124.85085000679828
+        }, {
+            "reference": "42682961",
+            "date": "2014-01-30T17:25:55.809Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": -39.75124646583572,
+            "balance": -164.602096472634
+        }, {
+            "reference": "34233157",
+            "date": "2013-07-14T07:31:35.891Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": -50.725928322644904,
+            "balance": -215.3280247952789
+        }, {
+            "reference": "12515210",
+            "date": "2013-06-07T05:16:31.580Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -53.312030071159825,
+            "balance": -268.64005486643873
+        }, {
+            "reference": "40430360",
+            "date": "2013-07-31T16:12:37.236Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": -52.14856672869064,
+            "balance": -320.78862159512937
+        }, {
+            "reference": "77429402",
+            "date": "2013-08-13T15:11:53.646Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": -49.262377040460706,
+            "balance": -370.0509986355901
+        }, {
+            "reference": "32339969",
+            "date": "2013-12-10T06:55:47.705Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": 51.99468233180232,
+            "balance": -318.05631630378775
+        }, {
+            "reference": "93894867",
+            "date": "2013-11-23T11:30:26.813Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": 52.025287830037996,
+            "balance": -266.03102847374976
+        }, {
+            "reference": "3827588",
+            "date": "2013-06-04T02:18:51.427Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -55.30508547881618,
+            "balance": -321.33611395256594
+        }, {
+            "reference": "16029742",
+            "date": "2013-11-12T12:28:04.847Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": 50.29023793945089,
+            "balance": -271.04587601311505
+        }, {
+            "reference": "51359802",
+            "date": "2013-10-10T05:18:52.150Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 51.15037162019871,
+            "balance": -219.89550439291634
+        }, {
+            "reference": "31880678",
+            "date": "2013-08-30T11:23:29.252Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 54.946778546087444,
+            "balance": -164.9487258468289
+        }, {
+            "reference": "1090619",
+            "date": "2013-09-04T11:42:17.266Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -65.77445292728953,
+            "balance": -230.72317877411842
+        }, {
+            "reference": "74793671",
+            "date": "2013-06-18T20:03:42.118Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": -62.85970511706545,
+            "balance": -293.5828838911839
+        }, {
+            "reference": "97411311",
+            "date": "2014-01-24T13:46:40.015Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -57.829788291826844,
+            "balance": -351.4126721830107
+        }, {
+            "reference": "4378738",
+            "date": "2014-01-02T05:46:58.257Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": -70.05016231024638,
+            "balance": -421.4628344932571
+        }, {
+            "reference": "25717798",
+            "date": "2013-12-26T20:27:04.324Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -61.14980989624747,
+            "balance": -482.61264438950457
+        }, {
+            "reference": "1309042",
+            "date": "2014-01-03T06:12:43.328Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": -74.49855591519736,
+            "balance": -557.1112003047019
+        }, {
+            "reference": "23736157",
+            "date": "2013-07-14T19:48:12.893Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -62.402589834295206,
+            "balance": -619.5137901389971
+        }, {
+            "reference": "20417614",
+            "date": "2013-08-13T05:52:24.540Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": 70.29647035826929,
+            "balance": -549.2173197807278
+        }, {
+            "reference": "39966264",
+            "date": "2013-10-04T22:18:24.127Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": -79.17672394355759,
+            "balance": -628.3940437242854
+        }, {
+            "reference": "80053995",
+            "date": "2013-11-25T18:29:33.670Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": 78.36796642653644,
+            "balance": -550.026077297749
+        }, {
+            "reference": "13701104",
+            "date": "2013-07-03T13:57:03.550Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": -76.63527324213646,
+            "balance": -626.6613505398855
+        }, {
+            "reference": "72292591",
+            "date": "2013-08-22T00:03:11.204Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 78.23724261461757,
+            "balance": -548.4241079252679
+        }, {
+            "reference": "21324722",
+            "date": "2013-12-11T18:39:11.510Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": 80.36615356989205,
+            "balance": -468.05795435537584
+        }, {
+            "reference": "76890097",
+            "date": "2013-09-10T20:04:29.521Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": -77.54670085315593,
+            "balance": -545.6046552085318
+        }, {
+            "reference": "70494247",
+            "date": "2013-09-04T12:12:35.140Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -86.8019967097789,
+            "balance": -632.4066519183107
+        }, {
+            "reference": "35966101",
+            "date": "2013-07-17T12:01:00.931Z",
+            "type": "Invoice",
+            "status": "Settled",
+            "amount": 83.5726915136911,
+            "balance": -548.8339604046196
+        }, {
+            "reference": "19643570",
+            "date": "2013-06-30T02:26:48.648Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": -87.03906669840217,
+            "balance": -635.8730271030217
+        }, {
+            "reference": "40986030",
+            "date": "2014-01-09T11:31:07.270Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": 83.88995053782128,
+            "balance": -551.9830765652005
+        }, {
+            "reference": "814981",
+            "date": "2013-09-14T15:53:17.373Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 82.62504184548743,
+            "balance": -469.35803471971303
+        }, {
+            "reference": "83556247",
+            "date": "2013-06-25T07:17:33.224Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -88.20058294711635,
+            "balance": -557.5586176668294
+        }, {
+            "reference": "1323893",
+            "date": "2013-06-13T20:09:24.674Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 83.88176618842408,
+            "balance": -473.6768514784053
+        }, {
+            "reference": "26700758",
+            "date": "2013-08-10T05:55:35.336Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": -91.90123817743734,
+            "balance": -565.5780896558426
+        }, {
+            "reference": "10441164",
+            "date": "2013-08-05T03:17:30.438Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -100.20479197218083,
+            "balance": -665.7828816280235
+        }, {
+            "reference": "5395492",
+            "date": "2013-12-13T16:21:28.067Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": 87.41788523783907,
+            "balance": -578.3649963901844
+        }, {
+            "reference": "73623540",
+            "date": "2013-07-01T06:16:11.814Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 96.93009720440023,
+            "balance": -481.43489918578416
+        }, {
+            "reference": "75599914",
+            "date": "2013-10-20T21:45:21.147Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 94.9617678928189,
+            "balance": -386.47313129296526
+        }, {
+            "reference": "59479603",
+            "date": "2013-06-16T11:06:11.988Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -98.5163094252348,
+            "balance": -484.98944071820006
+        }, {
+            "reference": "22099840",
+            "date": "2013-11-02T09:46:43.721Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": 95.68474294804037,
+            "balance": -389.3046977701597
+        }, {
+            "reference": "80273531",
+            "date": "2014-02-03T21:54:40.703Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 105.59551360365003,
+            "balance": -283.70918416650966
+        }, {
+            "reference": "6343802",
+            "date": "2013-11-28T10:30:22.003Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": 102.6504323668778,
+            "balance": -181.05875179963186
+        }, {
+            "reference": "84991322",
+            "date": "2013-11-24T05:18:50.581Z",
+            "type": "Invoice",
+            "status": "Settled",
+            "amount": 102.7863362885546,
+            "balance": -78.27241551107727
+        }, {
+            "reference": "88057741",
+            "date": "2013-11-26T18:51:49.778Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": 106.94697173405439,
+            "balance": 28.674556222977117
+        }, {
+            "reference": "38668188",
+            "date": "2013-10-31T10:02:23.565Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -112.60522951092571,
+            "balance": -83.9306732879486
+        }, {
+            "reference": "80784897",
+            "date": "2013-12-01T04:45:54.335Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": 116.76885781623423,
+            "balance": 32.83818452828564
+        }, {
+            "reference": "20802868",
+            "date": "2013-11-02T12:26:25.644Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -110.71944806864485,
+            "balance": -77.88126354035921
+        }, {
+            "reference": "40994567",
+            "date": "2013-11-25T17:05:51.942Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -117.32036970206536,
+            "balance": -195.20163324242458
+        }, {
+            "reference": "49558690",
+            "date": "2014-02-07T02:49:27.302Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": -116.55922303302214,
+            "balance": -311.7608562754467
+        }, {
+            "reference": "51581236",
+            "date": "2013-10-26T06:47:25.410Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": 114.33204910322092,
+            "balance": -197.4288071722258
+        }, {
+            "reference": "15556490",
+            "date": "2014-01-25T12:09:08.275Z",
+            "type": "Invoice",
+            "status": "Settled",
+            "amount": -110.73054708587006,
+            "balance": -308.15935425809585
+        }, {
+            "reference": "32209835",
+            "date": "2013-12-31T20:58:40.526Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 119.19339927169494,
+            "balance": -188.9659549864009
+        }, {
+            "reference": "42245419",
+            "date": "2013-08-25T13:11:37.438Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 126.5753136947751,
+            "balance": -62.3906412916258
+        }, {
+            "reference": "48533741",
+            "date": "2013-10-11T20:26:33.839Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": 121.87041842588224,
+            "balance": 59.47977713425644
+        }, {
+            "reference": "97347371",
+            "date": "2013-08-02T16:59:27.368Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": -122.18148323195054,
+            "balance": -62.7017060976941
+        }, {
+            "reference": "30787844",
+            "date": "2014-01-14T08:36:20.724Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": 128.11223303480074,
+            "balance": 65.41052693710664
+        }, {
+            "reference": "5057658",
+            "date": "2013-06-26T17:13:07.037Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 129.14518883242272,
+            "balance": 194.55571576952934
+        }, {
+            "reference": "61852921",
+            "date": "2013-11-18T03:23:06.002Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -134.05941732111387,
+            "balance": 60.49629844841547
+        }, {
+            "reference": "82295954",
+            "date": "2013-09-29T11:41:27.672Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -127.94148934283294,
+            "balance": -67.44519089441746
+        }, {
+            "reference": "45599992",
+            "date": "2013-08-10T12:06:46.207Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": 124.71183581580406,
+            "balance": 57.2666449213866
+        }, {
+            "reference": "75293952",
+            "date": "2013-06-29T02:13:49.657Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": -138.62046813871711,
+            "balance": -81.35382321733051
+        }, {
+            "reference": "32415844",
+            "date": "2013-11-07T20:03:21.295Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -132.7701635963749,
+            "balance": -214.12398681370541
+        }, {
+            "reference": "84304113",
+            "date": "2013-06-17T05:44:55.100Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": 139.41597164492123,
+            "balance": -74.70801516878419
+        }, {
+            "reference": "71459889",
+            "date": "2013-09-15T21:10:21.670Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 130.8388641520869,
+            "balance": 56.13084898330271
+        }, {
+            "reference": "44684864",
+            "date": "2013-09-18T00:34:51.055Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": 134.95847433060408,
+            "balance": 191.0893233139068
+        }, {
+            "reference": "506935",
+            "date": "2013-11-02T05:52:02.930Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": -145.30998872872442,
+            "balance": 45.77933458518237
+        }, {
+            "reference": "3784909",
+            "date": "2013-08-30T04:42:18.162Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -136.78680688049644,
+            "balance": -91.00747229531407
+        }, {
+            "reference": "69422636",
+            "date": "2013-12-12T21:44:41.379Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -145.15535043901764,
+            "balance": -236.1628227343317
+        }, {
+            "reference": "86711699",
+            "date": "2013-08-11T05:19:34.177Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 138.67693064245395,
+            "balance": -97.48589209187776
+        }, {
+            "reference": "55856352",
+            "date": "2014-01-22T01:38:39.912Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": 146.5624750633724,
+            "balance": 49.076582971494645
+        }, {
+            "reference": "38004182",
+            "date": "2013-09-21T07:29:21.479Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": -148.54398120939732,
+            "balance": -99.46739823790267
+        }, {
+            "reference": "79458643",
+            "date": "2013-09-18T04:39:21.403Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 155.49858474894427,
+            "balance": 56.0311865110416
+        }, {
+            "reference": "72922747",
+            "date": "2014-01-10T09:48:06.461Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": -154.24125611549243,
+            "balance": -98.21006960445084
+        }, {
+            "reference": "58680407",
+            "date": "2013-07-27T06:24:18.689Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -149.56432745070197,
+            "balance": -247.7743970551528
+        }, {
+            "reference": "21746121",
+            "date": "2013-10-05T16:33:22.844Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": -156.78205341752619,
+            "balance": -404.556450472679
+        }, {
+            "reference": "75878870",
+            "date": "2013-11-30T11:56:09.668Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -148.6147168725729,
+            "balance": -553.1711673452519
+        }, {
+            "reference": "93837396",
+            "date": "2013-07-05T20:29:37.877Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": 148.63098489493132,
+            "balance": -404.5401824503206
+        }, {
+            "reference": "90625023",
+            "date": "2014-01-24T19:48:38.456Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": 153.00989154959098,
+            "balance": -251.5302909007296
+        }, {
+            "reference": "21258586",
+            "date": "2013-11-10T21:06:50.702Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": -158.4413179415278,
+            "balance": -409.9716088422574
+        }, {
+            "reference": "12421802",
+            "date": "2013-07-08T02:54:58.875Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": 164.3316341000609,
+            "balance": -245.6399747421965
+        }, {
+            "reference": "87060877",
+            "date": "2013-10-21T08:14:38.509Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": -154.73775486275554,
+            "balance": -400.37772960495204
+        }, {
+            "reference": "16127900",
+            "date": "2013-07-01T09:33:14.463Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": -163.49407379887998,
+            "balance": -563.871803403832
+        }, {
+            "reference": "6494119",
+            "date": "2013-11-21T04:52:33.018Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -162.57214483455755,
+            "balance": -726.4439482383896
+        }, {
+            "reference": "89008699",
+            "date": "2014-01-28T20:45:34.535Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": -172.52666644379497,
+            "balance": -898.9706146821845
+        }, {
+            "reference": "5644979",
+            "date": "2013-06-27T11:34:49.387Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 173.9932254126761,
+            "balance": -724.9773892695084
+        }, {
+            "reference": "37376919",
+            "date": "2013-08-24T20:13:02.801Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 174.45919598615728,
+            "balance": -550.5181932833511
+        }, {
+            "reference": "37688367",
+            "date": "2013-08-23T20:49:26.783Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": 165.03609265456907,
+            "balance": -385.48210062878206
+        }, {
+            "reference": "33623813",
+            "date": "2014-02-01T06:26:57.419Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": -177.64778470038436,
+            "balance": -563.1298853291664
+        }, {
+            "reference": "19976855",
+            "date": "2014-02-06T09:56:11.538Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": 173.2516355321277,
+            "balance": -389.87824979703873
+        }, {
+            "reference": "16631318",
+            "date": "2013-07-23T04:14:24.686Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -171.43670180649497,
+            "balance": -561.3149516035337
+        }, {
+            "reference": "25509180",
+            "date": "2013-11-21T10:51:41.694Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 180.7985140469391,
+            "balance": -380.5164375565946
+        }, {
+            "reference": "4166084",
+            "date": "2013-11-24T17:36:12.147Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": -184.63808458554558,
+            "balance": -565.1545221421402
+        }, {
+            "reference": "48023719",
+            "date": "2014-01-01T15:12:04.114Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 177.40616617142223,
+            "balance": -387.74835597071797
+        }, {
+            "reference": "28293069",
+            "date": "2014-01-23T19:25:22.559Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": 181.3529248300474,
+            "balance": -206.39543114067055
+        }, {
+            "reference": "71612552",
+            "date": "2013-10-06T16:11:55.985Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": 185.40425144322217,
+            "balance": -20.991179697448388
+        }, {
+            "reference": "30207276",
+            "date": "2014-01-29T11:28:06.969Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 186.80343640199862,
+            "balance": 165.81225670455024
+        }, {
+            "reference": "35174487",
+            "date": "2013-11-17T09:20:50.124Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": -182.40001622610725,
+            "balance": -16.587759521557018
+        }, {
+            "reference": "37672424",
+            "date": "2013-08-22T03:17:08.722Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -180.6332942575682,
+            "balance": -197.2210537791252
+        }, {
+            "reference": "65018310",
+            "date": "2013-07-28T01:54:52.841Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 188.26410076674074,
+            "balance": -8.956953012384474
+        }, {
+            "reference": "9981536",
+            "date": "2013-08-02T04:51:44.888Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": -187.6572556591127,
+            "balance": -196.61420867149718
+        }, {
+            "reference": "89899901",
+            "date": "2013-09-16T06:55:58.765Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": 186.30625844048336,
+            "balance": -10.30795023101382
+        }, {
+            "reference": "59217753",
+            "date": "2013-12-26T13:57:06.085Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": -186.28638732153922,
+            "balance": -196.59433755255304
+        }, {
+            "reference": "20848289",
+            "date": "2013-06-21T05:49:39.119Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": 193.66743615246378,
+            "balance": -2.926901400089264
+        }, {
+            "reference": "98820534",
+            "date": "2013-10-08T16:32:06.311Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": 199.71510365232825,
+            "balance": 196.788202252239
+        }, {
+            "reference": "67829980",
+            "date": "2013-09-06T20:42:48.850Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": -195.9215273342561,
+            "balance": 0.8666749179828912
+        }, {
+            "reference": "31528701",
+            "date": "2013-08-23T19:48:56.033Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": 205.68195574264973,
+            "balance": 206.54863066063263
+        }, {
+            "reference": "16977526",
+            "date": "2013-12-30T23:39:18.359Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": 208.05177626456134,
+            "balance": 414.60040692519397
+        }, {
+            "reference": "34183980",
+            "date": "2013-06-22T01:50:34.330Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": 201.94170848932117,
+            "balance": 616.5421154145151
+        }, {
+            "reference": "39111741",
+            "date": "2013-08-09T16:44:27.794Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -201.77835397864692,
+            "balance": 414.7637614358682
+        }, {
+            "reference": "42291922",
+            "date": "2013-08-21T09:23:25.123Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 203.75028363266028,
+            "balance": 618.5140450685285
+        }, {
+            "reference": "16322450",
+            "date": "2013-12-06T21:56:06.024Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 206.1689578606747,
+            "balance": 824.6830029292032
+        }, {
+            "reference": "10437282",
+            "date": "2013-08-23T07:00:14.656Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": -210.97303614858538,
+            "balance": 613.7099667806178
+        }, {
+            "reference": "56928598",
+            "date": "2013-09-28T18:00:44.861Z",
+            "type": "Invoice",
+            "status": "Settled",
+            "amount": 206.58876903704368,
+            "balance": 820.2987358176615
+        }, {
+            "reference": "45993797",
+            "date": "2013-09-17T08:03:56.951Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -212.40370331774466,
+            "balance": 607.8950324999169
+        }, {
+            "reference": "99325938",
+            "date": "2013-08-22T11:30:14.523Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 215.3359359812457,
+            "balance": 823.2309684811626
+        }, {
+            "reference": "41011651",
+            "date": "2013-12-27T05:42:04.761Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 216.57402094616555,
+            "balance": 1039.804989427328
+        }, {
+            "reference": "31034126",
+            "date": "2013-08-30T18:05:14.523Z",
+            "type": "Invoice",
+            "status": "Settled",
+            "amount": 212.82912583462894,
+            "balance": 1252.634115261957
+        }, {
+            "reference": "92694532",
+            "date": "2014-01-18T21:14:46.283Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": -222.16187149635516,
+            "balance": 1030.472243765602
+        }, {
+            "reference": "29106895",
+            "date": "2013-08-10T10:26:48.561Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": 222.07632124400698,
+            "balance": 1252.5485650096089
+        }, {
+            "reference": "60179564",
+            "date": "2013-10-22T22:11:11.097Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": 216.74429816147313,
+            "balance": 1469.292863171082
+        }, {
+            "reference": "88367192",
+            "date": "2013-11-04T01:39:37.627Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": -216.74929010728374,
+            "balance": 1252.5435730637982
+        }, {
+            "reference": "29985619",
+            "date": "2013-12-10T08:39:58.531Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 225.05260562896729,
+            "balance": 1477.5961786927655
+        }, {
+            "reference": "73343971",
+            "date": "2014-01-10T14:08:39.811Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -231.69360573403537,
+            "balance": 1245.9025729587302
+        }, {
+            "reference": "64139999",
+            "date": "2013-10-02T02:53:13.737Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -223.95575834414922,
+            "balance": 1021.946814614581
+        }, {
+            "reference": "65888523",
+            "date": "2013-09-03T14:11:08.352Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": -221.7666249240283,
+            "balance": 800.1801896905527
+        }, {
+            "reference": "22672240",
+            "date": "2013-10-24T18:02:26.383Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": 226.07466442789882,
+            "balance": 1026.2548541184515
+        }, {
+            "reference": "22204683",
+            "date": "2014-01-03T05:23:55.980Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 225.53315989812836,
+            "balance": 1251.7880140165798
+        }, {
+            "reference": "36539542",
+            "date": "2013-09-03T14:37:42.684Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": -231.95778253138997,
+            "balance": 1019.8302314851899
+        }, {
+            "reference": "24773472",
+            "date": "2013-08-03T04:20:27.282Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": -228.16240750229917,
+            "balance": 791.6678239828907
+        }, {
+            "reference": "95029385",
+            "date": "2013-11-10T15:12:00.862Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": -229.43614073633216,
+            "balance": 562.2316832465585
+        }, {
+            "reference": "74496915",
+            "date": "2014-01-22T03:59:30.630Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 237.7142186688725,
+            "balance": 799.945901915431
+        }, {
+            "reference": "32027679",
+            "date": "2014-01-02T02:05:00.237Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": -235.25499786855653,
+            "balance": 564.6909040468745
+        }, {
+            "reference": "41746132",
+            "date": "2013-07-18T22:29:58.308Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": -244.75740928086452,
+            "balance": 319.93349476600997
+        }, {
+            "reference": "32842207",
+            "date": "2013-06-14T04:26:19.055Z",
+            "type": "Invoice",
+            "status": "Settled",
+            "amount": -237.8512463180814,
+            "balance": 82.08224844792858
+        }, {
+            "reference": "37452793",
+            "date": "2014-01-20T06:10:29.518Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -240.32194822398014,
+            "balance": -158.23969977605157
+        }, {
+            "reference": "77039869",
+            "date": "2013-10-26T21:09:44.809Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": 240.10655919020064,
+            "balance": 81.86685941414908
+        }, {
+            "reference": "63782056",
+            "date": "2013-06-27T04:28:39.668Z",
+            "type": "Invoice",
+            "status": "Settled",
+            "amount": -239.17153494106606,
+            "balance": -157.30467552691698
+        }, {
+            "reference": "14016947",
+            "date": "2014-02-10T21:52:49.488Z",
+            "type": "Invoice",
+            "status": "Settled",
+            "amount": -247.55740301683545,
+            "balance": -404.86207854375243
+        }, {
+            "reference": "13508012",
+            "date": "2013-08-10T12:14:00.235Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 254.13020184240307,
+            "balance": -150.73187670134936
+        }, {
+            "reference": "29950760",
+            "date": "2014-02-06T05:34:30.537Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -244.5843533165753,
+            "balance": -395.3162300179247
+        }, {
+            "reference": "67064254",
+            "date": "2014-02-13T12:37:43.017Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -247.41150413802825,
+            "balance": -642.7277341559529
+        }, {
+            "reference": "25004583",
+            "date": "2013-10-10T07:21:12.850Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": 251.3148246661294,
+            "balance": -391.4129094898235
+        }, {
+            "reference": "30919414",
+            "date": "2013-11-05T04:53:31.540Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 250.19926297827624,
+            "balance": -141.21364651154727
+        }, {
+            "reference": "12565758",
+            "date": "2013-09-25T10:00:57.565Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": -260.1359510477632,
+            "balance": -401.3495975593105
+        }, {
+            "reference": "38554678",
+            "date": "2013-10-31T14:13:34.532Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": 255.4673569353763,
+            "balance": -145.8822406239342
+        }, {
+            "reference": "38743000",
+            "date": "2013-11-19T01:39:16.693Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -252.33964615082368,
+            "balance": -398.2218867747579
+        }, {
+            "reference": "73869254",
+            "date": "2013-09-05T11:20:21.288Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": -266.88339900481515,
+            "balance": -665.105285779573
+        }, {
+            "reference": "78475333",
+            "date": "2013-11-14T20:29:13.720Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 269.2896201554686,
+            "balance": -395.81566562410444
+        }, {
+            "reference": "17016609",
+            "date": "2014-02-01T05:55:55.521Z",
+            "type": "Invoice",
+            "status": "Settled",
+            "amount": -258.4286422280129,
+            "balance": -654.2443078521173
+        }, {
+            "reference": "63074106",
+            "date": "2013-12-17T20:28:09.391Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": 267.12449795985594,
+            "balance": -387.1198098922614
+        }, {
+            "reference": "88662698",
+            "date": "2013-09-22T20:07:05.623Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": 264.6768209785223,
+            "balance": -122.4429889137391
+        }, {
+            "reference": "51654906",
+            "date": "2013-10-04T15:41:12.171Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -264.1544115312863,
+            "balance": -386.5974004450254
+        }, {
+            "reference": "23211693",
+            "date": "2013-06-28T13:08:29.320Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -265.7089037646074,
+            "balance": -652.3063042096328
+        }, {
+            "reference": "72908889",
+            "date": "2013-06-01T20:59:34.899Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -266.35980449826457,
+            "balance": -918.6661087078974
+        }, {
+            "reference": "82059190",
+            "date": "2013-07-21T13:50:42.090Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 269.89323524711654,
+            "balance": -648.7728734607808
+        }, {
+            "reference": "9826514",
+            "date": "2013-06-02T17:16:08.597Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 281.39570156042464,
+            "balance": -367.3771719003562
+        }, {
+            "reference": "28691621",
+            "date": "2013-07-23T16:26:42.273Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 274.39739466668107,
+            "balance": -92.97977723367512
+        }, {
+            "reference": "11156315",
+            "date": "2013-11-05T09:12:08.731Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 280.0139828666579,
+            "balance": 187.03420563298278
+        }, {
+            "reference": "99391539",
+            "date": "2013-08-21T15:34:51.878Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 277.91403599409387,
+            "balance": 464.94824162707664
+        }, {
+            "reference": "54243096",
+            "date": "2013-12-18T21:58:01.110Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 278.3358955308795,
+            "balance": 743.2841371579561
+        }, {
+            "reference": "35654702",
+            "date": "2013-06-25T01:38:10.451Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -279.1105683397036,
+            "balance": 464.17356881825253
+        }, {
+            "reference": "6266903",
+            "date": "2014-02-05T17:46:21.122Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 286.87040234939195,
+            "balance": 751.0439711676445
+        }, {
+            "reference": "46712745",
+            "date": "2013-12-21T13:48:54.900Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -289.49762149946764,
+            "balance": 461.54634966817684
+        }, {
+            "reference": "15580913",
+            "date": "2013-07-21T22:23:34.618Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -283.36121816863306,
+            "balance": 178.1851314995438
+        }, {
+            "reference": "51032103",
+            "date": "2013-06-17T03:51:36.712Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": -287.5799521508161,
+            "balance": -109.39482065127231
+        }, {
+            "reference": "85905915",
+            "date": "2013-06-26T15:09:22.561Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": 296.3404519977048,
+            "balance": 186.9456313464325
+        }, {
+            "reference": "71388673",
+            "date": "2013-08-27T12:54:11.740Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 290.3513423879631,
+            "balance": 477.2969737343956
+        }, {
+            "reference": "29249020",
+            "date": "2013-09-26T10:41:20.744Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -290.74315249803476,
+            "balance": 186.55382123636082
+        }, {
+            "reference": "88019313",
+            "date": "2013-09-07T12:36:49.997Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 293.7880484908819,
+            "balance": 480.34186972724274
+        }, {
+            "reference": "26082874",
+            "date": "2013-10-08T07:19:34.293Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": 297.1963552508969,
+            "balance": 777.5382249781396
+        }, {
+            "reference": "4349502",
+            "date": "2013-10-20T11:38:29.499Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -290.9331164653413,
+            "balance": 486.6051085127983
+        }, {
+            "reference": "51559379",
+            "date": "2013-08-13T17:35:47.543Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 299.97236646618694,
+            "balance": 786.5774749789853
+        }, {
+            "reference": "87543354",
+            "date": "2013-07-29T08:05:39.066Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": -298.6928490840364,
+            "balance": 487.88462589494884
+        }, {
+            "reference": "77572508",
+            "date": "2013-12-18T19:12:45.084Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 295.56231826753356,
+            "balance": 783.4469441624824
+        }, {
+            "reference": "20367067",
+            "date": "2013-07-15T19:39:50.308Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 309.57055969932117,
+            "balance": 1093.0175038618036
+        }, {
+            "reference": "70757056",
+            "date": "2013-10-14T09:30:47.142Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": 308.9055132160429,
+            "balance": 1401.9230170778465
+        }, {
+            "reference": "59930206",
+            "date": "2013-08-22T15:52:01.351Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -299.91338861896656,
+            "balance": 1102.00962845888
+        }, {
+            "reference": "73830147",
+            "date": "2013-07-21T20:20:51.940Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -314.5119067223277,
+            "balance": 787.4977217365522
+        }, {
+            "reference": "61891520",
+            "date": "2013-06-18T18:26:31.777Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": -309.59390560607426,
+            "balance": 477.90381613047794
+        }, {
+            "reference": "78554975",
+            "date": "2014-01-20T20:38:43.559Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": 308.51783110946417,
+            "balance": 786.4216472399421
+        }, {
+            "reference": "3039299",
+            "date": "2013-10-06T03:50:38.553Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": 309.53799506812356,
+            "balance": 1095.9596423080657
+        }, {
+            "reference": "43755606",
+            "date": "2013-07-24T00:08:26.662Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 318.7414978318848,
+            "balance": 1414.7011401399504
+        }, {
+            "reference": "4690784",
+            "date": "2014-01-09T15:34:32.106Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 322.4134520685766,
+            "balance": 1737.114592208527
+        }, {
+            "reference": "55502061",
+            "date": "2013-08-08T22:14:25.759Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 321.75145189720206,
+            "balance": 2058.866044105729
+        }, {
+            "reference": "49420130",
+            "date": "2013-06-05T20:58:56.446Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": 324.35919156717137,
+            "balance": 2383.2252356729005
+        }, {
+            "reference": "56202026",
+            "date": "2014-01-16T05:36:50.133Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": 319.05183102283627,
+            "balance": 2702.2770666957367
+        }, {
+            "reference": "38662878",
+            "date": "2013-07-03T07:06:03.902Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": -325.7362753772177,
+            "balance": 2376.540791318519
+        }, {
+            "reference": "34774918",
+            "date": "2013-06-01T09:27:32.465Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -327.66988293849863,
+            "balance": 2048.8709083800204
+        }, {
+            "reference": "11760268",
+            "date": "2014-01-08T13:52:39.325Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": -322.2900313404389,
+            "balance": 1726.5808770395815
+        }, {
+            "reference": "59877493",
+            "date": "2013-10-13T02:51:34.976Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 329.7209718609229,
+            "balance": 2056.3018489005044
+        }, {
+            "reference": "55037613",
+            "date": "2013-06-27T17:30:34.185Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 334.2795885242522,
+            "balance": 2390.5814374247566
+        }, {
+            "reference": "10047358",
+            "date": "2013-08-09T05:35:46.953Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": -334.0692320095841,
+            "balance": 2056.5122054151725
+        }, {
+            "reference": "54056802",
+            "date": "2013-11-27T19:27:14.685Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": 333.22660137782805,
+            "balance": 2389.7388067930005
+        }, {
+            "reference": "78228958",
+            "date": "2014-01-29T14:42:25.886Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -333.73882141755894,
+            "balance": 2055.9999853754416
+        }, {
+            "reference": "40299845",
+            "date": "2013-06-11T09:11:30.237Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 337.2372104851529,
+            "balance": 2393.2371958605945
+        }, {
+            "reference": "94368350",
+            "date": "2013-12-21T06:17:17.665Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -341.1894703998696,
+            "balance": 2052.047725460725
+        }, {
+            "reference": "72495429",
+            "date": "2013-08-19T05:12:44.483Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": -341.06407837732695,
+            "balance": 1710.983647083398
+        }, {
+            "reference": "16704225",
+            "date": "2013-10-19T16:57:11.231Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -336.66799165075645,
+            "balance": 1374.3156554326415
+        }, {
+            "reference": "95105974",
+            "date": "2013-06-28T10:57:59.092Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": -339.61621444299817,
+            "balance": 1034.6994409896433
+        }, {
+            "reference": "35857260",
+            "date": "2013-06-22T14:06:12.175Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -339.01416361285374,
+            "balance": 695.6852773767896
+        }, {
+            "reference": "72711223",
+            "date": "2013-11-15T13:35:49.863Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": 341.2244480922818,
+            "balance": 1036.9097254690714
+        }, {
+            "reference": "39529834",
+            "date": "2013-12-26T13:55:32.505Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -339.53654521750286,
+            "balance": 697.3731802515686
+        }, {
+            "reference": "61129897",
+            "date": "2014-01-27T11:56:44.851Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -348.14657252747566,
+            "balance": 349.2266077240929
+        }, {
+            "reference": "75019202",
+            "date": "2013-07-17T04:24:30.282Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 344.5082606419455,
+            "balance": 693.7348683660384
+        }, {
+            "reference": "38858647",
+            "date": "2013-08-22T17:32:26.357Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": -345.40404169424437,
+            "balance": 348.33082667179406
+        }, {
+            "reference": "98015566",
+            "date": "2014-01-22T13:41:13.701Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": -344.20600964385085,
+            "balance": 4.124817027943209
+        }, {
+            "reference": "66092327",
+            "date": "2014-01-19T04:42:48.510Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": -351.9164001233876,
+            "balance": -347.79158309544437
+        }, {
+            "reference": "12538510",
+            "date": "2013-08-01T01:42:58.739Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": -357.7435299544595,
+            "balance": -705.5351130499039
+        }, {
+            "reference": "42196039",
+            "date": "2014-01-22T21:55:16.417Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -351.3066904535517,
+            "balance": -1056.8418035034556
+        }, {
+            "reference": "21936627",
+            "date": "2013-12-31T16:55:45.530Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 359.7553829785902,
+            "balance": -697.0864205248654
+        }, {
+            "reference": "97527459",
+            "date": "2013-12-12T18:02:28.305Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 361.50718646286987,
+            "balance": -335.5792340619955
+        }, {
+            "reference": "8871903",
+            "date": "2013-09-17T06:42:36.210Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 357.2148980854545,
+            "balance": 21.635664023458958
+        }, {
+            "reference": "69777673",
+            "date": "2013-07-04T22:49:47.967Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -365.2822425181512,
+            "balance": -343.6465784946922
+        }, {
+            "reference": "23113541",
+            "date": "2013-10-08T10:47:06.219Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": -366.7070785872638,
+            "balance": -710.353657081956
+        }, {
+            "reference": "5156508",
+            "date": "2013-10-19T04:08:03.400Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -360.4804203619715,
+            "balance": -1070.8340774439275
+        }, {
+            "reference": "58037741",
+            "date": "2013-06-15T10:04:22.272Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -363.94186124252155,
+            "balance": -1434.775938686449
+        }, {
+            "reference": "21120906",
+            "date": "2014-01-18T02:02:43.345Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": 365.0345377405174,
+            "balance": -1069.7414009459317
+        }, {
+            "reference": "6792884",
+            "date": "2013-06-11T05:50:00.965Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": -373.6681448947638,
+            "balance": -1443.4095458406955
+        }, {
+            "reference": "80882287",
+            "date": "2013-10-10T02:20:24.833Z",
+            "type": "Invoice",
+            "status": "Settled",
+            "amount": 376.21729356679134,
+            "balance": -1067.1922522739042
+        }, {
+            "reference": "33744660",
+            "date": "2013-10-20T21:44:36.035Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 364.0648376320023,
+            "balance": -703.1274146419019
+        }, {
+            "reference": "9968148",
+            "date": "2013-09-28T18:51:37.293Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -376.06216652481817,
+            "balance": -1079.18958116672
+        }, {
+            "reference": "34548895",
+            "date": "2013-08-07T07:35:14.697Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 368.5947869592346,
+            "balance": -710.5947942074854
+        }, {
+            "reference": "44341439",
+            "date": "2014-02-02T14:43:47.793Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 379.6893180347979,
+            "balance": -330.9054761726875
+        }, {
+            "reference": "20952624",
+            "date": "2013-07-31T19:33:59.466Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": 373.8905297520105,
+            "balance": 42.985053579322994
+        }, {
+            "reference": "68010007",
+            "date": "2013-10-13T16:54:35.055Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 374.8913734063972,
+            "balance": 417.8764269857202
+        }, {
+            "reference": "86638000",
+            "date": "2013-11-07T07:53:33.949Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": 376.87289149314165,
+            "balance": 794.7493184788618
+        }, {
+            "reference": "15384946",
+            "date": "2014-02-04T09:12:57.687Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": 374.6583937285468,
+            "balance": 1169.4077122074086
+        }, {
+            "reference": "8473032",
+            "date": "2013-08-20T03:49:22.906Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": -388.74564813100733,
+            "balance": 780.6620640764013
+        }, {
+            "reference": "70890353",
+            "date": "2013-11-08T20:26:59.937Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 391.07798998919316,
+            "balance": 1171.7400540655944
+        }, {
+            "reference": "17643177",
+            "date": "2013-10-04T00:30:31.209Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 381.61605677520856,
+            "balance": 1553.356110840803
+        }, {
+            "reference": "40785407",
+            "date": "2013-08-22T00:58:12.036Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -387.96342380158603,
+            "balance": 1165.392687039217
+        }, {
+            "reference": "72293470",
+            "date": "2013-11-30T21:30:13.252Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": 390.3950612889603,
+            "balance": 1555.7877483281773
+        }, {
+            "reference": "35397308",
+            "date": "2013-08-11T21:31:46.139Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -391.1646169249434,
+            "balance": 1164.6231314032339
+        }, {
+            "reference": "31247957",
+            "date": "2013-11-08T15:55:06.002Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": -391.47694698977284,
+            "balance": 773.146184413461
+        }, {
+            "reference": "27590989",
+            "date": "2013-07-04T02:07:29.721Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -395.99950876040384,
+            "balance": 377.1466756530572
+        }, {
+            "reference": "69083559",
+            "date": "2013-09-26T20:27:24.965Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 396.97449910850264,
+            "balance": 774.1211747615598
+        }, {
+            "reference": "973450",
+            "date": "2013-08-19T13:02:36.143Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": 397.26360840629786,
+            "balance": 1171.3847831678577
+        }, {
+            "reference": "35281165",
+            "date": "2014-01-05T15:40:06.365Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": -399.5910060661845,
+            "balance": 771.7937771016732
+        }, {
+            "reference": "15468820",
+            "date": "2013-12-21T06:46:48.371Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": 396.5914840749465,
+            "balance": 1168.3852611766197
+        }, {
+            "reference": "60377887",
+            "date": "2013-10-15T14:05:51.117Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 395.01313466532156,
+            "balance": 1563.3983958419412
+        }, {
+            "reference": "41783034",
+            "date": "2013-10-01T20:43:23.784Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -401.2400418233592,
+            "balance": 1162.158354018582
+        }, {
+            "reference": "61974228",
+            "date": "2013-11-20T13:35:48.957Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 402.6937476885505,
+            "balance": 1564.8521017071325
+        }, {
+            "reference": "22142056",
+            "date": "2013-08-31T15:24:28.456Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": -408.8725024124142,
+            "balance": 1155.9795992947184
+        }, {
+            "reference": "49379534",
+            "date": "2013-07-23T23:48:04.042Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": 399.98428728757426,
+            "balance": 1555.9638865822926
+        }, {
+            "reference": "34871879",
+            "date": "2013-09-21T14:21:42.211Z",
+            "type": "Invoice",
+            "status": "Settled",
+            "amount": 411.7123730464373,
+            "balance": 1967.67625962873
+        }, {
+            "reference": "21515122",
+            "date": "2013-10-23T21:14:06.601Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": 402.27811625157483,
+            "balance": 2369.9543758803047
+        }, {
+            "reference": "98401378",
+            "date": "2013-06-03T19:59:26.283Z",
+            "type": "Invoice",
+            "status": "Settled",
+            "amount": 416.8196979830973,
+            "balance": 2786.774073863402
+        }, {
+            "reference": "22364924",
+            "date": "2013-06-30T20:36:56.110Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 412.5851679837797,
+            "balance": 3199.3592418471817
+        }, {
+            "reference": "54931162",
+            "date": "2013-10-19T07:14:13.207Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -421.14981002616696,
+            "balance": 2778.2094318210147
+        }, {
+            "reference": "41219374",
+            "date": "2014-02-06T16:29:52.723Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 408.2698010962922,
+            "balance": 3186.479232917307
+        }, {
+            "reference": "27441217",
+            "date": "2013-11-12T09:39:13.985Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": -416.78168410481885,
+            "balance": 2769.697548812488
+        }, {
+            "reference": "94028575",
+            "date": "2013-08-22T10:19:54.729Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": -415.9376151384786,
+            "balance": 2353.7599336740095
+        }, {
+            "reference": "22597988",
+            "date": "2013-11-30T15:24:25.873Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": 419.5529301627539,
+            "balance": 2773.3128638367634
+        }, {
+            "reference": "92044054",
+            "date": "2014-01-14T02:31:39.084Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": 419.3973662573844,
+            "balance": 3192.710230094148
+        }, {
+            "reference": "17119543",
+            "date": "2013-11-23T07:44:44.019Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": 423.8434253570158,
+            "balance": 3616.5536554511636
+        }, {
+            "reference": "42026007",
+            "date": "2013-10-27T03:58:23.361Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 423.0539170901757,
+            "balance": 4039.6075725413393
+        }, {
+            "reference": "4368819",
+            "date": "2013-08-05T00:10:50.765Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -419.8965947495308,
+            "balance": 3619.7109777918085
+        }, {
+            "reference": "48673386",
+            "date": "2013-10-20T14:23:37.348Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": -425.8570475061424,
+            "balance": 3193.853930285666
+        }, {
+            "reference": "88019826",
+            "date": "2014-01-14T12:49:05.831Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 430.5325491980184,
+            "balance": 3624.3864794836845
+        }, {
+            "reference": "60000140",
+            "date": "2013-11-19T16:02:22.458Z",
+            "type": "Adjustment",
+            "status": "Settled",
+            "amount": 423.5986022867728,
+            "balance": 4047.9850817704573
+        }, {
+            "reference": "9410900",
+            "date": "2014-02-01T16:34:53.993Z",
+            "type": "Invoice",
+            "status": "Settled",
+            "amount": 437.14020913280547,
+            "balance": 4485.125290903263
+        }, {
+            "reference": "369437",
+            "date": "2013-06-26T13:07:22.555Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": 433.59030289482325,
+            "balance": 4918.715593798086
+        }, {
+            "reference": "75044560",
+            "date": "2013-06-26T03:13:30.261Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -429.96704663615674,
+            "balance": 4488.748547161929
+        }, {
+            "reference": "20024564",
+            "date": "2013-11-03T17:15:38.710Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": -436.79868351412006,
+            "balance": 4051.9498636478093
+        }, {
+            "reference": "14994232",
+            "date": "2013-08-30T02:31:48.120Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 436.274214270059,
+            "balance": 4488.224077917868
+        }, {
+            "reference": "7332935",
+            "date": "2014-02-06T17:11:05.515Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -444.5885352236219,
+            "balance": 4043.6355426942464
+        }, {
+            "reference": "91940617",
+            "date": "2013-08-18T01:32:56.788Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": -433.93626571423374,
+            "balance": 3609.6992769800127
+        }, {
+            "reference": "22475005",
+            "date": "2013-12-30T18:02:10.001Z",
+            "type": "Invoice",
+            "status": "Unpaid",
+            "amount": -440.2601277537178,
+            "balance": 3169.439149226295
+        }, {
+            "reference": "45498181",
+            "date": "2013-10-31T16:02:43.097Z",
+            "type": "Adjustment",
+            "status": "Paid",
+            "amount": -445.61236478132196,
+            "balance": 2723.826784444973
+        }, {
+            "reference": "9822047",
+            "date": "2013-07-08T02:56:58.825Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -443.46008080942556,
+            "balance": 2280.3667036355473
+        }, {
+            "reference": "87033223",
+            "date": "2013-08-20T16:59:58.998Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": -450.69770042714663,
+            "balance": 1829.6690032084007
+        }, {
+            "reference": "90999392",
+            "date": "2013-08-07T23:01:10.578Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": 448.4244596064091,
+            "balance": 2278.0934628148098
+        }, {
+            "reference": "11001797",
+            "date": "2013-09-30T09:09:38.266Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": -444.94188580079935,
+            "balance": 1833.1515770140104
+        }, {
+            "reference": "8969093",
+            "date": "2013-07-18T11:22:09.996Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": 458.7238084534183,
+            "balance": 2291.8753854674287
+        }, {
+            "reference": "11628406",
+            "date": "2013-08-28T15:37:38.877Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": 451.75798703636974,
+            "balance": 2743.6333725037985
+        }, {
+            "reference": "6744401",
+            "date": "2014-01-14T16:47:43.732Z",
+            "type": "Reversal",
+            "status": "Unpaid",
+            "amount": -453.77873596781865,
+            "balance": 2289.85463653598
+        }, {
+            "reference": "14205616",
+            "date": "2013-08-21T04:55:54.938Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": -453.1635863080155,
+            "balance": 1836.6910502279643
+        }, {
+            "reference": "70406827",
+            "date": "2014-01-06T12:31:51.180Z",
+            "type": "Payment",
+            "status": "Settled",
+            "amount": 455.45261095510796,
+            "balance": 2292.1436611830723
+        }, {
+            "reference": "51989058",
+            "date": "2013-09-03T23:54:51.555Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 455.136077408446,
+            "balance": 2747.2797385915183
+        }, {
+            "reference": "82773544",
+            "date": "2013-12-11T03:18:04.004Z",
+            "type": "Adjustment",
+            "status": "Unpaid",
+            "amount": 453.9638228989206,
+            "balance": 3201.243561490439
+        }, {
+            "reference": "39836389",
+            "date": "2013-07-05T08:56:40.946Z",
+            "type": "Reversal",
+            "status": "Settled",
+            "amount": 464.53592088469304,
+            "balance": 3665.779482375132
+        }, {
+            "reference": "30578876",
+            "date": "2013-07-11T21:12:33.317Z",
+            "type": "Invoice",
+            "status": "Paid",
+            "amount": -456.02516547683626,
+            "balance": 3209.7543168982957
+        }, {
+            "reference": "20367457",
+            "date": "2013-10-22T02:29:59.034Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 471.9296463718638,
+            "balance": 3681.6839632701594
+        }, {
+            "reference": "85643694",
+            "date": "2013-12-30T04:26:16.834Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": -470.3289773056749,
+            "balance": 3211.3549859644845
+        }, {
+            "reference": "87849933",
+            "date": "2013-06-21T23:16:09.069Z",
+            "type": "Invoice",
+            "status": "Settled",
+            "amount": -462.22334819915704,
+            "balance": 2749.1316377653275
+        }, {
+            "reference": "96882601",
+            "date": "2013-12-02T08:06:10.286Z",
+            "type": "Payment",
+            "status": "Paid",
+            "amount": 463.4646937942598,
+            "balance": 3212.5963315595873
+        }, {
+            "reference": "81212045",
+            "date": "2014-01-10T09:24:09.211Z",
+            "type": "Reversal",
+            "status": "Paid",
+            "amount": 476.9976289642509,
+            "balance": 3689.593960523838
+        }, {
+            "reference": "72788600",
+            "date": "2013-08-01T04:30:51.081Z",
+            "type": "Payment",
+            "status": "Unpaid",
+            "amount": -466.13121761824004,
+            "balance": 3223.462742905598
+        }]
+    }
+}

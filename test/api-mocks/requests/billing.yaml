@@ -1,6 +1,6 @@
 # Get Billing Transactions for an Account
 -   request:
-        url: ^/api/accounts/billing/(.*)/transactions$
+        url: ^/api/billing/(.*)/billingSummary$
         method: GET
     response:
         status: 200
@@ -10,7 +10,7 @@
 
 # Get Billing Periods for an account
 -   request:
-        url: ^/api/accounts/billing/(.*)/billing-periods$
+        url: ^/api/billing/(.*)/billing-periods$
         method: GET
     response:
         status: 200
@@ -20,7 +20,7 @@
 
 # Get Estimated Charges for an account
 -   request:
-        url: ^/api/accounts/billing/(.*)/billing-periods/(.*)/estimatedCharges$
+        url: ^/api/billing/(.*)/billing-periods/(.*)/estimated_charges$
         method: GET
     response:
         status: 200
@@ -30,17 +30,17 @@
 
 # Get Account Info
 -   request:
-        url: ^/api/accounts/billing/(.*)$
+        url: ^/api/billing/(.*)/balance$
         method: GET
     response:
         status: 200
         headers:
             content-type: application/json
-        file: test/api-mocks/responses/account.json
+        file: test/api-mocks/responses/balance.json
 
 # Get Available Payment Methods
 -   request:
-        url: ^/api/accounts/payments/(.*)/methods$
+        url: ^/api/payment/(.*)/methods$
         method: GET
     response:
         status: 200
@@ -50,7 +50,7 @@
 
 # Post a payment to account
 -   request: 
-        url: ^/api/accounts/(.*)/payment$
+        url: ^/api/billing/(.*)/payment$
         method: POST
     response:
         status: 200
@@ -60,7 +60,7 @@
 
 # Get Account Info
 -   request:
-        url: ^/api/accounts/(.*)$
+        url: ^/api/billing(.*)$
         method: GET
     response:
         status: 200
