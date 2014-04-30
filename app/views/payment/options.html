@@ -40,7 +40,6 @@
                     <rx-payment-set-default
                         post-hook="changeDefaultMethod"
                         user-name="userName"
-                        classes="button button-blue"
                         method-id="defaultMethod.id"
                         methods="paymentMethods">
                         <img src="/billing/images/icon-change_set_white.png" />&nbsp;Change Primary
@@ -50,7 +49,6 @@
                     <rx-payment-action
                         post-hook="postPayment"
                         user-name="userName"
-                        classes="button button-green"
                         amount="paymentAmount"
                         method-id="defaultMethod.id"
                         methods="paymentMethods">
@@ -133,41 +131,32 @@
                                 <img src="/billing/images/icon-cog.png" />
                             </rx-popover-trigger>
                             <rx-popover-content>
-                                <ul class="payment-action-options">
-                                    <li>
-                                        <rx-payment-set-default
-                                            ng-show="!card.isDefault"
-                                            post-hook="changeDefaultMethod"
-                                            user-name="userName"
-                                            classes="payment-change"
-                                            method-id="card.id"
-                                            methods="paymentMethods">
-                                             <img src="/billing/images/icon-change_set.png" /> Set as Primary
-                                        </rx-payment-set-default>
-                                    </li>
-                                    <li>
-                                        <rx-payment-action
-                                            post-hook="postPayment"
-                                            user-name="userName"
-                                            classes="payment-post"
-                                            amount="paymentAmount"
-                                            method-id="card.id"
-                                            methods="paymentMethods">
-                                            <img src="/billing/images/icon-add.png" /> Make Payment with
-                                        </rx-payment-action>
-                                    </li>
-                                    <li>
-                                        <rx-payment-disable
-                                            ng-show="!card.isDefault"
-                                            post-hook="disableMethod"
-                                            user-name="userName"
-                                            classes="payment-disable"
-                                            method-id="card.id"
-                                            method="card">
-                                            <img src="/billing/images/icon-disable.png" /> Disable
-                                        </rx-payment-disable>
-                                    </li>
-                                </ul>
+                                <div class="payment-action-options">
+                                    <rx-payment-set-default
+                                        ng-show="!card.isDefault"
+                                        post-hook="changeDefaultMethod"
+                                        user-name="userName"
+                                        method-id="card.id"
+                                        methods="paymentMethods">
+                                         <img src="/billing/images/icon-change_set.png" /> Set as Primary
+                                    </rx-payment-set-default>
+                                    <rx-payment-action
+                                        post-hook="postPayment"
+                                        user-name="userName"
+                                        amount="paymentAmount"
+                                        method-id="card.id"
+                                        methods="paymentMethods">
+                                        <img src="/billing/images/icon-add.png" /> Make Payment with
+                                    </rx-payment-action>
+                                    <rx-payment-disable
+                                        ng-show="!card.isDefault"
+                                        post-hook="disableMethod"
+                                        user-name="userName"
+                                        method-id="card.id"
+                                        method="card">
+                                        <img src="/billing/images/icon-disable.png" /> Disable
+                                    </rx-payment-disable>
+                                </div>
                             </rx-popover-content>
                         </rx-popover>
                     </td>
@@ -244,40 +233,31 @@
                                 <img src="/billing/images/icon-cog.png" />
                             </rx-popover-trigger>
                             <rx-popover-content>
-                                <ul class="payment-action-options">
-                                    <li>
-                                        <rx-payment-set-default
-                                            ng-show="!ach.isDefault"
-                                            post-hook="changeDefaultMethod"
-                                            user-name="userName"
-                                            classes="payment-change"
-                                            method-id="ach.id"
-                                            methods="paymentMethods">
-                                             <img src="/billing/images/icon-change_set.png" /> Set as Primary
-                                        </rx-payment-set-default>
-                                    </li>
-                                    <li>
-                                        <rx-payment-action
-                                            post-hook="postPayment"
-                                            user-name="userName"
-                                            classes="payment-post"
-                                            amount="paymentAmount"
-                                            method-id="ach.id"
-                                            methods="paymentMethods">
-                                            <img src="/billing/images/icon-add.png" /> Make Payment with
-                                        </rx-payment-action>
-                                    </li>
-                                    <li>
-                                        <rx-payment-disable
-                                            ng-show="!ach.isDefault"
-                                            post-hook="disableMethod"
-                                            user-name="userName"
-                                            classes="payment-disable"
-                                            method="ach">
-                                            <img src="/billing/images/icon-disable.png" /> Disable
-                                        </rx-payment-disable>
-                                    </li>
-                                </ul>
+                                <div class="payment-action-options">
+                                    <rx-payment-set-default
+                                        ng-show="!ach.isDefault"
+                                        post-hook="changeDefaultMethod"
+                                        user-name="userName"
+                                        method-id="ach.id"
+                                        methods="paymentMethods">
+                                         <img src="/billing/images/icon-change_set.png" /> Set as Primary
+                                    </rx-payment-set-default>
+                                    <rx-payment-action
+                                        post-hook="postPayment"
+                                        user-name="userName"
+                                        amount="paymentAmount"
+                                        method-id="ach.id"
+                                        methods="paymentMethods">
+                                        <img src="/billing/images/icon-add.png" /> Make Payment with
+                                    </rx-payment-action>
+                                    <rx-payment-disable
+                                        ng-show="!ach.isDefault"
+                                        post-hook="disableMethod"
+                                        user-name="userName"
+                                        method="ach">
+                                        <img src="/billing/images/icon-disable.png" /> Disable
+                                    </rx-payment-disable>
+                                </div>
                             </rx-popover-content>
                         </rx-popover>
                     </td>
