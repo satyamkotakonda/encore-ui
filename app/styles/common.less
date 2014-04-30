@@ -300,8 +300,44 @@ Horizontal Tab Menu based on pure
     }
     &.button {
         color: #fff;
-        backgorund: @actionGreen;
+        background: @actionGreen;
+        &.payment-change {
+            color: #fff;
+            background: @paymentChangeColor;
+        }
+        &.payment-disable {
+            color: #fff;
+            background: @paymentPostColor;
+        }
+        &.payment-post {
+            color: #fff;
+            background: @paymentDisableColor;
+        }
+        &:hover {
+            color: #fff;
+        }
     }
+
+    img {
+        vertical-align: bottom;
+    }
+
+    &.payment-change,
+    &.payment-disable,
+    &.payment-post {
+        white-space: nowrap;
+    }
+
+    &.payment-change {
+        color: @paymentChangeColor;
+    }
+    &.payment-post {
+        color: @paymentPostColor;
+    }
+    &.payment-disable {
+        color: @paymentDisableColor;
+    }
+
 }
 
 /*
