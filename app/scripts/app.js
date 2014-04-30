@@ -3,7 +3,7 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
         'rxSwitch', 'encore.ui.rxPopover', 'billingSvcs', 'paymentSvcs', 'constants', 'productConstants'])
     .run(function ($http, $rootScope) {
         //#TODO: Integrate rxAuth/rxLogin so that we no longer have to temporarily store the token key
-        $http.defaults.headers.common['X-Auth-Token'] = '06557b8eecfe47adbd1fa2b260cc0eb5';
+        $http.defaults.headers.common['X-Auth-Token'] = '71887637eb3c4a0ea0a312761665fb6a';
         // Forces JSON only
         $http.defaults.headers.common['Accept'] = 'application/json';
 
@@ -37,7 +37,10 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
             ]
         }];
     })
-    .config(function ($routeProvider, $locationProvider) {
+    .config(function ($httpProvider, $routeProvider, $locationProvider) {
+        // Add Interceptors for auth
+        $httpProvider.interceptors.push('TokenInterceptor');
+        $httpProvider.interceptors.push('UnauthorizedInterceptor');
         //#TODO: To be replaced once account search is implemented, only temporary for dev
         $routeProvider
             .when('/billing/overview/:accountNumber', {
@@ -56,6 +59,5 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                 //#TODO: this is temporary until we get a more solid solution
                 redirectTo: '/billing/overview/020-473500'
             });
-
         $locationProvider.html5Mode(true).hashPrefix('!');
     });
