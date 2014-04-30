@@ -39,8 +39,8 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
     })
     .config(function ($httpProvider, $routeProvider, $locationProvider) {
         // Add Interceptors for auth
-        $httpProvider.interceptors.push('TokenInterceptor');
-        $httpProvider.interceptors.push('UnauthorizedInterceptor');
+        // $httpProvider.interceptors.push('TokenInterceptor');
+        // $httpProvider.interceptors.push('UnauthorizedInterceptor');
         //#TODO: To be replaced once account search is implemented, only temporary for dev
         $routeProvider
             .when('/billing/overview/:accountNumber', {
