@@ -1,40 +1,7 @@
 'use strict';
 angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.tpls',
         'rxSwitch', 'encore.ui.rxPopover', 'billingSvcs', 'paymentSvcs', 'constants', 'productConstants'])
-    .run(function ($http, $rootScope) {
-        // Forces JSON only
-        $http.defaults.headers.common['Accept'] = 'application/json';
 
-        $rootScope.billingMenu = [{
-            title: 'Billing',
-            children: [
-                {
-                    href: '/billing/overview/{{accountNumber}}',
-                    linkText: 'Overview'
-                },
-                {
-                    href: '/billing/transactions/{{accountNumber}}',
-                    linkText: 'Transactions'
-                },
-                {
-                    href: '/billing/usage/{{accountNumber}}',
-                    linkText: 'Current Usage'
-                },
-                {
-                    href: '/billing/discounts/{{accountNumber}}',
-                    linkText: 'Discounts'
-                },
-                {
-                    href: '/billing/payment/{{accountNumber}}/options',
-                    linkText: 'Payment Options'
-                },
-                {
-                    href: '/billing/preferences/{{accountNumber}}',
-                    linkText: 'Preferences'
-                }
-            ]
-        }];
-    })
     .config(function ($httpProvider, $routeProvider, $locationProvider) {
         // Add Interceptors for auth
         $httpProvider.interceptors.push('TokenInterceptor');
@@ -42,21 +9,74 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
 
         //#TODO: To be replaced once account search is implemented, only temporary for dev
         $routeProvider
-            .when('/billing/overview/:accountNumber', {
-                templateUrl: '/billing/views/billing/overview.html',
+            .when('/overview/:accountNumber', {
+                templateUrl: 'views/billing/overview.html',
                 controller: 'OverviewCtrl'
             })
-            .when('/billing/usage/:accountNumber', {
-                templateUrl: '/billing/views/usage/usage.html',
+            .when('/usage/:accountNumber', {
+                templateUrl: 'views/usage/usage.html',
                 controller: 'UsageCtrl'
             })
-            .when('/billing/payment/:accountNumber/options', {
-                templateUrl: '/billing/views/payment/options.html',
+            .when('/payment/:accountNumber/options', {
+                templateUrl: 'views/payment/options.html',
                 controller: 'OptionsCtrl'
             })
             .otherwise({
                 //#TODO: this is temporary until we get a more solid solution
-                redirectTo: '/billing/overview/020-473500'
+                redirectTo: '/overview/020-473500'
             });
         $locationProvider.html5Mode(true).hashPrefix('!');
+    }).run(function ($http, $rootScope) {
+        // Forces JSON only
+        $http.defaults.headers.common['Accept'] = 'application/json';
+
+        $rootScope.billingMenu = [{
+            title: 'Billing',
+            children: [
+                {
+                    href: 'overview/{{accountNumber}}',
+                    linkText: 'Overview'
+                },
+                {
+                    href: 'transactions/{{accountNumber}}',
+                    linkText: 'Transactions'
+                },
+                {
+                    href: 'usage/{{accountNumber}}',
+                    linkText: 'Current Usage'
+                },
+                {
+                    href: 'discounts/{{accountNumber}}',
+                    linkText: 'Discounts'
+                },
+                {
+                    href: 'payment/{{accountNumber}}/options',
+                    linkText: 'Payment Options'
+                },
+                {
+                    href: 'preferences/{{accountNumber}}',
+                    linkText: 'Preferences'
+                }
+            ]
+        }];
+    }).controller('LoginModalCtrl', function ($scope, Auth, Environment, rxNotify) {
+        $scope.environment = Environment.get().name;
+
+        var authenticate = function (credentials, success, error) {
+            //override the body here
+            var body = {
+            };
+
+            return Auth.loginWithJSON(body, success, error);
+        };
+
+        $scope.login = function () {
+            authenticate($scope.user, function (data) {
+                Auth.storeToken(data);
+            }, function (error) {
+                rxNotify.add('Invalid Username or RSA Token', { type: 'warning' });
+                $scope.user.token = '';
+                console.log(error);
+            });
+        };
     });
