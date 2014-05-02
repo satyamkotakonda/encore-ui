@@ -1,5 +1,5 @@
 describe('OptionsCtrl', function () {
-    var scope, ctrl, account, payment, paymentMethod, defaultPaymentMethod;
+    var scope, ctrl, account, balance, payment, paymentMethod, defaultPaymentMethod, balanceData;
 
     var testAccountNumber = '12345',
         paymentMethods = [{
@@ -9,15 +9,12 @@ describe('OptionsCtrl', function () {
                 'cardNumber': 'XXXXXXXXXXXX3456',
                 'cardType': 'VISA'
             }
-        }],
-        accountInfo = {
-            currentDue: 2124.00
-        };
+        }];
 
     beforeEach(function () {
         module('billingApp');
 
-        inject(function ($controller, $rootScope, $q, Account, Payment, PaymentMethod,
+        inject(function ($controller, $rootScope, $q, Account, Balance, Payment, PaymentMethod,
             DefaultPaymentMethodFilter) {
             var getResourceMock = function (data) {
                     var deferred = $q.defer();
@@ -27,18 +24,25 @@ describe('OptionsCtrl', function () {
                 },
                 getResourceCallBackMock = function (data) {
                     return function (param, success) {
-                        success(data);
+                        if (success) {
+                            success(data);
+                        }
                         return getResourceMock(data);
                     };
                 };
 
             scope = $rootScope.$new();
             account = Account;
+            balance = Balance;
             payment = Payment;
             paymentMethod = PaymentMethod;
             defaultPaymentMethod = DefaultPaymentMethodFilter;
+            balanceData = {
+                amountDue: '2124.00'
+            };
 
-            account.get = getResourceCallBackMock(accountInfo);
+            account.get = getResourceCallBackMock({});
+            balance.get = getResourceCallBackMock(balanceData);
             payment.post = sinon.stub(payment, 'post').returns(getResourceMock({}));
             paymentMethod.list = getResourceCallBackMock(paymentMethods);
             paymentMethod.disable = function (param, data, success) {
@@ -58,6 +62,8 @@ describe('OptionsCtrl', function () {
                 $scope: scope,
                 $routeParams: { accountNumber: testAccountNumber },
                 Account: account,
+                Balance: balance,
+                Payment: payment,
                 PaymentMethod: paymentMethod,
                 DefaultPaymentMethodFilter: defaultPaymentMethod
             });
@@ -108,7 +114,7 @@ describe('OptionsCtrl', function () {
         expect(scope.achSort.reverse).to.be.eq(true);
     });
 
-    it('OptionsCtrl should set the paymentAmount upon success of getting account info', function () {
+    it('OptionsCtrl should set the paymentAmount upon success of getting balance info', function () {
         expect(scope.paymentAmount).to.not.be.empty;
     });
 
