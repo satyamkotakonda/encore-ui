@@ -33,11 +33,11 @@
         </dl>
         <dl class="list-definition pull-right">
             <dt>Terms:</dt>
-            <dd ng-if="account.terms">{{account.terms}}</dd>
-            <dd ng-if="!account.terms">N/A</dd>
+            <dd ng-if="paymentInfo.paymentTerms">{{paymentInfo.paymentTerms}}</dd>
+            <dd ng-if="!paymentInfo.paymentTerms">N/A</dd>
             <dt>Billing Cycle:</dt>
-            <dd ng-if="account.cycle">{{account.cycle}} Months</dd>
-            <dd ng-if="!account.cycle">N/A</dd>
+            <dd ng-if="billInfo.billingDayOfMonth">{{billInfo.billingDayOfMonth > 0 && 'Monthly'}}</dd>
+            <dd ng-if="!billInfo.billingDayOfMonth">N/A</dd>
         </dl>
     </div>
     <hr />
@@ -95,7 +95,7 @@
                     <th scope="col">
                         <rx-sortable-column
                             sort-method="sortCol"
-                            sort-property="reference"
+                            sort-property="tranRefNum"
                             predicate="sort.predicate"
                             reverse="sort.reverse">
                             Reference #
@@ -150,7 +150,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="txn in transactions | orderBy:sort.predicate:sort.reverse | TransactionTable:transactionFilter | Paginate:pager" class="{{ txn.type | lowercase }}">
-                    <td>{{ txn.reference }}</td>
+                    <td>{{ txn.tranRefNum }}</td>
                     <td>{{ txn.date | date: defaultDateFormat }}</td>
                     <td>{{ txn.type }}</td>
                     <td class="{{ txn.status | lowercase }}">{{ txn.status }}</td>

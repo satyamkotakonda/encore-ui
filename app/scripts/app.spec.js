@@ -35,10 +35,6 @@ describe('Billing: LoginModalCtrl', function () {
             env = Environment;
             auth = Auth;
 
-            $location.absUrl = sinon.stub($location, 'absUrl', function () {
-                return 'http://staging.en.encore.rackspace.com';
-            });
-
             auth.isAuthenticated = sinon.stub(auth, 'isAuthenticated').returns(false);
             auth.loginWithJSON = sinon.stub(auth, 'loginWithJSON', getResourceMock(token));
 

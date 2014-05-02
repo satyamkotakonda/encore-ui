@@ -32,8 +32,8 @@ angular.module('billingApp')
     * </pre>
     */
     .controller('TransactionsCtrl', function ($scope, $routeParams, $q, Transaction, Account, Balance,
-        Period, Payment, PaymentMethod, PageTracking, rxSortUtil, rxPromiseNotifications,
-        DefaultPaymentMethodFilter,
+        Period, Payment, PaymentMethod, PageTracking, PaymentInfo, BillInfo,
+        rxSortUtil, rxPromiseNotifications, DefaultPaymentMethodFilter,
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES) {
 
         $scope.userName = 'Test Username';
@@ -88,6 +88,8 @@ angular.module('billingApp')
         $scope.clearFilter = clearFilter;
 
         // Get Account & Transactions Info
+        $scope.billInfo = BillInfo.get({ id: $routeParams.accountNumber });
+        $scope.paymentInfo = PaymentInfo.get({ id: $routeParams.accountNumber });
         $scope.account = Account.get({ id: $routeParams.accountNumber });
         $scope.balance = Balance.get({ id: $routeParams.accountNumber });
         $scope.transactions = Transaction.list({ id: $routeParams.accountNumber });
@@ -96,6 +98,8 @@ angular.module('billingApp')
 
         // Group the promises in $q.all for a global error message if any errors occur
         rxPromiseNotifications.add($q.all([
+            $scope.billInfo.$promise,
+            $scope.paymentInfo.$promise,
             $scope.balance.$promise,
             $scope.transactions.$promise,
             $scope.paymentMethods.$promise,

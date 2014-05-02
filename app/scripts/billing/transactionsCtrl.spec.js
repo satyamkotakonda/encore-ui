@@ -1,6 +1,6 @@
 describe('Billing: TransactionsCtrl', function () {
     var scope, ctrl, account, balance, transaction, period, payment, paymentMethod, PageTrackingObject,
-        balanceData, paymentMethods;
+        balanceData, paymentMethods, paymentInfo, billInfo;
 
     var testAccountNumber = '12345';
 
@@ -8,13 +8,20 @@ describe('Billing: TransactionsCtrl', function () {
         module('billingApp');
 
         inject(function ($controller, $rootScope, $httpBackend, Account, Balance, Transaction, Period,
-                Payment, PaymentMethod, PageTracking, DefaultPaymentMethodFilter, $q) {
-            var getResourceMock = function (data) {
-                var deferred = $q.defer();
-                data.$promise = deferred.promise;
-                data.$deferred = deferred;
-                return data;
-            };
+                Payment, PaymentMethod, BillInfo, PaymentInfo, PageTracking, DefaultPaymentMethodFilter, $q) {
+            var getResourceResultMock = function (data) {
+                    var deferred = $q.defer();
+                    data.$promise = deferred.promise;
+                    data.$deferred = deferred;
+                    return data;
+                },
+                getResourceMock = function (returnData) {
+                    returnData = getResourceResultMock(returnData);
+                    return function (callData, success, error) {
+                        returnData.$promise.then(success, error);
+                        return returnData;
+                    };
+                };
             scope = $rootScope.$new();
             transaction = Transaction;
             account = Account;
@@ -22,6 +29,8 @@ describe('Billing: TransactionsCtrl', function () {
             period = Period;
             paymentMethod = PaymentMethod;
             payment = Payment;
+            paymentInfo = PaymentInfo;
+            billInfo = BillInfo;
             balanceData = {
                 amountDue: '2124.00'
             };
@@ -30,12 +39,14 @@ describe('Billing: TransactionsCtrl', function () {
                 id: 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479'
             }];
 
-            period.list = sinon.stub(period, 'list').returns(getResourceMock([]));
-            account.get = sinon.stub(account, 'get').returns(getResourceMock({}));
-            balance.get = sinon.stub(balance, 'get').returns(getResourceMock(balanceData));
-            payment.post = sinon.stub(payment, 'post').returns(getResourceMock({}));
-            transaction.list = sinon.stub(transaction, 'list').returns(getResourceMock([]));
-            paymentMethod.list = sinon.stub(paymentMethod, 'list').returns(getResourceMock(paymentMethods));
+            billInfo.get =  sinon.stub(billInfo, 'get', getResourceMock({}));
+            paymentInfo.get =  sinon.stub(paymentInfo, 'get', getResourceMock({}));
+            period.list = sinon.stub(period, 'list', getResourceMock([]));
+            account.get = sinon.stub(account, 'get', getResourceMock({}));
+            balance.get = sinon.stub(balance, 'get', getResourceMock(balanceData));
+            payment.post = sinon.stub(payment, 'post', getResourceMock({}));
+            transaction.list = sinon.stub(transaction, 'list', getResourceMock([]));
+            paymentMethod.list = sinon.stub(paymentMethod, 'list', getResourceMock(paymentMethods));
 
             PageTrackingObject = PageTracking.createInstance().constructor;
 
