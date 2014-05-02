@@ -13,6 +13,10 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                 templateUrl: 'views/billing/overview.html',
                 controller: 'OverviewCtrl'
             })
+            .when('/transactions/:accountNumber', {
+                templateUrl: 'views/billing/transactions.html',
+                controller: 'TransactionsCtrl'
+            })
             .when('/usage/:accountNumber', {
                 templateUrl: 'views/usage/usage.html',
                 controller: 'UsageCtrl'
@@ -26,7 +30,13 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                 redirectTo: '/overview/020-473500'
             });
         $locationProvider.html5Mode(true).hashPrefix('!');
-    }).run(function ($http, $rootScope) {
+    }).run(function ($http, $rootScope, $window, Auth, Environment) {
+        var environment = Environment.get().name;
+
+        if (environment !== 'local' && !Auth.isAuthenticated()) {
+            $window.location = '/login?redirect=' + $window.location.pathname;
+            return;
+        }
         // Forces JSON only
         $http.defaults.headers.common['Accept'] = 'application/json';
 
@@ -65,11 +75,20 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
         var authenticate = function (credentials, success, error) {
             //override the body here
             var body = {
+                'auth': {
+                    'RAX-AUTH:domain': {
+                        'name': 'Rackspace'
+                    },
+                    'RAX-AUTH:rsaCredentials': {
+                        'username': credentials.username,
+                        'tokenKey': credentials.token
+                    }
+                }
             };
 
             return Auth.loginWithJSON(body, success, error);
         };
-
+        $scope.user = {};
         $scope.login = function () {
             authenticate($scope.user, function (data) {
                 Auth.storeToken(data);
