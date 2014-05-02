@@ -40,15 +40,17 @@
                     <rx-payment-set-default
                         post-hook="changeDefaultMethod"
                         user-name="userName"
+                        classes="button"
                         method-id="defaultMethod.id"
                         methods="paymentMethods">
-                        <img src="/billing/images/icon-change_set_white.png" />&nbsp;Change Primary
+                        <img src="/billing/images/icon-change_set_white.png" /> Change Primary
                     </rx-payment-set-default>
                 </li>
                 <li>
                     <rx-payment-action
                         post-hook="postPayment"
                         user-name="userName"
+                        classes="button"
                         amount="paymentAmount"
                         method-id="defaultMethod.id"
                         methods="paymentMethods">
