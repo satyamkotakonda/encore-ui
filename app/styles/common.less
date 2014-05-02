@@ -6,6 +6,13 @@ These are common styles that will be re-used across the site
 */
 @import (less, reference) '../bower_components/pure/menus.css';
 
+
+table {
+    tr {
+        background-color: #fff;
+    }
+}
+
 .pull-left {
     float: left;
 }
@@ -76,7 +83,7 @@ Data Definition List for common key/value descriptions
     dt {
         line-height: @lineHeight;
         float: left;
-        min-width: 170px;
+        min-width: 120px;
         font-weight: 500;
         text-align: right;
         letter-spacing: -0.04em;
@@ -102,24 +109,27 @@ Data Definition List for common key/value descriptions
         border: 1px #aaa solid;
         margin-bottom: 0.5em;
     }
+    dt.accent {
+        min-width: 150px;
+    }
     .accent-group {
+        min-width: inherit;
         border: 0;
         margin-bottom: 0.5em;
         padding-left: 0;
         .accent-text {
             border: 1px #aaa solid;
             border-left: 0;
-            border-right: 0;
             padding-right: @spacing;
             padding-left: @spacing - 1;
+            margin-right: @spacing/2;
             float: left;
         }
         .accent-action {
             float: left;
-            border: 0;
             line-height: 0;
             font-size: @fontSize - 0.1em;
-            line-height: @lineHeight + 1.1em;
+            line-height: @lineHeight - 0.35em;
         }
     }
 }
