@@ -3,6 +3,9 @@ angular.module('constants', [])
         overview: {
             error: 'There was an error loading Account Information'
         },
+        transactions: {
+            error: 'There was an error loading Account Transactions'
+        },
         payment: {
             error: 'There was an error Posting the Payment Request',
             load: 'Posting Payment',
