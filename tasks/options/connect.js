@@ -1,7 +1,4 @@
-var config = require('../util/config.js'),
-    appLocalRewrite = {};
-
-appLocalRewrite['/'+config.appName] = '';
+var config = require('../util/config.js');
 
 module.exports = {
     options: {
@@ -9,12 +6,6 @@ module.exports = {
         hostname: 'localhost'
     },
     proxies: [
-        {
-            context: '/' + config.appName,
-            host: 'localhost',
-            port: 9000,
-            rewrite: appLocalRewrite
-        },
         {
             context: '/api/billing',
             host: 'staging.billingv2.pipeline2.api.rackspacecloud.com',
@@ -34,18 +25,8 @@ module.exports = {
             rewrite: {
                 '/api/payment': '/v1/accounts'
             }
-        },
-        {
-            context: '/api',
-            host: 'localhost',
-            port: 3000,
-            https: false,
-            changeOrigin: false,
-            rewrite: {
-                '/api': '/api'
-            }
         }
-    ],
+    ].concat(config.defaultProxies),
     livereload: {
         options: {
             middleware: function (cnct) {
