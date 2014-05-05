@@ -92,10 +92,9 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
         $scope.login = function () {
             return authenticate($scope.user, function (data) {
                 Auth.storeToken(data);
-            }, function (error) {
+            }, function () {
                 rxNotify.add('Invalid Username or RSA Token', { type: 'warning' });
                 $scope.user.token = '';
-                console.log(error);
             });
         };
     });
