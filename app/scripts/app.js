@@ -17,6 +17,10 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                 templateUrl: 'views/billing/transactions.html',
                 controller: 'TransactionsCtrl'
             })
+            .when('/transactions/:accountNumber/:transactionType/:transactionNumber', {
+                templateUrl: 'views/billing/transactionDetails.html',
+                controller: 'TransactionDetailsCtrl'
+            })
             .when('/usage/:accountNumber', {
                 templateUrl: 'views/usage/usage.html',
                 controller: 'UsageCtrl'
@@ -37,6 +41,15 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
             $window.location = '/login?redirect=' + $window.location.pathname;
             return;
         }
+
+        $rootScope.auth = Auth;
+
+        // TODO: Replace with Auth.getSSO/getUserName once implemented, this gets past test errors
+        var token = Auth.getToken();
+        if (token && token.access && token.access.user) {
+            $rootScope.userName = token.access.user.id;
+        }
+
         // Forces JSON only
         $http.defaults.headers.common['Accept'] = 'application/json';
 
