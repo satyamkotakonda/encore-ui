@@ -34,15 +34,20 @@ angular.module('billingSvcs', ['ngResource'])
     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
     */
     .factory('Transaction', function ($resource, Transform) {
-        var transform = Transform('billingSummary.item', 'details');
-        return $resource('/api/billing/:id/billingSummary',
+        var transformList = Transform('billingSummary.item', 'details');
+        return $resource('/api/billing/:id/:transactionType/:transactionNumber',
             {
-                id: '@id',
-                marker: 0,
-                limit: 10
+                id: '@id'
             },
             {
-                list: { method: 'GET', isArray: true, transformResponse: transform }
+                list: {
+                    method: 'GET',
+                    isArray: true,
+                    transformResponse: transformList,
+                    params: {
+                        transactionType: 'billingSummary'
+                    }
+                }
             }
         );
     })
@@ -126,9 +131,7 @@ angular.module('billingSvcs', ['ngResource'])
         var transform = Transform('billingPeriods.billingPeriod', 'details');
         return $resource('/api/billing/:id/billing-periods',
             {
-                id: '@id',
-                marker: 0,
-                limit: 10
+                id: '@id'
             },
             {
                 list: { method: 'GET', isArray: true, transformResponse: transform }
@@ -177,7 +180,4 @@ angular.module('billingSvcs', ['ngResource'])
                 post: { method: 'POST' }
             }
         );
-    })
-    .constant('DATE_FORMAT', 'MM / dd / yyyy')
-    .constant('TRANSACTION_TYPES', ['Payment', 'Invoice', 'Reversal', 'Adjustment'])
-    .constant('TRANSACTION_STATUSES', ['Paid', 'Settled', 'Unpaid']);
+    });
