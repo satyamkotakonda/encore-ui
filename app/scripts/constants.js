@@ -19,4 +19,7 @@ angular.module('constants', [])
         usage: {
             error: 'There was an error loading Estimated Charges.'
         }
-    });
+    })
+    .constant('DATE_FORMAT', 'MM / dd / yyyy')
+    .constant('TRANSACTION_TYPES', ['Payment', 'Invoice', 'Reversal', 'Adjustment', 'Writeoff', 'Refund'])
+    .constant('TRANSACTION_STATUSES', ['Open', 'Closed', 'Pending', 'None']);

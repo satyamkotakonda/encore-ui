@@ -36,8 +36,6 @@ angular.module('billingApp')
         DefaultPaymentMethodFilter,
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES) {
 
-        $scope.userName = 'Test Username';
-
         // Action for clearing the filters
         var resetPager = function () {
                 $scope.pager.pageNumber = 0;

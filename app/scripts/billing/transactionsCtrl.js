@@ -36,8 +36,6 @@ angular.module('billingApp')
         rxSortUtil, rxPromiseNotifications, DefaultPaymentMethodFilter,
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES) {
 
-        $scope.userName = 'Test Username';
-
         // Action for clearing the filters
         var resetPager = function () {
                 $scope.pager.pageNumber = 0;
@@ -95,6 +93,9 @@ angular.module('billingApp')
         $scope.transactions = Transaction.list({ id: $routeParams.accountNumber });
         $scope.paymentMethods = PaymentMethod.list({ id: $routeParams.accountNumber });
         $scope.billingPeriods = Period.list({ id: $routeParams.accountNumber });
+
+        // Pass the account number for building links
+        $scope.accountNumber = $routeParams.accountNumber;
 
         // Group the promises in $q.all for a global error message if any errors occur
         rxPromiseNotifications.add($q.all([
