@@ -78,6 +78,44 @@ angular.module('billingSvcs', ['ngResource'])
     })
    /**
     * @ngdoc service
+    * @name billingSvcs.BillInfo
+    * @description
+    * Account Bill Settings/Info Service for interaction with Billing API
+    *
+    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    */
+    .factory('BillInfo', function ($resource, Transform) {
+        var transform = Transform('billInfo', 'details');
+        return $resource('/api/billing/:id/billInfo',
+            {
+                id: '@id'
+            },
+            {
+                get: { method: 'GET', transformResponse: transform }
+            }
+        );
+    })
+   /**
+    * @ngdoc service
+    * @name billingSvcs.PaymentInfo
+    * @description
+    * Account Payment Settings/Info Service for interaction with Billing API
+    *
+    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    */
+    .factory('PaymentInfo', function ($resource, Transform) {
+        var transform = Transform('paymentInfo', 'details');
+        return $resource('/api/billing/:id/paymentInfo',
+            {
+                id: '@id'
+            },
+            {
+                get: { method: 'GET', transformResponse: transform }
+            }
+        );
+    })
+   /**
+    * @ngdoc service
     * @name billingSvcs.Period
     * @description
     * Period Service for interaction with Billing API

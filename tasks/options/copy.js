@@ -12,7 +12,7 @@ module.exports = {
             src: [
                 '*.{ico,png,txt}',
                 '.htaccess',
-                'images/{,*/}*.{gif,webp}',
+                'images/{,**/}*.{gif,webp}',
                 'fonts/*',
                 'views/**/*',
                 '*.html',

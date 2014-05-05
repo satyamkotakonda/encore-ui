@@ -22,7 +22,7 @@ module.exports = {
         }
     },
     html: {
-        files: ['app/index.html', 'app/views/{,*/}*.html', 'app/modules/**/*.html'],
+        files: ['app/index.html', 'app/views/{,**/}*.html', 'app/modules/**/*.html'],
         options: {
             livereload: true
         }
