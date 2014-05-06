@@ -1,13 +1,15 @@
 describe('UsageFilters', function () {
-    var name, total;
+    var name, usageTotal, productTotal;
 
     beforeEach(function () {
         module('billingApp');
 
         inject(function ($filter) {
             name = $filter('ProductName');
-            total = $filter('UsageTotal');
+            usageTotal = $filter('UsageTotal');
+            productTotal = $filter('UsageProductTotal');
         });
+
     });
 
     it('ProductName filter should exist', function () {
@@ -20,23 +22,39 @@ describe('UsageFilters', function () {
         expect(name('DBAAS')).to.be.eq('Cloud Databases');
     });
 
-    it('UsageTotal filter should exist', function () {
-        expect(total).to.exist;
-        expect(total).to.not.be.empty;
+    it('UsageProductTotal filter should exist', function () {
+        expect(productTotal).to.exist;
+        expect(productTotal).to.not.be.empty;
     });
 
-    it('UsageTotal filter should filter results', function () {
+    it('UsageProductTotal filter should filter results', function () {
         var data = [
             { offeringCode: 'LBAAS', amount: '100.00' },
             { offeringCode: 'LBAAS', amount: '200.00' },
-            { offeringCode: 'LBAAS', amount: '300.00' }
+            { offeringCode: 'LBAAS', amount: '300.00' },
+            { offeringCode: 'DBAAS', amount: '700.00' }
         ];
 
-        expect(total(data)[0].name).to.be.eq('LBAAS');
-        expect(total(data)[0].total).to.be.eq(600);
+        expect(productTotal(data)[0].name).to.be.eq('LBAAS');
+        expect(productTotal(data)[0].total).to.be.eq(600);
     });
 
-    it('UsageTotal filter should return nothing if nothing is given', function () {
-        expect(_.isEqual(total(), [])).to.be.eq(true);
+    it('UsageProductTotal filter should return nothing if nothing is given', function () {
+        expect(_.isEqual(productTotal(), [])).to.be.eq(true);
+    });
+
+    it('UsageTotal filter should total the amounts', function () {
+        var data = [
+            { offeringCode: 'LBAAS', amount: '100.00' },
+            { offeringCode: 'LBAAS', amount: '200.00' },
+            { offeringCode: 'LBAAS', amount: '300.00' },
+            { offeringCode: 'DBAAS', amount: '700.00' }
+        ];
+
+        expect(usageTotal(data)).to.be.eq(1300);
+    });
+
+    it('UsageTotal filter should return 0 if nothing is given', function () {
+        expect(_.isEqual(usageTotal(), 0)).to.be.eq(true);
     });
 });

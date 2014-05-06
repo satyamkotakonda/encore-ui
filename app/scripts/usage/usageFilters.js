@@ -22,14 +22,14 @@ angular.module('billingApp')
     })
     /**
     * @ngdoc filter
-    * @name encore.filter:UsageTotal
+    * @name encore.filter:UsageProductTotal
     * @description
     * Filter that formats the list of products to consolidate multiple type entries, and return a
     * value representing the total amount due per product type.
     *
     * @param {Array} products - A list of products with their estimated charges and usage.
     */
-    .filter('UsageTotal', function () {
+    .filter('UsageProductTotal', function () {
         return function (products) {
             if (!products) { return []; }
             var groupings = _.groupBy(products, function (product) {
@@ -45,5 +45,22 @@ angular.module('billingApp')
                 result.push(values[0]);
             });
             return result;
+        };
+    })
+    /**
+    * @ngdoc filter
+    * @name encore.filter:UsageTotal
+    * @description
+    * Return the sum of the amounts of products for a given period products
+    *
+    * @param {Array} products - A list of products with their estimated charges and usage.
+    */
+    .filter('UsageTotal', function () {
+        return function (products) {
+            if (!products) { return 0.00; }
+            var total = _.reduce(products, function (total, product) {
+                return total + parseFloat(product.amount);
+            }, 0);
+            return total;
         };
     });
