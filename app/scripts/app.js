@@ -53,35 +53,8 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
         // Forces JSON only
         $http.defaults.headers.common['Accept'] = 'application/json';
 
-        $rootScope.billingMenu = [{
-            title: 'Billing',
-            children: [
-                {
-                    href: 'overview/{{accountNumber}}',
-                    linkText: 'Overview'
-                },
-                {
-                    href: 'transactions/{{accountNumber}}',
-                    linkText: 'Transactions'
-                },
-                {
-                    href: 'usage/{{accountNumber}}',
-                    linkText: 'Current Usage'
-                },
-                {
-                    href: 'discounts/{{accountNumber}}',
-                    linkText: 'Discounts'
-                },
-                {
-                    href: 'payment/{{accountNumber}}/options',
-                    linkText: 'Payment Options'
-                },
-                {
-                    href: 'preferences/{{accountNumber}}',
-                    linkText: 'Preferences'
-                }
-            ]
-        }];
+        // TODO: Here we used to have the menu for billing, need to replace
+        // With the new menu options from encore in order to be able to override it via the App.
     }).controller('LoginModalCtrl', function ($scope, Auth, Environment, rxNotify) {
         $scope.environment = Environment.get().name;
 

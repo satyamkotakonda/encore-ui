@@ -104,21 +104,19 @@
         }
     }
     .method-description {
+        &:extend(.label-definition all);
+        min-width: 15em;
+
         padding-right: 1em;
         margin-right: 1em;
         float: left;
-
-        font-size: 1.3em;
-        font-weight: 300;
-        color: @headingDark;
         border-right: 1px #ccc solid;
         .heading {
             font-size: 1.1em;
             margin-bottom: 0.7em;
         }
         strong {
-            font-weight: 400;
-            color: @actionGrey;
+            margin-right: 0;
         }
         p {
             margin: 0;

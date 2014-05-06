@@ -45,7 +45,7 @@ angular.module('billingSvcs', ['ngResource'])
                     isArray: true,
                     transformResponse: transformList,
                     params: {
-                        transactionType: 'billingSummary'
+                        transactionType: 'billing-summary'
                     }
                 }
             }

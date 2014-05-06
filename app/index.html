@@ -19,7 +19,9 @@
   <body ng-app="billingApp">
 
     <!-- Add your site or application content here -->
-    <rx-app id="billing-rxApp" menu="billingMenu">
+    <!-- // TODO: Here we used to have the menu for billing, need to replace
+            With the new menu options from encore in order to be able to override it via the App. -->
+    <rx-app id="billing-rxApp">
         <div ng-view=""></div>
     </rx-app>
     <div ng-controller="LoginModalCtrl">

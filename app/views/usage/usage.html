@@ -1,41 +1,51 @@
 <rx-page title="'Billing - Usages & Charges'" subtitle="'On account ' + account.name">
-    <div class="section usage-info">
-        <div class="section billing-cycle">
-        </div>
-        <div class="section billing-usage">
-            <table class="table usage-list">
-                <thead>
-                    <tr>
-                        <th scope="col">
-                            <rx-sortable-column
-                                sort-method="sortCol"
-                                sort-property="name | ProductName"
-                                predicate="sort.predicate"
-                                reverse="sort.reverse">
-                                Product
-                            </rx-sortable-column>
-                        </th>
-                        <th scope="col">
-                            <rx-sortable-column
-                                sort-method="sortCol"
-                                sort-property="total"
-                                predicate="sort.predicate"
-                                reverse="sort.reverse">
-                                Usage Charges
-                            </rx-sortable-column>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="charge in charges | UsageTotal | orderBy:sort.predicate:sort.reverse">
-                        <td>{{ charge.name | ProductName }}</td>
-                        <td>{{ charge.total| currency }}</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                </tfoot>
-            </table>
-        </div>
-        <hr />
+    <rx-notifications stack="usagePage"></rx-notifications>
+    <div class="section billing-cycle label-definition clearfix">
+        <p>
+            <strong>Billing Cycle Period:</strong>
+            {{ currentPeriod.startDate | date: defaultDateFormat }} to {{ currentPeriod.endDate | date: defaultDateFormat }}
+        </p>
+        <p>
+            <strong>Current Estimated Amount:</strong>
+            {{ charges | UsageTotal | currency }}
+        </p>
+    </div>
+    <hr />
+    <div class="section billing-usage">
+        <h3 class="section-title">
+            By Product
+        </h3>
+        <table class="table usage-list">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="sortCol"
+                            sort-property="name | ProductName"
+                            predicate="sort.predicate"
+                            reverse="sort.reverse">
+                            Product
+                        </rx-sortable-column>
+                    </th>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="sortCol"
+                            sort-property="total"
+                            predicate="sort.predicate"
+                            reverse="sort.reverse">
+                            Usage Charges
+                        </rx-sortable-column>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="charge in charges | UsageProductTotal | orderBy:sort.predicate:sort.reverse">
+                    <td>{{ charge.name | ProductName }}</td>
+                    <td>{{ charge.total | currency }}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
     </div>
 </rx-page>

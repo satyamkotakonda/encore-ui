@@ -17,7 +17,7 @@ angular.module('billingApp')
     */
     .controller('UsageCtrl', function ($scope, $routeParams, $q, EstimatedCharges,
             Period, rxSortUtil, rxPromiseNotifications,
-            STATUS_MESSAGES) {
+            STATUS_MESSAGES, DATE_FORMAT) {
 
         // Set the default sort of the usage
         $scope.sort = rxSortUtil.getDefault('name | ProductName', false);
@@ -41,6 +41,9 @@ angular.module('billingApp')
         $scope.sortCol = function (predicate) {
             return rxSortUtil.sortCol($scope, predicate);
         };
+
+        // Default Date Format
+        $scope.defaultDateFormat = DATE_FORMAT;
 
         $scope.periods = Period.list({ id: $routeParams.accountNumber }, getCharges);
 
