@@ -42,6 +42,6 @@ angular.module('billingApp')
         $scope.transactions = Transaction.get({
             id: $routeParams.accountNumber,
             transactionNumber: $routeParams.transactionNumber,
-            transactionType: $routeParams.transactionType
+            transactionType: $routeParams.transactionType + 's'
         });
     });
