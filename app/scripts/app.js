@@ -53,35 +53,6 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
         // Forces JSON only
         $http.defaults.headers.common['Accept'] = 'application/json';
 
-        $rootScope.billingMenu = [{
-            title: 'Billing',
-            children: [
-                {
-                    href: 'overview/{{accountNumber}}',
-                    linkText: 'Overview'
-                },
-                {
-                    href: 'transactions/{{accountNumber}}',
-                    linkText: 'Transactions'
-                },
-                {
-                    href: 'usage/{{accountNumber}}',
-                    linkText: 'Current Usage'
-                },
-                {
-                    href: 'discounts/{{accountNumber}}',
-                    linkText: 'Discounts'
-                },
-                {
-                    href: 'payment/{{accountNumber}}/options',
-                    linkText: 'Payment Options'
-                },
-                {
-                    href: 'preferences/{{accountNumber}}',
-                    linkText: 'Preferences'
-                }
-            ]
-        }];
     }).controller('LoginModalCtrl', function ($scope, Auth, Environment, rxNotify) {
         $scope.environment = Environment.get().name;
 
