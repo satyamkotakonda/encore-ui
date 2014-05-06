@@ -166,6 +166,29 @@ Data Definition List for common key/value descriptions
 }
 
 /*
+ Label definitions descriptions for headings
+ ```
+ <p class="label-definition">
+    <strong>Label Of Sorts:</strong> Value of Sorts
+ </p>
+ <div class="label-definition">
+    <p><strong>Label</strong> Value</p>
+ </div>
+ ```
+ */
+
+.label-definition {
+    font-size: 1.3em;
+    font-weight: 300;
+    color: @headingDark;
+    strong {
+        font-weight: 400;
+        color: @actionGrey;
+        margin-right: 0.9em;
+    }
+
+}
+/*
  List for summarized items that can be used to choose from
  ```
  <div class="summary-list">
