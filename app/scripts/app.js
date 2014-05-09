@@ -30,6 +30,10 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                 templateUrl: 'views/payment/options.html',
                 controller: 'OptionsCtrl'
             })
+            .when('/preferences/:accountNumber', {
+                templateUrl: 'views/preferences/preferences.html',
+                controller: 'PreferencesCtrl'
+            })
             .otherwise({
                 //#TODO: this is temporary until we get a more solid solution
                 redirectTo: '/overview/473500'
