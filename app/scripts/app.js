@@ -1,6 +1,7 @@
 'use strict';
 angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.tpls',
-        'rxSwitch', 'encore.ui.rxPopover', 'billingSvcs', 'paymentSvcs', 'constants', 'productConstants'])
+        'rxSwitch', 'encore.ui.rxPopover', 'billingSvcs', 'paymentSvcs', 'supportSvcs',
+        'customerAdminSvcs', 'constants', 'productConstants'])
 
     .config(function ($httpProvider, $routeProvider, $locationProvider) {
         // Add Interceptors for auth
@@ -31,7 +32,7 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
             })
             .otherwise({
                 //#TODO: this is temporary until we get a more solid solution
-                redirectTo: '/overview/020-473500'
+                redirectTo: '/overview/473500'
             });
         $locationProvider.html5Mode(true).hashPrefix('!');
     }).run(function ($http, $rootScope, $window, Auth, Environment) {
@@ -42,19 +43,14 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
             return;
         }
 
-        $rootScope.auth = Auth;
-
-        // TODO: Replace with Auth.getSSO/getUserName once implemented, this gets past test errors
-        var token = Auth.getToken();
-        if (token && token.access && token.access.user) {
-            $rootScope.userName = token.access.user.id;
-        }
-
         // Forces JSON only
         $http.defaults.headers.common['Accept'] = 'application/json';
 
+        $rootScope.userName = Auth.getUserName();
+
         // TODO: Here we used to have the menu for billing, need to replace
         // With the new menu options from encore in order to be able to override it via the App.
+
     }).controller('LoginModalCtrl', function ($scope, Auth, Environment, rxNotify) {
         $scope.environment = Environment.get().name;
 
