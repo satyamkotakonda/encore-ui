@@ -27,17 +27,4 @@ angular.module('billingApp')
         return function (addresses) {
             return _.find(addresses, { primary: true });
         };
-    })
-    /**
-    * @ngdoc filter
-    * @name encore.filter:PrimaryEmail
-    * @description
-    * Filter a list of contacts email addresses by primary.
-    *
-    * @param {Array} contacts - collection of addresses to be filtered.
-    */
-    .filter('PrimaryEmail', function () {
-        return function (addresses) {
-            return _.find(addresses, { primary: true });
-        };
     });
