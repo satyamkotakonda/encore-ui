@@ -1,30 +1,4 @@
-angular.module('billingSvcs', ['ngResource'])
-   /**
-    * @ngdoc service
-    * @name billingSvcs.Transform
-    * @description
-    *
-    * Transform a Json message into an object and fetch a specific path from it. (Or all of it)
-    */
-   .factory('Transform', function () {
-        var fromPath = function (obj, path) {
-            obj = _.reduce(path, function (val, key) {
-                return _.has(val, key) ? val[key] : false;
-            }, obj);
-            return obj;
-        };
-        return function (path, msgPath) {
-            // Pre parse the path into an array
-            // Set path to empty string if not given
-            var splitPath = _.isEmpty(path) ? [] : path.split('.'),
-                msgSplitPath = _.isEmpty(msgPath) ? [] : msgPath.split('.');
-            return function (data) {
-                var json = angular.fromJson(data),
-                    errorMsg = fromPath(json, msgSplitPath);
-                return errorMsg ? errorMsg : fromPath(json, splitPath);
-            };
-        };
-    })
+angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
    /**
     * @ngdoc service
     * @name billingSvcs.Transaction
@@ -50,17 +24,6 @@ angular.module('billingSvcs', ['ngResource'])
                 }
             }
         );
-    })
-   /**
-    * @ngdoc service
-    * @name billingSvcs.Account
-    * @description
-    * Account Service for interaction with Billing API
-    *
-    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
-    */
-    .factory('Account', function ($resource) {
-        return $resource('/api/billing/:id');
     })
    /**
     * @ngdoc service
@@ -178,6 +141,44 @@ angular.module('billingSvcs', ['ngResource'])
                 list: { method: 'GET', isArray: true, transformResponse: transform },
                 // I realize this seems redundant, but verbally Payment.post makes more sense than Payment.save
                 post: { method: 'POST' }
+            }
+        );
+    })
+    /**
+     * @ngdoc service
+     * @name billingSvcs.ContractEntity
+     * @description
+     * ContractEntity Service for interaction with Billing API
+     *
+     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+     */
+    .factory('ContractEntity', function ($resource, Transform) {
+        var transform = Transform('contractEntity', 'badRequest.details');
+        return $resource('/api/billing/:id/contractEntity',
+            {
+                id: '@id'
+            },
+            {
+                get: { method: 'GET', isArray: false, transformResponse: transform }
+            }
+        );
+    })
+    /**
+    * @ngdoc service
+    * @name billingSvcs.SupportInfo
+    * @description
+    * Account Bill Settings/Info Service for interaction with Billing API
+    *
+    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    */
+    .factory('SupportInfo', function ($resource, Transform) {
+        var transform = Transform('supportInfo', 'details');
+        return $resource('/api/billing/:id/supportInfo',
+            {
+                id: '@id'
+            },
+            {
+                get: { method: 'GET', transformResponse: transform }
             }
         );
     });
