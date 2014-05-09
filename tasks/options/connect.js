@@ -43,7 +43,7 @@ module.exports = {
             https: true,
             changeOrigin: true,
             rewrite: {
-                '/api/support-service': '/v1/support-accounts'
+                '/api/support-service': '/v1'
             }
         }
     ].concat(config.defaultProxies),
