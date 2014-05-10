@@ -1,4 +1,4 @@
-angular.module('paymentSvcs', ['ngResource'])
+angular.module('paymentSvcs', ['ngResource', 'rxGenericUtil'])
     /**
      * @ngdoc service
      * @name billingSvcs.Payment
