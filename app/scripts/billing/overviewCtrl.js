@@ -98,12 +98,19 @@ angular.module('billingApp')
         $scope.supportInfo = SupportInfo.get({ id: RAN });
 
         $scope.paymentMethods = PaymentMethod.list({ id: RAN });
+
         // Group the promises in $q.all for a global error message if any errors occur
         rxPromiseNotifications.add($q.all([
-            $scope.balance.$promise
+            $scope.account.$promise,
+            $scope.contacts.$promise,
+            $scope.supportAccount.$promise,
+            $scope.supportRoles.$promise,
+            $scope.balance.$promise,
+            $scope.contractEntity.$promise,
+            $scope.supportInfo.$promise
         ]), {
             loading: '',
-            error: STATUS_MESSAGES.overview.error + ' Message: "{{_.first(data).message}}"'
+            error: STATUS_MESSAGES.overview.error
         }, 'overviewPage');
 
         // Set defaults for the make a payment modal.
