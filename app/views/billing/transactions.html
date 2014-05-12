@@ -6,7 +6,7 @@
             <dd class="accent accent-group">
                 <span class="accent-text">
                     <span ng-if="balance.amountDue">
-                        {{balance.amountDue | currency }} ({{balance.currency}})
+                        {{balance.amountDue | currency }} {{balance.currency}}
                     </span>
                     <span ng-if="!balance.amountDue">
                         N/A
@@ -155,16 +155,8 @@
                         {{ txn.tranRefNum }}
                         </a>
                     </td>
-                    <td>
-                        <a href="transactions/{{ accountNumber }}/{{ txn.type | lowercase }}/{{ txn.id }}">
-                        {{ txn.date | date: defaultDateFormat }}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="transactions/{{ accountNumber }}/{{ txn.type | lowercase }}/{{ txn.id }}">
-                        {{ txn.type }}
-                        </a>
-                    </td>
+                    <td>{{ txn.date | date: defaultDateFormat }}</td>
+                    <td>{{ txn.type }}</td>
                     <td class="{{ txn.status | lowercase }}">{{ txn.status }}</td>
                     <td class="currency">{{ txn.amount | currency }}</td>
                     <td class="currency">{{ txn.balance | currency }}</td>
