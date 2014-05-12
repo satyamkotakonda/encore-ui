@@ -68,7 +68,7 @@ angular.module('billingApp')
                 var billingContact = _.first(contacts);
                 if (!_.isEmpty(billingContact)) {
                     $scope.contactAddress = PrimaryAddressFilter(billingContact.addresses.address);
-                    $scope.contactName = [billingContact.firstName, billingContact.lastName].join(' ');
+                    $scope.contactName = billingContact.firstName + ' ' + billingContact.lastName;
                 }
             },
             accountManager = function (roles) {
