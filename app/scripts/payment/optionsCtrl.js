@@ -24,8 +24,10 @@ angular.module('billingApp')
     *       Payment, DefaultPaymentMethodFilter, rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
     * </pre>
     */
-    .controller('OptionsCtrl', function ($scope, $routeParams, $q, Account, Balance, PaymentMethod,
+    .controller('OptionsCtrl', function ($scope, $routeParams, $q, Account, Balance, PaymentMethod, AccountNumberUtil,
             Payment, DefaultPaymentMethodFilter, rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
+
+        var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber);
 
         // Get filter the paymentMethods and retrieve the default one (callback)
         var getDefaultMethod = function (paymentMethods) {
@@ -38,7 +40,7 @@ angular.module('billingApp')
             // Return the list of payment methods for the account being viewed
             getPaymentMethods = function () {
                 return PaymentMethod.list({
-                    id: $routeParams.accountNumber,
+                    id: RAN,
                     showDisabled: true
                 }, getDefaultMethod);
             },
@@ -58,7 +60,7 @@ angular.module('billingApp')
             // methods upon success.  Passes promise to rxPromiseNotifications
             disableMethod = function (methodId) {
                 var disableMethodResult = PaymentMethod.disable({
-                    id: $routeParams.accountNumber,
+                    id: RAN,
                     methodId: methodId
                 }, refreshPaymentMethods);
                 // Display messages depending on the success of the call
@@ -72,7 +74,7 @@ angular.module('billingApp')
             // methods upon success.  Passes promise to rxPromiseNotifications
             changeDefaultMethod = function (methodId) {
                 var changeDefaultResult = PaymentMethod.changeDefault({
-                    id: $routeParams.accountNumber
+                    id: RAN
                 }, {
                     defaultMethod: {
                         methodId: methodId
@@ -89,7 +91,7 @@ angular.module('billingApp')
             // Passes promise to rxPromiseNotifications
             postPayment = function (amount, methodId) {
                 var paymentResult = Payment.post({
-                    id: $routeParams.accountNumber,
+                    id: RAN,
                     payment: {
                         amount: amount,
                         methodId: methodId
@@ -117,10 +119,10 @@ angular.module('billingApp')
         $scope.achSort = rxSortUtil.getDefault('isDefault', true);
 
         // Get Account Info
-        $scope.account = Account.get({ id: $routeParams.accountNumber });
+        $scope.account = Account.get({ id: RAN });
 
         // Get Account Info
-        $scope.balance = Balance.get({ id: $routeParams.accountNumber }, getCurrentDue);
+        $scope.balance = Balance.get({ id: RAN }, getCurrentDue);
 
         // Gets the payment methods
         $scope.paymentMethods = getPaymentMethods();

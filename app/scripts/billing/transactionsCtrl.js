@@ -33,8 +33,14 @@ angular.module('billingApp')
     */
     .controller('TransactionsCtrl', function ($scope, $routeParams, $q, Transaction, Account, Balance,
         Period, Payment, PaymentMethod, PageTracking, PaymentInfo, BillInfo,
-        rxSortUtil, rxPromiseNotifications, DefaultPaymentMethodFilter,
+        rxSortUtil, rxPromiseNotifications, DefaultPaymentMethodFilter, AccountNumberUtil,
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES) {
+
+        var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber),
+            RCN = AccountNumberUtil.getRCN($routeParams.accountNumber),
+            accountType = AccountNumberUtil.getAccountType($routeParams.accountNumber);
+
+        $scope.accountNumber = $routeParams.accountNumber;
 
         // Action for clearing the filters
         var resetPager = function () {
@@ -57,7 +63,7 @@ angular.module('billingApp')
             },
             postPayment = function (amount, methodId) {
                 $scope.paymentResult = Payment.post({
-                    id: $routeParams.accountNumber,
+                    id: RAN,
                     payment: {
                         amount: amount,
                         methodId: methodId
@@ -86,16 +92,13 @@ angular.module('billingApp')
         $scope.clearFilter = clearFilter;
 
         // Get Account & Transactions Info
-        $scope.billInfo = BillInfo.get({ id: $routeParams.accountNumber });
-        $scope.paymentInfo = PaymentInfo.get({ id: $routeParams.accountNumber });
-        $scope.account = Account.get({ id: $routeParams.accountNumber });
-        $scope.balance = Balance.get({ id: $routeParams.accountNumber });
-        $scope.transactions = Transaction.list({ id: $routeParams.accountNumber });
-        $scope.paymentMethods = PaymentMethod.list({ id: $routeParams.accountNumber });
-        $scope.billingPeriods = Period.list({ id: $routeParams.accountNumber });
-
-        // Pass the account number for building links
-        $scope.accountNumber = $routeParams.accountNumber;
+        $scope.billInfo = BillInfo.get({ id: RAN });
+        $scope.paymentInfo = PaymentInfo.get({ id: RAN });
+        $scope.account = Account.get({ id: RCN, type: accountType });
+        $scope.balance = Balance.get({ id: RAN });
+        $scope.transactions = Transaction.list({ id: RAN });
+        $scope.paymentMethods = PaymentMethod.list({ id: RAN });
+        $scope.billingPeriods = Period.list({ id: RAN });
 
         // Group the promises in $q.all for a global error message if any errors occur
         rxPromiseNotifications.add($q.all([
