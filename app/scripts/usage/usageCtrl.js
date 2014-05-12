@@ -16,8 +16,13 @@ angular.module('billingApp')
     * </pre>
     */
     .controller('UsageCtrl', function ($scope, $routeParams, $q, EstimatedCharges,
-            Period, rxSortUtil, rxPromiseNotifications,
+            Period, rxSortUtil, rxPromiseNotifications, AccountNumberUtil,
             STATUS_MESSAGES, DATE_FORMAT) {
+
+        // TODO: This should be handled at the $resource level, so that the controller
+        // passes the $routeParams.accountNumber, and the resource retrieves the type of
+        // account number it needs.
+        var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber);
 
         // Set the default sort of the usage
         $scope.sort = rxSortUtil.getDefault('name | ProductName', false);
@@ -33,7 +38,7 @@ angular.module('billingApp')
         var getCharges = function (periods) {
             $scope.currentPeriod = _.find(periods, { 'current': true });
             $scope.charges = EstimatedCharges.list({
-                id: $routeParams.accountNumber,
+                id: RAN,
                 periodId: $scope.currentPeriod.id
             });
         };
@@ -45,7 +50,7 @@ angular.module('billingApp')
         // Default Date Format
         $scope.defaultDateFormat = DATE_FORMAT;
 
-        $scope.periods = Period.list({ id: $routeParams.accountNumber }, getCharges);
+        $scope.periods = Period.list({ id: RAN }, getCharges);
 
         // Group the promises in $q.all for a global error message if any errors occur
         rxPromiseNotifications.add($q.all([

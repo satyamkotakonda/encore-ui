@@ -10,8 +10,6 @@ angular.module('billingApp')
     */
     .filter('RoleName', function () {
         return function (roles, name) {
-            return _.filter(roles, function (role) {
-                return _.contains(role.role, name);
-            });
+            return _.filter(roles, { role: name });
         };
     });

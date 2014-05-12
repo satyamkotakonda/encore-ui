@@ -1,27 +1,33 @@
 describe('Billing: OverviewCtrl', function () {
-    var scope, ctrl, account, balance, transaction, period, payment, paymentMethod, PageTrackingObject,
-        balanceData, paymentMethods;
+    var scope, ctrl, balanceData, paymentMethods, supportRolesData, contactData;
 
-    var testAccountNumber = '12345';
+    var balance, payment, paymentMethod, contractEntity, supportInfo,
+        contact, account, supportAccount, supportRoles;
+
+    var testAccountNumber = '020-12345',
+        routeParams = { accountNumber: testAccountNumber };
 
     beforeEach(function () {
         module('billingApp');
 
-        inject(function ($controller, $rootScope, $httpBackend, Account, Balance, Transaction, Period,
-                Payment, PaymentMethod, PageTracking, DefaultPaymentMethodFilter, $q) {
-            var getResourceMock = function (data) {
-                var deferred = $q.defer();
-                data.$promise = deferred.promise;
-                data.$deferred = deferred;
-                return data;
-            };
-            scope = $rootScope.$new();
-            transaction = Transaction;
-            account = Account;
-            balance = Balance;
-            period = Period;
-            paymentMethod = PaymentMethod;
-            payment = Payment;
+        inject(function ($controller, $rootScope, $httpBackend, $q,
+            Balance, Payment, PaymentMethod, ContractEntity, SupportInfo,
+            Contact, Account, SupportAccount, SupportRoles,
+            DefaultPaymentMethodFilter) {
+            var getResourceResultMock = function (data) {
+                    var deferred = $q.defer();
+                    data.$promise = deferred.promise;
+                    data.$deferred = deferred;
+                    return data;
+                },
+                getResourceMock = function (returnData) {
+                    returnData = getResourceResultMock(returnData);
+                    return function (callData, success, error) {
+                        returnData.$promise.then(success, error);
+                        return returnData;
+                    };
+                };
+
             balanceData = {
                 amountDue: '2124.00'
             };
@@ -29,26 +35,85 @@ describe('Billing: OverviewCtrl', function () {
                 isDefault: true,
                 id: 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479'
             }];
+            supportRolesData = [{
+                role: 'Account Manager',
+                user: {
+                    name: 'Joe Racker'
+                }
+            }];
+            contactData = [{
+                'firstName': 'Joe',
+                'lastName': 'Racker',
+                'roles': {
+                    'role': [
+                        'TECHNICAL'
+                    ]
+                },
+                'addresses': {
+                    'address': [{
+                        'zipcode': '78218',
+                        'street': '5000 Walzem Road',
+                        'primary': true,
+                        'state': 'Texas',
+                        'country': 'US',
+                        'city': 'San Antonio'
+                    }]
+                }
+            }, {
+                'firstName': 'Joe',
+                'lastName': 'Racker',
+                'roles': {
+                    'role': [
+                        'BILLING'
+                    ]
+                },
+                'addresses': {
+                    'address': [{
+                        'zipcode': '78218',
+                        'street': '5000 Walzem Road',
+                        'primary': true,
+                        'state': 'Texas',
+                        'country': 'US',
+                        'city': 'San Antonio'
+                    }]
+                }
+            }];
+            balance = Balance;
+            payment = Payment;
+            paymentMethod = PaymentMethod;
+            contractEntity = ContractEntity;
+            supportInfo = SupportInfo;
 
-            period.list = sinon.stub(period, 'list').returns(getResourceMock([]));
-            account.get = sinon.stub(account, 'get').returns(getResourceMock({}));
-            balance.get = sinon.stub(balance, 'get').returns(getResourceMock(balanceData));
-            payment.post = sinon.stub(payment, 'post').returns(getResourceMock({}));
-            transaction.list = sinon.stub(transaction, 'list').returns(getResourceMock([]));
-            paymentMethod.list = sinon.stub(paymentMethod, 'list').returns(getResourceMock(paymentMethods));
+            account = Account;
+            contact = Contact;
 
-            PageTrackingObject = PageTracking.createInstance().constructor;
+            supportAccount = SupportAccount;
+            supportRoles = SupportRoles;
 
+            balance.get = sinon.stub(balance, 'get', getResourceMock(balanceData));
+            payment.post = sinon.stub(payment, 'post', getResourceMock({}));
+            paymentMethod.list = sinon.stub(paymentMethod, 'list', getResourceMock(paymentMethods));
+            contractEntity.get = sinon.stub(contractEntity, 'get', getResourceMock({}));
+            supportInfo.get = sinon.stub(supportInfo, 'get', getResourceMock({}));
+
+            account.get = sinon.stub(account, 'get', getResourceMock({}));
+            contact.list = sinon.stub(contact, 'list', getResourceMock([]));
+
+            supportAccount.get = sinon.stub(supportAccount, 'get', getResourceMock({}));
+            supportRoles.list = sinon.stub(supportRoles, 'list', getResourceMock(supportRolesData));
+
+            scope = $rootScope.$new();
             ctrl = $controller('OverviewCtrl',{
                 $scope: scope,
-                Transaction: transaction,
-                Account: account,
                 Balance: balance,
-                Period: period,
                 Payment: payment,
                 PaymentMethod: paymentMethod,
-                $routeParams: { accountNumber: testAccountNumber },
-                PageTracking: PageTracking,
+                ContractEntity: contractEntity,
+                SupportInfo: supportInfo,
+                SupportRoles: supportRoles,
+                Account: account,
+                Contact: contact,
+                $routeParams: routeParams,
                 DefaultPaymentMethodFilter: DefaultPaymentMethodFilter,
                 TRANSACTION_TYPES: [],
                 TRANSACTION_STATUSES: []
@@ -60,40 +125,12 @@ describe('Billing: OverviewCtrl', function () {
         expect(ctrl).to.exist;
     });
 
-    it('OverviewCtrl should have a sort object defined', function () {
-        expect(scope.sort).to.be.a('object');
-        expect(scope.sort).to.have.property('predicate');
-        expect(scope.sort.predicate).to.eq('date');
-    });
-
     it('OverviewCtrl should have a default date format', function () {
         expect(scope.defaultDateFormat).to.be.eq('MM / dd / yyyy');
     });
 
-    it('OverviewCtrl should have a pager defined by PageTracking', function () {
-        expect(scope.pager).to.be.an.instanceof(PageTrackingObject);
-    });
-
-    it('OverviewCtrl should have default values', function () {
-        expect(scope.filterData.types).to.be.an('array');
-        expect(scope.filterData.statuses).to.be.an('array');
-        expect(scope.sort).to.deep.eq({ predicate: 'date', reverse: true });
-    });
-
-    it('OverviewCtrl should get list of transactions', function () {
-        sinon.assert.calledOnce(transaction.list);
-    });
-
     it('OverviewCtrl should get list of payment methods', function () {
         sinon.assert.calledOnce(paymentMethod.list);
-    });
-
-    it('OverviewCtrl should get list of billing periods', function () {
-        sinon.assert.calledOnce(period.list);
-    });
-
-    it('OverviewCtrl should get account info', function () {
-        sinon.assert.calledOnce(account.get);
     });
 
     it('OverviewCtrl should post a payment', function () {
@@ -111,14 +148,33 @@ describe('Billing: OverviewCtrl', function () {
         expect(scope.paymentMethod.id).to.be.eq('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
     });
 
-    it('OverviewCtrl should clear transaction filters', function () {
-        scope.clearFilter();
-        expect(scope.transactionFilter).to.be.a('object');
-        expect(scope.transactionFilter).to.be.empty;
+    it('OverviewCtrl should get the account manager for an account', function () {
+        scope.$apply(function () {
+            scope.supportRoles.$deferred.resolve(supportRolesData);
+        });
+        expect(scope.accountManager.name).to.be.eq('Joe Racker');
     });
 
-    it('OverviewCtrl should return a sorting predicate when calling sortCol', function () {
-        scope.sortCol('date');
-        expect(scope.sort.predicate).to.be.eq('date');
+    it('OverviewCtrl should leave account manager undefined when no account manager is found', function () {
+        scope.$apply(function () {
+            scope.supportRoles.$deferred.resolve([]);
+        });
+        expect(scope.accountManager).to.be.undefined;
+    });
+
+    it('OverviewCtrl should get the billing contact for an account', function () {
+        scope.$apply(function () {
+            scope.contacts.$deferred.resolve(contactData);
+        });
+        expect(scope.contactName).to.be.eq('Joe Racker');
+        expect(scope.contactAddress).to.not.be.empty;
+    });
+
+    it('OverviewCtrl should leave contact information undefined when no billing contact is found', function () {
+        scope.$apply(function () {
+            scope.contacts.$deferred.resolve([]);
+        });
+        expect(scope.contactName).to.be.undefined;
+        expect(scope.contactAddress).to.be.undefined;
     });
 });

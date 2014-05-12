@@ -1,36 +1,66 @@
-<rx-page title="'Billing - Overview'" subtitle="'On account ' + account.name">
+<rx-page
+    title="'Billing - Overview'"
+    subtitle="'On account ' + account.name"
+    ng-init="notFoundMsg = '(Not found in Account)';"
+    >
+
     <rx-notifications stack="overviewPage"></rx-notifications>
     <div class="section billing-info">
-        <dl class="list-definition pull-left">
-            <dt>Currency:</dt>
-            <dd ng-if="balance.currency">{{balance.currency}}</dd>
-            <dd ng-if="!balance.currency">N/A</dd>
-            <dt>Terms:</dt>
-            <dd ng-if="account.terms">{{account.terms}}</dd>
-            <dd ng-if="!account.terms">N/A</dd>
-            <dt>Billing Cycle:</dt>
-            <dd ng-if="account.cycle">{{account.cycle}} Months</dd>
-            <dd ng-if="!account.cycle">N/A</dd>
-            <dt>Paperless Billing:</dt>
-            <dd>
-                <rx-switch
-                    readonly="true"
-                    model="account.paperless">
-                </rx-switch>
-            </dd>
-        </dl>
+        <div class="section contact-info pull-left">
+            <h3 class="section-title">Contact</h3>
+            <div class="section label-definition">
+                {{ contactName | LoadingValue:contacts.$resolved:notFoundMsg }}<br />
+                <address ng-if="contactAddress.country === 'US'">
+                    {{ contactAddress.street }}<br />
+                    {{ contactAddress.city }}, {{ contactAddress.state }} {{ contactAddress.zipcode }}
+                    {{ contactAddress.country }}
+                </address>
+                <address ng-if="contactAddress.country === 'United Kingdom'">
+                    {{ contactAddress.street }}<br />
+                    {{ contactAddress.city }}<br />
+                    {{ contactAddress.zipcode }}<br />
+                    {{ contactAddress.country }}
+                </address>
+            </div>
+            <hr />
+            <h3 class="section-title">Account Summary</h3>
+            <div class="section label-definition" ng-if="!(contractEntity.$resolved && supportRoles.$resolved && supportAccount.$resolved)">
+                Loading...
+            </div>
+            <div class="section label-definition" ng-if="contractEntity.$resolved && supportRoles.$resolved && supportAccount.$resolved">
+                <p>
+                    <strong>Contract Entity:</strong>
+                    {{ contractEntity.description || notFoundMsg }}
+                </p>
+                <p>
+                    <strong>Account Manager:</strong>
+                    {{ accountManager.name || notFoundMsg }}
+                </p>
+                <p>
+                    <strong>Business Unit:</strong>
+                    {{ supportInfo.businessUnit || notFoundMsg }}
+                </p>
+                <p>
+                    <strong>Consolidated Account:</strong>
+                    {{ supportAccount.linked_account_number || notFoundMsg }}
+                </p>
+            </div>
+            <h3 class="section-title">Account Status</h3>
+            <div class="section label-definition">
+                <p>
+                    <strong>Status:</strong>
+                    {{ account.status | LoadingValue:account.$resolved:notFoundMsg }}
+                </p>
+            </div>
+        </div>
+
         <dl class="list-definition pull-right">
             <dt class="accent">Current Amount Due:</dt>
             <dd class="accent accent-group">
                 <span class="accent-text">
-                    <span ng-if="balance.amountDue">
-                        {{balance.amountDue | currency }} ({{balance.currency}})
-                    </span>
-                    <span ng-if="!balance.amountDue">
-                        N/A
-                    </span>
+                    {{ balance.amountDue | LoadingValue:balance.$resolved:notFoundMsg }} {{ balance.currency }}
                 </span>
-                <span class="accent-action">
+                <span class="accent-action" ng-show="paymentAmount && paymentMethods">
                     <rx-payment-action
                         post-hook="postPayment"
                         userName="userName"
@@ -42,12 +72,6 @@
                     </rx-payment-action>
                 </span>
             </dd>
-            <dt>Account Balance:</dt>
-            <dd ng-if="balance.currentBalance">{{balance.currentBalance | currency }}</dd>
-            <dd ng-if="!balance.currentBalance">N/A</dd>
-            <dt>Past Due:</dt>
-            <dd ng-if="balance.pastDue">{{balance.pastDue | currency }}</dd>
-            <dd ng-if="!balance.pastDue">N/A</dd>
         </dl>
     </div>
 </rx-page>

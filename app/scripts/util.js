@@ -59,6 +59,7 @@ angular.module('rxGenericUtil', [])
     * Display a value once it's promise/status has been set as complete
     * if it's not completed, show loading message
     * if value is falsy, show falsy msg
+    * #TODO: Convert to a directive
     */
     .filter('LoadingValue', function () {
         return function (val, completed, notFoundMsg, loadingMsg) {
