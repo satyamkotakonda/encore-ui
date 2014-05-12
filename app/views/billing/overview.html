@@ -24,22 +24,25 @@
             </div>
             <hr />
             <h3 class="section-title">Account Summary</h3>
-            <div class="section label-definition">
+            <div class="section label-definition" ng-if="!(contractEntity.$resolved && supportRoles.$resolved && supportAccount.$resolved)">
+                Loading...
+            </div>
+            <div class="section label-definition" ng-if="contractEntity.$resolved && supportRoles.$resolved && supportAccount.$resolved">
                 <p>
                     <strong>Contract Entity:</strong>
-                    {{ contractEntity.description | LoadingValue:contractEntity.$resolved:notFoundMsg }}
+                    {{ contractEntity.description || notFoundMsg }}
                 </p>
                 <p>
                     <strong>Account Manager:</strong>
-                    {{ accountManager.name | LoadingValue:supportRoles.$resolved:notFoundMsg }}
+                    {{ accountManager.name || notFoundMsg }}
                 </p>
                 <p>
                     <strong>Business Unit:</strong>
-                    {{ supportInfo.businessUnit | LoadingValue:supportRoles.$resolved:notFoundMsg }}
+                    {{ supportInfo.businessUnit || notFoundMsg }}
                 </p>
                 <p>
                     <strong>Consolidated Account:</strong>
-                    {{ supportAccount.linked_account_number | LoadingValue:supportAccount.$resolved:notFoundMsg }}
+                    {{ supportAccount.linked_account_number || notFoundMsg }}
                 </p>
             </div>
             <h3 class="section-title">Account Status</h3>
