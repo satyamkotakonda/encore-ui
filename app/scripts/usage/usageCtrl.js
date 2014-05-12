@@ -18,6 +18,10 @@ angular.module('billingApp')
     .controller('UsageCtrl', function ($scope, $routeParams, $q, EstimatedCharges,
             Period, rxSortUtil, rxPromiseNotifications, AccountNumberUtil,
             STATUS_MESSAGES, DATE_FORMAT) {
+
+        // TODO: This should be handled at the $resource level, so that the controller
+        // passes the $routeParams.accountNumber, and the resource retrieves the type of
+        // account number it needs.
         var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber);
 
         // Set the default sort of the usage

@@ -39,6 +39,9 @@ angular.module('billingApp')
         AccountNumberUtil, rxPromiseNotifications,
         DATE_FORMAT, STATUS_MESSAGES) {
 
+        // TODO: This should be handled at the $resource level, so that the controller
+        // passes the $routeParams.accountNumber, and the resource retrieves the type of
+        // account number it needs.
         var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber),
             RCN = AccountNumberUtil.getRCN($routeParams.accountNumber),
             accountType = AccountNumberUtil.getAccountType($routeParams.accountNumber);

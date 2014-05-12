@@ -27,6 +27,9 @@ angular.module('billingApp')
     .controller('OptionsCtrl', function ($scope, $routeParams, $q, Account, Balance, PaymentMethod, AccountNumberUtil,
             Payment, DefaultPaymentMethodFilter, rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
 
+        // TODO: This should be handled at the $resource level, so that the controller
+        // passes the $routeParams.accountNumber, and the resource retrieves the type of
+        // account number it needs.
         var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber);
 
         // Get filter the paymentMethods and retrieve the default one (callback)
