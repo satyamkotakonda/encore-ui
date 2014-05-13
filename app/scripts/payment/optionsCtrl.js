@@ -24,8 +24,10 @@ angular.module('billingApp')
     *       Payment, DefaultPaymentMethodFilter, rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
     * </pre>
     */
-    .controller('OptionsCtrl', function ($scope, $routeParams, $q, Account, Balance, PaymentMethod, AccountNumberUtil,
-            Payment, DefaultPaymentMethodFilter, rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
+    .controller('OptionsCtrl', function ($scope, $routeParams, $q,
+        Account, Balance, PaymentMethod, AccountNumberUtil,
+        Payment, DefaultPaymentMethodFilter, rxMakePayment,
+        rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
 
         // TODO: This should be handled at the $resource level, so that the controller
         // passes the $routeParams.accountNumber, and the resource retrieves the type of
@@ -93,15 +95,8 @@ angular.module('billingApp')
             // Given an amount, and a methodID perform a call to post a payment.
             // Passes promise to rxPromiseNotifications
             postPayment = function (amount, methodId) {
-                var paymentResult = Payment.post({
-                    id: RAN,
-                    payment: {
-                        amount: amount,
-                        methodId: methodId
-                    }
-                });
-                // Display messages depending on the success of the call
-                rxPromiseNotifications.add(paymentResult.$promise, {
+                $scope.paymentResult = rxMakePayment(RAN, amount, methodId);
+                rxPromiseNotifications.add($scope.paymentResult.$promise, {
                     loading: STATUS_MESSAGES.payment.load,
                     success: STATUS_MESSAGES.payment.success,
                     error: STATUS_MESSAGES.payment.error

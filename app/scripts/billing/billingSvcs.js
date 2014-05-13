@@ -133,14 +133,12 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
         var transform = Transform('payments.payment', 'badRequest.details');
         return $resource('/api/billing/:id/payments',
             {
-                id: '@id',
-                marker: 0,
-                limit: 10
+                id: '@id'
             },
             {
                 list: { method: 'GET', isArray: true, transformResponse: transform },
-                // I realize this seems redundant, but verbally Payment.post makes more sense than Payment.save
-                post: { method: 'POST' }
+                // I realize this seems redundant, but verbally Payment.makePayment makes more sense than Payment.save
+                makePayment: { method: 'POST' }
             }
         );
     })
