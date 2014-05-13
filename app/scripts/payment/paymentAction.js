@@ -56,18 +56,18 @@ angular.module('billingApp')
     })
     /**
      * @ngdoc service
-     * @name encore.service:rxPaymentPost
+     * @name encore.service:rxMakePayment
      * @description
      * @param {object} Payment - Payment Resource
-     * Wrapper around Payment.post for easy injection and re-usability throughout controllers
+     * Wrapper around Payment.makePayment for easy injection and re-usability throughout controllers
      *
-     * @param {string} accountNumber - Account Number for which to post the payment to.
+     * @param {string} accountNumber - Account Number for which to make the payment to.
      * @param {number} amount - Amount of the payment to be made
      * @param {string} methodId - urn:uuid of the payment method ID
      */
-    .factory('rxPaymentPost', function (Payment) {
+    .factory('rxMakePayment', function (Payment) {
         return function (accountNumber, amount, methodId) {
-            return Payment.post({
+            return Payment.makePayment({
                 id: accountNumber // URL Arguments
             }, {
                 payment: { // Post Data

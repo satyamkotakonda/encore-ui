@@ -1,6 +1,6 @@
 describe('Billing: TransactionsCtrl', function () {
-    var scope, ctrl, account, balance, transaction, period, payment, paymentMethod, PageTrackingObject,
-        balanceData, paymentMethods, paymentInfo, billInfo;
+    var scope, ctrl, account, balance, transaction, period, paymentMethod, PageTrackingObject,
+        balanceData, paymentMethods, paymentInfo, billInfo, makePayment;
 
     var testAccountNumber = '12345';
 
@@ -8,7 +8,7 @@ describe('Billing: TransactionsCtrl', function () {
         module('billingApp');
 
         inject(function ($controller, $rootScope, $httpBackend, Account, Balance, Transaction, Period,
-                Payment, PaymentMethod, BillInfo, PaymentInfo, PageTracking, DefaultPaymentMethodFilter, $q) {
+                PaymentMethod, BillInfo, PaymentInfo, PageTracking, DefaultPaymentMethodFilter, $q) {
             var getResourceResultMock = function (data) {
                     var deferred = $q.defer();
                     data.$promise = deferred.promise;
@@ -28,7 +28,6 @@ describe('Billing: TransactionsCtrl', function () {
             balance = Balance;
             period = Period;
             paymentMethod = PaymentMethod;
-            payment = Payment;
             paymentInfo = PaymentInfo;
             billInfo = BillInfo;
             balanceData = {
@@ -39,12 +38,13 @@ describe('Billing: TransactionsCtrl', function () {
                 id: 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479'
             }];
 
+            makePayment = sinon.stub().returns(getResourceResultMock({}));
+
             billInfo.get =  sinon.stub(billInfo, 'get', getResourceMock({}));
             paymentInfo.get =  sinon.stub(paymentInfo, 'get', getResourceMock({}));
             period.list = sinon.stub(period, 'list', getResourceMock([]));
             account.get = sinon.stub(account, 'get', getResourceMock({}));
             balance.get = sinon.stub(balance, 'get', getResourceMock(balanceData));
-            payment.post = sinon.stub(payment, 'post', getResourceMock({}));
             transaction.list = sinon.stub(transaction, 'list', getResourceMock([]));
             paymentMethod.list = sinon.stub(paymentMethod, 'list', getResourceMock(paymentMethods));
 
@@ -56,7 +56,7 @@ describe('Billing: TransactionsCtrl', function () {
                 Account: account,
                 Balance: balance,
                 Period: period,
-                Payment: payment,
+                rxMakePayment: makePayment,
                 PaymentMethod: paymentMethod,
                 $routeParams: { accountNumber: testAccountNumber },
                 PageTracking: PageTracking,
@@ -109,7 +109,7 @@ describe('Billing: TransactionsCtrl', function () {
 
     it('TransactionsCtrl should post a payment', function () {
         scope.postPayment({ amount: 12314, method: { id: 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479' }});
-        sinon.assert.calledOnce(payment.post);
+        sinon.assert.calledOnce(makePayment);
     });
 
     it('TransactionsCtrl should set default values once account and payment methods have been succesful', function () {

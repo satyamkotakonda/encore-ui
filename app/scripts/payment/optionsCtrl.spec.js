@@ -1,5 +1,5 @@
 describe('OptionsCtrl', function () {
-    var scope, ctrl, account, balance, payment, paymentMethod, defaultPaymentMethod, balanceData;
+    var scope, ctrl, account, balance, paymentMethod, defaultPaymentMethod, makePayment;
 
     var testAccountNumber = '12345',
         paymentMethods = [{
@@ -9,61 +9,49 @@ describe('OptionsCtrl', function () {
                 'cardNumber': 'XXXXXXXXXXXX3456',
                 'cardType': 'VISA'
             }
-        }];
+        }],
+        balanceData = {
+            amountDue: '2124.00'
+        };
 
     beforeEach(function () {
         module('billingApp');
 
-        inject(function ($controller, $rootScope, $q, Account, Balance, Payment, PaymentMethod,
+        inject(function ($controller, $rootScope, $q, Account, Balance, PaymentMethod,
             DefaultPaymentMethodFilter) {
-            var getResourceMock = function (data) {
+            var getResourceResultMock = function (data) {
                     var deferred = $q.defer();
                     data.$promise = deferred.promise;
                     data.$deferred = deferred;
                     return data;
                 },
-                getResourceCallBackMock = function (data) {
-                    return function (param, success) {
-                        if (success) {
-                            success(data);
-                        }
-                        return getResourceMock(data);
+                getResourceMock = function (returnData) {
+                    returnData = getResourceResultMock(returnData);
+                    return function (callData, success, error) {
+                        returnData.$promise.then(success, error);
+                        return returnData;
                     };
                 };
 
             scope = $rootScope.$new();
             account = Account;
             balance = Balance;
-            payment = Payment;
             paymentMethod = PaymentMethod;
             defaultPaymentMethod = DefaultPaymentMethodFilter;
-            balanceData = {
-                amountDue: '2124.00'
-            };
 
-            account.get = getResourceCallBackMock({});
-            balance.get = getResourceCallBackMock(balanceData);
-            payment.post = sinon.stub(payment, 'post').returns(getResourceMock({}));
-            paymentMethod.list = getResourceCallBackMock(paymentMethods);
-            paymentMethod.disable = function (param, data, success) {
-                if (success) {
-                    success({});
-                }
-                return getResourceMock({});
-            };
-            paymentMethod.changeDefault = function (param, data, success) {
-                if (success) {
-                    success({});
-                }
-                return getResourceMock({});
-            };
+            makePayment = sinon.stub().returns(getResourceResultMock({}));
+            account.get = getResourceMock({});
+            balance.get = getResourceMock(balanceData);
+            paymentMethod.list = getResourceMock(paymentMethods);
+            paymentMethod.disable = sinon.stub(paymentMethod, 'disable', getResourceMock({}));
+            paymentMethod.changeDefault = sinon.stub(paymentMethod, 'changeDefault', getResourceMock({}));
 
             ctrl = $controller('OptionsCtrl', {
                 $scope: scope,
                 $routeParams: { accountNumber: testAccountNumber },
                 Account: account,
                 Balance: balance,
-                Payment: payment,
+                rxMakePayment: makePayment,
                 PaymentMethod: paymentMethod,
                 DefaultPaymentMethodFilter: defaultPaymentMethod
             });
@@ -115,16 +103,20 @@ describe('OptionsCtrl', function () {
     });
 
     it('OptionsCtrl should set the paymentAmount upon success of getting balance info', function () {
+        scope.balance.$deferred.resolve(balanceData);
+        scope.$apply();
         expect(scope.paymentAmount).to.not.be.empty;
     });
 
     it('OptionsCtrl should set the defaultMethod upon success of getting payment methods', function () {
+        scope.paymentMethods.$deferred.resolve(paymentMethods);
+        scope.$apply();
         expect(scope.defaultMethod).to.not.be.empty;
     });
 
     it('OptionsCtrl should post a payment', function () {
         scope.postPayment(12314, 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
-        sinon.assert.calledOnce(payment.post);
+        sinon.assert.calledOnce(makePayment);
     });
 
     it('OptionsCtrl should disable a payment method', function () {
@@ -132,7 +124,7 @@ describe('OptionsCtrl', function () {
         //sinon.assert.calledOnce(payment.disable);
     });
 
-    it('OptionsCtrl should post a payment', function () {
+    it('OptionsCtrl should change default payment method', function () {
         scope.changeDefaultMethod('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
         //sinon.assert.calledOnce(payment.changeDefault);
     });

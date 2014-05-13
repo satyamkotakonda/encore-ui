@@ -137,8 +137,8 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
             },
             {
                 list: { method: 'GET', isArray: true, transformResponse: transform },
-                // I realize this seems redundant, but verbally Payment.post makes more sense than Payment.save
-                post: { method: 'POST' }
+                // I realize this seems redundant, but verbally Payment.makePayment makes more sense than Payment.save
+                makePayment: { method: 'POST' }
             }
         );
     })
