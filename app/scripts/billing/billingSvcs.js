@@ -133,9 +133,7 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
         var transform = Transform('payments.payment', 'badRequest.details');
         return $resource('/api/billing/:id/payments',
             {
-                id: '@id',
-                marker: 0,
-                limit: 10
+                id: '@id'
             },
             {
                 list: { method: 'GET', isArray: true, transformResponse: transform },
