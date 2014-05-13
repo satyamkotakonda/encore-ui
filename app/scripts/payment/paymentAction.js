@@ -55,7 +55,7 @@ angular.module('billingApp')
         };
     })
     /**
-     * @ngdoc paymentPost Service
+     * @ngdoc service
      * @name encore.service:rxPaymentPost
      * @description
      * @param {object} Payment - Payment Resource
