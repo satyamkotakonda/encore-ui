@@ -1,28 +1,39 @@
+.rx-switch-container {
+    display: inline-block;
+    .rx-spinner {
+        margin-left: 0.5em;
+        margin-top: 0.02em;
+        border-color: black;
+        border-top-color: transparent;
+        border-left-color: transparent;
+    }
+}
 .rx-switch {
 
+    @textColor: #fff;
     @offStateColor: #b3b3b3;
     @borderColor: darken(@offStateColor, 10%);
     @onStateColor: #00ac31;
     @knobColor: #e1e1e1;
     @knobBorderColor: darken(@knobColor, 10%);
-    @minWidth: 55px;
-    @knobSize: 20px;
-    @height: @knobSize + 2;
-    @lineHeight: @knobSize - 2;
-    @edgeSpacing: 6px;
+    @minWidth: 4.6em;
+    @knobSize: 1.4em;
+    @edgeSpacing: @knobSize * 0.8;
+    @lineHeight: @knobSize * 1.04;
+    @blurDist: @edgeSpacing;
+    @blurSpread: (@edgeSpacing/3) * -1;
+
+    font-size: 0.8em;
+    line-height: @lineHeight;
 
     display: inline-block;
 
     border: 1px @borderColor solid;
     border-radius: 9px;
     background-color: @offStateColor;
-    color: white;
+    color: @textColor;
 
-    font-size: 15px;
-    line-height: @lineHeight;
-
-    padding: 0 @edgeSpacing 0 @edgeSpacing + (@edgeSpacing / 2);
-    height: @height;
+    padding: 0 @edgeSpacing 0 @edgeSpacing;
 
     min-width: @minWidth;
 
@@ -32,9 +43,9 @@
 
     transition: all 0.1s ease-out;
 
-    -webkit-box-shadow: inset 1px 2px 5px -2px rgba(0,0,0,0.65);
-    -moz-box-shadow: inset 1px 2px 5px -2px rgba(0,0,0,0.65);
-    box-shadow: inset 1px 2px 5px -2px rgba(0,0,0,0.65);
+    -webkit-box-shadow: inset 1px 2px @blurDist @blurSpread rgba(0,0,0,0.50);
+    -moz-box-shadow: inset 1px 2px @blurDist @blurSpread rgba(0,0,0,0.50);
+    box-shadow: inset 1px 2px @blurDist @blurSpread rgba(0,0,0,0.50);
 
     .user-select(none);
     .box-sizing(border-box);
@@ -42,11 +53,28 @@
     &.readonly {
         cursor: default;
     }
+    &:disabled,
+    &[disabled="disabled"] {
+        background-color: desaturate(lighten(@offStateColor, 7%), 80%);
+        color: darken(@textColor, 17%);
+        &.on {
+            background-color: desaturate(lighten(@onStateColor, 30%), 80%);
+            color: darken(@textColor, 20%);
+        }
+        cursor: not-allowed;
+        .knob {
+            cursor: not-allowed;
+            background-color: desaturate(darken(@knobColor, 8%), 80%);
+        }
+    }
     &.on {
         background-color: @onStateColor;
         text-align: left;
         .knob {
-            right: @edgeSpacing * -1;
+            left: 100%;
+            // Shift the position of the knob to the left negative on it's x Axis
+            -webkit-transform: translate(@knobSize * -1, 0);
+            transform: translate(@knobSize * -1, 0);
         }
     }
     .knob {
@@ -54,7 +82,7 @@
 
         position: absolute;
         display: inline-block;
-        top: -1px;
+        top:  (@lineHeight/(@lineHeight*20)) * -1;
 
         width: @knobSize;
         height: @knobSize;
@@ -62,6 +90,15 @@
         background-color: @knobColor;
         border: 1px @knobBorderColor solid;
 
-        right: (@minWidth - @knobSize);
+        left: -0.1em;
+        // Shift the position of the knob to the left negative on it's x Axis
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+
+        -webkit-box-shadow: 0 0 @blurDist @blurSpread rgba(0,0,0,0.55);
+        -moz-box-shadow: 0 0 @blurDist @blurSpread rgba(0,0,0,0.55);
+        box-shadow: 0 0 @blurDist @blurSpread rgba(0,0,0,0.55);
+        overflow: hidden;
     }
+
 }

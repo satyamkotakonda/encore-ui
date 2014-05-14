@@ -1,9 +1,9 @@
 /* jshint node: true */
 
 describe('rxSwitch', function () {
-    var scope, compile, rootScope, el, directiveScope, readonlyEl, switchContainer,
+    var scope, compile, rootScope, el, directiveScope, disabledEl, switchContainer,
         validTemplate = '<rx-switch model="model"></rx-switch>',
-        readOnlyTemplate = '<rx-switch model="model" readonly="true"></rx-switch>';
+        disabledTemplate = '<rx-switch model="model" disabled="true"></rx-switch>';
 
     beforeEach(function () {
         module('rxSwitch');
@@ -20,12 +20,15 @@ describe('rxSwitch', function () {
         });
 
         el = helpers.createDirective(validTemplate, compile, scope);
-        readonlyEl = helpers.createDirective(readOnlyTemplate, compile, scope);
+        el = helpers.getChildDiv(el, 'rx-switch-container', 'class');
+
+        disabledEl = helpers.createDirective(disabledTemplate, compile, scope);
+        disabledEl = helpers.getChildDiv(disabledEl, 'rx-switch-container', 'class');
     });
 
     afterEach(function () {
         el = null;
-        readonlyEl = null;
+        disabledEl = null;
         directiveScope = null;
     });
 
@@ -38,32 +41,32 @@ describe('rxSwitch', function () {
         expect(helpers.getChildDiv(switchContainer, 'knob', 'class')).not.be.empty;
     });
 
-    it('should invert the model value when invert is called', function () {
+    it('should switch the model value when update is called', function () {
         switchContainer = helpers.getChildDiv(el, 'rx-switch', 'class');
         directiveScope = switchContainer.scope();
-        scope.$apply(function () {
-            directiveScope.invert(scope.model);
-        });
+        expect(scope.model).to.be.true;
+        directiveScope.update(scope.model);
+        scope.$apply();
         expect(scope.model).to.be.false;
         expect(switchContainer.hasClass('on')).to.be.false;
     });
 
-    it('should render readonly template correctly', function () {
-        switchContainer = helpers.getChildDiv(readonlyEl, 'rx-switch', 'class');
+    it('should render disabled template correctly', function () {
+        switchContainer = helpers.getChildDiv(disabledEl, 'rx-switch', 'class');
         expect(el).to.not.be.empty;
+        console.log(switchContainer.prototype);
         expect(switchContainer).to.not.be.empty;
         expect(switchContainer.hasClass('rx-switch')).to.be.true;
-        expect(switchContainer.hasClass('readonly')).to.be.true;
+        //expect(switchContainer.hasAttr('disabled')).to.be.true;
         expect(switchContainer.hasClass('on')).to.be.true;
         expect(helpers.getChildDiv(switchContainer, 'knob', 'class')).not.be.empty;
     });
 
-    it('should NOT invert the model value when invert is called (readonly)', function () {
-        switchContainer = helpers.getChildDiv(readonlyEl, 'rx-switch', 'class');
+    it('should NOT switch the model value when switch is called (disabled)', function () {
+        switchContainer = helpers.getChildDiv(disabledEl, 'rx-switch', 'class');
         directiveScope = switchContainer.scope();
-        scope.$apply(function () {
-            directiveScope.invert(scope.model);
-        });
+        directiveScope.update(scope.model);
+        scope.$apply();
         expect(scope.model).to.be.true;
         expect(switchContainer.hasClass('on')).to.be.true;
     });
