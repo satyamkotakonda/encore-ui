@@ -59,7 +59,8 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
                 id: '@id'
             },
             {
-                get: { method: 'GET', transformResponse: transform }
+                get: { method: 'GET', transformResponse: transform },
+                update: { method: 'PUT', transformResponse: transform }
             }
         );
     })
@@ -78,7 +79,8 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
                 id: '@id'
             },
             {
-                get: { method: 'GET', transformResponse: transform }
+                get: { method: 'GET', transformResponse: transform },
+                update: { method: 'PUT', transformResponse: transform }
             }
         );
     })
