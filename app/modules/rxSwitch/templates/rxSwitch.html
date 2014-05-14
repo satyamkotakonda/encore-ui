@@ -1,4 +1,7 @@
-<div class="rx-switch" ng-class="{on: model, readonly: readonly === 'true'}" ng-click="invert(model)">
-	<div class="knob"></div>
-	{{model ? 'ON' : 'OFF'}}
+<div class="rx-switch-container">
+	<div class="rx-switch" ng-class="{on: isTrueValue(model)}" ng-click="update(model)" ng-disabled="disabled">
+		<div class="knob"></div>
+		<span ng-bind="isTrueValue(model) ? trueText || 'ON' : falseText || 'OFF' ">&nbsp;</span>
+	</div>
+	<span rx-spinner toggle="loading"></span>
 </div>
