@@ -1,0 +1,37 @@
+angular.module('billingApp')
+    /**
+    * @ngdoc object
+    * @name encore:controller.PreferencesCtrl
+    * @description
+    * The Controller which displays an overview of a users' billing info.
+    *
+    * @requires $scope - The $scope variable for interacting with the UI.
+    * @requires $routeParams - AngularJS service which provides access to route paramters
+    * @requires encore.rxSortableColumn:rxSortUtil - Service which provides column sort related functions
+    * @requires billingSvcs.DATE_FORMAT - Constant that defines the default format for dates
+    *
+    * @example
+    * <pre>
+    * .controller('PreferencesCtrl', function ($scope, $routeParams, EstimatedCharges)
+    * </pre>
+    */
+    .controller('PreferencesCtrl', function ($scope, $routeParams, PurchaseOrder, CurrentPurchaseOrderFilter,
+        rxSortUtil, DATE_FORMAT) {
+
+        var accountNumber = '020-' + $routeParams.accountNumber;
+        var getCurrentPurchaseOrder = function (orders) {
+                $scope.currentPurchaseOrder = CurrentPurchaseOrderFilter(orders);
+            };
+
+        // Default Date Format
+        $scope.defaultDateFormat = DATE_FORMAT;
+
+        $scope.purchaseOrders = PurchaseOrder.list({ id: accountNumber }, getCurrentPurchaseOrder);
+
+        // Set the default sort of the usage
+        $scope.sort = rxSortUtil.getDefault('date', false);
+
+        $scope.sortCol = function (predicate) {
+            return rxSortUtil.sortCol($scope, predicate);
+        };
+    });

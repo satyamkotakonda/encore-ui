@@ -199,4 +199,23 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
                 get: { method: 'GET', transformResponse: transform }
             }
         );
+    })
+    /**
+    * @ngdoc service
+    * @name billingSvcs.PurchaseOrder
+    * @description
+    * Account Bill Settings/Info Service for interaction with Billing API
+    *
+    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    */
+    .factory('PurchaseOrder', function ($resource, Transform) {
+        var transform = Transform('purchaseOrders.purchaseOrder', 'details');
+        return $resource('/api/billing/:id/purchaseOrders',
+            {
+                id: '@id'
+            },
+            {
+                list: { method: 'GET', isArray: true, transformResponse: transform }
+            }
+        );
     });

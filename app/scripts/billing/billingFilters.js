@@ -92,4 +92,17 @@ angular.module('billingApp')
             return currencyFilter(modulus * value) + (units[unit - 1] || '');
         };
 
+    })
+    /**
+    * @ngdoc filter
+    * @name encore.filter:CurrentPurchaseOrder
+    * @description
+    * Filter a list of contacts purchaseOrders by primary.
+    *
+    * @param {Array} contacts - collection of purchaseOrders to be filtered.
+    */
+    .filter('CurrentPurchaseOrder', function () {
+        return function (purchaseOrders) {
+            return _.first(purchaseOrders);
+        };
     });

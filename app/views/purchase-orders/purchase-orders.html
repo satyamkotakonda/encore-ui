@@ -1,0 +1,50 @@
+<rx-page title="'Billing - Purchase Orders'" subtitle="'On account ' + account.name" ng-init="poNotFound = 'No Purchase Orders'">
+    <rx-notifications stack="preferencePage"></rx-notifications>
+    <h3 class="section-title">Purchase Orders</h3>
+    <div class="section">
+        <div class="label-definition">
+            <p>
+                <label>Number:</label> {{ currentPurchaseOrder.poNumber | LoadingValue:purchaseOrders.$resolved:poNotFound }}
+            </p>
+            <p>
+                <label>Start Date:</label> {{ currentPurchaseOrder.startDate | date:defaultDateFormat | LoadingValue:purchaseOrders.$resolved:poNotFound }}
+            </p>
+        </div>
+        <div class="actions">
+
+        </div>
+    </div>
+    <h3 class="section-title">History</h3>
+    <div class="section">
+        <table class="table purchase-order-list">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="sortCol"
+                            sort-property="startDate"
+                            predicate="sort.predicate"
+                            reverse="sort.reverse">
+                            Start Date
+                        </rx-sortable-column>
+                    </th>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="sortCol"
+                            sort-property="poNumber"
+                            predicate="sort.predicate"
+                            reverse="sort.reverse">
+                            Number
+                        </rx-sortable-column>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="purchaseOrder in purchaseOrders | orderBy:sort.predicate:sort.reverse">
+                    <td>{{ purchaseOrder.startDate | date:defaultDateFormat }}</td>
+                    <td>{{ purchaseOrder.number }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</rx-page>
