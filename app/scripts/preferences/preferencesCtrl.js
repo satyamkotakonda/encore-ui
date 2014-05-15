@@ -36,7 +36,6 @@ angular.module('billingApp')
             error: 'Error Loading Payment Preferences'
         }, 'preferencePage');
 
-
         $scope.billInfoLoading = function () {
             return $scope.billInfo.$resolved === false ||
                     ($scope.billInfoUpdate && $scope.billInfoUpdate.$resolved === false);
