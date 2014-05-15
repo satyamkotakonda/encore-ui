@@ -55,6 +55,7 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                         href: '/billing/usage/{{accountNumber}}',
                         linkText: 'Current Usage'
                     }, {
+                    // TODO: Commented out until functionality is to be released
                     //     href: '/billing/discounts/{{accountNumber}}',
                     //     linkText: 'Discounts'
                     // }, {
