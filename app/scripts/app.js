@@ -39,7 +39,36 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                 redirectTo: '/overview/473500'
             });
         $locationProvider.html5Mode(true).hashPrefix('!');
-    }).run(function ($http, $rootScope, $window, Auth, Environment) {
+    }).run(function ($http, $rootScope, $window, Auth, Environment, rxAppRoutes, $timeout) {
+        $timeout(function () {
+            rxAppRoutes.setRouteByKey('billing', {
+                children: [
+                    {
+                        href: '/billing/overview/{{accountNumber}}',
+                        linkText: 'Overview'
+                    }, {
+                        href: '/billing/transactions/{{accountNumber}}',
+                        linkText: 'Transactions'
+                    }, {
+                        href: '/billing/usage/{{accountNumber}}',
+                        linkText: 'Current Usage'
+                    }, {
+                    //     href: '/billing/discounts/{{accountNumber}}',
+                    //     linkText: 'Discounts'
+                    // }, {
+                        href: '/billing/purchaseorders/{{accountNumber}}',
+                        linkText: 'Purchase Orders'
+                    }, {
+                        href: '/billing/payment/{{accountNumber}}/options',
+                        linkText: 'Payment Options'
+                    }, {
+                        href: '/billing/preferences/{{accountNumber}}',
+                        linkText: 'Preferences'
+                    }
+                ]
+            });
+        });
+
         var environment = Environment.get().name;
 
         if (environment !== 'local' && !Auth.isAuthenticated()) {
@@ -51,10 +80,6 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
         $http.defaults.headers.common['Accept'] = 'application/json';
 
         $rootScope.userName = Auth.getUserName();
-
-        // TODO: Here we used to have the menu for billing, need to replace
-        // With the new menu options from encore in order to be able to override it via the App.
-
     }).controller('LoginModalCtrl', function ($scope, Auth, Environment, rxNotify) {
         $scope.environment = Environment.get().name;
 
