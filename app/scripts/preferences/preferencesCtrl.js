@@ -21,52 +21,40 @@ angular.module('billingApp')
         var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber),
             defaultParam = { id: RAN };
 
+        var isResourceLoading = function (res1, res2) {
+                return res1.$resolved === false || (res2 && res2.$resolved === false);
+            },
+            updatePreferences = function () {
+                $scope.billInfoUpdate = BillInfo.updateInvoiceDeliveryMethod(defaultParam,
+                                                                            $scope.billInfo.invoiceDeliveryMethod);
+                $scope.paymentInfoUpdate = PaymentInfo.updateNotificationOption(defaultParam,
+                                                                            $scope.paymentInfo.notificationOption);
+
+                rxPromiseNotifications.add($scope.billInfoUpdate.$promise, {
+                    loading: '',
+                    error: 'Error Updating Billing Preferences'
+                }, 'preferencePage');
+
+                rxPromiseNotifications.add($scope.paymentInfoUpdate.$promise, {
+                    loading: '',
+                    error: 'Error Updating Payment Preferences'
+                }, 'preferencePage');
+            };
+
+        $scope.updatePreferences = updatePreferences;
+        $scope.isResourceLoading = isResourceLoading;
+
         $scope.billInfo = BillInfo.get(defaultParam);
         $scope.paymentInfo = PaymentInfo.get(defaultParam);
 
         rxPromiseNotifications.add($scope.billInfo.$promise, {
             loading: '',
-            //success: 'Successful Load',
             error: 'Error Loading Billing Preferences'
         }, 'preferencePage');
 
         rxPromiseNotifications.add($scope.paymentInfo.$promise, {
             loading: '',
-            //success: 'Successful Load',
             error: 'Error Loading Payment Preferences'
         }, 'preferencePage');
 
-        $scope.billInfoLoading = function () {
-            return $scope.billInfo.$resolved === false ||
-                    ($scope.billInfoUpdate && $scope.billInfoUpdate.$resolved === false);
-        };
-
-        $scope.paymentInfoLoading = function () {
-            return $scope.paymentInfo.$resolved === false ||
-                    ($scope.paymentInfoUpdate && $scope.paymentInfoUpdate.$resolved === false);
-        };
-
-        $scope.updatePreferences = function () {
-            $scope.billInfoUpdate = BillInfo.update(defaultParam, {
-                billInfo: {
-                    invoiceDeliveryMethod: $scope.billInfo.invoiceDeliveryMethod
-                }
-            });
-            $scope.paymentInfoUpdate = PaymentInfo.update(defaultParam, {
-                paymentInfo: {
-                    notificationOption: $scope.paymentInfo.notificationOption
-                }
-            });
-            rxPromiseNotifications.add($scope.billInfoUpdate.$promise, {
-                loading: '',
-                //success: 'Successful Load',
-                error: 'Error Updating Billing Preferences'
-            }, 'preferencePage');
-
-            rxPromiseNotifications.add($scope.paymentInfoUpdate.$promise, {
-                loading: '',
-                //success: 'Successful Load',
-                error: 'Error Updating Payment Preferences'
-            }, 'preferencePage');
-        };
     });
