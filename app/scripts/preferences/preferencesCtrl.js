@@ -22,7 +22,7 @@ angular.module('billingApp')
             defaultParam = { id: RAN };
 
         var isResourceLoading = function (res1, res2) {
-                return res1.$resolved === false || (res2 && res2.$resolved === false);
+                return res1.$resolved === false || (res2 !== undefined && res2.$resolved === false);
             },
             updatePreferences = function () {
                 $scope.billInfoUpdate = BillInfo.updateInvoiceDeliveryMethod(defaultParam,
