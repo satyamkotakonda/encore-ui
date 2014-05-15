@@ -18,10 +18,11 @@ angular.module('billingApp')
     .controller('PreferencesCtrl', function ($scope, $routeParams, BillInfo, PaymentInfo,
         AccountNumberUtil, rxPromiseNotifications) {
 
-        var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber);
+        var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber),
+            defaultParam = { id: RAN };
 
-        $scope.billInfo = BillInfo.get({ id: RAN });
-        $scope.paymentInfo = PaymentInfo.get({ id: RAN });
+        $scope.billInfo = BillInfo.get(defaultParam);
+        $scope.paymentInfo = PaymentInfo.get(defaultParam);
 
         rxPromiseNotifications.add($scope.billInfo.$promise, {
             loading: '',
@@ -47,16 +48,12 @@ angular.module('billingApp')
         };
 
         $scope.updatePreferences = function () {
-            $scope.billInfoUpdate = BillInfo.update({
-                id: RAN
-            }, {
+            $scope.billInfoUpdate = BillInfo.update(defaultParam, {
                 billInfo: {
                     invoiceDeliveryMethod: $scope.billInfo.invoiceDeliveryMethod
                 }
             });
-            $scope.paymentInfoUpdate = PaymentInfo.update({
-                id: RAN
-            }, {
+            $scope.paymentInfoUpdate = PaymentInfo.update(defaultParam, {
                 paymentInfo: {
                     notificationOption: $scope.paymentInfo.notificationOption
                 }
