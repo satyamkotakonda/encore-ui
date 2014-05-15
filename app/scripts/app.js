@@ -40,7 +40,9 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
             });
         $locationProvider.html5Mode(true).hashPrefix('!');
     }).run(function ($http, $rootScope, $window, Auth, Environment, rxAppRoutes, $timeout) {
+        // TODO: Remove $timeout once Encore-UI updates a possible race condition fix.
         $timeout(function () {
+            // Override the children of the billing menu from the encore-ui default.
             rxAppRoutes.setRouteByKey('billing', {
                 children: [
                     {
