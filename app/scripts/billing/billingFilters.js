@@ -97,12 +97,31 @@ angular.module('billingApp')
     * @ngdoc filter
     * @name encore.filter:CurrentPurchaseOrder
     * @description
-    * Filter a list of contacts purchaseOrders by primary.
+    * Find the current purchaseOrder in a list of purchaseOrders.
     *
-    * @param {Array} contacts - collection of purchaseOrders to be filtered.
+    * @param {Array} purchaseOrders - collection of purchaseOrders to be filtered.
     */
     .filter('CurrentPurchaseOrder', function () {
         return function (purchaseOrders) {
-            return _.first(purchaseOrders);
+            return _.find(purchaseOrders, function (purchaseOrder) {
+                // The current purchase order does not have an endDate
+                return !purchaseOrder.hasOwnProperty('endDate');
+            });
+        };
+    })
+    /**
+    * @ngdoc filter
+    * @name encore.filter:ClosedPurchaseOrders
+    * @description
+    * Filters list of purchaseOrders by those that have been closed
+    *
+    * @param {Array} purchaseOrders - collection of purchaseOrders to be filtered.
+    */
+    .filter('ClosedPurchaseOrders', function () {
+        return function (purchaseOrders) {
+            return _.filter(purchaseOrders, function (purchaseOrder) {
+                // The current purchase order does not have an endDate
+                return purchaseOrder.hasOwnProperty('endDate');
+            });
         };
     });

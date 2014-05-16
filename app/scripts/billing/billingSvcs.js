@@ -5,7 +5,9 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     * @description
     * Transaction Service for interaction with Billing API
     *
-    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    * @requires $resource - AngularJS service to extend the $http and wrap Async calls to API's.
+    * @requires Transform - Service to create a data transform, to only return data at a specific path,
+    *                       mainly used on the response
     */
     .factory('Transaction', function ($resource, Transform) {
         var transformList = Transform('billingSummary.item', 'details');
@@ -31,7 +33,9 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     * @description
     * Balance Service for interaction with Billing API
     *
-    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    * @requires $resource - AngularJS service to extend the $http and wrap Async calls to API's.
+    * @requires Transform - Service to create a data transform, to only return data at a specific path,
+    *                       mainly used on the response
     */
     .factory('Balance', function ($resource, Transform) {
         var transform = Transform('balance', 'details');
@@ -50,7 +54,9 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     * @description
     * Account Bill Settings/Info Service for interaction with Billing API
     *
-    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    * @requires $resource - AngularJS service to extend the $http and wrap Async calls to API's.
+    * @requires Transform - Service to create a data transform, to only return data at a specific path,
+    *                       mainly used on the response
     */
     .factory('BillInfo', function ($resource, Transform) {
         var transform = Transform('billInfo', 'details');
@@ -64,12 +70,12 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
             }
         );
 
-        billInfo.updateInvoiceDeliveryMethod = function (params, invoiceDeliveryMethod) {
+        billInfo.updateInvoiceDeliveryMethod = function (params, invoiceDeliveryMethod, success, error) {
             return billInfo.update(params, {
                 billInfo: {
                     invoiceDeliveryMethod: invoiceDeliveryMethod
                 }
-            });
+            }, success, error);
         };
         return billInfo;
     })
@@ -79,7 +85,9 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     * @description
     * Account Payment Settings/Info Service for interaction with Billing API
     *
-    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    * @requires $resource - AngularJS service to extend the $http and wrap Async calls to API's.
+    * @requires Transform - Service to create a data transform, to only return data at a specific path,
+    *                       mainly used on the response
     */
     .factory('PaymentInfo', function ($resource, Transform) {
         var transform = Transform('paymentInfo', 'details');
@@ -93,12 +101,12 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
             }
         );
 
-        paymentInfo.updateNotificationOption = function (params, notificationOption) {
+        paymentInfo.updateNotificationOption = function (params, notificationOption, success, error) {
             return paymentInfo.update(params, {
                 paymentInfo: {
                     notificationOption: notificationOption
                 }
-            });
+            }, success, error);
         };
         return paymentInfo;
     })
@@ -108,7 +116,9 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     * @description
     * Period Service for interaction with Billing API
     *
-    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    * @requires $resource - AngularJS service to extend the $http and wrap Async calls to API's.
+    * @requires Transform - Service to create a data transform, to only return data at a specific path,
+    *                       mainly used on the response
     */
     .factory('Period', function ($resource, Transform) {
         var transform = Transform('billingPeriods.billingPeriod', 'details');
@@ -127,7 +137,9 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     * @description
     * Estimated Charges Service for interaction with Billing API
     *
-    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    * @requires $resource - AngularJS service to extend the $http and wrap Async calls to API's.
+    * @requires Transform - Service to create a data transform, to only return data at a specific path,
+    *                       mainly used on the response
     */
     .factory('EstimatedCharges', function ($resource, Transform) {
         var transform = Transform('estimatedCharges.estimatedCharge', 'details');
@@ -147,7 +159,9 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
      * @description
      * Payment Service for interaction with Billing API
      *
-     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+     * @requires $resource - AngularJS service to extend the $http and wrap Async calls to API's.
+     * @requires Transform - Service to create a data transform, to only return data at a specific path,
+     *                       mainly used on the response
      */
     .factory('Payment', function ($resource, Transform) {
         var transform = Transform('payments.payment', 'badRequest.details');
@@ -168,7 +182,9 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
      * @description
      * ContractEntity Service for interaction with Billing API
      *
-     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+     * @requires $resource - AngularJS service to extend the $http and wrap Async calls to API's.
+     * @requires Transform - Service to create a data transform, to only return data at a specific path,
+     *                       mainly used on the response
      */
     .factory('ContractEntity', function ($resource, Transform) {
         var transform = Transform('contractEntity', 'badRequest.details');
@@ -187,7 +203,9 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     * @description
     * Account Bill Settings/Info Service for interaction with Billing API
     *
-    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    * @requires $resource - AngularJS service to extend the $http and wrap Async calls to API's.
+    * @requires Transform - Service to create a data transform, to only return data at a specific path,
+    *                       mainly used on the response
     */
     .factory('SupportInfo', function ($resource, Transform) {
         var transform = Transform('supportInfo', 'details');
@@ -206,16 +224,32 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     * @description
     * Account Bill Settings/Info Service for interaction with Billing API
     *
-    * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
+    * @requires $resource - AngularJS service to extend the $http and wrap Async calls to API's.
+    * @requires Transform - Service to create a data transform, to only return data at a specific path,
+    *                       mainly used on the response
     */
     .factory('PurchaseOrder', function ($resource, Transform) {
         var transform = Transform('purchaseOrders.purchaseOrder', 'details');
-        return $resource('/api/billing/:id/purchaseOrders',
+        var purchaseOrder = $resource('/api/billing/:id/purchaseOrders/:purchaseOrderId',
             {
-                id: '@id'
+                id: '@id',
+                purchaseOrderId: '@purchaseOrderId'
             },
             {
-                list: { method: 'GET', isArray: true, transformResponse: transform }
+                list: { method: 'GET', isArray: true, transformResponse: transform },
+                create: { method: 'POST' },
+                disable: { method: 'DELETE' }
             }
         );
+
+        purchaseOrder.createPO = function (id, purchaseOrderNo, success, error) {
+            return purchaseOrder.create({
+                id: id
+            }, {
+                purchaseOrder: {
+                    poNumber: purchaseOrderNo
+                }
+            }, success, error);
+        };
+        return purchaseOrder;
     });
