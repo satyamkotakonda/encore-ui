@@ -30,6 +30,10 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                 templateUrl: 'views/payment/options.html',
                 controller: 'OptionsCtrl'
             })
+            .when('/purchase-orders/:accountNumber', {
+                templateUrl: 'views/purchase-orders/purchaseOrders.html',
+                controller: 'PurchaseOrdersCtrl'
+            })
             .when('/preferences/:accountNumber', {
                 templateUrl: 'views/preferences/preferences.html',
                 controller: 'PreferencesCtrl'
@@ -59,7 +63,7 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                     //     href: '/billing/discounts/{{accountNumber}}',
                     //     linkText: 'Discounts'
                     // }, {
-                        href: '/billing/purchaseorders/{{accountNumber}}',
+                        href: '/billing/purchase-orders/{{accountNumber}}',
                         linkText: 'Purchase Orders'
                     }, {
                         href: '/billing/payment/{{accountNumber}}/options',
