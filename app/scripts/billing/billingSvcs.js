@@ -54,14 +54,24 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     */
     .factory('BillInfo', function ($resource, Transform) {
         var transform = Transform('billInfo', 'details');
-        return $resource('/api/billing/:id/billInfo',
+        var billInfo = $resource('/api/billing/:id/billInfo',
             {
                 id: '@id'
             },
             {
-                get: { method: 'GET', transformResponse: transform }
+                get: { method: 'GET', transformResponse: transform },
+                update: { method: 'PUT', transformResponse: transform }
             }
         );
+
+        billInfo.updateInvoiceDeliveryMethod = function (params, invoiceDeliveryMethod) {
+            return billInfo.update(params, {
+                billInfo: {
+                    invoiceDeliveryMethod: invoiceDeliveryMethod
+                }
+            });
+        };
+        return billInfo;
     })
    /**
     * @ngdoc service
@@ -73,14 +83,24 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     */
     .factory('PaymentInfo', function ($resource, Transform) {
         var transform = Transform('paymentInfo', 'details');
-        return $resource('/api/billing/:id/paymentInfo',
+        var paymentInfo = $resource('/api/billing/:id/paymentInfo',
             {
                 id: '@id'
             },
             {
-                get: { method: 'GET', transformResponse: transform }
+                get: { method: 'GET', transformResponse: transform },
+                update: { method: 'PUT', transformResponse: transform }
             }
         );
+
+        paymentInfo.updateNotificationOption = function (params, notificationOption) {
+            return paymentInfo.update(params, {
+                paymentInfo: {
+                    notificationOption: notificationOption
+                }
+            });
+        };
+        return paymentInfo;
     })
    /**
     * @ngdoc service

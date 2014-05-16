@@ -30,12 +30,48 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                 templateUrl: 'views/payment/options.html',
                 controller: 'OptionsCtrl'
             })
+            .when('/preferences/:accountNumber', {
+                templateUrl: 'views/preferences/preferences.html',
+                controller: 'PreferencesCtrl'
+            })
             .otherwise({
                 //#TODO: this is temporary until we get a more solid solution
                 redirectTo: '/overview/473500'
             });
         $locationProvider.html5Mode(true).hashPrefix('!');
-    }).run(function ($http, $rootScope, $window, Auth, Environment) {
+    }).run(function ($http, $rootScope, $window, Auth, Environment, rxAppRoutes, $timeout) {
+        // TODO: Remove $timeout once Encore-UI updates a possible race condition fix.
+        $timeout(function () {
+            // Override the children of the billing menu from the encore-ui default.
+            rxAppRoutes.setRouteByKey('billing', {
+                children: [
+                    {
+                        href: '/billing/overview/{{accountNumber}}',
+                        linkText: 'Overview'
+                    }, {
+                        href: '/billing/transactions/{{accountNumber}}',
+                        linkText: 'Transactions'
+                    }, {
+                        href: '/billing/usage/{{accountNumber}}',
+                        linkText: 'Current Usage'
+                    }, {
+                    // TODO: Commented out until functionality is to be released
+                    //     href: '/billing/discounts/{{accountNumber}}',
+                    //     linkText: 'Discounts'
+                    // }, {
+                        href: '/billing/purchaseorders/{{accountNumber}}',
+                        linkText: 'Purchase Orders'
+                    }, {
+                        href: '/billing/payment/{{accountNumber}}/options',
+                        linkText: 'Payment Options'
+                    }, {
+                        href: '/billing/preferences/{{accountNumber}}',
+                        linkText: 'Preferences'
+                    }
+                ]
+            });
+        });
+
         var environment = Environment.get().name;
 
         if (environment !== 'local' && !Auth.isAuthenticated()) {
@@ -47,10 +83,6 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
         $http.defaults.headers.common['Accept'] = 'application/json';
 
         $rootScope.userName = Auth.getUserName();
-
-        // TODO: Here we used to have the menu for billing, need to replace
-        // With the new menu options from encore in order to be able to override it via the App.
-
     }).controller('LoginModalCtrl', function ($scope, Auth, Environment, rxNotify) {
         $scope.environment = Environment.get().name;
 

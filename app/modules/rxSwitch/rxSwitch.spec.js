@@ -54,10 +54,9 @@ describe('rxSwitch', function () {
     it('should render disabled template correctly', function () {
         switchContainer = helpers.getChildDiv(disabledEl, 'rx-switch', 'class');
         expect(el).to.not.be.empty;
-        console.log(switchContainer.prototype);
         expect(switchContainer).to.not.be.empty;
         expect(switchContainer.hasClass('rx-switch')).to.be.true;
-        //expect(switchContainer.hasAttr('disabled')).to.be.true;
+        expect(switchContainer.attr('disabled')).to.not.empty;
         expect(switchContainer.hasClass('on')).to.be.true;
         expect(helpers.getChildDiv(switchContainer, 'knob', 'class')).not.be.empty;
     });
