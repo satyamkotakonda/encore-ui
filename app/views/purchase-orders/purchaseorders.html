@@ -1,6 +1,5 @@
 <rx-page title="'Billing - Purchase Orders'" subtitle="'On account ' + account.name" ng-init="poNotFound = 'No Purchase Orders'">
-    <rx-notifications stack="preferencePage"></rx-notifications>
-    <h3 class="section-title">Purchase Orders</h3>
+    <rx-notifications stack="purchaseOrderPage"></rx-notifications>
     <div class="section">
         <div class="label-definition">
             <p>
@@ -21,7 +20,7 @@
                 <tr>
                     <th scope="col">
                         <rx-sortable-column
-                            sort-method="sortCol"
+                            sort-method="sortCol(property)"
                             sort-property="startDate"
                             predicate="sort.predicate"
                             reverse="sort.reverse">
@@ -30,7 +29,7 @@
                     </th>
                     <th scope="col">
                         <rx-sortable-column
-                            sort-method="sortCol"
+                            sort-method="sortCol(property)"
                             sort-property="poNumber"
                             predicate="sort.predicate"
                             reverse="sort.reverse">
@@ -40,9 +39,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="purchaseOrder in purchaseOrders | orderBy:sort.predicate:sort.reverse">
+                <tr ng-repeat="purchaseOrder in purchaseOrders | ClosedPurchaseOrders | orderBy:sort.predicate:sort.reverse">
                     <td>{{ purchaseOrder.startDate | date:defaultDateFormat }}</td>
-                    <td>{{ purchaseOrder.number }}</td>
+                    <td>{{ purchaseOrder.poNumber }}</td>
                 </tr>
             </tbody>
         </table>
