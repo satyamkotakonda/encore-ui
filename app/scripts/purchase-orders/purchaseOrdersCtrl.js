@@ -21,24 +21,18 @@ angular.module('billingApp')
         var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber),
             defaultParam = { id: RAN };
 
-        var isResourceLoading = function (res1, res2) {
-                return res1.$resolved === false || (res2 !== undefined && res2.$resolved === false);
-            },
-            getCurrentPurchaseOrder = function (orders) {
+        var getCurrentPurchaseOrder = function (orders) {
                 $scope.currentPurchaseOrder = CurrentPurchaseOrderFilter(orders);
+            },
+            sortCol = function (predicate) {
+                return rxSortUtil.sortCol($scope, predicate);
             };
-
-        $scope.isResourceLoading = isResourceLoading;
 
         // Default Date Format
         $scope.defaultDateFormat = DATE_FORMAT;
-
-        $scope.purchaseOrders = PurchaseOrder.list(defaultParam, getCurrentPurchaseOrder);
+        $scope.sortCol = sortCol;
 
         // Set the default sort of the usage
-        $scope.sort = rxSortUtil.getDefault('date', false);
-
-        $scope.sortCol = function (predicate) {
-            return rxSortUtil.sortCol($scope, predicate);
-        };
+        $scope.sort = rxSortUtil.getDefault('startDate', true);
+        $scope.purchaseOrders = PurchaseOrder.list(defaultParam, getCurrentPurchaseOrder);
     });
