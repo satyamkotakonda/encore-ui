@@ -43,7 +43,8 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                 redirectTo: '/overview/473500'
             });
         $locationProvider.html5Mode(true).hashPrefix('!');
-    }).run(function ($http, $rootScope, $window, Auth, Environment, rxAppRoutes) {
+    }).run(function ($http, $rootScope, $window, Auth, Environment, rxAppRoutes,
+        NOTFOUND_MSG, LOADING_MSG) {
         // Override the children of the billing menu from the encore-ui default.
         rxAppRoutes.setRouteByKey('billing', {
             children: [
@@ -84,6 +85,10 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
         $http.defaults.headers.common['Accept'] = 'application/json';
 
         $rootScope.userName = Auth.getUserName();
+
+        // Pass message constants for templates
+        $rootScope.loadingMsg = LOADING_MSG;
+        $rootScope.notFoundMsg = NOTFOUND_MSG;
     }).controller('LoginModalCtrl', function ($scope, Auth, Environment, rxNotify) {
         $scope.environment = Environment.get().name;
 

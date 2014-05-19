@@ -37,10 +37,12 @@ angular.module('billingApp')
         */
         var getCharges = function (periods) {
             $scope.currentPeriod = _.find(periods, { 'current': true });
-            $scope.charges = EstimatedCharges.list({
-                id: RAN,
-                periodId: $scope.currentPeriod.id
-            });
+            if ($scope.currentPeriod) {
+                $scope.charges = EstimatedCharges.list({
+                    id: RAN,
+                    periodId: $scope.currentPeriod.id
+                });
+            }
         };
 
         $scope.sortCol = function (predicate) {
