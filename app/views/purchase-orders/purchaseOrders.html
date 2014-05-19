@@ -14,36 +14,45 @@
         </div>
     </div>
     <h3 class="section-title">History</h3>
-    <div class="section">
-        <table class="table purchase-order-list">
-            <thead>
-                <tr>
-                    <th scope="col">
-                        <rx-sortable-column
-                            sort-method="sortCol(property)"
-                            sort-property="startDate"
-                            predicate="sort.predicate"
-                            reverse="sort.reverse">
-                            Start Date
-                        </rx-sortable-column>
-                    </th>
-                    <th scope="col">
-                        <rx-sortable-column
-                            sort-method="sortCol(property)"
-                            sort-property="poNumber"
-                            predicate="sort.predicate"
-                            reverse="sort.reverse">
-                            Number
-                        </rx-sortable-column>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="purchaseOrder in purchaseOrders | ClosedPurchaseOrders | orderBy:sort.predicate:sort.reverse">
-                    <td>{{ purchaseOrder.startDate | date:defaultDateFormat }}</td>
-                    <td>{{ purchaseOrder.poNumber }}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="section section-grid">
+        <div class="col-2-3">
+            <table class="table purchase-order-list">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <rx-sortable-column
+                                sort-method="sortCol(property)"
+                                sort-property="startDate"
+                                predicate="sort.predicate"
+                                reverse="sort.reverse">
+                                Start Date
+                            </rx-sortable-column>
+                        </th>
+                        <th scope="col">
+                            <rx-sortable-column
+                                sort-method="sortCol(property)"
+                                sort-property="poNumber"
+                                predicate="sort.predicate"
+                                reverse="sort.reverse">
+                                Number
+                            </rx-sortable-column>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="purchaseOrder in purchaseOrders | ClosedPurchaseOrders | orderBy:sort.predicate:sort.reverse | Paginate:pager">
+                        <td>{{ purchaseOrder.startDate | date:defaultDateFormat }}</td>
+                        <td>{{ purchaseOrder.poNumber }}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="paginate-area">
+                        <td colspan="6">
+                            <rx-paginate page-tracking="pager"></rx-paginate>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 </rx-page>
