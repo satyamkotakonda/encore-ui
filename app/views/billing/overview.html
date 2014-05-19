@@ -1,8 +1,6 @@
 <rx-page
     title="'Billing - Overview'"
-    subtitle="'On account ' + account.name"
-    ng-init="notFoundMsg = '(Not found in Account)';"
-    >
+    subtitle="'On account ' + account.name">
 
     <rx-notifications stack="overviewPage"></rx-notifications>
     <div class="section billing-info">
@@ -25,7 +23,7 @@
             <hr />
             <h3 class="section-title">Account Summary</h3>
             <div class="section label-definition" ng-if="!(contractEntity.$resolved && supportRoles.$resolved && supportAccount.$resolved)">
-                Loading...
+                {{ loadingMsg }}
             </div>
             <div class="section label-definition" ng-if="contractEntity.$resolved && supportRoles.$resolved && supportAccount.$resolved">
                 <p>
