@@ -1,7 +1,7 @@
 <rx-page title="'Billing - Preferences'" subtitle="'On account ' + account.name" ng-init="poNotFound = 'No Purchase Orders'">
     <rx-notifications stack="preferencePage"></rx-notifications>
     <div class="section">
-        <div class="preferences-container">
+        <div class="section-grid preferences-container">
             <div class="col-1-3">
                 <h4 class="section-title">Paperless Billing</h4>
                 <div class="label-definition">
@@ -27,13 +27,13 @@
                 </div>
             </div>
         </div>
-        <div class="preferences-container">
+        <div class="section-grid preferences-container">
             <div class="col-2-3">
                 <rx-button
                     toggle-msg="Updating"
                     default-msg="Update"
                     toggle="isResourceLoading(billInfo, billInfoUpdate) || isResourceLoading(paymentInfo, paymentInfoUpdate)"
-                    ng-click="updatePreferences()" ng-disabled="">Update</button>
+                    ng-click="updatePreferences()" ng-disabled="">Update</rx-button>
             </div>
         </div>
     </div>
