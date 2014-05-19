@@ -20,6 +20,7 @@ module.exports = function(config) {
             'bower_components/angular-route/angular-route.js',
             'bower_components/angular-sanitize/angular-sanitize.js',
             'http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.js',
+            'bower_components/encore-ui/encore-ui-tpls.min.js',
             'bower_components/angular-xeditable/dist/js/xeditable.js',
             'bower_components/angular-rx-data-table/dist/scripts/rx-data-table.js',
             'bower_components/lodash/dist/lodash.js',
