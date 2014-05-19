@@ -96,32 +96,28 @@ angular.module('billingApp')
     /**
     * @ngdoc filter
     * @name encore.filter:CurrentPurchaseOrder
+    * @param {Object} PurchaseOrderUtil - returns true/false depending on whether the current purchase order is current
     * @description
     * Find the current purchaseOrder in a list of purchaseOrders.
     *
     * @param {Array} purchaseOrders - collection of purchaseOrders to be filtered.
     */
-    .filter('CurrentPurchaseOrder', function () {
+    .filter('CurrentPurchaseOrder', function (PurchaseOrderUtil) {
         return function (purchaseOrders) {
-            return _.find(purchaseOrders, function (purchaseOrder) {
-                // The current purchase order does not have an endDate
-                return !purchaseOrder.hasOwnProperty('endDate');
-            });
+            return _.find(purchaseOrders, _.partialRight(PurchaseOrderUtil.isCurrent, true));
         };
     })
     /**
     * @ngdoc filter
     * @name encore.filter:ClosedPurchaseOrders
+    * @param {Object} PurchaseOrderUtil - returns true/false depending on whether the current purchase order is current
     * @description
     * Filters list of purchaseOrders by those that have been closed
     *
     * @param {Array} purchaseOrders - collection of purchaseOrders to be filtered.
     */
-    .filter('ClosedPurchaseOrders', function () {
+    .filter('ClosedPurchaseOrders', function (PurchaseOrderUtil) {
         return function (purchaseOrders) {
-            return _.filter(purchaseOrders, function (purchaseOrder) {
-                // The current purchase order does not have an endDate
-                return purchaseOrder.hasOwnProperty('endDate');
-            });
+            return _.filter(purchaseOrders, _.partialRight(PurchaseOrderUtil.isCurrent, false));
         };
     });

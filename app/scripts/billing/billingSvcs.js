@@ -252,4 +252,24 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
             }, success, error);
         };
         return purchaseOrder;
+    })
+    /**
+    * @ngdoc service
+    * @name encore.service:PurchaseOrderCurrent
+    * @description
+    * Returns true if Purchase Order is the current one
+    *
+    * @param {Array} purchaseOrders - collection of purchaseOrders to be filtered.
+    */
+    .factory('PurchaseOrderUtil', function () {
+        return {
+            isCurrent: function (purchaseOrder, current) {
+                purchaseOrder = purchaseOrder || {};
+                // Force boolean type in case function is called with no arguments
+                current = current === true || false;
+
+                // The "current" purchase order does not have an endDate
+                return purchaseOrder.hasOwnProperty('endDate') !== current;
+            }
+        };
     });

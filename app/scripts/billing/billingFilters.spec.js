@@ -1,12 +1,26 @@
 describe('BillingFilters', function () {
-    var table, currencySuffix, createTransactions;
+    var table, currencySuffix, currentPO, closedPO, createTransactions;
+
+    var purchaseOrders;
 
     beforeEach(function () {
         module('billingApp');
 
-        inject(function ($filter) {
-            table = $filter('TransactionTable');
-            currencySuffix = $filter('CurrencySuffix');
+        inject(function (TransactionTableFilter, CurrencySuffixFilter,
+            CurrentPurchaseOrderFilter, ClosedPurchaseOrdersFilter) {
+            table = TransactionTableFilter;
+            currencySuffix = CurrencySuffixFilter;
+            currentPO = CurrentPurchaseOrderFilter;
+            closedPO = ClosedPurchaseOrdersFilter;
+
+            purchaseOrders = [{
+                'poNumber': '1234567',
+                'startDate': '2014-05-16Z'
+            }, {
+                'poNumber': '929292',
+                'startDate': '2014-05-16Z',
+                'endDate': '2014-05-16Z',
+            }];
         });
     });
 
@@ -52,6 +66,25 @@ describe('BillingFilters', function () {
         expect(currencySuffix(25145)).to.be.eq('$25.15k');
         expect(currencySuffix(12315100000)).to.be.eq('$12.32b');
         expect(currencySuffix(-1359314.12)).to.be.eq('($1.36)m');
+    });
+
+    it('CurrentPurchaseOrder filter should exist', function () {
+        expect(currentPO).to.exist;
+        expect(currentPO).to.not.be.empty;
+    });
+
+    it('CurrentPurchaseOrder filter should return the current purchase order', function () {
+        expect(currentPO(purchaseOrders)).to.be.an.object;
+    });
+
+    it('ClosedPurchaseOrder filter should exist', function () {
+        expect(closedPO).to.exist;
+        expect(closedPO).to.not.be.empty;
+    });
+
+    it('ClosedPurchaseOrder filter should filter results by those that are not current', function () {
+        expect(closedPO(purchaseOrders).length).to.be.eq(1);
+        expect(_.first(closedPO(purchaseOrders))).to.be.an.object;
     });
 
     createTransactions = function () {
