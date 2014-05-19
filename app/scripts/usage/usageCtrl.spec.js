@@ -8,12 +8,20 @@ describe('Usage: UsageCtrl', function () {
 
         inject(function ($controller, $rootScope, $httpBackend, EstimatedCharges,
                 Period, $q) {
-            var getResourceMock = function (data) {
-                var deferred = $q.defer();
-                data.$promise = deferred.promise;
-                data.$deferred = deferred;
-                return data;
-            };
+            var getResourceResultMock = function (data) {
+                    var deferred = $q.defer();
+                    data.$promise = deferred.promise;
+                    data.$deferred = deferred;
+                    return data;
+                },
+                getResourceMock = function (returnData) {
+                    returnData = getResourceResultMock(returnData);
+                    return function (callData, success, error) {
+                        returnData.$promise.then(success, error);
+                        return returnData;
+                    };
+                };
+
             scope = $rootScope.$new();
             estimatedCharges = EstimatedCharges;
             period = Period;
@@ -28,11 +36,8 @@ describe('Usage: UsageCtrl', function () {
                 amount: '1000.00'
             }];
 
-            period.list = function (param, success) {
-                success(periodData);
-                return getResourceMock(periodData);
-            };
-            estimatedCharges.list = sinon.stub(estimatedCharges, 'list').returns(getResourceMock(chargeData));
+            period.list = sinon.stub(period, 'list', getResourceMock(periodData));
+            estimatedCharges.list = sinon.stub(estimatedCharges, 'list', getResourceMock(chargeData));
 
             ctrl = $controller('UsageCtrl',{
                 $scope: scope,
@@ -59,9 +64,8 @@ describe('Usage: UsageCtrl', function () {
     });
 
     it('UsageCtrl should get a list of estimated charges', function () {
-        scope.$apply(function () {
-            scope.periods.$deferred.resolve(periodData);
-        });
+        scope.periods.$deferred.resolve(periodData);
+        scope.$apply();
         sinon.assert.calledOnce(estimatedCharges.list);
     });
 
@@ -69,4 +73,17 @@ describe('Usage: UsageCtrl', function () {
         scope.sortCol('amount');
         expect(scope.sort.predicate).to.be.eq('amount');
     });
+
+    it('UsageCtrl should get the current billing period', function () {
+        scope.periods.$deferred.resolve(periodData);
+        scope.$apply();
+        expect(scope.currentPeriod).to.not.be.empty;
+    });
+
+    it('UsageCtrl should get leave current period undefined if no current period found', function () {
+        scope.periods.$deferred.resolve([]);
+        scope.$apply();
+        expect(scope.currentPeriod).to.be.undefined;
+    });
+
 });
