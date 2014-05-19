@@ -267,7 +267,7 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
                 // Force object type in case function is called with no arguments
                 purchaseOrder = purchaseOrder || {};
                 // Force boolean type in case function is called with no arguments
-                current = current === true || false;
+                current = current === true;
 
                 // The "current" purchase order does not have an endDate
                 return purchaseOrder.hasOwnProperty('endDate') !== current;
