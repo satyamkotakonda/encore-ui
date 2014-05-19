@@ -16,7 +16,7 @@ angular.module('billingApp')
     * </pre>
     */
     .controller('PurchaseOrdersCtrl', function ($scope, $routeParams, PurchaseOrder, CurrentPurchaseOrderFilter,
-        rxSortUtil, AccountNumberUtil, DATE_FORMAT) {
+        rxSortUtil, AccountNumberUtil, PageTracking, DATE_FORMAT) {
 
         var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber),
             defaultParam = { id: RAN };
@@ -27,6 +27,9 @@ angular.module('billingApp')
             sortCol = function (predicate) {
                 return rxSortUtil.sortCol($scope, predicate);
             };
+
+        // Create an instance of the PageTracking component
+        $scope.pager = PageTracking.createInstance();
 
         // Default Date Format
         $scope.defaultDateFormat = DATE_FORMAT;
