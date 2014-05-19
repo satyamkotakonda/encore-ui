@@ -30,6 +30,10 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                 templateUrl: 'views/payment/options.html',
                 controller: 'OptionsCtrl'
             })
+            .when('/purchase-orders/:accountNumber', {
+                templateUrl: 'views/purchase-orders/purchaseOrders.html',
+                controller: 'PurchaseOrdersCtrl'
+            })
             .when('/preferences/:accountNumber', {
                 templateUrl: 'views/preferences/preferences.html',
                 controller: 'PreferencesCtrl'
@@ -39,37 +43,34 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                 redirectTo: '/overview/473500'
             });
         $locationProvider.html5Mode(true).hashPrefix('!');
-    }).run(function ($http, $rootScope, $window, Auth, Environment, rxAppRoutes, $timeout) {
-        // TODO: Remove $timeout once Encore-UI updates a possible race condition fix.
-        $timeout(function () {
-            // Override the children of the billing menu from the encore-ui default.
-            rxAppRoutes.setRouteByKey('billing', {
-                children: [
-                    {
-                        href: '/billing/overview/{{accountNumber}}',
-                        linkText: 'Overview'
-                    }, {
-                        href: '/billing/transactions/{{accountNumber}}',
-                        linkText: 'Transactions'
-                    }, {
-                        href: '/billing/usage/{{accountNumber}}',
-                        linkText: 'Current Usage'
-                    }, {
-                    // TODO: Commented out until functionality is to be released
-                    //     href: '/billing/discounts/{{accountNumber}}',
-                    //     linkText: 'Discounts'
-                    // }, {
-                        href: '/billing/purchaseorders/{{accountNumber}}',
-                        linkText: 'Purchase Orders'
-                    }, {
-                        href: '/billing/payment/{{accountNumber}}/options',
-                        linkText: 'Payment Options'
-                    }, {
-                        href: '/billing/preferences/{{accountNumber}}',
-                        linkText: 'Preferences'
-                    }
-                ]
-            });
+    }).run(function ($http, $rootScope, $window, Auth, Environment, rxAppRoutes) {
+        // Override the children of the billing menu from the encore-ui default.
+        rxAppRoutes.setRouteByKey('billing', {
+            children: [
+                {
+                    href: 'overview/{{accountNumber}}',
+                    linkText: 'Overview'
+                }, {
+                    href: 'transactions/{{accountNumber}}',
+                    linkText: 'Transactions'
+                }, {
+                    href: 'usage/{{accountNumber}}',
+                    linkText: 'Current Usage'
+                }, {
+                // TODO: Commented out until functionality is to be released
+                //     href: 'discounts/{{accountNumber}}',
+                //     linkText: 'Discounts'
+                // }, {
+                    href: 'purchase-orders/{{accountNumber}}',
+                    linkText: 'Purchase Orders'
+                }, {
+                    href: 'payment/{{accountNumber}}/options',
+                    linkText: 'Payment Options'
+                }, {
+                    href: 'preferences/{{accountNumber}}',
+                    linkText: 'Preferences'
+                }
+            ]
         });
 
         var environment = Environment.get().name;
