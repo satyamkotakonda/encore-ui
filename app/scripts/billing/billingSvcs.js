@@ -264,6 +264,7 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     .factory('PurchaseOrderUtil', function () {
         return {
             isCurrent: function (purchaseOrder, current) {
+                // Force object type in case function is called with no arguments
                 purchaseOrder = purchaseOrder || {};
                 // Force boolean type in case function is called with no arguments
                 current = current === true || false;
