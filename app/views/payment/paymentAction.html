@@ -3,7 +3,7 @@
         template-url="/billing/views/payment/paymentActionForm.html"
         pre-hook="setDefaultValues(amount, methodId)"
         post-hook="postHook(payment.amount, payment.methodId)"
-        classes="payment-action payment-post {{classes}}">
+        classes="action primary {{classes}}">
         <span ng-transclude></span>
     </rx-modal-action>
 </div>

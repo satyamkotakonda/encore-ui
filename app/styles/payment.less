@@ -1,12 +1,4 @@
 /*
- Colors for different elements/properties in payments
- */
-@paymentOptionDefaultColor: @infoBlue;
-@paymentChangeColor: @actionBlue;
-@paymentPostColor: @actionGreen;
-@paymentDisableColor: @actionRed;
-
-/*
  Overrides for the make a payment modal of the summary list and the form-items
  Also append a description panel below the payment method dropdown
  ```
@@ -61,8 +53,8 @@
     }
     .detail-list {
         margin-bottom: 40px;
-        .primary {
-            color: @paymentOptionDefaultColor;
+        .default {
+            color: @infoBlue;
         }
         .method-number {
             width: 160px;
@@ -95,22 +87,15 @@
 .payment-default {
     padding: 1em 0;
     .default-title {
-        display: inline-block;
-        float: left;
-        // TODO: There should be a better solution to override styles from rx-app.
-        .rx-app & {
-            margin: 0;
-            margin-right: 1em;
-        }
+        // Inherit from instead of override
+        &:extend(.rx-app .page-body .section-title);
+        padding: 0.18em;
+        line-height: normal;
     }
     .method-description {
         &:extend(.label-definition all);
-        min-width: 15em;
+        min-width: 14em;
 
-        padding-right: 1em;
-        margin-right: 1em;
-        float: left;
-        border-right: 1px #ccc solid;
         .heading {
             font-size: 1.1em;
             margin-bottom: 0.7em;
@@ -122,12 +107,8 @@
             margin: 0;
         }
     }
-    .method-actions {
-        float: left;
+    .actions {
         width: 11em;
-        .button {
-            width: 100%;
-        }
     }
 }
 
