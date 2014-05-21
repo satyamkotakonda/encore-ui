@@ -1,16 +1,34 @@
 <rx-page title="'Billing - Purchase Orders'" subtitle="'On account ' + account.name" ng-init="poNotFound = 'No Purchase Orders'">
     <rx-notifications stack="purchaseOrderPage"></rx-notifications>
-    <div class="section">
-        <div class="label-definition">
-            <p>
-                <label>Number:</label> {{ currentPurchaseOrder.poNumber | LoadingValue:purchaseOrders.$resolved:poNotFound }}
-            </p>
-            <p>
-                <label>Start Date:</label> {{ currentPurchaseOrder.startDate | date:defaultDateFormat | LoadingValue:purchaseOrders.$resolved:poNotFound }}
-            </p>
-        </div>
-        <div class="actions">
-
+    <div class="section section-grid purchase-orders">
+        <div class="col-2-3">
+            <div class="section inline">
+                <div class="label-definition">
+                    <p>
+                        <label>Number:</label> {{ currentPurchaseOrder.poNumber | LoadingValue:purchaseOrders.$resolved:poNotFound }}
+                    </p>
+                    <p>
+                        <label>Start Date:</label> {{ currentPurchaseOrder.startDate | date:defaultDateFormat | LoadingValue:purchaseOrders.$resolved:poNotFound }}
+                    </p>
+                </div>
+                <div class="actions">
+                    <ul>
+                        <li>
+                            <rx-purchase-order-create
+                                user-name="userName"
+                                current-purchase-order="{{ currentPurchaseOrder.poNumber }}"
+                                classes="button">
+                                <img src="/billing/images/icon-add_white.png" /> Add New Purchase Order
+                            </rx-purchase-order-create>
+                        </li>
+                        <li>
+                            <button class="button action disable">
+                                <img src="/billing/images/icon-disable_white.png" /> Disable Purchase Order
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <h3 class="section-title">History</h3>

@@ -1,5 +1,5 @@
 'use strict';
-angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.tpls',
+angular.module('billingApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'encore.ui', 'encore.ui.tpls',
         'rxSwitch', 'encore.ui.rxPopover', 'billingSvcs', 'paymentSvcs', 'supportSvcs',
         'customerAdminSvcs', 'constants', 'productConstants'])
 
@@ -37,10 +37,6 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
             .when('/preferences/:accountNumber', {
                 templateUrl: 'views/preferences/preferences.html',
                 controller: 'PreferencesCtrl'
-            })
-            .otherwise({
-                //#TODO: this is temporary until we get a more solid solution
-                redirectTo: '/overview/473500'
             });
 
         $locationProvider.html5Mode(true).hashPrefix('!');
@@ -63,11 +59,11 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                 //     href: 'discounts/{{accountNumber}}',
                 //     linkText: 'Discounts'
                 // }, {
-                    href: 'purchase-orders/{{accountNumber}}',
-                    linkText: 'Purchase Orders'
-                }, {
                     href: 'payment/{{accountNumber}}/options',
                     linkText: 'Payment Options'
+                }, {
+                    href: 'purchase-orders/{{accountNumber}}',
+                    linkText: 'Purchase Orders'
                 }, {
                     href: 'preferences/{{accountNumber}}',
                     linkText: 'Preferences'
