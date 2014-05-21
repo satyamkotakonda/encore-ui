@@ -165,16 +165,28 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
      */
     .factory('Payment', function ($resource, Transform) {
         var transform = Transform('payments.payment', 'badRequest.details');
-        return $resource('/api/billing/:id/payments',
+        var payment = $resource('/api/billing/:id/payments',
             {
                 id: '@id'
             },
             {
                 list: { method: 'GET', isArray: true, transformResponse: transform },
-                // I realize this seems redundant, but verbally Payment.makePayment makes more sense than Payment.save
-                makePayment: { method: 'POST' }
+                make: { method: 'POST' }
             }
         );
+
+        payment.makePayment = function (accountNumber, amount, methodId) {
+            return payment.make({
+                id: accountNumber // URL Arguments
+            }, {
+                payment: { // Post Data
+                    amount: amount,
+                    methodId: methodId
+                }
+            });
+        };
+
+        return payment;
     })
     /**
      * @ngdoc service
