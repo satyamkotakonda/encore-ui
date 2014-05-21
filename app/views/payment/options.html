@@ -34,7 +34,7 @@
                 </p>
             </div>
         </div>
-        <div class="method-actions">
+        <div class="actions">
             <ul>
                 <li>
                     <rx-payment-set-default
@@ -123,7 +123,7 @@
                     <td>{{ card.paymentCard.expirationDate }}</td>
                     <td class="status">
                         {{ card.disabled && 'Disabled' || 'Enabled'}}
-                        <span ng-if="card.isDefault" class="primary">
+                        <span ng-if="card.isDefault" class="default">
                             (Primary)
                         </span>
                     </td>
@@ -225,7 +225,7 @@
                     <td>{{ ach.electronicCheck.accountHolderName }}</td>
                     <td class="status">
                         {{ ach.disabled && 'Disabled' || 'Enabled'}}
-                        <span ng-if="ach.isDefault" class="primary">
+                        <span ng-if="ach.isDefault" class="default">
                             (Primary)
                         </span>
                     </td>
