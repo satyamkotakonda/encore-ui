@@ -1,12 +1,4 @@
 /*
- Colors for different elements/properties in payments
- */
-@paymentOptionDefaultColor: @infoBlue;
-@paymentChangeColor: @actionBlue;
-@paymentPostColor: @actionGreen;
-@paymentDisableColor: @actionRed;
-
-/*
  Overrides for the make a payment modal of the summary list and the form-items
  Also append a description panel below the payment method dropdown
  ```
@@ -61,7 +53,7 @@
     }
     .detail-list {
         margin-bottom: 40px;
-        .primary {
+        .default {
             color: @paymentOptionDefaultColor;
         }
         .method-number {
@@ -102,10 +94,8 @@
     }
     .method-description {
         &:extend(.label-definition all);
-        min-width: 15em;
+        min-width: 14em;
 
-        padding-right: 1em;
-        border-right: 1px #ccc solid;
         .heading {
             font-size: 1.1em;
             margin-bottom: 0.7em;
@@ -117,11 +107,8 @@
             margin: 0;
         }
     }
-    .method-actions {
+    .actions {
         width: 11em;
-        .button {
-            width: 100%;
-        }
     }
 }
 

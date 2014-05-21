@@ -57,6 +57,17 @@ table {
             display: inline-block;
         }
     }
+    .actions {
+        margin-left: 1em;
+        padding-left: 2em;
+        border-left: 1px #ccc solid;
+        min-width: 10em;
+        min-height: 8em;
+        .button {
+            width: 100%;
+            text-align: left;
+        }
+    }
 }
 
 
@@ -71,15 +82,19 @@ Column Based Container based on Pure
 .section-grid {
     &:extend(.pure-g all);
     &:extend(.pure-g-r all);
+    font-family: inherit;
 
     .col-1-3 {
         &:extend(.pure-u-1-3 all);
+        font-family: inherit;
     }
     .col-2-3 {
         &:extend(.pure-u-2-3 all);
+        font-family: inherit;
     }
     .col-1 {
         &:extend(.pure-u-1 all);
+        font-family: inherit;
     }
 }
 
@@ -352,10 +367,12 @@ Horizontal Tab Menu based on pure
  </rx-modal-action>
  ```
  */
-.payment-action {
-    color: @actionGreen;
+.action {
+    color: @primaryAction;
     background: transparent;
     cursor: pointer;
+    .box-sizing(border-box);
+
     &:hover,
     &:active,
     &:visited,
@@ -365,18 +382,18 @@ Horizontal Tab Menu based on pure
     }
     &.button {
         color: #fff;
-        background: @actionGreen;
-        &.payment-change {
+        background: @primaryAction;
+        &.change {
             color: #fff;
-            background: @paymentChangeColor;
+            background: @changeAction;
         }
-        &.payment-disable {
+        &.disable {
             color: #fff;
-            background: @paymentDisableColor;
+            background: @disableAction;
         }
-        &.payment-post {
+        &.primary {
             color: #fff;
-            background: @paymentPostColor;
+            background: @primaryAction;
         }
         &:hover {
             color: #fff;
@@ -384,25 +401,24 @@ Horizontal Tab Menu based on pure
     }
 
     img {
-        vertical-align: bottom;
+        vertical-align: middle;
     }
 
-    &.payment-change,
-    &.payment-disable,
-    &.payment-post {
+    &.change,
+    &.disable,
+    &.post {
         white-space: nowrap;
     }
 
-    &.payment-change {
-        color: @paymentChangeColor;
+    &.change {
+        color: @changeAction;
     }
-    &.payment-disable {
-        color: @paymentDisableColor;
+    &.disable {
+        color: @disableAction;
     }
-    &.payment-post {
-        color: @paymentPostColor;
+    &.primary {
+        color: @primaryAction;
     }
-
 }
 
 /*
