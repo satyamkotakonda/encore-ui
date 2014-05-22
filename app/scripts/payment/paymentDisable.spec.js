@@ -70,7 +70,7 @@ describe('rxPaymentDisable', function () {
 
         linkAction = linkContainer.find('a');
         expect(linkAction).not.be.empty;
-        expect(linkAction.hasClass('payment-action')).to.be.true;
+        expect(linkAction.hasClass('action')).to.be.true;
     });
 
     it('should have the default method-id set', function () {

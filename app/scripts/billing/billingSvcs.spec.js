@@ -1,13 +1,14 @@
 describe('Billing: billingSvcs', function () {
-    var paymentInfo, billInfo, purchaseOrder, poUtil;
+    var paymentInfo, billInfo, purchaseOrder, poUtil, payment;
     beforeEach(function () {
         module('billingSvcs');
 
-        inject(function (PaymentInfo, BillInfo, PurchaseOrder, PurchaseOrderUtil) {
+        inject(function (PaymentInfo, BillInfo, PurchaseOrder, PurchaseOrderUtil, Payment) {
             paymentInfo = PaymentInfo;
             billInfo = BillInfo;
             purchaseOrder = PurchaseOrder;
             poUtil = PurchaseOrderUtil;
+            payment = Payment;
         });
     });
 
@@ -21,6 +22,10 @@ describe('Billing: billingSvcs', function () {
 
     it('billingSvcs PurchaseOrder.createPO should return PurchaseOrder resource ', function () {
         expect(purchaseOrder.createPO('12345', '123456')).to.be.instanceof(purchaseOrder);
+    });
+
+    it('billingSvcs Payment.makePayment should return Payment resource ', function () {
+        expect(payment.makePayment('12345', '1000', 'urn:uuid:aaaaaa')).to.be.instanceof(payment);
     });
 
     it('billingSvcs PurchaseOrderUtil.isCurrent should return true if current PO ', function () {

@@ -26,7 +26,7 @@ angular.module('billingApp')
     */
     .controller('OptionsCtrl', function ($scope, $routeParams, $q,
         Account, Balance, PaymentMethod, AccountNumberUtil,
-        Payment, DefaultPaymentMethodFilter, rxMakePayment,
+        Payment, DefaultPaymentMethodFilter,
         rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
 
         // TODO: This should be handled at the $resource level, so that the controller
@@ -95,7 +95,7 @@ angular.module('billingApp')
             // Given an amount, and a methodID perform a call to post a payment.
             // Passes promise to rxPromiseNotifications
             postPayment = function (amount, methodId) {
-                $scope.paymentResult = rxMakePayment(RAN, amount, methodId);
+                $scope.paymentResult = Payment.makePayment(RAN, amount, methodId);
                 rxPromiseNotifications.add($scope.paymentResult.$promise, {
                     loading: STATUS_MESSAGES.payment.load,
                     success: STATUS_MESSAGES.payment.success,
@@ -123,7 +123,7 @@ angular.module('billingApp')
         $scope.balance = Balance.get({ id: RAN }, getCurrentDue);
 
         // Gets the payment methods
-        $scope.paymentMethods = getPaymentMethods();
+        refreshPaymentMethods();
 
         // Group the promises in $q.all for a global error message if any errors occur
         rxPromiseNotifications.add($q.all([
