@@ -1,6 +1,6 @@
 describe('Billing: TransactionsCtrl', function () {
     var scope, ctrl, account, balance, transaction, period, paymentMethod, PageTrackingObject,
-        balanceData, paymentMethods, paymentInfo, billInfo, makePayment;
+        balanceData, paymentMethods, paymentInfo, billInfo, payment;
 
     var testAccountNumber = '12345';
 
@@ -8,7 +8,7 @@ describe('Billing: TransactionsCtrl', function () {
         module('billingApp');
 
         inject(function ($controller, $rootScope, $httpBackend, Account, Balance, Transaction, Period,
-                PaymentMethod, BillInfo, PaymentInfo, PageTracking, DefaultPaymentMethodFilter, $q) {
+                Payment, PaymentMethod, BillInfo, PaymentInfo, PageTracking, DefaultPaymentMethodFilter, $q) {
             var getResourceResultMock = function (data) {
                     var deferred = $q.defer();
                     data.$promise = deferred.promise;
@@ -38,7 +38,8 @@ describe('Billing: TransactionsCtrl', function () {
                 id: 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479'
             }];
 
-            makePayment = sinon.stub().returns(getResourceResultMock({}));
+            payment = Payment;
+            payment.makePayment = sinon.stub(payment, 'makePayment', getResourceMock({}));
 
             billInfo.get =  sinon.stub(billInfo, 'get', getResourceMock({}));
             paymentInfo.get =  sinon.stub(paymentInfo, 'get', getResourceMock({}));
@@ -56,7 +57,7 @@ describe('Billing: TransactionsCtrl', function () {
                 Account: account,
                 Balance: balance,
                 Period: period,
-                rxMakePayment: makePayment,
+                Payment: payment,
                 PaymentMethod: paymentMethod,
                 $routeParams: { accountNumber: testAccountNumber },
                 PageTracking: PageTracking,
@@ -109,7 +110,7 @@ describe('Billing: TransactionsCtrl', function () {
 
     it('TransactionsCtrl should post a payment', function () {
         scope.postPayment({ amount: 12314, method: { id: 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479' }});
-        sinon.assert.calledOnce(makePayment);
+        sinon.assert.calledOnce(payment.makePayment);
     });
 
     it('TransactionsCtrl should set default values once account and payment methods have been succesful', function () {

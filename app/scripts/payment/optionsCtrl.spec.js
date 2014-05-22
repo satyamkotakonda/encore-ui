@@ -1,5 +1,5 @@
 describe('OptionsCtrl', function () {
-    var scope, ctrl, account, balance, paymentMethod, defaultPaymentMethod, makePayment;
+    var scope, ctrl, account, balance, paymentMethod, defaultPaymentMethod, payment;
 
     var testAccountNumber = '12345',
         paymentMethods = [{
@@ -18,7 +18,7 @@ describe('OptionsCtrl', function () {
         module('billingApp');
 
         inject(function ($controller, $rootScope, $q, Account, Balance, PaymentMethod,
-            DefaultPaymentMethodFilter) {
+            Payment, DefaultPaymentMethodFilter) {
             var getResourceResultMock = function (data) {
                     var deferred = $q.defer();
                     data.$promise = deferred.promise;
@@ -36,10 +36,11 @@ describe('OptionsCtrl', function () {
             scope = $rootScope.$new();
             account = Account;
             balance = Balance;
+            payment = Payment;
             paymentMethod = PaymentMethod;
             defaultPaymentMethod = DefaultPaymentMethodFilter;
 
-            makePayment = sinon.stub().returns(getResourceResultMock({}));
+            payment.makePayment = sinon.stub(payment, 'makePayment', getResourceMock({}));
             account.get = getResourceMock({});
             balance.get = getResourceMock(balanceData);
             paymentMethod.list = getResourceMock(paymentMethods);
@@ -51,7 +52,7 @@ describe('OptionsCtrl', function () {
                 $routeParams: { accountNumber: testAccountNumber },
                 Account: account,
                 Balance: balance,
-                rxMakePayment: makePayment,
+                Payment: payment,
                 PaymentMethod: paymentMethod,
                 DefaultPaymentMethodFilter: defaultPaymentMethod
             });
@@ -116,7 +117,7 @@ describe('OptionsCtrl', function () {
 
     it('OptionsCtrl should post a payment', function () {
         scope.postPayment(12314, 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
-        sinon.assert.calledOnce(makePayment);
+        sinon.assert.calledOnce(payment.makePayment);
     });
 
     it('OptionsCtrl should disable a payment method', function () {

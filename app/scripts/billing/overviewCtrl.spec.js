@@ -2,7 +2,7 @@ describe('Billing: OverviewCtrl', function () {
     var scope, ctrl, balanceData, paymentMethods, supportRolesData, contactData;
 
     var balance, paymentMethod, contractEntity, supportInfo,
-        contact, account, supportAccount, supportRoles, makePayment;
+        contact, account, supportAccount, supportRoles, payment;
 
     var testAccountNumber = '020-12345',
         routeParams = { accountNumber: testAccountNumber };
@@ -89,7 +89,8 @@ describe('Billing: OverviewCtrl', function () {
             supportAccount = SupportAccount;
             supportRoles = SupportRoles;
 
-            makePayment = sinon.stub().returns(getResourceResultMock({}));
+            payment = Payment;
+            payment.makePayment = sinon.stub(payment, 'makePayment', getResourceMock({}));
 
             balance.get = sinon.stub(balance, 'get', getResourceMock(balanceData));
             paymentMethod.list = sinon.stub(paymentMethod, 'list', getResourceMock(paymentMethods));
@@ -106,7 +107,7 @@ describe('Billing: OverviewCtrl', function () {
             ctrl = $controller('OverviewCtrl',{
                 $scope: scope,
                 Balance: balance,
-                rxMakePayment: makePayment,
+                Payment: payment,
                 PaymentMethod: paymentMethod,
                 ContractEntity: contractEntity,
                 SupportInfo: supportInfo,
@@ -135,7 +136,7 @@ describe('Billing: OverviewCtrl', function () {
 
     it('OverviewCtrl should post a payment', function () {
         scope.postPayment({ amount: 12314, method: { id: 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479' }});
-        sinon.assert.calledOnce(makePayment);
+        sinon.assert.calledOnce(payment.makePayment);
     });
 
     it('OverviewCtrl should set default values once account and payment methods have been succesful', function () {

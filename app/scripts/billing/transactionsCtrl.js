@@ -32,7 +32,7 @@ angular.module('billingApp')
     * </pre>
     */
     .controller('TransactionsCtrl', function ($scope, $routeParams, $q, Transaction, Account, Balance,
-        Period, Payment, PaymentMethod, PageTracking, PaymentInfo, BillInfo, rxMakePayment,
+        Period, Payment, PaymentMethod, PageTracking, PaymentInfo, BillInfo,
         rxSortUtil, rxPromiseNotifications, DefaultPaymentMethodFilter, AccountNumberUtil,
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES) {
 
@@ -65,7 +65,7 @@ angular.module('billingApp')
                 $scope.paymentMethod = DefaultPaymentMethodFilter(result[1]);
             },
             postPayment = function (amount, methodId) {
-                $scope.paymentResult = rxMakePayment(RAN, amount, methodId);
+                $scope.paymentResult = Payment.makePayment(RAN, amount, methodId);
                 rxPromiseNotifications.add($scope.paymentResult.$promise, {
                     loading: STATUS_MESSAGES.payment.load,
                     success: STATUS_MESSAGES.payment.success,

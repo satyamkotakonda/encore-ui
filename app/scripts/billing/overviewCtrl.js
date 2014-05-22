@@ -36,7 +36,7 @@ angular.module('billingApp')
         Balance, Payment, PaymentMethod, ContractEntity, SupportInfo,
         Contact, Account, SupportAccount, SupportRoles,
         DefaultPaymentMethodFilter, PrimaryAddressFilter, RoleNameFilter,
-        AccountNumberUtil, rxMakePayment, rxPromiseNotifications,
+        AccountNumberUtil, rxPromiseNotifications,
         DATE_FORMAT, STATUS_MESSAGES) {
 
         // TODO: This should be handled at the $resource level, so that the controller
@@ -54,7 +54,7 @@ angular.module('billingApp')
                 $scope.paymentMethod = DefaultPaymentMethodFilter(result[1]);
             },
             postPayment = function (amount, methodId) {
-                $scope.paymentResult = rxMakePayment(RAN, amount, methodId);
+                $scope.paymentResult = Payment.makePayment(RAN, amount, methodId);
                 rxPromiseNotifications.add($scope.paymentResult.$promise, {
                     loading: STATUS_MESSAGES.payment.load,
                     success: STATUS_MESSAGES.payment.success,
