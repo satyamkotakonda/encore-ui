@@ -25,26 +25,6 @@ module.exports = {
             rewrite: {
                 '/api/payment': '/v1/accounts'
             }
-        },
-        {
-            context: '/api/customer-admin',
-            host: 'customer-admin.staging.ord1.us.ci.rackspace.net',
-            port: 443,
-            https: true,
-            changeOrigin: true,
-            rewrite: {
-                '/api/customer-admin': '/v3'
-            }
-        },
-        {
-            context: '/api/support-service',
-            host: 'staging.dfw.support.encore.rackspace.com',
-            port: 443,
-            https: true,
-            changeOrigin: true,
-            rewrite: {
-                '/api/support-service': '/api'
-            }
         }
     ].concat(config.defaultProxies),
     livereload: {
