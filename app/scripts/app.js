@@ -42,6 +42,7 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                 //#TODO: this is temporary until we get a more solid solution
                 redirectTo: '/overview/473500'
             });
+
         $locationProvider.html5Mode(true).hashPrefix('!');
     }).run(function ($http, $rootScope, $window, Auth, Environment, rxAppRoutes,
         NOTFOUND_MSG, LOADING_MSG) {
@@ -84,11 +85,10 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
         // Forces JSON only
         $http.defaults.headers.common['Accept'] = 'application/json';
 
-        $rootScope.userName = Auth.getUserName();
-
         // Pass message constants for templates
         $rootScope.loadingMsg = LOADING_MSG;
         $rootScope.notFoundMsg = NOTFOUND_MSG;
+
     }).controller('LoginModalCtrl', function ($scope, Auth, Environment, rxNotify) {
         $scope.environment = Environment.get().name;
 
