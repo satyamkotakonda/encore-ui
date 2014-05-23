@@ -61,10 +61,10 @@ angular.module('rxGenericUtil', [])
     * if value is falsy, show falsy msg
     * #TODO: Convert to a directive
     */
-    .filter('LoadingValue', function () {
+    .filter('LoadingValue', function (NOTFOUND_MSG, LOADING_MSG) {
         return function (val, completed, notFoundMsg, loadingMsg) {
-            loadingMsg = loadingMsg ? loadingMsg : 'Loading...';
-            notFoundMsg = notFoundMsg ? notFoundMsg : '(Not Available)';
+            loadingMsg = loadingMsg ? loadingMsg : LOADING_MSG;
+            notFoundMsg = notFoundMsg ? notFoundMsg : NOTFOUND_MSG;
             if (completed) {
                 return val || notFoundMsg;
             }

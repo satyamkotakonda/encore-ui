@@ -21,7 +21,7 @@
     <!-- Add your site or application content here -->
     <!-- // TODO: Here we used to have the menu for billing, need to replace
             With the new menu options from encore in order to be able to override it via the App. -->
-    <rx-app id="billing-rxApp">
+    <rx-app id="billing-rxApp" collapsible-nav="true">
         <div ng-view=""></div>
     </rx-app>
     <div ng-controller="LoginModalCtrl">
@@ -72,6 +72,7 @@
     <script src="modules/rxPopover/rxPopover.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/util.js"></script>
+
     <script src="scripts/payment/paymentAction.js"></script>
     <script src="scripts/payment/paymentSetDefault.js"></script>
     <script src="scripts/payment/paymentDisable.js"></script>

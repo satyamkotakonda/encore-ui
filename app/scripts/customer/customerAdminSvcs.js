@@ -8,7 +8,16 @@ angular.module('customerAdminSvcs', ['ngResource', 'rxGenericUtil'])
     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
     */
     .factory('Account', function ($resource) {
-        return $resource('/api/customer-admin/customer_accounts/:type/:id');
+        return $resource('/api/customer-admin/customer_accounts/:type/:id',
+            {
+                id: '@id',
+                type: '@type'
+            },
+            {
+                get: {
+                    cache: true
+                }
+            });
     })
     /**
     * @ngdoc service
