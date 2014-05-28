@@ -17,13 +17,15 @@
                             <rx-purchase-order-create
                                 user-name="userName"
                                 current-purchase-order="{{ currentPurchaseOrder.poNumber }}"
-                                classes="button">
-                                <img src="/billing/images/icon-add_white.png" /> Add New Purchase Order
+                                classes="button"
+                                notification-stack="purchaseOrderPage"
+                                post-hook="refreshPurchaseOrders()">
+                                <img src="images/icon-add_white.png" /> Add New Purchase Order
                             </rx-purchase-order-create>
                         </li>
                         <li>
                             <button class="button action disable">
-                                <img src="/billing/images/icon-disable_white.png" /> Disable Purchase Order
+                                <img src="images/icon-disable_white.png" /> Disable Purchase Order
                             </button>
                         </li>
                     </ul>

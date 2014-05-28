@@ -37,6 +37,9 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'encore.u
             .when('/preferences/:accountNumber', {
                 templateUrl: 'views/preferences/preferences.html',
                 controller: 'PreferencesCtrl'
+            })
+            .otherwise({
+                redirectTo: '/overview/473500'
             });
 
         $locationProvider.html5Mode(true).hashPrefix('!');
@@ -85,32 +88,4 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'encore.u
         $rootScope.loadingMsg = LOADING_MSG;
         $rootScope.notFoundMsg = NOTFOUND_MSG;
 
-    }).controller('LoginModalCtrl', function ($scope, Auth, Environment, rxNotify) {
-        $scope.environment = Environment.get().name;
-
-        var authenticate = function (credentials, success, error) {
-            //override the body here
-            var body = {
-                'auth': {
-                    'RAX-AUTH:domain': {
-                        'name': 'Rackspace'
-                    },
-                    'RAX-AUTH:rsaCredentials': {
-                        'username': credentials.username,
-                        'tokenKey': credentials.token
-                    }
-                }
-            };
-
-            return Auth.loginWithJSON(body, success, error);
-        };
-        $scope.user = {};
-        $scope.login = function () {
-            return authenticate($scope.user, function (data) {
-                Auth.storeToken(data);
-            }, function () {
-                rxNotify.add('Invalid Username or RSA Token', { type: 'warning' });
-                $scope.user.token = '';
-            });
-        };
     });

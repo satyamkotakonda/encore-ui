@@ -104,7 +104,9 @@ angular.module('billingApp')
     */
     .filter('CurrentPurchaseOrder', function (PurchaseOrderUtil) {
         return function (purchaseOrders) {
-            return _.find(purchaseOrders, _.partialRight(PurchaseOrderUtil.isCurrent, true));
+            return _.find(purchaseOrders, function (po) {
+                return PurchaseOrderUtil.isCurrent(po, true);
+            });
         };
     })
     /**
