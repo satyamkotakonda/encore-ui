@@ -1,5 +1,6 @@
 angular.module('constants', [])
     .constant('STATUS_MESSAGES', {
+        permissionDenied: 'Permission Denied',
         overview: {
             error: 'There was an error loading Account Information'
         },

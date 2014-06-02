@@ -37,8 +37,8 @@ angular.module('billingApp')
                 postHook: '&'
             }
         };
-    }).controller('PurchaseOrderCreateCtrl', function ($scope, $routeParams, $modalInstance, PurchaseOrder,
-        rxNotify, AccountNumberUtil, STATUS_MESSAGES) {
+    }).controller('PurchaseOrderCreateCtrl', function ($scope, $routeParams, PurchaseOrder,
+        rxNotify, BillingError, AccountNumberUtil, STATUS_MESSAGES) {
         var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber),
             notifyInstances = {},
             defaultStackName = 'purchaseOrderCreate';
@@ -55,10 +55,13 @@ angular.module('billingApp')
             createError = function (response) {
                 var msg = STATUS_MESSAGES.purchaseOrders.createError,
                     data = response.data;
-                if (data) {
-                    msg += ' "' + data[_.first(_.keys(data))].message + '".';
+                if (response.status === 404) {
+                    msg += ' "' + STATUS_MESSAGES.permissionDenied + '".';
+                } else if (data) {
+                    msg += ' "' + BillingError(data).message + '".';
                 }
                 rxNotify.add(msg, {
+                    stack: defaultStackName,
                     type: 'error'
                 });
             },
@@ -76,16 +79,16 @@ angular.module('billingApp')
                     stack: defaultStackName,
                     loading: true
                 });
-                var newPO = PurchaseOrder.createPO(RAN,
+                $scope.newPO = PurchaseOrder.createPO(RAN,
                                                    $scope.fields.purchaseOrderNumber,
                                                    createSuccess,
                                                    createError);
-                newPO.$promise.finally(function () {
+                $scope.newPO.$promise.finally(function () {
                     rxNotify.dismiss(notifyInstances.loading);
                 });
                 // Call the postHook (if) defined on succesful close of the modal
                 if ($scope.postHook) {
-                    newPO.$promise.then($scope.postHook);
+                    $scope.newPO.$promise.then($scope.postHook);
                 }
             };
 

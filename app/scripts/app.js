@@ -1,5 +1,5 @@
 'use strict';
-angular.module('billingApp', ['ngRoute', 'ngResource', 'ui.bootstrap', 'encore.ui', 'encore.ui.tpls',
+angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.tpls',
         'rxSwitch', 'encore.ui.rxPopover', 'billingSvcs', 'paymentSvcs', 'supportSvcs',
         'customerAdminSvcs', 'constants', 'productConstants'])
 

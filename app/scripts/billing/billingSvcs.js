@@ -285,4 +285,21 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
                 return purchaseOrder.hasOwnProperty('endDate') !== current;
             }
         };
+    })
+    /**
+    * @ngdoc service
+    * @name encore.service:BillingErrorMsg
+    * @description
+    * Returns the error structure from the billing API
+    *
+    * @param {Array} error - error returned from billing API
+    */
+    .factory('BillingError', function () {
+        return function (error) {
+            // Grab the first key of all the structure's keys, for errors there's only one defined
+            var keys = _.keys(error),
+                errorKey = _.first(keys);
+            error[errorKey].type = errorKey;
+            return error[errorKey];
+        };
     });
