@@ -7,6 +7,7 @@ describe('rxGenericUtil', function () {
     var paymentMethods, testData, testError, accountNumber, testOutput, loadingMsg, notFoundMsg;
 
     beforeEach(function () {
+        module('constants'); // Required by LoadingValueFilter
         module('rxGenericUtil');
 
         inject(function ($rootScope, $q,

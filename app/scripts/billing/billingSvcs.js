@@ -285,4 +285,42 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
                 return purchaseOrder.hasOwnProperty('endDate') !== current;
             }
         };
+    })
+    /**
+    * @ngdoc service
+    * @name encore.service:BillingErrorResponse
+    * @param {Object} STATUS_MESSAGES - Status Messages
+    * @description
+    * Returns the error structure from an error response of the Billing API
+    *
+    * @param {Array} error - error returned from billing API
+    */
+    .factory('BillingErrorResponse', function (STATUS_MESSAGES) {
+        return function (response) {
+            var error = response.data || {};
+            var keys = _.keys(error),
+                errorKey = _.first(keys);
+
+            error = _.extend({
+                type: 'error',
+                msg: ''
+            }, error[errorKey]);
+
+            // Save the key as error type
+            error.type = errorKey;
+            error.status = response.status;
+
+            // #NOTE: This may change once Billing API has Repose in front of it
+            // 404 From Billing API could mean NotFound/PermissionDenied
+            // Repose (may) change this logic
+            if (error.status === 404) {
+                error.msg = STATUS_MESSAGES.permissionDenied;
+                error.type = 'permissionDenied';
+            } else if (!_.isEmpty(error.message)) {
+                // Grab the error message from the API return data
+                error.msg = error.message;
+            }
+
+            return error;
+        };
     });

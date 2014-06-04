@@ -19,37 +19,9 @@
   <body ng-app="billingApp">
 
     <!-- Add your site or application content here -->
-    <!-- // TODO: Here we used to have the menu for billing, need to replace
-            With the new menu options from encore in order to be able to override it via the App. -->
-    <rx-app id="billing-rxApp" collapsible-nav="true">
+    <rx-app id="billing-rxApp">
         <div ng-view=""></div>
     </rx-app>
-    <div ng-controller="LoginModalCtrl">
-        <div ng-if="environment === 'local'" style='background: #1a1a1a'>
-            <rx-modal-action
-                post-hook="login(user)"
-                template-url="modalLogin.html">
-                <button>Login</button>
-            </rx-modal-action>
-            <script type="text/ng-template" id="modalLogin.html">
-                <rx-modal-form title="Login">
-                    <rx-form-input
-                        type="text"
-                        required="true"
-                        label="SSO Username"
-                        field-id="username"
-                        model="user.username"></rx-form-input>
-
-                    <rx-form-input
-                        type="password"
-                        required="true"
-                        label="RSA Token"
-                        field-id="token"
-                        model="user.token"></rx-form-input>
-                </rx-modal-form>
-            </script>
-        </div>
-    </div>
     <!-- build:js /billing/scripts/plugins.js -->
 
     <!-- endbuild -->
@@ -76,6 +48,7 @@
     <script src="scripts/payment/paymentAction.js"></script>
     <script src="scripts/payment/paymentSetDefault.js"></script>
     <script src="scripts/payment/paymentDisable.js"></script>
+    <script src="scripts/purchase-orders/purchaseOrderCreate.js"></script>
 
     <script src="scripts/billing/billingSvcs.js"></script>
     <script src="scripts/payment/paymentSvcs.js"></script>

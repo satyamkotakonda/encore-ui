@@ -1,5 +1,6 @@
 angular.module('constants', [])
     .constant('STATUS_MESSAGES', {
+        permissionDenied: 'Permission Denied',
         overview: {
             error: 'There was an error loading Account Information'
         },
@@ -18,6 +19,13 @@ angular.module('constants', [])
         },
         usage: {
             error: 'There was an error loading Estimated Charges.'
+        },
+        purchaseOrders: {
+            create: 'Creating new Purchase Order',
+            createError: 'Error Activating new Purchase Order.',
+            createSuccess: 'The new Purchase Order has been Activated',
+            loading: 'Loading Purchase Orders',
+            loadingError: 'Error loading Purchase Orders'
         }
     })
     .constant('DATE_FORMAT', 'MM / dd / yyyy')
