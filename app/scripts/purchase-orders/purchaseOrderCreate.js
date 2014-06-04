@@ -38,27 +38,30 @@ angular.module('billingApp')
             }
         };
     }).controller('PurchaseOrderCreateCtrl', function ($scope, $routeParams, PurchaseOrder,
-        rxNotify, BillingError, AccountNumberUtil, STATUS_MESSAGES) {
+        rxNotify, BillingErrorResponse, AccountNumberUtil, STATUS_MESSAGES) {
         var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber),
             notifyInstances = {},
             defaultStackName = 'purchaseOrderCreate';
 
+        // Clears the notifications stacks that are being used by this controller
         var clearNotifications = function () {
                 if (!_.isEmpty(rxNotify.stacks[defaultStackName])) {
                     rxNotify.clear(defaultStackName);
                 }
 
+                // Only attempt to clear the notificationStack if it has been passed in
                 if ($scope.notificationStack && !_.isEmpty(rxNotify.stacks[$scope.notificationStack])) {
                     rxNotify.clear($scope.notificationStack);
                 }
             },
+            // Show a notification error within the modal
             createError = function (response) {
                 var msg = STATUS_MESSAGES.purchaseOrders.createError,
-                    data = response.data;
-                if (response.status === 404) {
-                    msg += ' "' + STATUS_MESSAGES.permissionDenied + '".';
-                } else if (data) {
-                    msg += ' "' + BillingError(data).message + '".';
+                    error = BillingErrorResponse(response);
+
+                // #NOTE: This may change once Billing API has Repose in front of it
+                if (error.msg !== '') {
+                    msg += ' "' + error.msg + '".';
                 }
                 rxNotify.add(msg, {
                     stack: defaultStackName,
@@ -74,19 +77,24 @@ angular.module('billingApp')
                 $scope.$close(data);
             },
             createPurchaseOrder = function () {
+                // We clear the notification stacks used by us so that we don't let them stack up
                 clearNotifications();
+
+                // Capture the instance of the loading notification in order to dismiss it once done processing
                 notifyInstances.loading = rxNotify.add(STATUS_MESSAGES.purchaseOrders.create, {
                     stack: defaultStackName,
                     loading: true
                 });
+
                 $scope.newPO = PurchaseOrder.createPO(RAN,
                                                    $scope.fields.purchaseOrderNumber,
                                                    createSuccess,
                                                    createError);
+
                 $scope.newPO.$promise.finally(function () {
                     rxNotify.dismiss(notifyInstances.loading);
                 });
-                // Call the postHook (if) defined on succesful close of the modal
+                // Call the postHook (if) defined on succesful result of createPO
                 if ($scope.postHook) {
                     $scope.newPO.$promise.then($scope.postHook);
                 }

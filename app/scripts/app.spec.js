@@ -1,8 +1,8 @@
-describe('Billing: LoginModalCtrl', function () {
+describe('Billing: app', function () {
     var scope, auth, env;
 
     beforeEach(function () {
-        module('clusterBuildApp');
+        module('billingApp');
 
         inject(function ($controller, $rootScope, $location, Auth, Environment) {
             scope = $rootScope.$new();
