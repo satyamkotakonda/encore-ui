@@ -15,7 +15,7 @@ angular.module('rxSwitch', [])
             model: '=',
             loading: '=?',
             disabled: '=?',
-            postHook: '=?',
+            postHook: '&',
             trueValue: '@?',
             falseValue: '@?',
             trueText: '@?',
@@ -40,10 +40,8 @@ angular.module('rxSwitch', [])
                     return;
                 }
                 var newValue = $scope.switchValue(value);
-                if (_.isFunction($scope.postHook)) {
-                    $scope.postHook(newValue, value);
-                    return;
-                }
+
+                $scope.postHook({ newValue: newValue, value: value });
                 $scope.model = newValue;
             };
         }
