@@ -263,6 +263,12 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
                 }
             }, success, error);
         };
+        purchaseOrder.disablePO = function (id, purchaseOrderNo, success, error) {
+            return purchaseOrder.disable({
+                id: id,
+                purchaseOrderId: purchaseOrderNo
+            }, null, success, error);
+        };
         return purchaseOrder;
     })
     /**
