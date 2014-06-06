@@ -24,6 +24,9 @@ angular.module('constants', [])
             create: 'Creating new Purchase Order',
             createError: 'Error Activating new Purchase Order.',
             createSuccess: 'The new Purchase Order has been Activated',
+            disable: 'Disabling current Purchase Order',
+            disableError: 'Error Disabling current Purchase Order.',
+            disableSuccess: 'The current Purchase Order has been Disabled',
             loading: 'Loading Purchase Orders',
             loadingError: 'Error loading Purchase Orders'
         }
