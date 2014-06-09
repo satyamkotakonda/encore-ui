@@ -28,6 +28,10 @@ describe('Billing: billingSvcs', function () {
         expect(purchaseOrder.createPO('12345', '123456')).to.be.instanceof(purchaseOrder);
     });
 
+    it('billingSvcs PurchaseOrder.disablePO should return PurchaseOrder resource ', function () {
+        expect(purchaseOrder.disablePO('12345', '123456')).to.be.instanceof(purchaseOrder);
+    });
+
     it('billingSvcs Payment.makePayment should return Payment resource ', function () {
         expect(payment.makePayment('12345', '1000', 'urn:uuid:aaaaaa')).to.be.instanceof(payment);
     });

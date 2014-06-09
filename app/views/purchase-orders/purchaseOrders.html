@@ -3,7 +3,7 @@
     <div class="section section-grid purchase-orders">
         <div class="col-2-3">
             <div class="section inline">
-                <div class="label-definition">
+                <div class="label-definition" ng-show="currentPurchaseOrder">
                     <p>
                         <label>Number:</label> {{ currentPurchaseOrder.poNumber | LoadingValue:purchaseOrders.$resolved:poNotFound }}
                     </p>
@@ -11,7 +11,7 @@
                         <label>Start Date:</label> {{ currentPurchaseOrder.startDate | date:defaultDateFormat | LoadingValue:purchaseOrders.$resolved:poNotFound }}
                     </p>
                 </div>
-                <div class="actions">
+                <div class="actions" ng-class="{single: !currentPurchaseOrder}">
                     <ul>
                         <li>
                             <rx-purchase-order-create
@@ -20,13 +20,18 @@
                                 classes="button"
                                 notification-stack="purchaseOrderPage"
                                 post-hook="refreshPurchaseOrders()">
-                                <img src="images/icon-add_white.png" /> Add New Purchase Order
+                                <img src="/billing/images/icon-add_white.png" /> Add New Purchase Order
                             </rx-purchase-order-create>
                         </li>
                         <li>
-                            <button class="button action disable">
-                                <img src="images/icon-disable_white.png" /> Disable Purchase Order
-                            </button>
+                            <rx-purchase-order-disable
+                                user-name="userName"
+                                current-purchase-order="{{ currentPurchaseOrder.poNumber }}"
+                                classes="button"
+                                notification-stack="purchaseOrderPage"
+                                post-hook="refreshPurchaseOrders()">
+                                <img src="/billing/images/icon-disable_white.png" /> Disable Purchase Order
+                            </rx-purchase-order-disable>
                         </li>
                     </ul>
                 </div>

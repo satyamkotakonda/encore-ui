@@ -37,9 +37,6 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
             .when('/preferences/:accountNumber', {
                 templateUrl: 'views/preferences/preferences.html',
                 controller: 'PreferencesCtrl'
-            })
-            .otherwise({
-                redirectTo: '/overview/473500'
             });
 
         $locationProvider.html5Mode(true).hashPrefix('!');
@@ -74,12 +71,12 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
             ]
         });
 
-        var environment = Environment.get().name;
-
-        if (environment !== 'local' && !Auth.isAuthenticated()) {
-            $window.location = '/login?redirect=' + $window.location.pathname;
-            return;
-        }
+        $rootScope.$on('$routeChangeStart', function () {
+            if (!Auth.isAuthenticated()) {
+                $window.location = '/login?redirect=' + $window.location.pathname;
+                return;
+            }
+        });
 
         // Forces JSON only
         $http.defaults.headers.common['Accept'] = 'application/json';

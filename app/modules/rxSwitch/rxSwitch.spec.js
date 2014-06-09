@@ -107,7 +107,6 @@ describe('rxSwitch', function () {
     it('should call posthook when updating value', function () {
         switchContainer = helpers.getChildDiv(postHookEL, 'rx-switch', 'class');
         directiveScope = switchContainer.scope();
-        console.log('Custom', directiveScope.postHook);
 
         expect(scope.model).to.be.true;
         directiveScope.update(scope.model);

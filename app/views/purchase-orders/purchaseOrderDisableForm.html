@@ -1,0 +1,18 @@
+<rx-modal-form
+    submitText="Disable Purchase Order"
+    title="Disable Purchase Order"
+    subtitle="for {{account.name}}">
+    <div class="purchase-order-form">
+        <rx-notifications stack="purchaseOrderDisable"></rx-notifications>
+        <div class="section">
+            <div class="label-definition" ng-show="currentPurchaseOrder">
+                <p>
+                    <label>Deleting Number:</label> {{ currentPurchaseOrder }}
+                </p>
+            </div>
+        </div>
+        <div class="payment-disable-warn msg-warn">
+            <img src="images/icon-warning.png" /><strong>Warning:</strong> Purchase Order {{ currentPurchaseOrder }} will no longer be active with this account.
+        </div>
+    </div>
+</rx-modal-form>
