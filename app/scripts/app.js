@@ -71,9 +71,10 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
             ]
         });
 
-        $rootScope.$on('$locationChangeStart', function () {
+        $rootScope.$on('$routeChangeStart', function () {
             if (!Auth.isAuthenticated()) {
-                // $window.location = '/login?redirect=' + $window.location.pathname;
+                console.log($window.location);
+                $window.location = '/login?redirect=' + $window.location.pathname;
                 return;
             }
         });
