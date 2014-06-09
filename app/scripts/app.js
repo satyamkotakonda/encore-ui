@@ -73,7 +73,6 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
 
         $rootScope.$on('$routeChangeStart', function () {
             if (!Auth.isAuthenticated()) {
-                console.log($window.location);
                 $window.location = '/login?redirect=' + $window.location.pathname;
                 return;
             }
