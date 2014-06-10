@@ -1,0 +1,12 @@
+{
+    "writeoff": {
+        "id": "6e0004ss-f0cd-4065-8489-1ee3fc680zzd",
+        "amount": "10.45",
+        "tranDate": "2013-09-11T16:50:55.000-05:00",
+        "status": "APPROVED",
+        "rackerSSO": "racker123",
+        "tranRefNum": "W1-1234567",
+        "reasonCode": "Bankruptcy",
+        "comments": "Deemed uncollectible"
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "contact": [{
+        "addresses": {
+            "address": [{
+                "primary": true,
+                "street": "1211 Test Lane",
+                "city": "Testville",
+                "state": "Iowa",
+                "country": "US",
+                "zipcode": "98659"
+            }]
+        },
+        "emailAddresses": {
+            "emailAddress": [{
+                "primary": true,
+                "address": "tree@house.com"
+            }]
+        },
+        "phoneNumbers": {
+            "phoneNumber": [{
+                "number": "210-323-3636",
+                "mask": "(###) ###-#### x############",
+                "country": "US"
+            }]
+        },
+        "roles": {
+            "role": ["BILLING"]
+        },
+        "link": [{
+            "rel": "VIA",
+            "href": "https://customer-admin.staging.ord1.us.ci.rackspace.net/v3/contacts/RPN-475-635-816"
+        }],
+        "firstName": "Louis",
+        "lastName": "Jackson",
+        "contactNumber": "RPN-475-635-816",
+        "rcn": "RCN-000-019-581",
+        "customer_admin:legacyId": "266531"
+    }]
+}

@@ -1,0 +1,14 @@
+{
+    "reversal": {
+        "id": "6e0004cb-f0bd-4085-8419-5ee3fc980aad",
+        "amount": "10.45",
+        "tranDate": "2013-05-26T16:32:52.000-05:00",
+        "status": "APPROVED",
+        "methodType": "CREDITCARD",
+        "paymentId": "b153650f-a293-41f1-988d-1b7cf7d3fbed",
+        "rackerSSO": "racker123",
+        "tranRefNum": "P1-1234567",
+        "reasonCode": "Merchant initiated chargeback",
+        "comments": "This is a reversal"
+    }
+}
