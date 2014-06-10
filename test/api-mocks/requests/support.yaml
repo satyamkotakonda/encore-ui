@@ -1,0 +1,69 @@
+# Get Billing Transactions for an Account
+-   request:
+        url: ^/api/billing/(.*)/billing-summary$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/transactions.json
+
+# Get Account Info
+-   request:
+        url: ^/api/billing/(.*)/balance$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/balance.json
+
+# Get Billing Periods for an account
+-   request:
+        url: ^/api/billing/(.*)/billing-periods$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/periods.json
+
+# Get Estimated Charges for an account
+-   request:
+        url: ^/api/billing/(.*)/billing-periods/(.*)/estimated_charges$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/charges.json
+
+# Get Available Payment Methods
+-   request:
+        url: ^/api/payment/(.*)/methods$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/payment-methods.json
+
+# Post a payment to account
+-   request: 
+        url: ^/api/billing/(.*)/payment$
+        method: POST
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/make-payment.json
+
+# Get Account Info
+-   request:
+        url: ^/api/billing(.*)$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/account.json

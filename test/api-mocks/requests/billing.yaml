@@ -1,12 +1,42 @@
 # Get Billing Transactions for an Account
 -   request:
-        url: ^/api/billing/(.*)/billingSummary$
+        url: ^/api/billing/(.*)/billing-summary$
         method: GET
     response:
         status: 200
         headers:
             content-type: application/json
-        file: test/api-mocks/responses/transactions.json
+        file: test/api-mocks/responses/billing/transactions.json
+
+# Get Balance for an Account
+-   request:
+        url: ^/api/billing/(.*)/balance$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/balance.json
+
+# Get Billing Information for an Account
+-   request:
+        url: ^/api/billing/(.*)/billInfo$
+        method: [GET, PUT]
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/bill-info.json
+
+# Get Payment Information for an Account
+-   request:
+        url: ^/api/billing/(.*)/paymentInfo$
+        method: [GET, PUT]
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/payment-info.json
 
 # Get Billing Periods for an account
 -   request:
@@ -16,7 +46,7 @@
         status: 200
         headers:
             content-type: application/json
-        file: test/api-mocks/responses/periods.json
+        file: test/api-mocks/responses/billing/billing-periods.json
 
 # Get Estimated Charges for an account
 -   request:
@@ -26,44 +56,65 @@
         status: 200
         headers:
             content-type: application/json
-        file: test/api-mocks/responses/charges.json
-
-# Get Account Info
--   request:
-        url: ^/api/billing/(.*)/balance$
-        method: GET
-    response:
-        status: 200
-        headers:
-            content-type: application/json
-        file: test/api-mocks/responses/balance.json
-
-# Get Available Payment Methods
--   request:
-        url: ^/api/payment/(.*)/methods$
-        method: GET
-    response:
-        status: 200
-        headers:
-            content-type: application/json
-        file: test/api-mocks/responses/payment-methods.json
+        file: test/api-mocks/responses/billing/estimated-charges.json
 
 # Post a payment to account
 -   request: 
-        url: ^/api/billing/(.*)/payment$
+        url: ^/api/billing/(.*)/payments$
         method: POST
     response:
         status: 200
         headers:
             content-type: application/json
-        file: test/api-mocks/responses/make-payment.json
+        file: test/api-mocks/responses/billing/make-payment.json
 
-# Get Account Info
+# Get Contract Entity for an Account
 -   request:
-        url: ^/api/billing(.*)$
+        url: ^/api/billing/(.*)/contractEntity$
         method: GET
     response:
         status: 200
         headers:
             content-type: application/json
-        file: test/api-mocks/responses/account.json
+        file: test/api-mocks/responses/billing/contract-entity.json
+
+# Get Support Info for an Account
+-   request:
+        url: ^/api/billing/(.*)/supportInfo$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/suport-info.json
+
+
+# Get Purchase Orders
+-   request:
+        url: ^/api/billing/(.*)/purchaseOrders?$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/purchase-orders.json
+
+# Create Purchase Order
+-   request:
+        url: ^/api/billing/(.*)/purchaseOrders?$
+        method: POST
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/purchase-order-create.json
+
+# Delete Purchase Order
+-   request:
+        url: ^/api/billing/(.*)/purchaseOrders/(.+)?$
+        method: DELETE
+    response:
+        status: 204
+        headers:
+            content-type: application/json
+        body: 
