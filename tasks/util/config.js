@@ -17,6 +17,35 @@ module.exports = {
     mountFolder : function (connect, dir) {
         return connect.static(require('path').resolve(dir));
     },
+    mockedProxies: [
+        {
+            context: '/api/identity',
+            // Point to the identity host relevant to the project
+            host: 'localhost',
+            port: 3000,
+            https: false,
+            xforward: true,
+            changeOrigin: true
+        },
+        {
+            context: '/api/support',
+            // Point to the support host relevant to the project
+            host: 'localhost',
+            port: 3000,
+            https: false,
+            xforward: true,
+            changeOrigin: true
+        },
+        {
+            context: '/api/customer-admin',
+            // Point to the customer-admin host relevant to the project
+            host: 'localhost',
+            port: 3000,
+            https: false,
+            xforward: true,
+            changeOrigin: true
+        }
+    ],
     defaultProxies: [
         {
             context: '/login',

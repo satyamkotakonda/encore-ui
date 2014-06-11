@@ -5,28 +5,35 @@ module.exports = {
         port: 9000,
         hostname: 'localhost'
     },
-    proxies: [
-        {
-            context: '/api/billing',
-            host: 'staging.billingv2.pipeline2.api.rackspacecloud.com',
-            port: 443,
-            https: true,
-            changeOrigin: true,
-            rewrite: {
-                '/api/billing': '/v2/accounts'
+    live: {
+        proxies: [
+            {
+                context: '/api/billing',
+                host: 'staging.billingv2.pipeline2.api.rackspacecloud.com',
+                port: 443,
+                https: true,
+                changeOrigin: true,
+                rewrite: {
+                    '/api/billing': '/v2/accounts'
+                }
+            },
+            {
+                context: '/api/payment',
+                host: 'staging.system.payment.pipeline2.api.rackspacecloud.com',
+                port: 443,
+                https: true,
+                changeOrigin: true,
+                rewrite: {
+                    '/api/payment': '/v1/accounts'
+                }
             }
-        },
-        {
-            context: '/api/payment',
-            host: 'staging.system.payment.pipeline2.api.rackspacecloud.com',
-            port: 443,
-            https: true,
-            changeOrigin: true,
-            rewrite: {
-                '/api/payment': '/v1/accounts'
-            }
-        }
-    ].concat(config.defaultProxies),
+        ].concat(config.defaultProxies),
+    },
+
+    mocked: {
+        proxies: [].concat(config.mockedProxies).concat(config.defaultProxies),
+    },
+
     livereload: {
         options: {
             middleware: function (cnct) {
