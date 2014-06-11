@@ -9,8 +9,11 @@
             <span ng-if="!periods.$resolved">{{ loadingMsg }}</span>
             <span ng-if="periods.$resolved && currentPeriod">
                 {{ currentPeriod.startDate | date: defaultDateFormat }}
+                &nbsp;
                 to
-                {{ currentPeriod.endDate | date: defaultDateFormat }}
+                &nbsp;
+                <span ng-if="currentPeriod.endDate">{{ currentPeriod.endDate | date: defaultDateFormat }}</span>
+                <span ng-if="!currentPeriod.endDate">Present</span>
             </span>
             <span ng-if="periods.$resolved && !currentPeriod">
                 {{ notFoundMsg }}

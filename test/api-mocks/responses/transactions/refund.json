@@ -1,0 +1,15 @@
+{
+    "refund": {
+        "id": "cfc42488-0ce2-4068-b39a-1892438f418f",
+        "amount": "10.45",
+        "tranDate": "2013-05-26T16:32:52.000-05:00",
+        "status": "CLOSED",
+        "methodType": "CREDITCARD",
+        "gatewayTxRefNum": "5098B66B8741F2E4A38B24F103150B3AEA8A530E",
+        "rackerSSO": "racker123",
+        "tranRefNum": "R1-1234561",
+        "reasonCode": "Check refund",
+        "comments": "License fee refund",
+        "methodId": "urn:uuid:fa093563-73db-4fe4-8f3a-def53dde8f5d"
+    }
+}

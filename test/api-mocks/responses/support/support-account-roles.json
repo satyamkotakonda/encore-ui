@@ -1,0 +1,63 @@
+{
+    "items": [{
+        "role": {
+            "_links": {
+                "self": {
+                    "href": "http://sandbox.api.ss.rackspace.net/api/roles/2",
+                    "id": "2"
+                }
+            },
+            "name": "Account Manager"
+        },
+        "user": {
+            "_links": {
+                "badges": {
+                    "href": "http://sandbox.api.ss.rackspace.net/api/users/alan5372/badges"
+                },
+                "groups": {
+                    "href": "http://sandbox.api.ss.rackspace.net/api/users/alan5372/groups"
+                },
+                "self": {
+                    "href": "http://sandbox.api.ss.rackspace.net/api/users/alan5372",
+                    "id": "jane.racker"
+                }
+            },
+            "email": "jane.racker@RACKSPACE.COM",
+            "name": "Jane Racker",
+            "sso": "jane.racker",
+            "tags": [
+                "jane_racker"
+            ]
+        }
+    }, {
+        "role": {
+            "_links": {
+                "self": {
+                    "href": "http://sandbox.api.ss.rackspace.net/api/roles/8",
+                    "id": "8"
+                }
+            },
+            "name": "Launch Manager"
+        },
+        "user": {
+            "_links": {
+                "badges": {
+                    "href": "http://sandbox.api.ss.rackspace.net/api/users/alan5372/badges"
+                },
+                "groups": {
+                    "href": "http://sandbox.api.ss.rackspace.net/api/users/alan5372/groups"
+                },
+                "self": {
+                    "href": "http://sandbox.api.ss.rackspace.net/api/users/alan5372",
+                    "id": "jane.racker"
+                }
+            },
+            "email": "jane.racker@RACKSPACE.COM",
+            "name": "Jane Racker",
+            "sso": "jane.racker",
+            "tags": [
+                "jane_racker"
+            ]
+        }
+    }]
+}

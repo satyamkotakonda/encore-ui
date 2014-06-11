@@ -1,0 +1,22 @@
+{
+    "adjustment": {
+        "id": "6e0004cb-f0bd-4085-8419-5ee3fc980aad",
+        "amount": "22.65",
+        "tranDate": "2013-08-26T16:32:52.000-05:00",
+        "status": "POSTED",
+        "rackerSSO": "racker123",
+        "tranRefNum": "A1-1234564",
+        "itemReferences": {
+            "itemReference": [{
+                "id": "68bcaeb0-d486-4637-a6c8-846d401be419",
+                "tranDate": "2013-05-26T16:32:52.000-05:00",
+                "amountApplied": "20.0",
+                "tranRefNum": "D1-1234567",
+                "type": "DEBIT_ADJ"
+            }]
+        },
+        "reasonCode": "Uptime SLA",
+        "type": "CREDIT",
+        "comments": "Uptime SLA breached on 06\\21\\2013"
+    }
+}

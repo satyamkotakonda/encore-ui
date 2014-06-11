@@ -254,19 +254,19 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
             }
         );
 
-        purchaseOrder.createPO = function (id, purchaseOrderNo, success, error) {
+        purchaseOrder.createPO = function (id, purchaseOrderId, success, error) {
             return purchaseOrder.create({
                 id: id
             }, {
                 purchaseOrder: {
-                    poNumber: purchaseOrderNo
+                    poNumber: purchaseOrderId
                 }
             }, success, error);
         };
-        purchaseOrder.disablePO = function (id, purchaseOrderNo, success, error) {
+        purchaseOrder.disablePO = function (id, purchaseOrderId, success, error) {
             return purchaseOrder.disable({
                 id: id,
-                purchaseOrderId: purchaseOrderNo
+                purchaseOrderId: purchaseOrderId
             }, null, success, error);
         };
         return purchaseOrder;

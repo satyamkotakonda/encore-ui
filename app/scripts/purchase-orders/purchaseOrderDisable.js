@@ -87,7 +87,7 @@ angular.module('billingApp')
                 });
 
                 $scope.newPO = PurchaseOrder.disablePO(RAN,
-                                                   $scope.fields.purchaseOrderNumber,
+                                                   $scope.currentPurchaseOrder,
                                                    disableSuccess,
                                                    disableError);
 

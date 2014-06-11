@@ -1,0 +1,29 @@
+# Get Available Payment Methods
+-   request:
+        url: ^/api/payment/(.*)/methods$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/payment/payment-methods.json
+
+# Get Default Payment Methods
+-   request:
+        url: ^/api/payment/(.*)/methods/default$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/payment/payment-methods-default.json
+
+# Disable Payment Methods
+-   request:
+        url: ^/api/payment/(.*)/methods/(.+)$
+        method: DELETE
+    response:
+        status: 204
+        headers:
+            content-type: application/json
+        body: 
