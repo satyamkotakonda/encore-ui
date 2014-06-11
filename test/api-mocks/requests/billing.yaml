@@ -86,7 +86,7 @@
         status: 200
         headers:
             content-type: application/json
-        file: test/api-mocks/responses/billing/suport-info.json
+        file: test/api-mocks/responses/billing/support-info.json
 
 
 # Get Purchase Orders

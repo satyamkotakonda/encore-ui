@@ -1,13 +1,3 @@
-# Get ACcount Information for Support
--   request:
-        url: ^/api/support/support-accounts/(.*)$
-        method: GET
-    response:
-        status: 200
-        headers:
-            content-type: application/json
-        file: test/api-mocks/responses/support/support-account.json
-
 # Get Billing Transactions for an Account
 -   request:
         url: ^/api/support/support-accounts/(.*)/roles$
@@ -18,3 +8,12 @@
             content-type: application/json
         file: test/api-mocks/responses/support/support-account-roles.json
 
+# Get ACcount Information for Support
+-   request:
+        url: ^/api/support/support-accounts/(.*)$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/support/support-account.json
