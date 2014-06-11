@@ -263,13 +263,6 @@
                 "quantity": "12.00",
                 "rate": ".12",
                 "unitOfMeasure": "GB"
-            },
-            {
-                "amount": "100.00",
-                "chargeType": "MANAGED_SERVICE_LEVEL",
-                "quantity": "1.00",
-                "rate": "100.00",
-                "unitOfMeasure": "COUNT"
             }
         ],
         "atom:link": [

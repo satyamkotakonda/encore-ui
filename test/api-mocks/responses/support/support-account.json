@@ -17,7 +17,7 @@
     },
     "name": null,
     "tags": [],
-    "linked_account_number": null,
+    "linked_account_number": 12345678901,
     "support_region": "US",
     "type": "CLOUD",
     "number": "473500",
