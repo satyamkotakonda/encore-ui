@@ -8,14 +8,17 @@ angular.module('customerAdminSvcs', ['ngResource', 'rxGenericUtil'])
     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
     */
     .factory('Account', function ($resource) {
-        return $resource('/api/customer-admin/customer_accounts/:type/:id',
+        return $resource('/api/customer-admin/customer_accounts/:type/:accountNumber',
             {
-                id: '@id',
+                accountNumber: '@accountNumber',
                 type: '@type'
             },
             {
                 get: {
-                    cache: true
+                    cache: true,
+                    params: {
+                        type: 'CLOUD'
+                    }
                 }
             });
     })
@@ -29,9 +32,9 @@ angular.module('customerAdminSvcs', ['ngResource', 'rxGenericUtil'])
     */
     .factory('Contact', function ($resource, Transform) {
         var transformList = Transform('contact', 'details');
-        return $resource('/api/customer-admin/customer_accounts/:type/:id/contacts',
+        return $resource('/api/customer-admin/customer_accounts/:type/:accountNumber/contacts',
             {
-                id: '@id',
+                accountNumber: '@accountNumber',
                 marker: 1,
                 limit: 10
             },
