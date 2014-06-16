@@ -1,8 +1,8 @@
 <rx-page title="'Billing - Payment Options'" subtitle="'On account ' + account.name">
     <rx-notifications stack="optionsPage"></rx-notifications>
     <div class="section inline payment-options payment-default">
-        <h3 ng-style="{'visibility': (defaultMethod ? 'visible' : 'hidden')}" class="default-title">Primary:</h3>
-        <div ng-style="{'visibility': (defaultMethod ? 'visible' : 'hidden')}" class="method-description">
+        <h3 ng-show="defaultMethod" class="default-title">Primary:</h3>
+        <div ng-show="defaultMethod" class="method-description">
             <div ng-if="defaultMethod.electronicCheck">
                 <p class="heading">
                     {{defaultMethod.electronicCheck.accountType | AccountTypeFormat}} Account - ending in <strong>{{defaultMethod.electronicCheck.accountNumber | PaymentMethodNumber:true }}</strong>
@@ -34,7 +34,7 @@
                 </p>
             </div>
         </div>
-        <div class="actions">
+        <div class="actions" ng-class="{single: !defaultMethod}">
             <ul>
                 <li>
                     <rx-payment-set-default
