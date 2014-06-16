@@ -151,7 +151,7 @@
             <tbody>
                 <tr ng-repeat="txn in transactions | orderBy:sort.predicate:sort.reverse | TransactionTable:transactionFilter | Paginate:pager" class="{{ txn.type | lowercase }}">
                     <td>
-                        <a href="transactions/{{ accountNumber }}/{{ txn.type | lowercase }}/{{ txn.id }}">
+                        <a href="transactions/{{ accountNumber }}/{{ txn.type | TransactionType }}/{{ txn.id }}">
                         {{ txn.tranRefNum }}
                         </a>
                     </td>
