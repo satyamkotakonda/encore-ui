@@ -10,22 +10,34 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     *                       mainly used on the response
     */
     .factory('Transaction', function ($resource, Transform) {
-        var transformList = Transform('billingSummary.item', 'details');
-        return $resource('/api/billing/:id/:transactionType/:transactionNumber',
+        var transaction = $resource('/api/billing/:prefix-:accountNumber/:transactionType/:transactionNumber',
             {
-                id: '@id'
+                accountNumber: '@accountNumber',
+                prefix: '020'
             },
             {
                 list: {
                     method: 'GET',
                     isArray: true,
-                    transformResponse: transformList,
+                    transformResponse: Transform('billingSummary.item'),
                     params: {
                         transactionType: 'billing-summary'
                     }
+                },
+                details: {
+                    method: 'GET',
+                    isArray: false
                 }
             }
         );
+        transaction.getDetails = function (accountNumber, type, tranNumber, success, fail) {
+            return transaction.details({
+                accountNumber: accountNumber,
+                transactionType: type,
+                transactionNumber: tranNumber
+            }, success, fail);
+        };
+        return transaction;
     })
    /**
     * @ngdoc service
@@ -39,9 +51,10 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     */
     .factory('Balance', function ($resource, Transform) {
         var transform = Transform('balance', 'details');
-        return $resource('/api/billing/:id/balance',
+        return $resource('/api/billing/:prefix-:accountNumber/balance',
             {
-                id: '@id'
+                accountNumber: '@accountNumber',
+                prefix: '020'
             },
             {
                 get: { method: 'GET', transformResponse: transform }
@@ -60,9 +73,10 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     */
     .factory('BillInfo', function ($resource, Transform) {
         var transform = Transform('billInfo', 'details');
-        var billInfo = $resource('/api/billing/:id/billInfo',
+        var billInfo = $resource('/api/billing/:prefix-:accountNumber/billInfo',
             {
-                id: '@id'
+                accountNumber: '@accountNumber',
+                prefix: '020'
             },
             {
                 get: { method: 'GET', transformResponse: transform },
@@ -70,8 +84,10 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
             }
         );
 
-        billInfo.updateInvoiceDeliveryMethod = function (params, invoiceDeliveryMethod, success, error) {
-            return billInfo.update(params, {
+        billInfo.updateInvoiceDeliveryMethod = function (accountNumber, invoiceDeliveryMethod, success, error) {
+            return billInfo.update({
+                accountNumber: accountNumber
+            }, {
                 billInfo: {
                     invoiceDeliveryMethod: invoiceDeliveryMethod
                 }
@@ -91,9 +107,10 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     */
     .factory('PaymentInfo', function ($resource, Transform) {
         var transform = Transform('paymentInfo', 'details');
-        var paymentInfo = $resource('/api/billing/:id/paymentInfo',
+        var paymentInfo = $resource('/api/billing/:prefix-:accountNumber/paymentInfo',
             {
-                id: '@id'
+                accountNumber: '@accountNumber',
+                prefix: '020'
             },
             {
                 get: { method: 'GET', transformResponse: transform },
@@ -101,8 +118,10 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
             }
         );
 
-        paymentInfo.updateNotificationOption = function (params, notificationOption, success, error) {
-            return paymentInfo.update(params, {
+        paymentInfo.updateNotificationOption = function (accountNumber, notificationOption, success, error) {
+            return paymentInfo.update({
+                accountNumber: accountNumber
+            }, {
                 paymentInfo: {
                     notificationOption: notificationOption
                 }
@@ -122,9 +141,10 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     */
     .factory('Period', function ($resource, Transform) {
         var transform = Transform('billingPeriods.billingPeriod', 'details');
-        return $resource('/api/billing/:id/billing-periods',
+        return $resource('/api/billing/:prefix-:accountNumber/billing-periods',
             {
-                id: '@id'
+                accountNumber: '@accountNumber',
+                prefix: '020'
             },
             {
                 list: { method: 'GET', isArray: true, transformResponse: transform }
@@ -143,10 +163,11 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     */
     .factory('EstimatedCharges', function ($resource, Transform) {
         var transform = Transform('estimatedCharges.estimatedCharge', 'details');
-        return $resource('/api/billing/:id/billing-periods/:periodId/estimated_charges',
+        return $resource('/api/billing/:prefix-:accountNumber/billing-periods/:periodId/estimated_charges',
             {
-                id: '@id',
-                periodId: '@periodId'
+                accountNumber: '@accountNumber',
+                periodId: '@periodId',
+                prefix: '020'
             },
             {
                 list: { method: 'GET', isArray: true, transformResponse: transform }
@@ -165,9 +186,10 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
      */
     .factory('Payment', function ($resource, Transform) {
         var transform = Transform('payments.payment', 'badRequest.details');
-        var payment = $resource('/api/billing/:id/payments',
+        var payment = $resource('/api/billing/:prefix-:accountNumber/payments',
             {
-                id: '@id'
+                accountNumber: '@accountNumber',
+                prefix: '020'
             },
             {
                 list: { method: 'GET', isArray: true, transformResponse: transform },
@@ -177,7 +199,7 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
 
         payment.makePayment = function (accountNumber, amount, methodId) {
             return payment.make({
-                id: accountNumber // URL Arguments
+                accountNumber: accountNumber // URL Arguments
             }, {
                 payment: { // Post Data
                     amount: amount,
@@ -200,9 +222,10 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
      */
     .factory('ContractEntity', function ($resource, Transform) {
         var transform = Transform('contractEntity', 'badRequest.details');
-        return $resource('/api/billing/:id/contractEntity',
+        return $resource('/api/billing/:prefix-:accountNumber/contractEntity',
             {
-                id: '@id'
+                accountNumber: '@accountNumber',
+                prefix: '020'
             },
             {
                 get: { method: 'GET', isArray: false, transformResponse: transform }
@@ -221,9 +244,10 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     */
     .factory('SupportInfo', function ($resource, Transform) {
         var transform = Transform('supportInfo', 'details');
-        return $resource('/api/billing/:id/supportInfo',
+        return $resource('/api/billing/:prefix-:accountNumber/supportInfo',
             {
-                id: '@id'
+                accountNumber: '@accountNumber',
+                prefix: '020'
             },
             {
                 get: { method: 'GET', transformResponse: transform }
@@ -242,9 +266,10 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     */
     .factory('PurchaseOrder', function ($resource, Transform) {
         var transform = Transform('purchaseOrders.purchaseOrder', 'details');
-        var purchaseOrder = $resource('/api/billing/:id/purchaseOrders/:purchaseOrderId',
+        var purchaseOrder = $resource('/api/billing/:prefix-:accountNumber/purchaseOrders/:purchaseOrderId',
             {
-                id: '@id',
+                accountNumber: '@accountNumber',
+                prefix: '020',
                 purchaseOrderId: '@purchaseOrderId'
             },
             {
@@ -254,18 +279,18 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
             }
         );
 
-        purchaseOrder.createPO = function (id, purchaseOrderId, success, error) {
+        purchaseOrder.createPO = function (accountNumber, purchaseOrderId, success, error) {
             return purchaseOrder.create({
-                id: id
+                accountNumber: accountNumber
             }, {
                 purchaseOrder: {
                     poNumber: purchaseOrderId
                 }
             }, success, error);
         };
-        purchaseOrder.disablePO = function (id, purchaseOrderId, success, error) {
+        purchaseOrder.disablePO = function (accountNumber, purchaseOrderId, success, error) {
             return purchaseOrder.disable({
-                id: id,
+                accountNumber: accountNumber,
                 purchaseOrderId: purchaseOrderId
             }, null, success, error);
         };
