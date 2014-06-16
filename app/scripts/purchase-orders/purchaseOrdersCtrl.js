@@ -20,8 +20,7 @@ angular.module('billingApp')
     .controller('PurchaseOrdersCtrl', function ($scope, $routeParams, PurchaseOrder, CurrentPurchaseOrderFilter,
         rxSortUtil, AccountNumberUtil, PageTracking, DATE_FORMAT) {
 
-        var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber),
-            defaultParam = { id: RAN };
+        var defaultParam = { accountNumber: $routeParams.accountNumber };
 
         var sortCol = function (predicate) {
                 return rxSortUtil.sortCol($scope, predicate);

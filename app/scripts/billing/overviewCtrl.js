@@ -39,13 +39,6 @@ angular.module('billingApp')
         AccountNumberUtil, rxPromiseNotifications,
         DATE_FORMAT, STATUS_MESSAGES) {
 
-        // TODO: This should be handled at the $resource level, so that the controller
-        // passes the $routeParams.accountNumber, and the resource retrieves the type of
-        // account number it needs.
-        var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber),
-            RCN = AccountNumberUtil.getRCN($routeParams.accountNumber),
-            accountType = AccountNumberUtil.getAccountType($routeParams.accountNumber);
-
         var setPaymentInfo = function (result) {
                 // Get Current Due from Account Information, first promise of $q.all
                 $scope.paymentAmount = result[0].amountDue;
@@ -54,7 +47,7 @@ angular.module('billingApp')
                 $scope.paymentMethod = DefaultPaymentMethodFilter(result[1]);
             },
             postPayment = function (amount, methodId) {
-                $scope.paymentResult = Payment.makePayment(RAN, amount, methodId);
+                $scope.paymentResult = Payment.makePayment($scope.accountNumber, amount, methodId);
                 rxPromiseNotifications.add($scope.paymentResult.$promise, {
                     loading: STATUS_MESSAGES.payment.load,
                     success: STATUS_MESSAGES.payment.success,
@@ -82,16 +75,16 @@ angular.module('billingApp')
         $scope.postPayment = postPayment;
 
         // Get Account & Contact Info
-        $scope.account = Account.get({ id: RCN, type: accountType });
-        $scope.contacts = Contact.list({ id: RCN, type: accountType, role: 'BILLING' }, billingContacts);
-        $scope.supportAccount = SupportAccount.get({ id: RCN });
-        $scope.supportRoles = SupportRoles.list({ id: RCN }, accountManager);
+        $scope.account = Account.get({ accountNumber: $scope.accountNumber });
+        $scope.contacts = Contact.list({ accountNumber: $scope.accountNumber, role: 'BILLING' }, billingContacts);
+        $scope.supportAccount = SupportAccount.get({ accountNumber: $scope.accountNumber });
+        $scope.supportRoles = SupportRoles.list({ accountNumber: $scope.accountNumber }, accountManager);
 
-        $scope.balance = Balance.get({ id: RAN });
-        $scope.contractEntity = ContractEntity.get({ id: RAN });
-        $scope.supportInfo = SupportInfo.get({ id: RAN });
+        $scope.balance = Balance.get({ accountNumber: $scope.accountNumber });
+        $scope.contractEntity = ContractEntity.get({ accountNumber: $scope.accountNumber });
+        $scope.supportInfo = SupportInfo.get({ accountNumber: $scope.accountNumber });
 
-        $scope.paymentMethods = PaymentMethod.list({ id: RAN });
+        $scope.paymentMethods = PaymentMethod.list({ accountNumber: $scope.accountNumber });
 
         // Group the promises in $q.all for a global error message if any errors occur
         rxPromiseNotifications.add($q.all([

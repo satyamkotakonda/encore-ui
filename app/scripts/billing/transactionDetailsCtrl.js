@@ -39,9 +39,9 @@ angular.module('billingApp')
         $scope.defaultDateFormat = DATE_FORMAT;
 
         // Get Account & Transactions Info
-        $scope.transactions = Transaction.get({
-            id: $routeParams.accountNumber,
-            transactionNumber: $routeParams.transactionNumber,
-            transactionType: $routeParams.transactionType + 's'
-        });
+        $scope.transaction = Transaction.getDetails(
+            $routeParams.accountNumber,
+            $routeParams.transactionType,
+            $routeParams.transactionNumber
+        );
     });

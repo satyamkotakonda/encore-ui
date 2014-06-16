@@ -39,8 +39,7 @@ angular.module('billingApp')
         };
     }).controller('PurchaseOrderDisableCtrl', function ($scope, $routeParams, PurchaseOrder,
         rxNotify, BillingErrorResponse, AccountNumberUtil, STATUS_MESSAGES) {
-        var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber),
-            notifyInstances = {},
+        var notifyInstances = {},
             defaultStackName = 'purchaseOrderDisable';
 
         // Clears the notifications stacks that are being used by this controller
@@ -86,10 +85,10 @@ angular.module('billingApp')
                     loading: true
                 });
 
-                $scope.newPO = PurchaseOrder.disablePO(RAN,
-                                                   $scope.currentPurchaseOrder,
-                                                   disableSuccess,
-                                                   disableError);
+                $scope.newPO = PurchaseOrder.disablePO($routeParams.accountNumber,
+                                                       $scope.currentPurchaseOrder,
+                                                       disableSuccess,
+                                                       disableError);
 
                 $scope.newPO.$promise.finally(function () {
                     rxNotify.dismiss(notifyInstances.loading);
