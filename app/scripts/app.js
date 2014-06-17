@@ -18,7 +18,9 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                 controller: 'TransactionsCtrl'
             })
             .when('/transactions/:accountNumber/:transactionType/:transactionNumber', {
-                templateUrl: 'views/billing/transactionDetails.html',
+                templateUrl: function ($routeParams) {
+                    return 'views/billing/transactions/' + $routeParams.transactionType + '.html';
+                },
                 controller: 'TransactionDetailsCtrl'
             })
             .when('/usage/:accountNumber', {
