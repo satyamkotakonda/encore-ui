@@ -1,0 +1,104 @@
+<rx-page title="'Billing - ' + transaction.refund.tranRefNum + ' - Refund'" subtitle="'On account ' + account.name">
+    <div class="section billing-info">
+        <dl class="list-definition pull-left">
+            <dt class="accent">Refund Amount:</dt>
+            <dd class="accent accent-group">
+                <span class="accent-text">
+                    <span ng-if="transaction.refund.amount">
+                        {{transaction.refund.amount | currency }} {{balance.currency}}
+                    </span>
+                    <span ng-if="!transaction.refund.amount">
+                        N/A
+                    </span>
+                </span>
+            </dd>
+            <dt>Posted On:</dt>
+            <dd ng-if="transaction.refund.tranDate">{{transaction.refund.tranDate | date:'longDate' }}</dd>
+            <dd ng-if="!transaction.refund.tranDate">N/A</dd>
+            <dt>Reason:</dt>
+            <dd ng-if="transaction.refund.reasonCode">{{transaction.refund.reasonCode }}</dd>
+            <dd ng-if="!transaction.refund.reasonCode">N/A</dd>
+            <!-- <dt>Business Unit:</dt>
+            <dd ng-if="transaction.refund.reasonCode">{{transaction.refund.reasonCode }}</dd>
+            <dd ng-if="!transaction.refund.reasonCode">N/A</dd> -->
+            <dt>Applied To:</dt>
+            <dd ng-if="transaction.refund.methodType">{{transaction.refund.methodType }}</dd>
+            <dd ng-if="!transaction.refund.methodType">N/A</dd>
+            
+        </dl>
+    </div>
+    <div class="section billing-transaction" ng-show="transaction.refund.itemReferences.itemReference.length > 0">
+        <hr />
+        <table class="table transaction-list">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="sortCol"
+                            sort-property="tranRefNum"
+                            predicate="sort.predicate"
+                            reverse="sort.reverse">
+                            Reference #
+                        </rx-sortable-column>
+                    </th>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="sortCol"
+                            sort-property="tranDate"
+                            predicate="sort.predicate"
+                            reverse="sort.reverse">
+                            Date
+                        </rx-sortable-column>
+                    </th>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="sortCol"
+                            sort-property="type"
+                            predicate="sort.predicate"
+                            reverse="sort.reverse">
+                            Type
+                        </rx-sortable-column>
+                    </th>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="sortCol"
+                            sort-property="amountApplied"
+                            predicate="sort.predicate"
+                            reverse="sort.reverse">
+                            Amount Applied
+                        </rx-sortable-column>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="txn in transaction.refund.itemReferences.itemReference | orderBy:sort.predicate:sort.reverse" class="{{ txn.type | lowercase }}">
+                    <td>
+                        <a href="transactions/{{ accountNumber }}/{{ txn.type | lowercase }}/{{ txn.id }}">
+                        {{ txn.tranRefNum }}
+                        </a>
+                    </td>
+                    <td>{{ txn.dateDate | date: defaultDateFormat }}</td>
+                    <td>{{ txn.type }}</td>
+                    <td class="currency">{{ txn.amountApplied | currency }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="section" ng-show="transaction.refund.comments">
+        <hr />
+        <h3 class="section-title">
+            Notes
+        </h3>
+        <table class="table notes-table">
+            <th>
+                <h3>{{ transaction.refund.rackerSSO }}</h3>
+                <small>
+                {{ transaction.refund.tranDate | date: 'shortDate' }} at {{ transaction.refund.tranDate | date: 'shortTime' }}
+                </small>
+            </th>
+            <td>
+                <p>{{ transaction.refund.comments }}</p>
+            </td>
+        </table>
+    </div>
+</rx-page>
