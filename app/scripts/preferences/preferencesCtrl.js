@@ -18,17 +18,14 @@ angular.module('billingApp')
     .controller('PreferencesCtrl', function ($scope, $routeParams, BillInfo, PaymentInfo,
         AccountNumberUtil, rxPromiseNotifications) {
 
-        var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber),
-            defaultParam = { id: RAN };
-
         var isResourceLoading = function (res1, res2) {
                 return res1.$resolved === false || (res2 !== undefined && res2.$resolved === false);
             },
             updatePreferences = function () {
-                $scope.billInfoUpdate = BillInfo.updateInvoiceDeliveryMethod(defaultParam,
-                                                                            $scope.billInfo.invoiceDeliveryMethod);
-                $scope.paymentInfoUpdate = PaymentInfo.updateNotificationOption(defaultParam,
-                                                                            $scope.paymentInfo.notificationOption);
+                $scope.billInfoUpdate = BillInfo.updateInvoiceDeliveryMethod($routeParams.accountNumber,
+                                                                             $scope.billInfo.invoiceDeliveryMethod);
+                $scope.paymentInfoUpdate = PaymentInfo.updateNotificationOption($routeParams.accountNumber,
+                                                                                $scope.paymentInfo.notificationOption);
 
                 rxPromiseNotifications.add($scope.billInfoUpdate.$promise, {
                     loading: '',
@@ -44,8 +41,8 @@ angular.module('billingApp')
         $scope.updatePreferences = updatePreferences;
         $scope.isResourceLoading = isResourceLoading;
 
-        $scope.billInfo = BillInfo.get(defaultParam);
-        $scope.paymentInfo = PaymentInfo.get(defaultParam);
+        $scope.billInfo = BillInfo.get({ accountNumber: $routeParams.accountNumber });
+        $scope.paymentInfo = PaymentInfo.get({ accountNumber: $routeParams.accountNumber });
 
         rxPromiseNotifications.add($scope.billInfo.$promise, {
             loading: '',

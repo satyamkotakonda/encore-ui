@@ -25,7 +25,7 @@ describe('Billing: TransactionDetailsCtrl', function () {
             account = Account;
 
             account.get = sinon.stub(account, 'get', getResourceMock({}));
-            transaction.get = sinon.stub(transaction, 'get', getResourceMock({}));
+            transaction.getDetails = sinon.stub(transaction, 'getDetails', getResourceMock({}));
 
             ctrl = $controller('TransactionDetailsCtrl',{
                 $scope: scope,
@@ -51,7 +51,7 @@ describe('Billing: TransactionDetailsCtrl', function () {
     });
 
     it('TransactionDetailsCtrl should get account info', function () {
-        sinon.assert.calledOnce(transaction.get);
+        sinon.assert.calledOnce(transaction.getDetails);
     });
 
     it('TransactionDetailsCtrl should return a sorting predicate when calling sortCol', function () {

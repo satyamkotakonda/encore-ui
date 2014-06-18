@@ -39,8 +39,7 @@ angular.module('billingApp')
         };
     }).controller('PurchaseOrderCreateCtrl', function ($scope, $routeParams, PurchaseOrder,
         rxNotify, BillingErrorResponse, AccountNumberUtil, STATUS_MESSAGES) {
-        var RAN = AccountNumberUtil.getRAN($routeParams.accountNumber),
-            notifyInstances = {},
+        var notifyInstances = {},
             defaultStackName = 'purchaseOrderCreate';
 
         // Clears the notifications stacks that are being used by this controller
@@ -86,10 +85,10 @@ angular.module('billingApp')
                     loading: true
                 });
 
-                $scope.newPO = PurchaseOrder.createPO(RAN,
-                                                   $scope.fields.purchaseOrderNumber,
-                                                   createSuccess,
-                                                   createError);
+                $scope.newPO = PurchaseOrder.createPO($routeParams.accountNumber,
+                                                      $scope.fields.purchaseOrderNumber,
+                                                      createSuccess,
+                                                      createError);
 
                 $scope.newPO.$promise.finally(function () {
                     rxNotify.dismiss(notifyInstances.loading);
