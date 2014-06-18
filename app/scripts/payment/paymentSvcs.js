@@ -9,9 +9,10 @@ angular.module('paymentSvcs', ['ngResource', 'rxGenericUtil'])
      */
     .factory('PaymentMethod', function ($resource, Transform) {
         var transform = Transform('methods.method', 'badRequest.details');
-        return $resource('/api/payment/:id/methods/:methodId',
+        return $resource('/api/payment/:prefix-:accountNumber/methods/:methodId',
             {
-                id: '@id'
+                accountNumber: '@accountNumber',
+                prefix: '020'
             },
             {
                 list: { method: 'GET', isArray: true, transformResponse: transform },

@@ -1,10 +1,10 @@
 describe('Billing: billingSvcs', function () {
-    var paymentInfo, billInfo, purchaseOrder, poUtil, payment, billErrorResp, msg;
+    var paymentInfo, billInfo, purchaseOrder, poUtil, payment, transaction, billErrorResp, msg;
     beforeEach(function () {
         module('constants');
         module('billingSvcs');
 
-        inject(function (PaymentInfo, BillInfo, PurchaseOrder, PurchaseOrderUtil, Payment,
+        inject(function (PaymentInfo, BillInfo, PurchaseOrder, PurchaseOrderUtil, Transaction, Payment,
             BillingErrorResponse, STATUS_MESSAGES) {
             paymentInfo = PaymentInfo;
             billInfo = BillInfo;
@@ -12,16 +12,17 @@ describe('Billing: billingSvcs', function () {
             poUtil = PurchaseOrderUtil;
             payment = Payment;
             billErrorResp = BillingErrorResponse;
+            transaction = Transaction;
             msg = STATUS_MESSAGES;
         });
     });
 
     it('billingSvcs PaymentInfo.updateNotificationOption should return PaymentInfo resource ', function () {
-        expect(paymentInfo.updateNotificationOption({ id: '12345' }, 'OPT_IN')).to.be.instanceof(paymentInfo);
+        expect(paymentInfo.updateNotificationOption('12345', 'OPT_IN')).to.be.instanceof(paymentInfo);
     });
 
     it('billingSvcs BillInfo.updateInvoiceDeliveryMethod should return BillInfo resource ', function () {
-        expect(billInfo.updateInvoiceDeliveryMethod({ id: '12345' }, 'PAPERLESS')).to.be.instanceof(billInfo);
+        expect(billInfo.updateInvoiceDeliveryMethod('12345', 'PAPERLESS')).to.be.instanceof(billInfo);
     });
 
     it('billingSvcs PurchaseOrder.createPO should return PurchaseOrder resource ', function () {
@@ -34,6 +35,10 @@ describe('Billing: billingSvcs', function () {
 
     it('billingSvcs Payment.makePayment should return Payment resource ', function () {
         expect(payment.makePayment('12345', '1000', 'urn:uuid:aaaaaa')).to.be.instanceof(payment);
+    });
+
+    it('billingSvcs Transaction.getDetails should return Transaction resource ', function () {
+        expect(transaction.getDetails('12345','payments', 'uuid')).to.be.instanceof(transaction);
     });
 
     it('billingSvcs PurchaseOrderUtil.isCurrent should return true if current PO ', function () {

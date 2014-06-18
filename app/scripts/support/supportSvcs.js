@@ -8,7 +8,7 @@ angular.module('supportSvcs', ['ngResource', 'rxGenericUtil'])
     * @requires $resource - AngularJS service to extend the $http and wrap AJAX calls to API's.
     */
     .factory('SupportAccount', function ($resource) {
-        return $resource('/api/support/support-accounts/:id');
+        return $resource('/api/support/support-accounts/:accountNumber');
     })
     /**
     * @ngdoc service
@@ -20,7 +20,7 @@ angular.module('supportSvcs', ['ngResource', 'rxGenericUtil'])
     */
     .factory('SupportRoles', function ($resource, Transform) {
         var transform = Transform('items', '');
-        return $resource('/api/support/support-accounts/:id/roles',
+        return $resource('/api/support/support-accounts/:accountNumber/roles',
             {
                 number: '@number'
             },
