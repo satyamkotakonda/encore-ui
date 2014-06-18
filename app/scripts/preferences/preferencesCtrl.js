@@ -16,12 +16,15 @@ angular.module('billingApp')
     * </pre>
     */
     .controller('PreferencesCtrl', function ($scope, $routeParams, BillInfo, PaymentInfo,
-        AccountNumberUtil, rxPromiseNotifications) {
+        AccountNumberUtil, rxPromiseNotifications, rxNotify) {
 
         var isResourceLoading = function (res1, res2) {
                 return res1.$resolved === false || (res2 !== undefined && res2.$resolved === false);
             },
             updatePreferences = function () {
+                if (_.isArray(rxNotify.stacks['preferencePage'])) {
+                    rxNotify.clear('preferencePage');
+                }
                 $scope.billInfoUpdate = BillInfo.updateInvoiceDeliveryMethod($routeParams.accountNumber,
                                                                              $scope.billInfo.invoiceDeliveryMethod);
                 $scope.paymentInfoUpdate = PaymentInfo.updateNotificationOption($routeParams.accountNumber,
