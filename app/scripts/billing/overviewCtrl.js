@@ -39,6 +39,9 @@ angular.module('billingApp')
         AccountNumberUtil, rxPromiseNotifications,
         DATE_FORMAT, STATUS_MESSAGES) {
 
+        $scope.accountNumber = $routeParams.accountNumber;
+        var defaultParams = { accountNumber: $routeParams.accountNumber };
+
         var setPaymentInfo = function (result) {
                 // Get Current Due from Account Information, first promise of $q.all
                 $scope.paymentAmount = result[0].amountDue;
@@ -75,16 +78,16 @@ angular.module('billingApp')
         $scope.postPayment = postPayment;
 
         // Get Account & Contact Info
-        $scope.account = Account.get({ accountNumber: $scope.accountNumber });
-        $scope.contacts = Contact.list({ accountNumber: $scope.accountNumber, role: 'BILLING' }, billingContacts);
-        $scope.supportAccount = SupportAccount.get({ accountNumber: $scope.accountNumber });
-        $scope.supportRoles = SupportRoles.list({ accountNumber: $scope.accountNumber }, accountManager);
+        $scope.account = Account.get(defaultParams);
+        $scope.contacts = Contact.list(_.extend({ role: 'BILLING' }, defaultParams), billingContacts);
+        $scope.supportAccount = SupportAccount.get(defaultParams);
+        $scope.supportRoles = SupportRoles.list(defaultParams, accountManager);
 
-        $scope.balance = Balance.get({ accountNumber: $scope.accountNumber });
-        $scope.contractEntity = ContractEntity.get({ accountNumber: $scope.accountNumber });
-        $scope.supportInfo = SupportInfo.get({ accountNumber: $scope.accountNumber });
+        $scope.balance = Balance.get(defaultParams);
+        $scope.contractEntity = ContractEntity.get(defaultParams);
+        $scope.supportInfo = SupportInfo.get(defaultParams);
 
-        $scope.paymentMethods = PaymentMethod.list({ accountNumber: $scope.accountNumber });
+        $scope.paymentMethods = PaymentMethod.list(defaultParams);
 
         // Group the promises in $q.all for a global error message if any errors occur
         rxPromiseNotifications.add($q.all([
