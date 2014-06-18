@@ -37,6 +37,7 @@ angular.module('billingApp')
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES) {
 
         $scope.accountNumber = $routeParams.accountNumber;
+        var defaultParams = { accountNumber: $routeParams.accountNumber };
 
         // Action for clearing the filters
         var resetPager = function () {
@@ -82,13 +83,13 @@ angular.module('billingApp')
         $scope.clearFilter = clearFilter;
 
         // Get Account & Transactions Info
-        $scope.billInfo = BillInfo.get({ accountNumber: $routeParams.accountNumber });
-        $scope.paymentInfo = PaymentInfo.get({ accountNumber: $routeParams.accountNumber });
-        $scope.account = Account.get({ accountNumber: $routeParams.accountNumber });
-        $scope.balance = Balance.get({ accountNumber: $routeParams.accountNumber });
-        $scope.transactions = Transaction.list({ accountNumber: $routeParams.accountNumber });
-        $scope.paymentMethods = PaymentMethod.list({ accountNumber: $routeParams.accountNumber });
-        $scope.billingPeriods = Period.list({ accountNumber: $routeParams.accountNumber });
+        $scope.billInfo = BillInfo.get(defaultParams);
+        $scope.paymentInfo = PaymentInfo.get(defaultParams);
+        $scope.account = Account.get(defaultParams);
+        $scope.balance = Balance.get(defaultParams);
+        $scope.transactions = Transaction.list(defaultParams);
+        $scope.paymentMethods = PaymentMethod.list(defaultParams);
+        $scope.billingPeriods = Period.list(defaultParams);
 
         // Group the promises in $q.all for a global error message if any errors occur
         rxPromiseNotifications.add($q.all([
