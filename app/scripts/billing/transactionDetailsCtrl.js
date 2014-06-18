@@ -38,8 +38,8 @@ angular.module('billingApp')
         // Default Date Format
         $scope.defaultDateFormat = DATE_FORMAT;
 
-        $scope.account = Account.get({ id: $routeParams.accountNumber });
-        $scope.balance = Balance.get({ id: $routeParams.accountNumber });
+        $scope.account = Account.get({ accountNumber: $routeParams.accountNumber });
+        $scope.balance = Balance.get({ accountNumber: $routeParams.accountNumber });
 
         // Get Account & Transactions Info
         $scope.transaction = Transaction.getDetails(
