@@ -32,7 +32,7 @@ angular.module('constants', [])
         }
     })
     .constant('DATE_FORMAT', 'MM / dd / yyyy')
-    .constant('TRANSACTION_TYPES', ['Payment', 'Invoice', 'Reversal', 'Adjustment', 'Writeoff', 'Refund'])
-    .constant('TRANSACTION_STATUSES', ['Open', 'Closed', 'Pending', 'None'])
+    .constant('TRANSACTION_TYPES', ['PAYMENT', 'INVOICE', 'REVERSAL', 'ADJUSTMENT', 'WRITE OFF', 'REFUND'])
+    .constant('TRANSACTION_STATUSES', ['OPEN', 'CLOSED', 'PENDING', 'NONE'])
     .constant('LOADING_MSG', 'Loading...')
     .constant('NOTFOUND_MSG', '(Not found in Account)');

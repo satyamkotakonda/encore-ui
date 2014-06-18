@@ -1,5 +1,5 @@
 describe('BillingFilters', function () {
-    var table, currencySuffix, currentPO, closedPO, createTransactions;
+    var table, currencySuffix, currentPO, closedPO, createTransactions, tranType;
 
     var purchaseOrders;
 
@@ -7,11 +7,12 @@ describe('BillingFilters', function () {
         module('billingApp');
 
         inject(function (TransactionTableFilter, CurrencySuffixFilter,
-            CurrentPurchaseOrderFilter, ClosedPurchaseOrdersFilter) {
+            CurrentPurchaseOrderFilter, ClosedPurchaseOrdersFilter, TransactionTypeFilter) {
             table = TransactionTableFilter;
             currencySuffix = CurrencySuffixFilter;
             currentPO = CurrentPurchaseOrderFilter;
             closedPO = ClosedPurchaseOrdersFilter;
+            tranType = TransactionTypeFilter;
 
             purchaseOrders = [{
                 'poNumber': '1234567',
@@ -31,7 +32,7 @@ describe('BillingFilters', function () {
 
     it('TransactionTable filter should return same number of rows passed when no filter applied', function () {
         var actions = createTransactions();
-        expect(table(actions).length).to.be.eq(actions.length);
+        expect(table(actions).length).to.eq(actions.length);
     });
 
     it('TransactionTable filter should filter results', function () {
@@ -44,15 +45,15 @@ describe('BillingFilters', function () {
         endTestDate.setMonth(now.getMonth() - 3);
 
         expect(actions).to.not.be.empty;
-        expect(table(actions, { type: 'Payment' }).length).to.be.eq(3);
-        expect(table(actions, { status: 'Paid' }).length).to.be.eq(5);
-        expect(table(actions, { reference: '76' }).length).to.be.eq(2);
-        expect(table(actions, { reference: '0', status: 'Paid' }).length).to.be.eq(4);
-        expect(table(actions, { period: '-1' }).length).to.be.eq(4);
-        expect(table(actions, { period: '-3' }).length).to.be.eq(9);
-        expect(table(actions, { period: startTestDate.toJSON() }).length).to.be.eq(4);
-        expect(table(actions, { period: endTestDate.toJSON() }).length).to.be.eq(9);
-        expect(table(actions, { period: startTestDate.toJSON() + '|' + endTestDate.toJSON() }).length).to.be.eq(8);
+        expect(table(actions, { type: 'Payment' }).length).to.eq(3);
+        expect(table(actions, { status: 'Paid' }).length).to.eq(5);
+        expect(table(actions, { reference: '76' }).length).to.eq(2);
+        expect(table(actions, { reference: '0', status: 'Paid' }).length).to.eq(4);
+        expect(table(actions, { period: '-1' }).length).to.eq(4);
+        expect(table(actions, { period: '-3' }).length).to.eq(9);
+        expect(table(actions, { period: startTestDate.toJSON() }).length).to.eq(4);
+        expect(table(actions, { period: endTestDate.toJSON() }).length).to.eq(9);
+        expect(table(actions, { period: startTestDate.toJSON() + '|' + endTestDate.toJSON() }).length).to.eq(8);
     });
 
     it('CurrencySuffix filter should exist', function () {
@@ -61,11 +62,11 @@ describe('BillingFilters', function () {
     });
 
     it('CurrencySuffix filter should format number values into their prefixed forms', function () {
-        expect(currencySuffix(2124)).to.be.eq('$2,124.00');
-        expect(currencySuffix(381492513)).to.be.eq('$381.49m');
-        expect(currencySuffix(25145)).to.be.eq('$25.15k');
-        expect(currencySuffix(12315100000)).to.be.eq('$12.32b');
-        expect(currencySuffix(-1359314.12)).to.be.eq('($1.36)m');
+        expect(currencySuffix(2124)).to.eq('$2,124.00');
+        expect(currencySuffix(381492513)).to.eq('$381.49m');
+        expect(currencySuffix(25145)).to.eq('$25.15k');
+        expect(currencySuffix(12315100000)).to.eq('$12.32b');
+        expect(currencySuffix(-1359314.12)).to.eq('($1.36)m');
     });
 
     it('CurrentPurchaseOrder filter should exist', function () {
@@ -83,8 +84,29 @@ describe('BillingFilters', function () {
     });
 
     it('ClosedPurchaseOrder filter should filter results by those that are not current', function () {
-        expect(closedPO(purchaseOrders).length).to.be.eq(1);
+        expect(closedPO(purchaseOrders).length).to.eq(1);
         expect(_.first(closedPO(purchaseOrders))).to.be.an.object;
+    });
+
+    it('TransactionType filter should return the transaction type in lowercase + plural form', function () {
+        expect(tranType('INVOICE')).to.eq('invoices');
+        expect(tranType('PAYMENT')).to.eq('payments');
+        expect(tranType('REVERSAL')).to.eq('reversals');
+        expect(tranType('REFUND')).to.eq('refunds');
+    });
+
+    it('TransactionType filter should properly format write off trantype', function () {
+        expect(tranType('WRITE OFF')).to.eq('writeoffs');
+    });
+
+    it('TransactionType filter should handle adjustment transaction types', function () {
+        expect(tranType('CREDIT')).to.eq('adjustments');
+        expect(tranType('DEBIT')).to.eq('adjustments');
+    });
+
+    it('TransactionType filter not add an extra plural "s" if the trantype is already plural', function () {
+        expect(tranType('INVOICES')).to.not.eq('invoicess');
+        expect(tranType('payments')).to.eq('payments');
     });
 
     createTransactions = function () {

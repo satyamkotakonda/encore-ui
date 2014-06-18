@@ -29,9 +29,12 @@ angular.module('billingApp')
             },
             tFilter = {
                 isRefMatch: function (transaction, filter) {
-                    return filter.reference ? _.contains(transaction.reference, filter.reference) : true;
+                    return filter.reference ? _.contains(transaction.tranRefNum, filter.reference) : true;
                 },
                 isType: function (transaction, filter) {
+                    if (filter.type && filter.type === 'ADJUSTMENT') {
+                        return _.contains(['DEBIT', 'CREDIT'], transaction.type);
+                    }
                     return filter.type ? filter.type === transaction.type : true;
                 },
                 isStatus: function (transaction, filter) {
@@ -92,6 +95,28 @@ angular.module('billingApp')
             return currencyFilter(modulus * value) + (units[unit - 1] || '');
         };
 
+    })
+    /**
+    * @ngdoc filter
+    * @name encore.filter:TransactionType
+    * @description
+    * Formats transaction types as expected by the API
+    *
+    * @param {String} tranType - transaction type
+    */
+    .filter('TransactionType', function () {
+        return function (tranType) {
+            tranType = tranType.toLowerCase();
+            if (tranType === 'write off') {
+                return 'writeoffs';
+            } else if (tranType === 'credit' || tranType === 'debit'){
+                return 'adjustments';
+            }
+            if (_.last(tranType) !== 's') {
+                tranType += 's';
+            }
+            return tranType;
+        };
     })
     /**
     * @ngdoc filter
