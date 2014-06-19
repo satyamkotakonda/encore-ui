@@ -39,6 +39,10 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
             })
             .otherwise({
                 redirectTo: function (params, path) {
+                    if (_.isUndefined(params.accountNumber)) {
+                        $windowProvider.$get().location = '/';
+                        return;
+                    }
                     $windowProvider.$get().location = path;
                 }
             });
