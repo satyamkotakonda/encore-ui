@@ -21,12 +21,12 @@ angular.module('billingApp')
     * </pre>
     */
     .controller('TransactionDetailsCtrl', function ($scope, $routeParams, Transaction, Account,
-        rxSortUtil, DATE_FORMAT) {
+        Balance, PaymentMethod, rxSortUtil, DATE_FORMAT) {
 
         // Action for setting the sort
         var sortCol = function (predicate) {
-                return rxSortUtil.sortCol($scope, predicate);
-            };
+            return rxSortUtil.sortCol($scope, predicate);
+        };
 
         // Pass the account number for building links
         $scope.accountNumber = $routeParams.accountNumber;
@@ -38,10 +38,24 @@ angular.module('billingApp')
         // Default Date Format
         $scope.defaultDateFormat = DATE_FORMAT;
 
+        $scope.account = Account.get({ accountNumber: $routeParams.accountNumber });
+        $scope.balance = Balance.get({ accountNumber: $routeParams.accountNumber });
+
         // Get Account & Transactions Info
         $scope.transaction = Transaction.getDetails(
             $routeParams.accountNumber,
             $routeParams.transactionType,
             $routeParams.transactionNumber
         );
+
+        if ($routeParams.transactionType === 'refunds') {
+            $scope.transaction.$promise.then(function (transaction) {
+                PaymentMethod.get({
+                    accountNumber: $routeParams.accountNumber,
+                    methodId: transaction.refund.methodId
+                }, function (method) {
+                    $scope.transaction.method = method;
+                });
+            });
+        }
     });
