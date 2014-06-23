@@ -4,15 +4,13 @@ module.exports = function(config) {
         // base path, that will be used to resolve files and exclude
         basePath: 'app/',
 
-
         // frameworks to use
         frameworks: ['mocha', 'chai', 'sinon-chai'],
 
-
         // list of files / patterns to load in the browser
         files: [
-            'bower_components/angular/angular.js',
             'bower_components/jquery/jquery.min.js',
+            'bower_components/angular/angular.js',
             'bower_components/angular-animate/angular-animate.js',
             'bower_components/angular-cookies/angular-cookies.js',
             'bower_components/angular-mocks/angular-mocks.js',
@@ -21,12 +19,11 @@ module.exports = function(config) {
             'bower_components/angular-sanitize/angular-sanitize.js',
             'http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.js',
             'bower_components/encore-ui/encore-ui-tpls.min.js',
-            'bower_components/angular-xeditable/dist/js/xeditable.js',
-            'bower_components/angular-rx-data-table/dist/scripts/rx-data-table.js',
             'bower_components/lodash/dist/lodash.js',
-            'bower_components/mousetrap/mousetrap.js',
-            'bower_components/mousetrap-bind-element/mousetrap-bind-element.js',
+            // 'bower_components/mousetrap/mousetrap.js',
+            'bower_components/angular-hotkeys/build/hotkeys.min.js',
             'bower_components/momentjs/moment.js',
+            'scripts/app.js', // always load app definition first
             'modules/**/*.js',
             'scripts/**/*.js',
             '../test/browser-helpers.js',
