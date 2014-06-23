@@ -46,6 +46,7 @@ describe('BillingFilters', function () {
 
         expect(actions).to.not.be.empty;
         expect(table(actions, { type: 'Payment' }).length).to.eq(3);
+        expect(table(actions, { type: 'ADJUSTMENT' }).length).to.eq(3);
         expect(table(actions, { status: 'Paid' }).length).to.eq(5);
         expect(table(actions, { reference: '76' }).length).to.eq(2);
         expect(table(actions, { reference: '0', status: 'Paid' }).length).to.eq(4);
@@ -120,7 +121,7 @@ describe('BillingFilters', function () {
 
         return [
             {
-                'reference': '81931301',
+                'tranRefNum': '81931301',
                 'date': today.toJSON(),
                 'type': 'Payment',
                 'status': 'Settled',
@@ -128,7 +129,7 @@ describe('BillingFilters', function () {
                 'balance': 0
             },
             {
-                'reference': '50977603',
+                'tranRefNum': '50977603',
                 'date': lastMonth.toJSON(),
                 'type': 'Payment',
                 'status': 'Settled',
@@ -136,7 +137,7 @@ describe('BillingFilters', function () {
                 'balance': 0
             },
             {
-                'reference': '26034609',
+                'tranRefNum': '26034609',
                 'date': lastMonth.toJSON(),
                 'type': 'Reversal',
                 'status': 'Paid',
@@ -144,7 +145,7 @@ describe('BillingFilters', function () {
                 'balance': 4.12360714841634
             },
             {
-                'reference': '59400044',
+                'tranRefNum': '59400044',
                 'date': lastMonth.toJSON(),
                 'type': 'Invoice',
                 'status': 'Paid',
@@ -152,7 +153,7 @@ describe('BillingFilters', function () {
                 'balance': -7.648627933580428
             },
             {
-                'reference': '98975138',
+                'tranRefNum': '98975138',
                 'date': lastMonth1Day.toJSON(),
                 'type': 'Payment',
                 'status': 'Settled',
@@ -160,7 +161,7 @@ describe('BillingFilters', function () {
                 'balance': -4.648627933580428
             },
             {
-                'reference': '72341094',
+                'tranRefNum': '72341094',
                 'date': lastMonth1Day.toJSON(),
                 'type': 'Invoice',
                 'status': 'Paid',
@@ -168,25 +169,25 @@ describe('BillingFilters', function () {
                 'balance': -1.648627933580428
             },
             {
-                'reference': '41400002',
+                'tranRefNum': '41400002',
                 'date': lastMonth1Day.toJSON(),
-                'type': 'Adjustment',
+                'type': 'CREDIT',
                 'status': 'Paid',
                 'amount': -31.772235081996769,
                 'balance': -3.648627933580428
             },
             {
-                'reference': '59896376',
+                'tranRefNum': '59896376',
                 'date': threeMonth.toJSON(),
-                'type': 'Adjustment',
+                'type': 'DEBIT',
                 'status': 'Paid',
                 'amount': -7.3051205445081,
                 'balance': -14.953748478088528
             },
             {
-                'reference': '62985984',
+                'tranRefNum': '62985984',
                 'date': threeMonth.toJSON(),
-                'type': 'Adjustment',
+                'type': 'CREDIT',
                 'status': 'Unpaid',
                 'amount': -13.849712662864476,
                 'balance': -28.803461140953004
