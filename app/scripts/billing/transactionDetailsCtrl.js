@@ -25,8 +25,8 @@ angular.module('billingApp')
 
         // Action for setting the sort
         var sortCol = function (predicate) {
-                return rxSortUtil.sortCol($scope, predicate);
-            };
+            return rxSortUtil.sortCol($scope, predicate);
+        };
 
         // Pass the account number for building links
         $scope.accountNumber = $routeParams.accountNumber;
