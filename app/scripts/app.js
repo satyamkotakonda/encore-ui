@@ -2,7 +2,7 @@
 angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.tpls',
         'rxSwitch', 'encore.ui.rxPopover', 'billingSvcs', 'paymentSvcs', 'supportSvcs',
         'customerAdminSvcs', 'constants', 'productConstants'])
-    .config(function ($httpProvider, $routeProvider, $locationProvider, $windowProvider) {
+    .config(function ($httpProvider, $routeProvider, $locationProvider) {
         // Add Interceptors for auth
         $httpProvider.interceptors.push('TokenInterceptor');
         $httpProvider.interceptors.push('UnauthorizedInterceptor');
@@ -38,15 +38,6 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
             .when('/preferences/:accountNumber', {
                 templateUrl: 'views/preferences/preferences.html',
                 controller: 'PreferencesCtrl'
-            })
-            .otherwise({
-                redirectTo: function (params, path) {
-                    if (_.isUndefined(params.accountNumber)) {
-                        $windowProvider.$get().location = '/';
-                        return;
-                    }
-                    $windowProvider.$get().location = path;
-                }
             });
 
         $locationProvider.html5Mode(true).hashPrefix('!');
