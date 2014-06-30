@@ -24,7 +24,7 @@ module.exports = {
                 https: true,
                 changeOrigin: true,
                 rewrite: {
-                    '/api/payment': '/v1/accounts'
+                    '/api/payment': '/v1'
                 }
             }
         ].concat(config.defaultProxies),

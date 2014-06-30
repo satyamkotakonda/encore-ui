@@ -24,17 +24,19 @@
             <dt>Applied To:</dt>
             <dd ng-if="transaction.refund.methodType">{{transaction.refund.methodType }}</dd>
             <dd ng-if="!transaction.refund.methodType">N/A</dd>
-            
+
         </dl>
+        <rx-payment-method-details></rx-payment-method-details>
     </div>
     <div class="section billing-transaction" ng-show="transaction.refund.itemReferences.itemReference.length > 0">
+        <h3 class="section-title">Transactions Impacted</h3>
         <hr />
         <table class="table transaction-list">
             <thead>
                 <tr>
                     <th scope="col">
                         <rx-sortable-column
-                            sort-method="sortCol"
+                            sort-method="sortCol(property)"
                             sort-property="tranRefNum"
                             predicate="sort.predicate"
                             reverse="sort.reverse">
@@ -43,7 +45,7 @@
                     </th>
                     <th scope="col">
                         <rx-sortable-column
-                            sort-method="sortCol"
+                            sort-method="sortCol(property)"
                             sort-property="tranDate"
                             predicate="sort.predicate"
                             reverse="sort.reverse">
@@ -52,7 +54,7 @@
                     </th>
                     <th scope="col">
                         <rx-sortable-column
-                            sort-method="sortCol"
+                            sort-method="sortCol(property)"
                             sort-property="type"
                             predicate="sort.predicate"
                             reverse="sort.reverse">
@@ -61,7 +63,7 @@
                     </th>
                     <th scope="col">
                         <rx-sortable-column
-                            sort-method="sortCol"
+                            sort-method="sortCol(property)"
                             sort-property="amountApplied"
                             predicate="sort.predicate"
                             reverse="sort.reverse">
