@@ -25,7 +25,7 @@
             <dd ng-if="transaction.payment.methodType">{{transaction.payment.methodType}}</dd>
             <dd ng-if="!transaction.payment.methodType">N/A</dd>
         </dl>
-        <rx-payment-method></rx-payment-method>
+        <rx-payment-method-details></rx-payment-method-details>
     </div>
     <div class="section billing-transaction" ng-show="transaction.payment.itemReferences.itemReference.length > 0">
         <h3 class="section-title">Transactions Impacted</h3>

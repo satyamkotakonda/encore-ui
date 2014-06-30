@@ -1,15 +1,15 @@
 angular.module('billingApp')
     /**
      * @ngdoc directive
-     * @name billingApp:rxPaymentMethod
+     * @name billingApp:rxPaymentMethodDetails
      * @restrict E
      *
      * @description
      * Shows details for the relevant payment method
      */
-    .directive('rxPaymentMethod', function () {
+    .directive('rxPaymentMethodDetails', function () {
         return {
             restrict: 'E',
-            templateUrl: '/billing/views/payment/paymentMethod.html',
+            templateUrl: '/billing/views/payment/paymentMethodDetails.html',
         };
     });
