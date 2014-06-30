@@ -1,7 +1,7 @@
 angular.module('paymentSvcs', ['ngResource', 'rxGenericUtil'])
     /**
      * @ngdoc service
-     * @name billingSvcs.Payment
+     * @name paymentSvcs.PaymentMethod
      * @description
      * Payment Method Service for interaction with Billing API
      *
@@ -9,13 +9,15 @@ angular.module('paymentSvcs', ['ngResource', 'rxGenericUtil'])
      */
     .factory('PaymentMethod', function ($resource, Transform) {
         var transform = Transform('methods.method', 'badRequest.details');
-        return $resource('/api/payment/:prefix-:accountNumber/methods/:methodId',
+        var transformMethod = Transform('method');
+        return $resource('/api/payment/accounts/:prefix-:accountNumber/methods/:methodId',
             {
                 accountNumber: '@accountNumber',
                 prefix: '020'
             },
             {
                 list: { method: 'GET', isArray: true, transformResponse: transform },
+                get: { method: 'GET', url: '/api/payment/methods/:methodId', transformResponse: transformMethod },
                 disable: { method: 'DELETE' },
                 changeDefault: { method: 'PUT', params: { methodId: 'default' }}
             }
