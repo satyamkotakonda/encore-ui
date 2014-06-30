@@ -1,9 +1,9 @@
 angular.module('billingApp')
     /**
     * @ngdoc object
-    * @name encore:controller.TransactionsCtrl
+    * @name encore:controller.TransactionsDetailsCtrl
     * @description
-    * The Controller which displays an overview of a users' billing info.
+    * The Controller which displays details of a user's billing transaction.
     *
     * @requires $scope - The $scope variable for interacting with the UI.
     * @requires $routeParams - AngularJS service which provides access to route paramters
@@ -53,6 +53,17 @@ angular.module('billingApp')
                 PaymentMethod.get({
                     accountNumber: $routeParams.accountNumber,
                     methodId: transaction.refund.methodId
+                }, function (method) {
+                    $scope.transaction.method = method;
+                });
+            });
+        }
+
+        if ($routeParams.transactionType === 'payments') {
+            $scope.transaction.$promise.then(function (transaction) {
+                PaymentMethod.get({
+                    accountNumber: $routeParams.accountNumber,
+                    methodId: transaction.payment.methodId
                 }, function (method) {
                     $scope.transaction.method = method;
                 });
