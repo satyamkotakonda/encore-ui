@@ -32,7 +32,7 @@ angular.module('billingApp')
         $scope.accountNumber = $routeParams.accountNumber;
 
         // Set the default sort of the transactions
-        $scope.sort = rxSortUtil.getDefault('date', true);
+        $scope.sort = rxSortUtil.getDefault('tranDate', true);
         $scope.sortCol = sortCol;
 
         // Default Date Format

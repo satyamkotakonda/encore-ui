@@ -43,7 +43,7 @@ describe('Billing: TransactionDetailsCtrl', function () {
     it('TransactionDetailsCtrl should have a sort object defined', function () {
         expect(scope.sort).to.be.a('object');
         expect(scope.sort).to.have.property('predicate');
-        expect(scope.sort.predicate).to.eq('date');
+        expect(scope.sort.predicate).to.eq('tranDate');
     });
 
     it('TransactionDetailsCtrl should have a default date format', function () {
