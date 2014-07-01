@@ -73,7 +73,7 @@
                         {{ txn.tranRefNum }}
                         </a>
                     </td>
-                    <td>{{ txn.dateDate | date: defaultDateFormat }}</td>
+                    <td>{{ txn.tranDate | date: defaultDateFormat }}</td>
                     <td>{{ txn.type }}</td>
                     <td class="currency">{{ txn.amountApplied | currency }}</td>
                 </tr>
