@@ -59,7 +59,7 @@
         file: test/api-mocks/responses/billing/estimated-charges.json
 
 # Post a payment to account
--   request: 
+-   request:
         url: ^/api/billing/(.*)/payments$
         method: POST
     response:
@@ -117,4 +117,29 @@
         status: 204
         headers:
             content-type: application/json
-        body: 
+        body:
+
+# Search for account by transaction ref num
+-   request:
+        url: ^/api/billing$
+        method: GET
+        query:
+            tranRefNum: P1-54
+            tranType: PAYMENT
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/account-search.json
+
+# Search for account by transaction auth ID
+-   request:
+        url: ^/api/billing$
+        method: GET
+        query:
+            gatewayTxRefNum: 53A1FD85F198E1A8922FA6EDB7E5B816883C545E
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/account-search.json

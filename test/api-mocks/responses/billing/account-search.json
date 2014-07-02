@@ -1,0 +1,19 @@
+{
+    "billingAccounts": {
+        "link": [{
+            "rel": "next",
+            "href": "http://billing.api.rackspacecloud.com/v2/ran/accounts"
+        }, {
+            "rel": "prev",
+            "href": "http://billing.api.rackspacecloud.com/v2/ran/accounts"
+        }],
+        "billingAccount": [{
+            "link": [{
+                "rel": "INVOICE",
+                "href": "http://billing.api.rackspacecloud.com/v2/020-123456/invoices/B1-23456"
+            }],
+            "accountNumber": "020-123456",
+            "name": "amazon"
+        }]
+    }
+}

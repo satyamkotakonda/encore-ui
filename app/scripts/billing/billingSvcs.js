@@ -27,6 +27,12 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
                 details: {
                     method: 'GET',
                     isArray: false
+                },
+                search: {
+                    method: 'GET',
+                    url: '/api/billing',
+                    params: { prefix: null },
+                    isArray: false
                 }
             }
         );
