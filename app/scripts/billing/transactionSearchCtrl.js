@@ -13,24 +13,28 @@ angular.module('billingApp')
     .controller('TransactionSearchCtrl', function ($scope, $routeParams, $location, rxNotify, rxPromiseNotifications,
         Transaction, STATUS_MESSAGES) {
 
-        function isAuthId (term) {
+        // Check if search entry is an Auth ID
+        function isAuthId (term) { 
             return term.indexOf('-') === -1;
         }
 
+        // Check if search entry is payment or invoice
         function getPaymentType (term) {
             return term[0].toLowerCase() === 'b' ? 'INVOICE' : 'PAYMENT';
         }
 
         var term = $routeParams.term;
-        var query = isAuthId(term) ? { gatewayTxRefNum: term } : { tranRefNum: term, tranType: getPaymentType(term) };
+        var type = isAuthId(term) ? 'PAYMENT' : getPaymentType(term);
+        var query = isAuthId(term) ? { gatewayTxRefNum: term } : { tranRefNum: term, tranType: type };
 
         $scope.result = Transaction.search(query,
             function (res) {
                 if (res.billingAccounts && res.billingAccounts.billingAccount.length === 1) {
+                    // Remove account prefix
                     var account = res.billingAccounts.billingAccount[0].accountNumber.slice(4);
                     var paymentId = 1234;
-                    $location.url($location.path());
-                    $location.path('/transactions/' + account + '/' + paymentId);
+                    // Redirect to transaction details page on successful fetch
+                    $location.path('/transactions/' + account + '/' + type.toLowerCase() + '/' + paymentId);
                     return;
                 }
             }, function (err) {
