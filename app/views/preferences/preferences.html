@@ -11,7 +11,8 @@
                         true-value="PAPERLESS"
                         false-value="PAPER"
                         loading="isResourceLoading(billInfo, billInfoUpdate)"
-                        disabled="isResourceLoading(billInfo, billInfoUpdate)"></rx-switch>
+                        disabled="isResourceLoading(billInfo, billInfoUpdate)"
+                        post-hook="updated(newValue, value, billInfo)"></rx-switch>
                 </div>
             </div>
             <div class="col-1-3">
@@ -23,7 +24,8 @@
                         true-value="OPT_IN"
                         false-value="OPT_OUT"
                         loading="isResourceLoading(paymentInfo, paymentInfoUpdate)"
-                        disabled="isResourceLoading(paymentInfo, paymentInfoUpdate)"></rx-switch>
+                        disabled="isResourceLoading(paymentInfo, paymentInfoUpdate)"
+                        post-hook="updated(newValue, value, paymentInfo)"></rx-switch>
                 </div>
             </div>
         </div>
