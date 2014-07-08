@@ -25,27 +25,53 @@ angular.module('billingApp')
                 if (_.isArray(rxNotify.stacks['preferencePage'])) {
                     rxNotify.clear('preferencePage');
                 }
-                $scope.billInfoUpdate = BillInfo.updateInvoiceDeliveryMethod($routeParams.accountNumber,
-                                                                             $scope.billInfo.invoiceDeliveryMethod);
-                $scope.paymentInfoUpdate = PaymentInfo.updateNotificationOption($routeParams.accountNumber,
-                                                                                $scope.paymentInfo.notificationOption);
 
-                rxPromiseNotifications.add($scope.billInfoUpdate.$promise, {
-                    loading: '',
-                    error: 'Error Updating Billing Preferences'
-                }, 'preferencePage');
+                if ($scope.billInfo.updated) {
+                    $scope.billInfoUpdate = BillInfo.updateInvoiceDeliveryMethod(
+                        $routeParams.accountNumber,
+                        $scope.billInfo.invoiceDeliveryMethod,
+                        updateBillInfo, updateBillInfo);
 
-                rxPromiseNotifications.add($scope.paymentInfoUpdate.$promise, {
-                    loading: '',
-                    error: 'Error Updating Payment Preferences'
-                }, 'preferencePage');
+                    rxPromiseNotifications.add($scope.billInfoUpdate.$promise, {
+                        loading: '',
+                        error: 'Error Updating Billing Preferences'
+                    }, 'preferencePage');
+                }
+
+                if ($scope.paymentInfo.updated) {
+                    $scope.paymentInfoUpdate = PaymentInfo.updateNotificationOption(
+                        $routeParams.accountNumber,
+                        $scope.paymentInfo.notificationOption,
+                        updatePaymentInfo, updatePaymentInfo);
+
+                    rxPromiseNotifications.add($scope.paymentInfoUpdate.$promise, {
+                        loading: '',
+                        error: 'Error Updating Payment Preferences'
+                    }, 'preferencePage');
+                }
             };
 
         $scope.updatePreferences = updatePreferences;
         $scope.isResourceLoading = isResourceLoading;
 
-        $scope.billInfo = BillInfo.get({ accountNumber: $routeParams.accountNumber });
-        $scope.paymentInfo = PaymentInfo.get({ accountNumber: $routeParams.accountNumber });
+        var updateBillInfo = function () {
+            $scope.billInfo = BillInfo.get({ accountNumber: $routeParams.accountNumber });
+        };
+
+        var updatePaymentInfo = function () {
+            $scope.paymentInfo = PaymentInfo.get({ accountNumber: $routeParams.accountNumber });
+        };
+
+        updateBillInfo();
+        updatePaymentInfo();
+
+        $scope.updated = function (newValue, value, obj) {
+            if (!obj.hasOwnProperty('updated')) {
+                obj.updated = true;
+            } else {
+                obj.updated = !obj.updated;
+            }
+        };
 
         rxPromiseNotifications.add($scope.billInfo.$promise, {
             loading: '',
