@@ -74,8 +74,8 @@ describe('Preferences: PreferencesCtrl', function () {
         expect(scope.isResourceLoading(scope.billInfo, scope.billInfoUpdate)).to.be.false;
         expect(scope.isResourceLoading(scope.paymentInfo, scope.paymentInfoUpdate)).to.be.false;
 
-        scope.billInfo.updated = true;
-        scope.paymentInfo.updated = true;
+        scope.billInfo.dirty = true;
+        scope.paymentInfo.dirty = true;
         scope.updatePreferences();
         expect(scope.isResourceLoading(scope.billInfo, scope.billInfoUpdate)).to.be.true;
         expect(scope.isResourceLoading(scope.paymentInfo, scope.paymentInfoUpdate)).to.be.true;
@@ -87,8 +87,8 @@ describe('Preferences: PreferencesCtrl', function () {
         expect(scope.isResourceLoading(scope.billInfo, scope.billInfoUpdate)).to.be.false;
         expect(scope.isResourceLoading(scope.paymentInfo, scope.paymentInfoUpdate)).to.be.false;
 
-        scope.billInfo.updated = false;
-        scope.paymentInfo.updated = false;
+        scope.billInfo.dirty = false;
+        scope.paymentInfo.dirty = false;
         scope.updatePreferences();
         expect(scope.isResourceLoading(scope.billInfo, scope.billInfoUpdate)).to.be.false;
         expect(scope.isResourceLoading(scope.paymentInfo, scope.paymentInfoUpdate)).to.be.false;

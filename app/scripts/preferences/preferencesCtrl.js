@@ -30,11 +30,9 @@ angular.module('billingApp')
                 return res1.$resolved === false || (res2 !== undefined && res2.$resolved === false);
             },
             updatePreferences = function () {
-                if (_.isArray(rxNotify.stacks['preferencePage'])) {
-                    rxNotify.clear('preferencePage');
-                }
+                rxNotify.clear('preferencePage');
 
-                if ($scope.billInfo.updated === true) {
+                if ($scope.billInfo.dirty === true) {
                     $scope.billInfoUpdate = BillInfo.updateInvoiceDeliveryMethod(
                         $routeParams.accountNumber,
                         $scope.billInfo.invoiceDeliveryMethod,
@@ -46,7 +44,7 @@ angular.module('billingApp')
                     }, 'preferencePage');
                 }
 
-                if ($scope.paymentInfo.updated === true) {
+                if ($scope.paymentInfo.dirty === true) {
                     $scope.paymentInfoUpdate = PaymentInfo.updateNotificationOption(
                         $routeParams.accountNumber,
                         $scope.paymentInfo.notificationOption,
@@ -65,11 +63,11 @@ angular.module('billingApp')
         updateBillInfo();
         updatePaymentInfo();
 
-        $scope.updated = function (newValue, value, obj) {
-            if (!obj.hasOwnProperty('updated')) {
-                obj.updated = true;
+        $scope.setDirty = function (newValue, value, preferenceObj) {
+            if (!preferenceObj.hasOwnProperty('dirty')) {
+                preferenceObj.dirty = true;
             } else {
-                obj.updated = !obj.updated;
+                preferenceObj.dirty = !preferenceObj.dirty;
             }
         };
 
