@@ -55,7 +55,7 @@ describe('rxPurchaseOrderDisable', function () {
 describe('rxPurchaseOrderDisable: PurchaseOrderDisableCtrl', function () {
     var scope, ctrl, notify, msgs, postHook;
 
-    var purchaseOrder;
+    var purchaseOrder, account;
 
     var testAccountNumber = '020-12345',
         stack = 'purchaseOrderDisable',
@@ -65,7 +65,7 @@ describe('rxPurchaseOrderDisable: PurchaseOrderDisableCtrl', function () {
         module('constants');
         module('billingApp');
 
-        inject(function ($controller, $rootScope, $q, PurchaseOrder, STATUS_MESSAGES) {
+        inject(function ($controller, $rootScope, $q, PurchaseOrder, Account, STATUS_MESSAGES) {
             var getResourceResultMock = function (data) {
                     var deferred = $q.defer();
                     data.$promise = deferred.promise;
@@ -111,6 +111,9 @@ describe('rxPurchaseOrderDisable: PurchaseOrderDisableCtrl', function () {
             purchaseOrder = PurchaseOrder;
             purchaseOrder.disablePO = sinon.stub(purchaseOrder, 'disablePO', getResourceMock({}));
 
+            account = Account;
+            account.get = sinon.stub(account, 'get', getResourceMock({}));
+
             scope = $rootScope.$new();
             // Mock the modal instance for scope
             scope.$close = sinon.stub();
@@ -124,7 +127,8 @@ describe('rxPurchaseOrderDisable: PurchaseOrderDisableCtrl', function () {
                 $scope: scope,
                 $routeParams: routeParams,
                 PurchaseOrder: purchaseOrder,
-                rxNotify: notify
+                rxNotify: notify,
+                Account: account
             });
         });
     });

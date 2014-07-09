@@ -37,8 +37,12 @@ angular.module('billingApp')
                 postHook: '&'
             }
         };
-    }).controller('PurchaseOrderCreateCtrl', function ($scope, $routeParams, PurchaseOrder,
-        rxNotify, BillingErrorResponse, AccountNumberUtil, STATUS_MESSAGES) {
+    }).controller('PurchaseOrderCreateCtrl', function (
+        $scope, $routeParams, PurchaseOrder,
+        rxNotify, BillingErrorResponse, Account, AccountNumberUtil, STATUS_MESSAGES) {
+
+        var defaultParams = { accountNumber: $routeParams.accountNumber };
+
         var notifyInstances = {},
             defaultStackName = 'purchaseOrderCreate';
 
@@ -100,7 +104,8 @@ angular.module('billingApp')
             };
 
         clearNotifications();
-
+        
+        $scope.account = Account.get(defaultParams);
         $scope.submit = createPurchaseOrder;
         $scope.cancel = $scope.$dismiss;
     });

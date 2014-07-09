@@ -33,12 +33,17 @@ angular.module('billingApp')
                 userName: '=',
                 classes: '@',
                 currentPurchaseOrder: '@',
+                currentPurchaseOrderId: '@',
                 notificationStack: '@',
                 postHook: '&'
             }
         };
-    }).controller('PurchaseOrderDisableCtrl', function ($scope, $routeParams, PurchaseOrder,
-        rxNotify, BillingErrorResponse, AccountNumberUtil, STATUS_MESSAGES) {
+    }).controller('PurchaseOrderDisableCtrl', function (
+        $scope, $routeParams, PurchaseOrder,
+        rxNotify, Account, BillingErrorResponse, AccountNumberUtil, STATUS_MESSAGES) {
+
+        var defaultParams = { accountNumber: $routeParams.accountNumber };
+
         var notifyInstances = {},
             defaultStackName = 'purchaseOrderDisable';
 
@@ -86,7 +91,7 @@ angular.module('billingApp')
                 });
 
                 $scope.newPO = PurchaseOrder.disablePO($routeParams.accountNumber,
-                                                       $scope.currentPurchaseOrder,
+                                                       $scope.currentPurchaseOrderId,
                                                        disableSuccess,
                                                        disableError);
 
@@ -101,6 +106,7 @@ angular.module('billingApp')
 
         clearNotifications();
 
+        $scope.account = Account.get(defaultParams);
         $scope.submit = disablePurchaseOrder;
         $scope.cancel = $scope.$dismiss;
     });

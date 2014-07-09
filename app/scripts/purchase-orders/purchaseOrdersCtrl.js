@@ -1,7 +1,7 @@
 angular.module('billingApp')
     /**
     * @ngdoc object
-    * @name encore:controller.PreferencesCtrl
+    * @name encore:controller.PurchaseOrdersCtrl
     * @description
     * The Controller which displays an overview of a users' billing info.
     *
@@ -14,11 +14,12 @@ angular.module('billingApp')
     *
     * @example
     * <pre>
-    * .controller('PreferencesCtrl', function ($scope, $routeParams, EstimatedCharges)
+    * .controller('PurchaseOrdersCtrl', function ($scope, $routeParams, EstimatedCharges)
     * </pre>
     */
-    .controller('PurchaseOrdersCtrl', function ($scope, $routeParams, PurchaseOrder, CurrentPurchaseOrderFilter,
-        rxSortUtil, AccountNumberUtil, PageTracking, DATE_FORMAT) {
+    .controller('PurchaseOrdersCtrl', function (
+        $scope, $routeParams, PurchaseOrder, CurrentPurchaseOrderFilter, rxSortUtil,
+        AccountNumberUtil, Account, PageTracking, DATE_FORMAT) {
 
         var defaultParam = { accountNumber: $routeParams.accountNumber };
 
@@ -31,6 +32,9 @@ angular.module('billingApp')
             refreshPurchaseOrders = function () {
                 $scope.purchaseOrders = PurchaseOrder.list(defaultParam, getCurrentPurchaseOrder);
             };
+
+        // Account information
+        $scope.account = Account.get(defaultParam);
 
         // Default Date Format
         $scope.defaultDateFormat = DATE_FORMAT;
