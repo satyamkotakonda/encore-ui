@@ -1,11 +1,11 @@
 describe('PurchaseOrders: PurchaseOrdersCtrl', function () {
-    var scope, ctrl, purchaseOrders, testPOs;
+    var scope, ctrl, purchaseOrders, testPOs, account;
     var testAccountNumber = '12345';
 
     beforeEach(function () {
         module('billingApp');
 
-        inject(function ($controller, $rootScope, $q, PurchaseOrder) {
+        inject(function ($controller, $rootScope, $q, PurchaseOrder, Account) {
             var getResourceResultMock = function (data) {
                     var deferred = $q.defer();
                     data.$promise = deferred.promise;
@@ -42,11 +42,14 @@ describe('PurchaseOrders: PurchaseOrdersCtrl', function () {
             purchaseOrders = PurchaseOrder;
             purchaseOrders.get = sinon.stub(purchaseOrders, 'list', getResourceMock(testPOs));
             scope = $rootScope.$new();
+            account = Account;
+            account.get = sinon.stub(account, 'get', getResourceMock({}));
 
             ctrl = $controller('PurchaseOrdersCtrl',{
                 $scope: scope,
                 PurchaseOrder: purchaseOrders,
-                $routeParams: { accountNumber: testAccountNumber }
+                $routeParams: { accountNumber: testAccountNumber },
+                Account: account
             });
         });
     });

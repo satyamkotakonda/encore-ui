@@ -55,7 +55,7 @@ describe('rxPurchaseOrderCreate', function () {
 describe('rxPurchaseOrderCreate: PurchaseOrderCreateCtrl', function () {
     var scope, ctrl, notify, msgs, postHook;
 
-    var purchaseOrder;
+    var purchaseOrder, account;
 
     var testAccountNumber = '020-12345',
         stack = 'purchaseOrderCreate',
@@ -65,7 +65,7 @@ describe('rxPurchaseOrderCreate: PurchaseOrderCreateCtrl', function () {
         module('constants');
         module('billingApp');
 
-        inject(function ($controller, $rootScope, $q, PurchaseOrder, STATUS_MESSAGES) {
+        inject(function ($controller, $rootScope, $q, PurchaseOrder, Account, STATUS_MESSAGES) {
             var getResourceResultMock = function (data) {
                     var deferred = $q.defer();
                     data.$promise = deferred.promise;
@@ -110,6 +110,9 @@ describe('rxPurchaseOrderCreate: PurchaseOrderCreateCtrl', function () {
 
             purchaseOrder = PurchaseOrder;
             purchaseOrder.createPO = sinon.stub(purchaseOrder, 'createPO', getResourceMock({}));
+
+            account = Account;
+            account.get = sinon.stub(account, 'get', getResourceMock({}));
 
             scope = $rootScope.$new();
             // Mock the modal instance for scope
