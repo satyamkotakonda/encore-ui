@@ -18,6 +18,14 @@ angular.module('billingApp')
     .controller('PreferencesCtrl', function ($scope, $routeParams, BillInfo, PaymentInfo,
         AccountNumberUtil, rxPromiseNotifications, rxNotify) {
 
+        var updateBillInfo = function () {
+            $scope.billInfo = BillInfo.get({ accountNumber: $routeParams.accountNumber });
+        };
+
+        var updatePaymentInfo = function () {
+            $scope.paymentInfo = PaymentInfo.get({ accountNumber: $routeParams.accountNumber });
+        };
+
         var isResourceLoading = function (res1, res2) {
                 return res1.$resolved === false || (res2 !== undefined && res2.$resolved === false);
             },
@@ -26,7 +34,7 @@ angular.module('billingApp')
                     rxNotify.clear('preferencePage');
                 }
 
-                if ($scope.billInfo.updated) {
+                if ($scope.billInfo.updated === true) {
                     $scope.billInfoUpdate = BillInfo.updateInvoiceDeliveryMethod(
                         $routeParams.accountNumber,
                         $scope.billInfo.invoiceDeliveryMethod,
@@ -38,7 +46,7 @@ angular.module('billingApp')
                     }, 'preferencePage');
                 }
 
-                if ($scope.paymentInfo.updated) {
+                if ($scope.paymentInfo.updated === true) {
                     $scope.paymentInfoUpdate = PaymentInfo.updateNotificationOption(
                         $routeParams.accountNumber,
                         $scope.paymentInfo.notificationOption,
@@ -53,14 +61,6 @@ angular.module('billingApp')
 
         $scope.updatePreferences = updatePreferences;
         $scope.isResourceLoading = isResourceLoading;
-
-        var updateBillInfo = function () {
-            $scope.billInfo = BillInfo.get({ accountNumber: $routeParams.accountNumber });
-        };
-
-        var updatePaymentInfo = function () {
-            $scope.paymentInfo = PaymentInfo.get({ accountNumber: $routeParams.accountNumber });
-        };
 
         updateBillInfo();
         updatePaymentInfo();
