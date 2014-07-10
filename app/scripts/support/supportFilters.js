@@ -10,6 +10,6 @@ angular.module('billingApp')
     */
     .filter('RoleName', function () {
         return function (roles, name) {
-            return _.filter(roles, { role: { name: name }});
+            return _.filter(roles, { role: name });
         };
     });
