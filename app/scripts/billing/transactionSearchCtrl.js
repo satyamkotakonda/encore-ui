@@ -7,20 +7,24 @@ angular.module('billingApp')
     *
     * @requires $scope - The $scope variable for interacting with the UI.
     * @requires $routeParams - AngularJS service which provides access to route paramters
-    * @requires rxPromiseNotifications - EncoreUI service which displays notifications
+    * @requires $location - AngularJS service which provides access to URL in browser.
+    * @requires rxNotify - EncoreUI service that creates and styles notifications.
+    * @requires rxPromiseNotifications - EncoreUI service which displays notifications for promises.
     * @requires billingSvcs.Transaction - Service for CRUD operations for the Transaction resource.
+    * @requires STATUS_MESSAGES - An object that provides constant status values.
     */
-    .controller('TransactionSearchCtrl', function ($scope, $routeParams, $location, rxNotify, rxPromiseNotifications,
+    .controller('TransactionSearchCtrl', function (
+        $scope, $routeParams, $location, rxNotify, rxPromiseNotifications,
         Transaction, STATUS_MESSAGES) {
 
         // Check if search entry is an Auth ID
-        function isAuthId (term) { 
-            return term.indexOf('-') === -1;
+        function isAuthId (term) {
+            return !_.contains(term, '-');
         }
 
         // Check if search entry is payment or invoice
         function getPaymentType (term) {
-            return term[0].toLowerCase() === 'b' ? 'INVOICE' : 'PAYMENT';
+            return _.first(term).toLowerCase() === 'b' ? 'INVOICE' : 'PAYMENT';
         }
 
         var term = $routeParams.term;
@@ -29,19 +33,21 @@ angular.module('billingApp')
 
         $scope.result = Transaction.search(query,
             function (res) {
-                if (res.billingAccounts && res.billingAccounts.billingAccount.length === 1) {
+                if (res && res.length === 1) {
                     // Remove account prefix
-                    var account = res.billingAccounts.billingAccount[0].accountNumber.slice(4);
-                    var paymentId = 1234;
-                    // Redirect to transaction details page on successful fetch
-                    $location.path('/transactions/' + account + '/' + type.toLowerCase() + '/' + paymentId);
+                    var account = _.first(res).accountNumber;
+                    account = _.last(account.split('-'));
+                    // Redirect to account overview page on successful fetch
+                    $location.path('/overview/' + account);
                     return;
+                } else {
+                    rxNotify.add('Account not found', { type: 'error' }); // Bad search returns empty array
                 }
             }, function (err) {
                 if (err.status !== 404) {
                     rxNotify.add(STATUS_MESSAGES.transactions.error, { type: 'error' });
                 } else {
-                    rxNotify.add('Transaction not found', { type: 'error' });
+                    rxNotify.add('Account not found', { type: 'error' });
                 }
             });
 
