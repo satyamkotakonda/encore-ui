@@ -32,7 +32,8 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
                     method: 'GET',
                     url: '/api/billing',
                     params: { prefix: null },
-                    isArray: false
+                    transformResponse: Transform('billingAccounts.billingAccount'),
+                    isArray: true
                 }
             }
         );
