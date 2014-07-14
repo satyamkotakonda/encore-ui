@@ -124,8 +124,8 @@
         url: ^/api/billing$
         method: GET
         query:
-            tranRefNum: P1-54
-            tranType: PAYMENT
+            tranRefNum: (.*)
+            tranType: ^PAYMENT|INVOICE$
     response:
         status: 200
         headers:
@@ -137,7 +137,7 @@
         url: ^/api/billing$
         method: GET
         query:
-            gatewayTxRefNum: 53A1FD85F198E1A8922FA6EDB7E5B816883C545E
+            gatewayTxRefNum: (.*)
     response:
         status: 200
         headers:
