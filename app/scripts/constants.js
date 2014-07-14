@@ -5,7 +5,8 @@ angular.module('constants', [])
             error: 'There was an error loading Account Information'
         },
         transactions: {
-            error: 'There was an error loading Account Transactions'
+            error: 'There was an error loading Account Transactions',
+            search: 'Searching for account'
         },
         payment: {
             error: 'There was an error Posting the Payment Request',

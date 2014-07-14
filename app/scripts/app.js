@@ -13,6 +13,10 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'encore.ui', 'encore.ui.t
                 templateUrl: 'views/billing/overview.html',
                 controller: 'OverviewCtrl'
             })
+            .when('/search/:term', {
+                templateUrl: 'views/billing/transactionSearch.html',
+                controller: 'TransactionSearchCtrl'
+            })
             .when('/transactions/:accountNumber', {
                 templateUrl: 'views/billing/transactions.html',
                 controller: 'TransactionsCtrl'
