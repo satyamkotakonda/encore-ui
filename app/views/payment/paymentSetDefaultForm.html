@@ -10,7 +10,7 @@
                     <li ng-class="{'tab-selected': methodType === 'paymentCard'}">
                         <a ng-click="changeMethodType('paymentCard')">Credit Card</a>
                     </li>
-                    <li ng-class="{'tab-selected': methodType === 'electronicCheck'}">
+                    <li ng-show="'local' | rxEnvironmentMatch" ng-class="{'tab-selected': methodType === 'electronicCheck'}">
                         <a ng-click="changeMethodType('electronicCheck')">ACH</a>
                     </li>
                     <li ng-class="{'tab-selected': methodType === 'invoice'}">
