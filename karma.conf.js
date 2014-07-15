@@ -24,6 +24,7 @@ module.exports = function(config) {
             'bower_components/encore-ui/encore-ui-tpls.min.js',
             'bower_components/lodash/dist/lodash.js',
             'bower_components/mousetrap/mousetrap.js',
+            'bower_components/angular-hotkeys/build/hotkeys.js',
             'bower_components/momentjs/moment.js',
             'scripts/app.js', // always load app definition first
             'scripts/**/*.js',
