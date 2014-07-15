@@ -1,0 +1,60 @@
+{
+    "billingPeriods": {
+        "billingPeriod": [{
+            "current": true,
+            "startDate": "2014-02-01T06:00:00.000Z",
+            "id": "ID000"
+        }, {
+            "current": false,
+            "startDate": "2014-01-01T06:00:00.000Z",
+            "id": "ID001",
+            "endDate": "2014-02-01T06:00:00.000Z"
+        }, {
+            "current": false,
+            "startDate": "2013-12-01T06:00:00.000Z",
+            "id": "ID002",
+            "endDate": "2014-01-01T06:00:00.000Z"
+        }, {
+            "current": false,
+            "startDate": "2013-11-01T05:00:00.000Z",
+            "id": "ID003",
+            "endDate": "2013-12-01T06:00:00.000Z"
+        }, {
+            "current": false,
+            "startDate": "2013-10-01T05:00:00.000Z",
+            "id": "ID004",
+            "endDate": "2013-11-01T05:00:00.000Z"
+        }, {
+            "current": false,
+            "startDate": "2013-09-01T05:00:00.000Z",
+            "id": "ID005",
+            "endDate": "2013-10-01T05:00:00.000Z"
+        }, {
+            "current": false,
+            "startDate": "2013-08-01T05:00:00.000Z",
+            "id": "ID006",
+            "endDate": "2013-09-01T05:00:00.000Z"
+        }, {
+            "current": false,
+            "startDate": "2013-07-01T05:00:00.000Z",
+            "id": "ID007",
+            "endDate": "2013-08-01T05:00:00.000Z"
+        }, {
+            "current": false,
+            "startDate": "2013-06-01T05:00:00.000Z",
+            "id": "ID008",
+            "endDate": "2013-07-01T05:00:00.000Z"
+        }, {
+            "current": false,
+            "startDate": "2013-05-01T05:00:00.000Z",
+            "id": "ID009",
+            "endDate": "2013-06-01T05:00:00.000Z"
+        }],
+        "link": [{
+            "rel": "next",
+            "href": "http://billing.api.rackspacecloud.com/440369/billing_periods?marker=0&amp;limit=10"
+        }, {
+            "href": "http://billing.api.rackspacecloud.com/440369/billing_periods?marker=0&amp;limit=10"
+        }]
+    }
+}

@@ -1,0 +1,270 @@
+<rx-page title="'Billing - Payment Options'" subtitle="'On account ' + account.name">
+    <rx-notifications stack="optionsPage"></rx-notifications>
+    <div class="section inline payment-options payment-default">
+        <h3 ng-show="defaultMethod" class="default-title">Primary:</h3>
+        <div ng-show="defaultMethod" class="method-description">
+            <div ng-if="defaultMethod.electronicCheck">
+                <p class="heading">
+                    {{defaultMethod.electronicCheck.accountType | AccountTypeFormat}} Account - ending in <strong>{{defaultMethod.electronicCheck.accountNumber | PaymentMethodNumber:true }}</strong>
+                </p>
+                <p>
+                    <strong>Type:</strong>
+                    {{defaultMethod.electronicCheck.accountType | AccountTypeFormat}}
+                </p>
+                <p>
+                    <strong>Name on Account:</strong> {{defaultMethod.electronicCheck.accountHolderName}}
+                </p>
+                <p>
+                    <strong>Routing #:</strong> {{defaultMethod.electronicCheck.routingNumber}}
+                </p>
+            </div>
+            <div ng-if="defaultMethod.paymentCard">
+                <p class="heading">
+                    {{defaultMethod.paymentCard.cardType}} Card - ending in <strong>{{defaultMethod.paymentCard.cardNumber | PaymentMethodNumber }}</strong>
+                </p>
+                <p>
+                    <strong>Type:</strong>
+                    {{defaultMethod.paymentCard.cardType}}
+                </p>
+                <p>
+                    <strong>Name on Card:</strong> {{defaultMethod.paymentCard.cardHolderName}}
+                </p>
+                <p>
+                    <strong>Expiration:</strong> {{defaultMethod.paymentCard.expirationDate}}
+                </p>
+            </div>
+        </div>
+        <div class="actions" ng-class="{single: !defaultMethod}">
+            <ul>
+                <li>
+                    <rx-payment-set-default
+                        post-hook="changeDefaultMethod"
+                        user-name="userName"
+                        classes="button"
+                        method-id="defaultMethod.id"
+                        methods="paymentMethods">
+                        <img src="/billing/images/icon-change_set_white.png" /> Change Primary
+                    </rx-payment-set-default>
+                </li>
+                <li>
+                    <rx-payment-action
+                        post-hook="postPayment"
+                        user-name="userName"
+                        classes="button"
+                        amount="paymentAmount"
+                        method-id="defaultMethod.id"
+                        methods="paymentMethods">
+                        <img src="/billing/images/icon-add_white.png" /> Make a Payment
+                    </rx-payment-action>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <div class="section payment-options">
+        <h1 class="section-title">Other Payment Options</h1>
+        <h3 class="section-title">Credit Cards</h3>
+        <table class="table detail-list">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="cardSortCol"
+                            sort-property="paymentCard.cardType"
+                            predicate="cardSort.predicate"
+                            reverse="cardSort.reverse">
+                            Card Type
+                        </rx-sortable-column>
+                    </th>
+                    <th class="method-number" scope="col">
+                        <rx-sortable-column
+                            sort-method="cardSortCol"
+                            sort-property="paymentCard.cardNumber"
+                            predicate="cardSort.predicate"
+                            reverse="cardSort.reverse">
+                            Card Number
+                        </rx-sortable-column>
+                    </th>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="cardSortCol"
+                            sort-property="paymentCard.cardHolderName"
+                            predicate="cardSort.predicate"
+                            reverse="cardSort.reverse">
+                            Cardholder Name
+                        </rx-sortable-column>
+                    </th>
+                    <th class="method-number" scope="col">
+                        <rx-sortable-column
+                            sort-method="cardSortCol"
+                            sort-property="paymentCard.expirationDate"
+                            predicate="cardSort.predicate"
+                            reverse="cardSort.reverse">
+                            Expiration Date
+                        </rx-sortable-column>
+                    </th>
+                    <th class="status" scope="col">
+                        <rx-sortable-column
+                            sort-method="cardSortCol"
+                            sort-property="disabled"
+                            predicate="cardSort.predicate"
+                            reverse="cardSort.reverse">
+                            Status
+                        </rx-sortable-column>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="card in paymentMethods | orderBy:cardSort.predicate:cardSort.reverse | PaymentMethodType:'paymentCard'">
+                    <td>{{ card.paymentCard.cardType }}</td>
+                    <td>{{ card.paymentCard.cardNumber | CardNumberFormat:card.paymentCard.cardType }}</td>
+                    <td>{{ card.paymentCard.cardHolderName }}</td>
+                    <td>{{ card.paymentCard.expirationDate }}</td>
+                    <td class="status">
+                        {{ card.disabled && 'Disabled' || 'Enabled'}}
+                        <span ng-if="card.isDefault" class="default">
+                            (Primary)
+                        </span>
+                    </td>
+                    <td class="method-action">
+                        <rx-popover position="left" ng-show="!card.disabled">
+                            <rx-popover-trigger>
+                                <img src="/billing/images/icon-cog.png" />
+                            </rx-popover-trigger>
+                            <rx-popover-content>
+                                <div class="payment-action-options">
+                                    <rx-payment-set-default
+                                        ng-show="!card.isDefault"
+                                        post-hook="changeDefaultMethod"
+                                        user-name="userName"
+                                        method-id="card.id"
+                                        methods="paymentMethods">
+                                         <img src="/billing/images/icon-change_set.png" /> Set as Primary
+                                    </rx-payment-set-default>
+                                    <rx-payment-action
+                                        post-hook="postPayment"
+                                        user-name="userName"
+                                        amount="paymentAmount"
+                                        method-id="card.id"
+                                        methods="paymentMethods">
+                                        <img src="/billing/images/icon-add.png" /> Make Payment with
+                                    </rx-payment-action>
+                                    <rx-payment-disable
+                                        ng-show="!card.isDefault"
+                                        post-hook="disableMethod"
+                                        user-name="userName"
+                                        method-id="card.id"
+                                        method="card">
+                                        <img src="/billing/images/icon-disable.png" /> Disable
+                                    </rx-payment-disable>
+                                </div>
+                            </rx-popover-content>
+                        </rx-popover>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="section-title">ACH Accounts</h3>
+        <table class="table detail-list">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="achSortCol"
+                            sort-property="electronicCheck.accountType"
+                            predicate="achSort.predicate"
+                            reverse="achSort.reverse">
+                            Account Type
+                        </rx-sortable-column>
+                    </th>
+                    <th class="method-number" scope="col">
+                        <rx-sortable-column
+                            sort-method="achSortCol"
+                            sort-property="electronicCheck.accountNumber"
+                            predicate="achSort.predicate"
+                            reverse="achSort.reverse">
+                            Account Number
+                        </rx-sortable-column>
+                    </th>
+                    <th class="method-number" scope="col">
+                        <rx-sortable-column
+                            sort-method="achSortCol"
+                            sort-property="electronicCheck.routingNumber"
+                            predicate="achSort.predicate"
+                            reverse="achSort.reverse">
+                            Routing Number
+                        </rx-sortable-column>
+                    </th>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="achSortCol"
+                            sort-property="electronicCheck.accountHolderName"
+                            predicate="achSort.predicate"
+                            reverse="achSort.reverse">
+                            Name on Account
+                        </rx-sortable-column>
+                    </th>
+                    <th class="status" scope="col">
+                        <rx-sortable-column
+                            sort-method="achSortCol"
+                            sort-property="disabled"
+                            predicate="achSort.predicate"
+                            reverse="achSort.reverse">
+                            Status
+                        </rx-sortable-column>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ach in paymentMethods | orderBy:achSort.predicate:achSort.reverse |  PaymentMethodType:'electronicCheck'">
+                    <td>{{ ach.electronicCheck.accountType | AccountTypeFormat }}</td>
+                    <td>{{ ach.electronicCheck.accountNumber | AccountNumberFormat }}</td>
+                    <td>{{ ach.electronicCheck.routingNumber }}</td>
+                    <td>{{ ach.electronicCheck.accountHolderName }}</td>
+                    <td class="status">
+                        {{ ach.disabled && 'Disabled' || 'Enabled'}}
+                        <span ng-if="ach.isDefault" class="default">
+                            (Primary)
+                        </span>
+                    </td>
+                    <td class="method-action">
+                        <rx-popover position="left" ng-show="!card.disabled">
+                            <rx-popover-trigger>
+                                <img src="/billing/images/icon-cog.png" />
+                            </rx-popover-trigger>
+                            <rx-popover-content>
+                                <div class="payment-action-options">
+                                    <rx-payment-set-default
+                                        ng-show="!ach.isDefault"
+                                        post-hook="changeDefaultMethod"
+                                        user-name="userName"
+                                        method-id="ach.id"
+                                        methods="paymentMethods">
+                                         <img src="/billing/images/icon-change_set.png" /> Set as Primary
+                                    </rx-payment-set-default>
+                                    <rx-payment-action
+                                        post-hook="postPayment"
+                                        user-name="userName"
+                                        amount="paymentAmount"
+                                        method-id="ach.id"
+                                        methods="paymentMethods">
+                                        <img src="/billing/images/icon-add.png" /> Make Payment with
+                                    </rx-payment-action>
+                                    <rx-payment-disable
+                                        ng-show="!ach.isDefault"
+                                        post-hook="disableMethod"
+                                        user-name="userName"
+                                        method="ach">
+                                        <img src="/billing/images/icon-disable.png" /> Disable
+                                    </rx-payment-disable>
+                                </div>
+                            </rx-popover-content>
+                        </rx-popover>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</rx-page>

@@ -27,8 +27,10 @@ module.exports = function(config) {
             'bower_components/momentjs/moment.js',
             'scripts/app.js', // always load app definition first
             'scripts/**/*.js',
+            'modules/**/*.js',
             '../test/browser-helpers.js',
             // '../test/window-hack.js', // Only load when preventing window.location redirects
+            'modules/**/*.html',
             'views/**/*.html',// templates
         ],
 
@@ -40,6 +42,7 @@ module.exports = function(config) {
             'views/**/*.html': 'ng-html2js',
             'modules/**/*.html': 'ng-html2js',
             // TODO figure out how to filter 'lib' folder
+            'modules/**/!(*.spec).js': ['coverage'],
             'scripts/**/!(*.spec).js': ['coverage']
         },
 

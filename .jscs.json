@@ -35,7 +35,6 @@
     "disallowLeftStickedOperators": [
         "?",
         "+",
-        "-",
         "/",
         "*",
         "=",
@@ -90,11 +89,12 @@
         "!=",
         "!=="
     ],
+    "requireCamelCaseOrUpperCaseIdentifiers": true,
     "disallowMultipleLineBreaks": true,
     "disallowKeywordsOnNewLine": ["else"],
     "validateJSDoc": {
         "checkParamNames": true,
-        "checkRedundantParams": true,
+        "checkRedundantParams": false,
         "requireParamTypes": true
     },
     "excludeFiles": ["app/scripts/lib/**"]

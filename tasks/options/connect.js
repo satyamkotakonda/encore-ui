@@ -5,9 +5,29 @@ module.exports = {
         port: 9000,
         hostname: 'localhost'
     },
-
     live: {
-        proxies: [].concat(config.defaultProxies),
+        proxies: [
+            {
+                context: '/api/billing',
+                host: 'staging.billingv2.pipeline2.api.rackspacecloud.com',
+                port: 443,
+                https: true,
+                changeOrigin: true,
+                rewrite: {
+                    '/api/billing': '/v2/accounts'
+                }
+            },
+            {
+                context: '/api/payment',
+                host: 'staging.system.payment.pipeline2.api.rackspacecloud.com',
+                port: 443,
+                https: true,
+                changeOrigin: true,
+                rewrite: {
+                    '/api/payment': '/v1'
+                }
+            }
+        ].concat(config.defaultProxies),
     },
 
     mocked: {

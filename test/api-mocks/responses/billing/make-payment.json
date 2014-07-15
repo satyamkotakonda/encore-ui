@@ -1,0 +1,30 @@
+{
+    "payment": {
+        "methodType": "CREDITCARD",
+        "status": "POSTED",
+        "tranRefNum": "P1-1234564",
+        "amount": "22.65",
+        "id": "6e81bfc6-81bf-4c68-8ae2-7ad2e58641f6",
+        "responseMessage": "Approved",
+        "submissionDate": "2013-05-26T16:32:52.000-05:00",
+        "gatewayTxRefNum": "4C3213241331117CD265DE7ADA3967A15218542B",
+        "rackerSSO": "racker123",
+        "itemReferences": {
+            "itemReference": [{
+                "id": "12bcaeb0-d486-4637-a6c8-846d401be000",
+                "tranDate": "2013-04-26T07:32:52.000-05:00",
+                "amountApplied": "10.0",
+                "tranRefNum": "B1-1234567",
+                "type": "INVOICE"
+            }, {
+                "id": "34bcaeb0-d486-4637-a6c8-846d401be555",
+                "tranDate": "2013-05-26T16:06:22.000-05:00",
+                "amountApplied": "5.0",
+                "tranRefNum": "D1-1234567",
+                "type": "DEBIT_ADJ"
+            }]
+        },
+        "comments": "balance adjustment payment",
+        "methodId": "urn:uuid:fa093563-73db-4fe4-8f3a-def53dde8f5d"
+    }
+}

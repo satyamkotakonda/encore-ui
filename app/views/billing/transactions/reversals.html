@@ -1,0 +1,100 @@
+<rx-page title="'Billing - ' + transaction.reversal.tranRefNum + ' - Reversal'" subtitle="'On account ' + account.name">
+    <div class="section billing-info">
+        <dl class="list-definition pull-left">
+            <dt class="accent">Reversal Amount:</dt>
+            <dd class="accent accent-group">
+                <span class="accent-text">
+                    <span ng-if="transaction.reversal.amount">
+                        {{transaction.reversal.amount | currency }} {{balance.currency}}
+                    </span>
+                    <span ng-if="!transaction.reversal.amount">
+                        N/A
+                    </span>
+                </span>
+            </dd>
+            <dt>Posted On:</dt>
+            <dd ng-if="transaction.reversal.tranDate">{{transaction.reversal.tranDate | date:'longDate' }}</dd>
+            <dd ng-if="!transaction.reversal.tranDate">N/A</dd>
+            <dt>Reversed Payment:</dt>
+            <dd ng-if="transaction.reversal.tranRefNum">{{transaction.reversal.tranRefNum }}</dd>
+            <dd ng-if="!transaction.reversal.tranRefNum">N/A</dd>
+            <dt>Reason:</dt>
+            <dd ng-if="transaction.reversal.reasonCode">{{transaction.reversal.reasonCode }}</dd>
+            <dd ng-if="!transaction.reversal.reasonCode">N/A</dd>
+        </dl>
+    </div>
+    <div class="section billing-transaction" ng-show="transaction.reversal.itemReferences.itemReference.length > 0">
+        <hr />
+        <table class="table transaction-list">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="sortCol"
+                            sort-property="tranRefNum"
+                            predicate="sort.predicate"
+                            reverse="sort.reverse">
+                            Reference #
+                        </rx-sortable-column>
+                    </th>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="sortCol"
+                            sort-property="tranDate"
+                            predicate="sort.predicate"
+                            reverse="sort.reverse">
+                            Date
+                        </rx-sortable-column>
+                    </th>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="sortCol"
+                            sort-property="type"
+                            predicate="sort.predicate"
+                            reverse="sort.reverse">
+                            Type
+                        </rx-sortable-column>
+                    </th>
+                    <th scope="col">
+                        <rx-sortable-column
+                            sort-method="sortCol"
+                            sort-property="amountApplied"
+                            predicate="sort.predicate"
+                            reverse="sort.reverse">
+                            Amount Applied
+                        </rx-sortable-column>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="txn in transaction.reversal.itemReferences.itemReference | orderBy:sort.predicate:sort.reverse" class="{{ txn.type | lowercase }}">
+                    <td>
+                        <a href="transactions/{{ accountNumber }}/{{ txn.type | lowercase | TransactionType }}/{{ txn.id }}">
+                        {{ txn.tranRefNum }}
+                        </a>
+                    </td>
+                    <td>{{ txn.tranDate | date: defaultDateFormat }}</td>
+                    <td>{{ txn.type }}</td>
+                    <td class="currency">{{ txn.amountApplied | currency }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="section" ng-show="transaction.reversal.comments">
+        <hr />
+        <h3 class="section-title">
+            Notes
+        </h3>
+        <table class="table notes-table">
+            <th>
+                <h3>{{ transaction.reversal.rackerSSO }}</h3>
+                <small>
+                {{ transaction.reversal.tranDate | date: 'shortDate' }} at {{ transaction.reversal.tranDate | date: 'shortTime' }}
+                </small>
+            </th>
+            <td>
+                <p>{{ transaction.reversal.comments }}</p>
+            </td>
+        </table>
+    </div>
+</rx-page>

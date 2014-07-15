@@ -66,12 +66,13 @@
     "grunt-stubby": "~0.1.4",
     "stubby": "~0.2.3",
     "styledocco": "^0.6.6",
+    "grunt-contrib-htmlmin": "^0.2.0",
     "rx-page-objects": "https://95c7050854423f809e66-6999ba0e7a4f47d417515fb3f08fa9b8.ssl.cf1.rackcdn.com/rx-page-objects-0.10.0.tgz",
     "restler": "~3.2.2"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rackerlabs/encore-ui-template"
+    "url": "https://github.com/rackerlabs/billing-ui"
   },
   "engines": {
     "node": ">=0.10.25"

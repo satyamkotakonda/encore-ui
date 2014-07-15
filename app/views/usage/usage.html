@@ -1,0 +1,75 @@
+<rx-page
+    title="'Billing - Usages & Charges'"
+    subtitle="'On account ' + account.name">
+
+    <rx-notifications stack="usagePage"></rx-notifications>
+    <div class="section billing-cycle label-definition clearfix">
+        <p>
+            <strong>Billing Cycle Period:</strong>
+            <span ng-if="!periods.$resolved">{{ loadingMsg }}</span>
+            <span ng-if="periods.$resolved && currentPeriod">
+                {{ currentPeriod.startDate | date: defaultDateFormat }}
+                &nbsp;
+                to
+                &nbsp;
+                <span ng-if="currentPeriod.endDate">{{ currentPeriod.endDate | date: defaultDateFormat }}</span>
+                <span ng-if="!currentPeriod.endDate">Present</span>
+            </span>
+            <span ng-if="periods.$resolved && !currentPeriod">
+                {{ notFoundMsg }}
+            </span>
+        </p>
+        <p>
+            <strong>Current Estimated Amount:</strong>
+            <span ng-if="!(periods.$resolved || charges.$resolved)">{{ loadingMsg }}</span>
+            <span ng-if="periods.$resolved && charges.$resolved">
+                {{ charges | UsageTotal | currency }}
+            </span>
+            <span ng-if="periods.$resolved && !charges">
+                {{ notFoundMsg }}
+            </span>
+        </p>
+    </div>
+    <hr />
+    <div class="section billing-usage" ng-if="periods.$resolved && charges.$resolved">
+        <h3 class="section-title">
+            By Product
+        </h3>
+        <div class="section-grid">
+            <div class="col-2-3">
+                <table class="table usage-list">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <rx-sortable-column
+                                    sort-method="sortCol"
+                                    sort-property="name | ProductName"
+                                    predicate="sort.predicate"
+                                    reverse="sort.reverse">
+                                    Product
+                                </rx-sortable-column>
+                            </th>
+                            <th scope="col">
+                                <rx-sortable-column
+                                    sort-method="sortCol"
+                                    sort-property="total"
+                                    predicate="sort.predicate"
+                                    reverse="sort.reverse">
+                                    Usage Charges
+                                </rx-sortable-column>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="charge in charges | UsageProductTotal | orderBy:sort.predicate:sort.reverse">
+                            <td>{{ charge.name | ProductName }}</td>
+                            <td>{{ charge.total | currency }}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</rx-page>

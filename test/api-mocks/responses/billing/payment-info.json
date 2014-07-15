@@ -1,0 +1,8 @@
+{
+    "paymentInfo": {
+        "paymentType": "METHOD",
+        "paymentDetail": "urn:uuid:f1143d2f-fa3c-4522-b8e7-ea22c8dd4c09",
+        "paymentTerms": "NET_0",
+        "notificationOption": "OPT_IN"
+    }
+}

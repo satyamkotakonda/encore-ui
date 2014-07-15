@@ -1,0 +1,31 @@
+<rx-modal-form
+    submitText="Save Primary Payment"
+    title="Change Primary Payment Option"
+    subtitle="{{userName}}">
+    <div class="payment-post-form">
+        <rx-notifications stack="primaryPaymentChange"></rx-notifications>
+        <div class="payment-field payment-method">
+            <div class="tab-menu">
+                <ul>
+                    <li ng-class="{'tab-selected': methodType === 'paymentCard'}">
+                        <a ng-click="changeMethodType('paymentCard')">Credit Card</a>
+                    </li>
+                    <li ng-class="{'tab-selected': methodType === 'electronicCheck'}">
+                        <a ng-click="changeMethodType('electronicCheck')">ACH</a>
+                    </li>
+                    <li ng-class="{'tab-selected': methodType === 'invoice'}">
+                        <a ng-click="changeMethodType('invoice')">Invoice</a>
+                    </li>
+                </ul>
+            </div>
+            <rx-form-option-table
+                data="methodList"
+                columns="methodListCols"
+                type="radio"
+                model="payment.methodId"
+                selected="payment.methodId"
+                field-id="paymentMethodTable">
+                </rx-form-option-table>
+        </div>
+    </div>
+</rx-modal-form>

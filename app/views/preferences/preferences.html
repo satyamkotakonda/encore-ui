@@ -1,0 +1,42 @@
+<rx-page title="'Billing - Preferences'" subtitle="'On account ' + account.name" ng-init="poNotFound = 'No Purchase Orders'">
+    <rx-notifications stack="preferencePage"></rx-notifications>
+    <div class="section">
+        <div class="section-grid preferences-container">
+            <div class="col-1-3">
+                <h4 class="section-title">Paperless Billing</h4>
+                <div class="label-definition">
+                    <label>Invoices:</label>
+                    <rx-switch
+                        model="billInfo.invoiceDeliveryMethod"
+                        true-value="PAPERLESS"
+                        false-value="PAPER"
+                        loading="isResourceLoading(billInfo, billInfoUpdate)"
+                        disabled="isResourceLoading(billInfo, billInfoUpdate)"
+                        post-hook="setDirty(newValue, value, billInfo)"></rx-switch>
+                </div>
+            </div>
+            <div class="col-1-3">
+                <h4 class="section-title">Notifications</h4>
+                <div class="label-definition">
+                    <label>Successful Payment:</label>
+                    <rx-switch
+                        model="paymentInfo.notificationOption"
+                        true-value="OPT_IN"
+                        false-value="OPT_OUT"
+                        loading="isResourceLoading(paymentInfo, paymentInfoUpdate)"
+                        disabled="isResourceLoading(paymentInfo, paymentInfoUpdate)"
+                        post-hook="setDirty(newValue, value, paymentInfo)"></rx-switch>
+                </div>
+            </div>
+        </div>
+        <div class="section-grid preferences-container">
+            <div class="col-2-3">
+                <rx-button
+                    toggle-msg="Updating"
+                    default-msg="Update"
+                    toggle="isResourceLoading(billInfo, billInfoUpdate) || isResourceLoading(paymentInfo, paymentInfoUpdate)"
+                    ng-click="updatePreferences()" ng-disabled="">Update</rx-button>
+            </div>
+        </div>
+    </div>
+</rx-page>

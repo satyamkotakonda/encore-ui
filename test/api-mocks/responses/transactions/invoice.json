@@ -1,0 +1,78 @@
+{
+    "invoice": {
+        "consolidatedAccountNumber": "EBS123456",
+        "status": "OPEN",
+        "invoiceTotal": "600.01",
+        "contractEntity": "US",
+        "tranRefNum": "T-123456785",
+        "poNumber": "2D2F5V58F",
+        "date": "2013-05-01T16:32:52.000-05:00",
+        "coverageEndDate": "2013-04-30T16:32:52.000-05:00",
+        "currency": "USD",
+        "id": "7dc53df5-703e-49b3-8670-b1c468f47f1f",
+        "accountName": "ESPN Sports",
+        "invoiceItem": [{
+            "id": "0f35a016-2ea1-4ea3-8399-0fe3601d5bac",
+            "name": "Cloud Servers",
+            "itemType": "PRODUCT_CHARGES",
+            "itemAmount": "21.61"
+        }, {
+            "id": "0f35a016-2ea1-4ea3-8399-0fe3601d5bac",
+            "name": "Cloud Database",
+            "itemType": "PRODUCT_CHARGES",
+            "itemAmount": "78.55"
+        }, {
+            "id": "0f35a016-2ea1-4ea3-8399-0fe3601d5bac",
+            "name": "Cloud Block Storage",
+            "itemType": "PRODUCT_CHARGES",
+            "itemAmount": "16.91"
+        }, {
+            "id": "0f35a016-2ea1-4ea3-8399-0fe3601d5bac",
+            "name": "Cloud Files",
+            "itemType": "PRODUCT_CHARGES",
+            "itemAmount": "11.25"
+        }, {
+            "id": "0f35a016-2ea1-4ea3-8399-0fe3601d5bac",
+            "name": "CloudBackup",
+            "itemType": "PRODUCT_CHARGES",
+            "itemAmount": "21.61"
+        }, {
+            "id": "0439a07e-6f9b-439e-9256-c051b3ab7a1f",
+            "name": "Professional Services Migration",
+            "itemType": "PRODUCT_CHARGES",
+            "itemAmount": "20.01"
+        }, {
+            "id": "0439a07e-6f9b-439e-9256-c051b3ab7a1f",
+            "name": "Bulk File importing",
+            "itemType": "OTHER_CHARGES",
+            "itemAmount": "20.01"
+        }],
+        "invoiceContact": [{
+            "address": {
+                "zip": "75373-0759",
+                "state": "TX",
+                "addressLine1": "64 Austin HWY",
+                "country": "United States",
+                "city": "Austin"
+            },
+            "name": "Mary Silva",
+            "contactType": "BILLER"
+        }, {
+            "address": {
+                "zip": "78218",
+                "state": "TX",
+                "addressLine1": "320 Basse Rd",
+                "country": "United States",
+                "city": "San Antonio"
+            },
+            "name": "ESPN Sports",
+            "contactType": "BILL_TO_PRIMARY"
+        }],
+        "invoiceSubTotal": "600.02",
+        "taxTotal": "10.01",
+        "coverageStartDate": "2013-04-01T16:32:52.000-05:00",
+        "discountTotal": "20.02",
+        "paymentTerms": "Due upon receipt",
+        "sellerOfRecordInfo": "Rackspace US, Inc. P.O. Box 730759 Dallas,"
+    }
+}

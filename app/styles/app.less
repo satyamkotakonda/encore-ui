@@ -1,4 +1,10 @@
-@import (less,reference) '../bower_components/encore-ui/encore-ui.css';
+@import (less, reference) '../bower_components/encore-ui/encore-ui.css';
+@import (less, reference) '../bower_components/pure/grids.css';
+@import (less, reference) '../bower_components/pure/menus.css';
+// We only need the reference here, encore-ui CSS is being merged here by usemin on the index.html
+
+@import 'mixins';
+@import 'vars';
 
 body {
     margin: 0;
@@ -16,3 +22,13 @@ body {
     clear: both;
     .clearfix();
 }
+
+
+@import '../modules/rxSwitch/rxSwitch';
+@import '../modules/rxPopover/rxPopover';
+
+@import 'common';
+@import 'overview';
+@import 'transactions';
+@import 'payment';
+@import 'preferences';

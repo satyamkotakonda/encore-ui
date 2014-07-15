@@ -1,0 +1,46 @@
+/*
+
+# Preference Page Styles
+These are common styles that apply to the preferences page
+
+*/
+
+/*
+Preferences Container with styling to the likes of the preferences mock up
+```
+<div class="preferences-container">
+
+</div>
+```
+*/
+.preferences-container {
+    border: 1px @inputBorder solid;
+    background: white;
+    padding: 2em;
+
+    .label-definition {
+        margin: 1em 0;
+        label {
+            margin-right: 2em;
+        }
+    }
+    &:first-child {
+        border-bottom: 0;
+    }
+    & + & {
+        border-top: 0;
+        border-bottom: 0;
+    }
+    &:last-child {
+        border-top: 0;
+        border-bottom: 1px @inputBorder solid;
+    }
+}
+
+.purchase-orders {
+    .actions {
+        float: right;
+        border: 0;
+        margin-right: 0;
+    }
+}

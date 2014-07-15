@@ -1,0 +1,130 @@
+/*
+ Overrides for the make a payment modal of the summary list and the form-items
+ Also append a description panel below the payment method dropdown
+ ```
+ <div class="payment-field payment-amount">
+     <rx-form-item label="Payment Amount" prefix="$">
+         <input type="text" ng-model="payment.amount" ng-required="true" ng-blur="setPayment(payment.amount)" />
+     </rx-form-item>
+ </div>
+ ```
+*/
+.payment-field {
+    margin-bottom: @fontSize;
+    .form-item {
+        margin-top: 0;
+        .field-label {
+            font-weight: 500;
+            font-size: @fontSize;
+            width: 30%;
+        }
+        .field-prefix {
+            font-size: @fontSize + 0.4;
+            font-weight: 500;
+            vertical-align: top;
+            line-height: @lineHeight - 0.5;
+        }
+        .field-input {
+            margin: 0;
+        }
+        .option-table {
+            min-width: 100%;
+        }
+    }
+}
+.payment-amount {
+    input {
+        //background-color: #e8f3ff;
+        border: 1px #e8e8e8 solid;
+        border-radius: 0;
+        font-size: 1.4em;
+        letter-spacing: -0.05em;
+        //padding: 3px 6px;
+        width: 90px;
+    }
+}
+
+/*
+ Overrides for the .detail-list of payment options
+ */
+.payment-options {
+    & > * {
+        padding: 10px 0;
+    }
+    .detail-list {
+        margin-bottom: 40px;
+        .default {
+            color: @infoBlue;
+        }
+        .method-number {
+            width: 160px;
+        }
+        .status {
+            width: 130px;
+            text-align: center;
+        }
+        .method-action {
+            width: 20px;
+            text-align: center;
+        }
+    }
+}
+
+.payment-action-options {
+    text-align: left;
+    font-size: 1.1em;
+    font-weight: normal;
+    width: 12em;
+    padding: 0;
+    .payment-action {
+        margin: 0;
+        padding: 5px 7px 5px 0;
+        display: block;
+        text-align: left;
+    }
+}
+
+.payment-default {
+    padding: 1em 0;
+    .default-title {
+        // Inherit from instead of override
+        &:extend(.rx-app .page-body .section-title);
+        padding: 0.18em;
+        line-height: normal;
+    }
+    .method-description {
+        &:extend(.label-definition all);
+        min-width: 14em;
+
+        .heading {
+            font-size: 1.1em;
+            margin-bottom: 0.7em;
+        }
+        strong {
+            margin-right: 0;
+        }
+        p {
+            margin: 0;
+        }
+    }
+    .actions {
+        min-width: 11em;
+    }
+}
+
+.payment-disable-form {
+    &:extend(.payment-default all);
+    .clearfix();
+    .method-description {
+        border-right: 0;
+        clear: right;
+    }
+}
+
+.payment-disable-warn {
+    .clearfix();
+    img {
+        width: 1em;
+        vertical-align: bottom;
+    }
+}

@@ -1,0 +1,481 @@
+/*
+
+# Common Styles
+These are common styles that will be re-used across the site
+
+*/
+
+
+table {
+    tr {
+        background-color: #fff;
+    }
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+/*
+ Common to align numeric/currency values to the right
+ ```
+  <table style="width: 100%">
+     <tr>
+         <td class="currency">$100.00</td>
+     </tr>
+ </table>
+<div>
+    <p class="numeric">10000</p>
+    <p class="currency">$120.10</p>
+</div>
+```
+ */
+.currency,
+.numeric {
+    text-align: right;
+}
+
+/*
+ Horizontal Sections for a page
+ ```
+ <div class="section">...</div>
+ ```
+ */
+.section {
+    margin: 0 0 20px;
+    clear: both;
+    .clearfix();
+    &.inline {
+        & > * {
+            float: left;
+            margin: 0;
+            margin-right: 1em;
+            display: inline-block;
+        }
+    }
+    .actions {
+        margin-left: 1em;
+        padding-left: 2em;
+        border-left: 1px #ccc solid;
+        min-width: 10em;
+        min-height: 8em;
+        &.single {
+            border-left: 0;
+            float: none;
+            padding: 0;
+            margin: 0;
+        }
+        .button {
+            width: 100%;
+            text-align: left;
+        }
+    }
+}
+
+
+/*
+Column Based Container based on Pure
+```
+<div class="section-grid">
+
+</div>
+```
+*/
+.section-grid {
+    &:extend(.pure-g all);
+    &:extend(.pure-g-r all);
+    font-family: inherit;
+
+    .col-1-3 {
+        &:extend(.pure-u-1-3 all);
+        font-family: inherit;
+    }
+    .col-2-3 {
+        &:extend(.pure-u-2-3 all);
+        font-family: inherit;
+    }
+    .col-1 {
+        &:extend(.pure-u-1 all);
+        font-family: inherit;
+    }
+}
+
+/*
+Data Definition List for common key/value descriptions
+
+```
+<dl class="list-definition pull-left">
+    <dt class="accent">Current Amount Due:</dt>
+    <dd class="accent accent-group">
+        <span class="accent-text">
+            $2,1124.00
+        </span>
+        <span class="accent-action">
+            <rx-modal-action
+                template-url="/views/billing/makePayment.html"
+                post-hook="postPayment(payment)"
+                class="payment-action">
+                Pay Bill
+            </rx-modal-action>
+        </span>
+    </dd>
+    <dt>Account Balance:</dt>
+    <dd>$13,313,131,313</dd>
+</dl>
+```
+*/
+
+.list-definition {
+    font-size: @fontSize;
+    color: #727272;
+    dt {
+        line-height: @lineHeight;
+        float: left;
+        min-width: 120px;
+        font-weight: 500;
+        text-align: right;
+        letter-spacing: -0.04em;
+        clear: left;
+        &.accent {
+            padding-right: 0;
+            padding-left: 0;
+            border-right: 0;
+        }
+    }
+    dd {
+        line-height: @lineHeight;
+        float: left;
+        font-weight: 400;
+        text-align: left;
+        margin: 0;
+        padding-left: @spacing;
+        clear: right;
+    }
+    .accent {
+        font-size: @fontSize + 0.15;
+        line-height: @lineHeight + 0.7em;
+        border: 1px #aaa solid;
+        margin-bottom: 0.5em;
+    }
+    dt.accent {
+        min-width: 150px;
+    }
+    .accent-group {
+        min-width: inherit;
+        border: 0;
+        margin-bottom: 0.5em;
+        padding-left: 0;
+        .accent-text {
+            border: 1px #aaa solid;
+            border-left: 0;
+            padding-right: @spacing;
+            padding-left: @spacing - 1;
+            margin-right: @spacing/2;
+            float: left;
+        }
+        .accent-action {
+            float: left;
+            line-height: 0;
+            font-size: @fontSize - 0.1em;
+            line-height: @lineHeight - 0.35em;
+        }
+    }
+}
+
+/*
+ Container for filters that sits on top of a list of items
+ ```
+ <div class="detail-filters">
+     <span class="filter">
+         <rx-form-item label="Reference #">
+             <input type="text" ng-model="listFilter.reference" ng-required="true" />
+         </rx-form-item>
+     </span>
+     <span class="filter">
+         <rx-form-item label="Type">
+             <span class="field-select">
+                 <select ng-model="listFilter.type" >
+                     <option value="">Any</option>
+                     <option ng-repeat="t in filterData.types" value="{{t}}">{{t}}</option>
+                 </select>
+             </span>
+         </rx-form-item>
+     </span>
+ </div>
+ ```
+*/
+.detail-filters {
+    .clearfix();
+    padding: 15px 20px;
+    .filter {
+        float: left;
+        margin-right: 10px;
+    }
+}
+
+/*
+ Label definitions descriptions for headings
+ ```
+ <p class="label-definition">
+    <strong>Label Of Sorts:</strong> Value of Sorts
+ </p>
+ <div class="label-definition">
+    <p><strong>Label</strong> Value</p>
+ </div>
+ ```
+ */
+
+.label-definition {
+    font-size: 1.3em;
+    font-weight: 300;
+    color: @headingDark;
+    strong,
+    label {
+        font-weight: 400;
+        color: @actionGrey;
+        margin-right: 0.9em;
+    }
+
+}
+/*
+ List for summarized items that can be used to choose from
+ ```
+ <div class="summary-list">
+     <div class="summary-item pull-left" ng-click="setPayment(account.balance)" ng-class="{active: account.balance == payment.amount}">
+         <strong class="header">Account Balance</strong>
+         <p>$1,313.00</p>
+         <div class="arrow-down"></div>
+     </div>
+     <div class="summary-item pull-left" ng-click="setPayment(account.currentDue)" ng-class="{active: account.currentDue == payment.amount}">
+         <strong class="header">Due Today</strong>
+         <p>$11.03m</p>
+         <div class="arrow-down"></div>
+     </div>
+ </div>
+ ```
+*/
+.summary-list {
+    .clearfix();
+    .summary-item {
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+
+        width: 30%;
+        margin: 0 0 0 5%;
+        padding: 15px 0;
+
+        background-color: @actionGrey;
+        color: @summaryItemText;
+        &:first-child {
+            margin-left: 0;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+        .header {
+            text-transform: uppercase;
+            font-size: @fontSize - 0.2;
+        }
+        p {
+            font-size: @fontSize + 0.8;
+            font-weight: 100;
+            margin: 0;
+            line-height: @lineHeight;
+        }
+        .arrow-down {
+            width: 0;
+            height: 0;
+            margin: 5px auto 0;
+            border-left: 9px solid transparent;
+            border-right: 9px solid transparent;
+            border-top: 8px solid @summaryItemText;
+        }
+        &:hover,
+        &.active {
+            background-color: @actionBlue;
+            color: @summaryItemHover;
+            .header {
+                color: @summaryItemHeaderHover;
+            }
+            .arrow-down {
+                border-left: 9px solid transparent;
+                border-right: 9px solid transparent;
+                border-top: 8px solid @summaryItemArrowHover;
+            }
+        }
+    }
+}
+
+/*
+Horizontal Tab Menu based on pure
+```
+<div class="tab-menu">
+    <ul>
+        <li class="tab-selected"><a href="#">Default</a></li>
+        <li><a href="#">Card</a></li>
+        <li><a href="#">ACH</a></li>
+        <li><a href="#">Invoice</a></li>
+    </ul>
+</div>
+```
+*/
+.tab-menu {
+    @activeColor: #3e80c1;
+    @activeTextColor: #fff;
+    @tabColor: desaturate(darken(@activeColor, 12%), 15%);
+    @tabTextColor: darken(@activeTextColor, 13%);
+    &:extend(.pure-menu all);
+    &:extend(.pure-menu-open all);
+    &:extend(.pure-menu-horizontal all);
+    .clearfix();
+    border-bottom: 1px @tabColor solid;
+    ul {
+        .clearfix();
+        border-bottom: 9px @activeColor solid;
+    }
+    li {
+        margin: 0;
+        float: left;
+        &.tab-selected {
+            &:extend(.pure-menu-selected all);
+            a {
+                background: @activeColor;
+                color: @activeTextColor;
+            }
+        }
+        a {
+            background: @tabColor;
+            color: @tabTextColor;
+            padding: 15px 30px;
+        }
+        a:hover,
+        a:focus,
+        a:visited,
+        a:active {
+            &:extend(.tab-menu li.tab-selected a);
+        }
+    }
+}
+
+/*
+ Styles for expected payment-action look & feel
+ ```
+ <rx-modal-action
+   template-url="/views/billing/makePayment.html"
+   post-hook="postPayment(payment)"
+   class="payment-action">
+   Pay Bill
+ </rx-modal-action>
+ ```
+ */
+.action {
+    color: @primaryAction;
+    background: transparent;
+    cursor: pointer;
+    .box-sizing(border-box);
+
+    &:hover,
+    &:active,
+    &:visited,
+    &:focus {
+        text-decoration: none;
+        color: #fff;
+    }
+    &.button {
+        color: #fff;
+        background: @primaryAction;
+        &.change {
+            color: #fff;
+            background: @changeAction;
+        }
+        &.disable {
+            color: #fff;
+            background: @disableAction;
+        }
+        &.primary {
+            color: #fff;
+            background: @primaryAction;
+        }
+        &:hover {
+            color: #fff;
+        }
+    }
+
+    img {
+        vertical-align: middle;
+    }
+
+    &.change,
+    &.disable,
+    &.post {
+        white-space: nowrap;
+    }
+
+    &.change {
+        color: @changeAction;
+    }
+    &.disable {
+        color: @disableAction;
+    }
+    &.primary {
+        color: @primaryAction;
+    }
+}
+
+/*
+ Styles for detail lists in tables
+ ```
+ <table class="detail-list">
+    <thead>
+        <tr><th>Heading 1</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>Cell 1</td></tr>
+    </tbody>
+</table>
+ ```
+ */
+.detail-list {
+    background: white;
+    thead {
+        tr {
+            th:first-child {
+                width: 160px;
+            }
+        }
+    }
+
+    tr, td {
+        padding: 15px;
+    }
+}
+
+.notes-table {
+    th {
+        width: 15%;
+        background-color: lighten(@actionGrey, 30%);
+        text-align: right;
+        > h3 {
+            &:extend(.rx-app .page-body .section-title);
+            margin: 0 0 0 0.25em;
+        }
+        small {
+            &:extend(.rx-app .page-body .section-title);
+            font-size: 80%;
+            color: lighten(@actionGrey, 15%);
+        }
+    }
+    td {
+        p {
+            margin: 0;
+        }
+    }
+    th, td {
+        vertical-align: top;
+    }
+}
