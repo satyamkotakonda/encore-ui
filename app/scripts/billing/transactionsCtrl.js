@@ -31,7 +31,8 @@ angular.module('billingApp')
     *   DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES)
     * </pre>
     */
-    .controller('TransactionsCtrl', function ($scope, $routeParams, $q, Transaction, Account, Balance,
+    .controller('TransactionsCtrl', function (
+        $scope, $routeParams, $q, Transaction, Account, Balance,
         Period, Payment, PaymentMethod, PageTracking, PaymentInfo, BillInfo,
         rxSortUtil, rxPromiseNotifications, DefaultPaymentMethodFilter, AccountNumberUtil,
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES) {

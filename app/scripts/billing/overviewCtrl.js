@@ -27,17 +27,17 @@ angular.module('billingApp')
     * @example
     * <pre>
     * .controller('OverviewCtrl', function ($scope, $routeParams, $q, Transaction, Account, Balance,
-    *   Period, Payment, PaymentMethod, PageTracking, rxSortUtil, rxPromiseNotifications,
+    *   Period, Payment, PaymentMethod, PageTracking, rxSortUtil, rxPromiseNotifications, 
     *   DefaultPaymentMethodFilter,
     *   DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES)
     * </pre>
     */
-    .controller('OverviewCtrl', function ($scope, $routeParams, $q, $timeout,
+    .controller('OverviewCtrl', function (
+        $scope, $routeParams, $q, $timeout,
         Balance, Payment, PaymentMethod, ContractEntity, SupportInfo,
         Contact, Account, SupportAccount, SupportRoles,
         DefaultPaymentMethodFilter, PrimaryAddressFilter, RoleNameFilter,
-        AccountNumberUtil, rxPromiseNotifications,
-        DATE_FORMAT, STATUS_MESSAGES) {
+        AccountNumberUtil, rxPromiseNotifications, DATE_FORMAT, STATUS_MESSAGES) {
 
         $scope.accountNumber = $routeParams.accountNumber;
         var defaultParams = { accountNumber: $routeParams.accountNumber };
