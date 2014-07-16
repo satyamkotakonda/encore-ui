@@ -10,7 +10,9 @@ describe('CustomerAdminFilters', function () {
         });
 
         roles = [{
-            'role': 'Account Manager',
+            'role': {
+                'name': 'Account Manager'
+            },
             'user': {
                 'sso': 'joe.racker',
                 'email': 'joe.racker@rackspace.com',
