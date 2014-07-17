@@ -1,12 +1,12 @@
 describe('Preferences: PreferencesCtrl', function () {
-    var scope, ctrl, billInfo, paymentInfo;
+    var scope, ctrl, billInfo, paymentInfo, account;
 
     var testAccountNumber = '12345';
 
     beforeEach(function () {
         module('billingApp');
 
-        inject(function ($controller, $rootScope, $q, BillInfo, PaymentInfo, AccountNumberUtil) {
+        inject(function ($controller, $rootScope, $q, BillInfo, PaymentInfo, AccountNumberUtil, Account) {
             var getResourceResultMock = function (data) {
                     var deferred = $q.defer();
                     data.$promise = deferred.promise;
@@ -24,9 +24,11 @@ describe('Preferences: PreferencesCtrl', function () {
                     };
                 };
 
+            account = Account;
             billInfo = BillInfo;
             paymentInfo = PaymentInfo;
 
+            account.get = sinon.stub(account, 'get', getResourceMock({}));
             billInfo.get = sinon.stub(billInfo, 'get', getResourceMock({}));
             paymentInfo.get = sinon.stub(paymentInfo, 'get', getResourceMock({}));
             billInfo.updateInvoiceDeliveryMethod = sinon.stub(billInfo, 'updateInvoiceDeliveryMethod',

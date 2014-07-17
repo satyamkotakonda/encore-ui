@@ -1,5 +1,5 @@
 describe('Usage: UsageCtrl', function () {
-    var scope, ctrl, estimatedCharges, period, periodData, chargeData;
+    var scope, ctrl, estimatedCharges, period, periodData, chargeData, account;
 
     var testAccountNumber = '12345';
 
@@ -7,7 +7,7 @@ describe('Usage: UsageCtrl', function () {
         module('billingApp');
 
         inject(function ($controller, $rootScope, $httpBackend, EstimatedCharges,
-                Period, $q) {
+                         Period, Account, $q) {
             var getResourceResultMock = function (data) {
                     var deferred = $q.defer();
                     data.$promise = deferred.promise;
@@ -25,6 +25,7 @@ describe('Usage: UsageCtrl', function () {
             scope = $rootScope.$new();
             estimatedCharges = EstimatedCharges;
             period = Period;
+            account = Account;
 
             periodData = [{
                 current: true,
@@ -38,7 +39,8 @@ describe('Usage: UsageCtrl', function () {
 
             period.list = sinon.stub(period, 'list', getResourceMock(periodData));
             estimatedCharges.list = sinon.stub(estimatedCharges, 'list', getResourceMock(chargeData));
-
+            account.get = sinon.stub(account, 'get', getResourceMock({}));
+            
             ctrl = $controller('UsageCtrl',{
                 $scope: scope,
                 $routeParams: { accountNumber: testAccountNumber },

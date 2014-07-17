@@ -15,10 +15,12 @@ angular.module('billingApp')
     * .controller('UsageCtrl', function ($scope, $routeParams, EstimatedCharges)
     * </pre>
     */
-    .controller('UsageCtrl', function ($scope, $routeParams, $q, EstimatedCharges,
+    .controller('UsageCtrl', function ($scope, $routeParams, $q, EstimatedCharges, Account,
                                        Period, rxSortUtil, rxPromiseNotifications, AccountNumberUtil,
                                        STATUS_MESSAGES, DATE_FORMAT) {
 
+        // Set account name
+        $scope.account = Account.get({ accountNumber: $routeParams.accountNumber });
         // Set the default sort of the usage
         $scope.sort = rxSortUtil.getDefault('name | ProductName', false);
 
