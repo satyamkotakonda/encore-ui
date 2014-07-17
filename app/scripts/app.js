@@ -1,10 +1,12 @@
 'use strict';
-
 angular.module('billingApp', ['ngRoute', 'ngResource', 'homeSvcs', 'encore.ui', 'encore.ui.tpls',
         'rxSwitch', 'encore.ui.rxPopover', 'billingSvcs', 'paymentSvcs', 'supportSvcs',
         'customerAdminSvcs', 'constants', 'productConstants'])
     .config(function ($httpProvider, $routeProvider, $locationProvider) {
-        
+        // Add Interceptors for auth
+        $httpProvider.interceptors.push('TokenInterceptor');
+        $httpProvider.interceptors.push('UnauthorizedInterceptor');
+
         //#TODO: To be replaced once account search is implemented, only temporary for dev
         $routeProvider
             .when('/overview/:accountNumber', {
@@ -63,16 +65,8 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'homeSvcs', 'encore.ui', 
             });
 
         $locationProvider.html5Mode(true).hashPrefix('!');
-<<<<<<< HEAD
-        $httpProvider.interceptors.push('TokenInterceptor'); //Injects auth token id into api calls
-        $httpProvider.interceptors.push('UnauthorizedInterceptor'); //Redirects user to login page on 401
-
-    }).run(function ($http, $rootScope, $window, Auth, Environment, rxAppRoutes,
-        NOTFOUND_MSG, LOADING_MSG) {
-=======
     }).run(function ($http, $rootScope, $window, $interpolate, Auth, Environment, rxAppRoutes,
                      NOTFOUND_MSG, LOADING_MSG, rxBreadcrumbsSvc) {
->>>>>>> master
         // Override the children of the billing menu from the encore-ui default.
         rxAppRoutes.setRouteByKey('billing', {
             children: [
