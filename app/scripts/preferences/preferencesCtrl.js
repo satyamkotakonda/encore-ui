@@ -15,9 +15,11 @@ angular.module('billingApp')
     * .controller('PreferencesCtrl', function ($scope, $routeParams, EstimatedCharges)
     * </pre>
     */
-    .controller('PreferencesCtrl', function ($scope, $routeParams, BillInfo, PaymentInfo,
+    .controller('PreferencesCtrl', function ($scope, $routeParams, BillInfo, PaymentInfo, Account,
                                              AccountNumberUtil, rxPromiseNotifications, rxNotify) {
-
+        // Set account name
+        $scope.account = Account.get({ accountNumber: $routeParams.accountNumber });
+        
         var updateBillInfo = function () {
             $scope.billInfo = BillInfo.get({ accountNumber: $routeParams.accountNumber });
         };
