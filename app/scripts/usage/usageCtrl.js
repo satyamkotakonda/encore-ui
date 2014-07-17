@@ -16,8 +16,8 @@ angular.module('billingApp')
     * </pre>
     */
     .controller('UsageCtrl', function ($scope, $routeParams, $q, EstimatedCharges,
-            Period, rxSortUtil, rxPromiseNotifications, AccountNumberUtil,
-            STATUS_MESSAGES, DATE_FORMAT) {
+                                       Period, rxSortUtil, rxPromiseNotifications, AccountNumberUtil,
+                                       STATUS_MESSAGES, DATE_FORMAT) {
 
         // Set the default sort of the usage
         $scope.sort = rxSortUtil.getDefault('name | ProductName', false);

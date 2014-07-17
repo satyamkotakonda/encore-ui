@@ -17,37 +17,62 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'homeSvcs', 'encore.ui', 
             })
             .when('/transactions/:accountNumber', {
                 templateUrl: 'views/billing/transactions.html',
-                controller: 'TransactionsCtrl'
+                controller: 'TransactionsCtrl',
+                data: {
+                    title: 'Transactions'
+                }
             })
             .when('/transactions/:accountNumber/:transactionType/:transactionNumber', {
                 templateUrl: function ($routeParams) {
                     return 'views/billing/transactions/' + $routeParams.transactionType + '.html';
                 },
-                controller: 'TransactionDetailsCtrl'
+                controller: 'TransactionDetailsCtrl',
+                data: {
+                    title: 'Transaction Details',
+                    parent: 'Transactions',
+                    parentPath: '/billing/transactions/{{accountNumber}}'
+                }
             })
             .when('/usage/:accountNumber', {
                 templateUrl: 'views/usage/usage.html',
-                controller: 'UsageCtrl'
+                controller: 'UsageCtrl',
+                data: {
+                    title: 'Usage'
+                }
             })
             .when('/payment/:accountNumber/options', {
                 templateUrl: 'views/payment/options.html',
-                controller: 'OptionsCtrl'
+                controller: 'OptionsCtrl',
+                data: {
+                    title: 'Payment Options'
+                }
             })
             .when('/purchase-orders/:accountNumber', {
                 templateUrl: 'views/purchase-orders/purchaseOrders.html',
-                controller: 'PurchaseOrdersCtrl'
+                controller: 'PurchaseOrdersCtrl',
+                data: {
+                    title: 'Purchase Orders'
+                }
             })
             .when('/preferences/:accountNumber', {
                 templateUrl: 'views/preferences/preferences.html',
-                controller: 'PreferencesCtrl'
+                controller: 'PreferencesCtrl',
+                data: {
+                    title: 'Preferences'
+                }
             });
 
         $locationProvider.html5Mode(true).hashPrefix('!');
+<<<<<<< HEAD
         $httpProvider.interceptors.push('TokenInterceptor'); //Injects auth token id into api calls
         $httpProvider.interceptors.push('UnauthorizedInterceptor'); //Redirects user to login page on 401
 
     }).run(function ($http, $rootScope, $window, Auth, Environment, rxAppRoutes,
         NOTFOUND_MSG, LOADING_MSG) {
+=======
+    }).run(function ($http, $rootScope, $window, $interpolate, Auth, Environment, rxAppRoutes,
+                     NOTFOUND_MSG, LOADING_MSG, rxBreadcrumbsSvc) {
+>>>>>>> master
         // Override the children of the billing menu from the encore-ui default.
         rxAppRoutes.setRouteByKey('billing', {
             children: [
@@ -77,11 +102,36 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'homeSvcs', 'encore.ui', 
             ]
         });
 
-        $rootScope.$on('$routeChangeStart', function () {
+        $rootScope.$on('$routeChangeStart', function (event, next) {
             if (Environment.get().name !== 'local' && !Auth.isAuthenticated()) {
                 $window.location = '/login?redirect=' + $window.location.pathname;
                 return;
             }
+
+            var params = _.isUndefined(next) ? {} : next.params;
+            var data = _.isUndefined(next) ? {} : next.data;
+            var crumbs = _.isEmpty(data) && !_.has(params, 'accountNumber') ? [] : [{
+                path: '/accounts/' + params.accountNumber,
+                name: params.accountNumber
+            }, {
+                path: '/billing/overview/' + params.accountNumber,
+                name: 'Billing'
+            }];
+
+            if (_.has(data, 'parent')) {
+                crumbs.push({
+                    path: $interpolate(data.parentPath)(params),
+                    name: data.parent
+                });
+            }
+
+            if (_.has(data, 'title')) {
+                crumbs.push({
+                    name: data.title
+                });
+            }
+
+            rxBreadcrumbsSvc.set(crumbs);
         });
 
         // Forces JSON only

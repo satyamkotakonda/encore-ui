@@ -24,7 +24,8 @@ angular.module('billingApp')
     *       Payment, DefaultPaymentMethodFilter, rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
     * </pre>
     */
-    .controller('OptionsCtrl', function ($scope, $routeParams, $q,
+    .controller('OptionsCtrl', function (
+        $scope, $routeParams, $q,
         Account, Balance, PaymentMethod, AccountNumberUtil,
         Payment, DefaultPaymentMethodFilter,
         rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {

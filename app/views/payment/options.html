@@ -165,8 +165,8 @@
                 </tr>
             </tbody>
         </table>
-        <h3 class="section-title">ACH Accounts</h3>
-        <table class="table detail-list">
+        <h3 ng-show="'local' | rxEnvironmentMatch" class="section-title">ACH Accounts</h3>
+        <table ng-show="'local' | rxEnvironmentMatch" class="table detail-list">
             <thead>
                 <tr>
                     <th scope="col">

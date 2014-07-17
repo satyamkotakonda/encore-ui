@@ -21,8 +21,7 @@ angular.module('billingApp')
     * </pre>
     */
     .controller('TransactionDetailsCtrl', function ($scope, $routeParams, Transaction, Account,
-        Balance, PaymentMethod, rxSortUtil, DATE_FORMAT) {
-
+                                                    Balance, PaymentMethod, rxSortUtil, DATE_FORMAT) {
         // Action for setting the sort
         var sortCol = function (predicate) {
             return rxSortUtil.sortCol($scope, predicate);
