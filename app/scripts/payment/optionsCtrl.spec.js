@@ -124,10 +124,4 @@ describe('OptionsCtrl', function () {
         scope.disableMethod('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
         //sinon.assert.calledOnce(payment.disable);
     });
-
-    it('OptionsCtrl should change default payment method', function () {
-        scope.changeDefaultMethod('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
-        //sinon.assert.calledOnce(payment.changeDefault);
-    });
-
 });
