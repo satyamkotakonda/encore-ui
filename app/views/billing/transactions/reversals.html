@@ -87,13 +87,13 @@
         </h3>
         <table class="table notes-table">
             <th>
-                <h3>{{ transaction.reversal.rackerSSO }}</h3>
-                <small>
+                <h3 class="note-creator">{{ transaction.reversal.rackerSSO }}</h3>
+                <small class="note-date">
                 {{ transaction.reversal.tranDate | date: 'shortDate' }} at {{ transaction.reversal.tranDate | date: 'shortTime' }}
                 </small>
             </th>
             <td>
-                <p>{{ transaction.reversal.comments }}</p>
+                <p class="note-text">{{ transaction.reversal.comments }}</p>
             </td>
         </table>
     </div>

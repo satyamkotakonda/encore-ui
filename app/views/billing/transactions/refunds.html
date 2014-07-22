@@ -93,13 +93,13 @@
         </h3>
         <table class="table notes-table">
             <th>
-                <h3>{{ transaction.refund.rackerSSO }}</h3>
-                <small>
+                <h3 class="note-creator">{{ transaction.refund.rackerSSO }}</h3>
+                <small class="note-date">
                 {{ transaction.refund.tranDate | date: 'shortDate' }} at {{ transaction.refund.tranDate | date: 'shortTime' }}
                 </small>
             </th>
             <td>
-                <p>{{ transaction.refund.comments }}</p>
+                <p class="note-text">{{ transaction.refund.comments }}</p>
             </td>
         </table>
     </div>
