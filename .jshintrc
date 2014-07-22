@@ -27,8 +27,11 @@
     "expr": true,
     "maxcomplexity": 10,
     "globals": {
+        "$": false,
+        "$$": false,
         "alert": false,
         "angular": false,
+        "browser": false,
         "devel": false,
         "describe": false,
         "it": false,

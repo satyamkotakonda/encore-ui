@@ -1,11 +1,14 @@
 /* jshint node:true */
+
 module.exports = function(config) {
     config.set({
         // base path, that will be used to resolve files and exclude
         basePath: 'app/',
 
+
         // frameworks to use
         frameworks: ['mocha', 'chai', 'sinon-chai'],
+
 
         // list of files / patterns to load in the browser
         files: [
@@ -20,13 +23,14 @@ module.exports = function(config) {
             'http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.js',
             'bower_components/encore-ui/encore-ui-tpls.min.js',
             'bower_components/lodash/dist/lodash.js',
-            // 'bower_components/mousetrap/mousetrap.js',
-            'bower_components/angular-hotkeys/build/hotkeys.min.js',
+            'bower_components/mousetrap/mousetrap.js',
+            'bower_components/angular-hotkeys/build/hotkeys.js',
             'bower_components/momentjs/moment.js',
             'scripts/app.js', // always load app definition first
-            'modules/**/*.js',
             'scripts/**/*.js',
+            'modules/**/*.js',
             '../test/browser-helpers.js',
+            // '../test/window-hack.js', // Only load when preventing window.location redirects
             'modules/**/*.html',
             'views/**/*.html',// templates
         ],
@@ -46,13 +50,12 @@ module.exports = function(config) {
 
         // test results reporter to use
         // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-        reporters: ['dots', 'coverage', 'threshold'],
+        reporters: ['progress', 'coverage', 'threshold'],
 
         coverageReporter: {
             type : 'html',
             dir : '../coverage/'
         },
-
 
         thresholdReporter: {
             statements: 90,

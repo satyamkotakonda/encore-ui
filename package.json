@@ -18,7 +18,7 @@
     "grunt-contrib-watch": "^0.5.0",
     "grunt-conventional-changelog": "^1.1.0",
     "grunt-html2js": "^0.2.4",
-    "grunt-jscs-checker": "^0.4.4",
+    "grunt-jscs-checker": "0.4.4",
     "grunt-karma": "^0.8.3",
     "grunt-ngdocs": "^0.2.1",
     "grunt-ngmin": "^0.0.2",
@@ -67,7 +67,8 @@
     "stubby": "~0.2.3",
     "styledocco": "^0.6.6",
     "grunt-contrib-htmlmin": "^0.2.0",
-    "rx-page-objects": "https://95c7050854423f809e66-6999ba0e7a4f47d417515fb3f08fa9b8.ssl.cf1.rackcdn.com/rx-page-objects-0.10.0.tgz"
+    "rx-page-objects": "https://95c7050854423f809e66-6999ba0e7a4f47d417515fb3f08fa9b8.ssl.cf1.rackcdn.com/rx-page-objects-0.10.0.tgz",
+    "restler": "~3.2.2"
   },
   "repository": {
     "type": "git",

@@ -47,6 +47,7 @@ module.exports = {
             }
         }
     },
+
     test: {
         options: {
             middleware: function (cnct) {
@@ -60,15 +61,19 @@ module.exports = {
             }
         }
     },
+
     dist: {
         options: {
             middleware: function (cnct) {
                 return [
+                    config.proxyRequest,
+                    config.modRewrite(['!\\.[0-9a-zA-Z_-]+$ /index.html']),
                     config.mountFolder(cnct, config.appDest)
                 ];
             }
         }
     },
+
     docs: {
         options: {
             middleware: function (cnct) {

@@ -6,17 +6,14 @@ module.exports = function (grunt) {
             'jshint',
             'jscs',
             'useminPrepare',
+            'less',
             'concurrent:dist',
             'concat',
             'copy:dist',
-            //'ngmin',
-            'less',
             'cssmin',
-            //'uglify',
             'rev',
             'usemin',
             'docs',
-            'shell:commitPush',
             'copy:plato',
             'copyCoverage'
         ]

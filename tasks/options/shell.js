@@ -1,23 +1,6 @@
 var grunt = require('grunt');
 
 module.exports = {
-    protractor: {
-        options: {
-            stdout: true
-        },
-        command: function (file) {
-            var localConfigFile = 'test/protractor.conf.local.js';
-            var defaultConfigFile = 'test/protractor.conf.js';
-            var configFile =  grunt.file.isFile(localConfigFile) ? localConfigFile : defaultConfigFile;
-            var cmd = 'protractor ' + configFile;
-
-            if (typeof file !== 'undefined' && file.length > 0) {
-                cmd += ' --specs ' + file;
-            }
-
-            return cmd;
-        }
-    },
     commitPush: {
         options: {
             stdout: true
@@ -32,9 +15,9 @@ module.exports = {
     },
     hooks: {
         command: [
-            'rm -f ../.git/hooks/pre-commit',
-            'cp tasks/git-hooks/pre-commit ../.git/hooks/',
-            'chmod u+x ../.git/hooks/pre-commit'
+            'rm -f .git/hooks/pre-commit',
+            'cp tasks/git-hooks/pre-commit .git/hooks/',
+            'chmod u+x .git/hooks/pre-commit'
         ].join(' && ')
     }
 };

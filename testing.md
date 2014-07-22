@@ -96,7 +96,19 @@ For both Midway and E2E tests, we use a Page Object library called [Astrolabe](h
 
 Goal: Validate our appplication in isolation from its dependencies (e.g. API Server)
 
+<<<<<<< HEAD
+In order to run the midway test suite, you will need a selenium server running.
+If you have homebrew installed, you can get a selenium webdriver running with:
+
+```
+$> brew install selenium-server-standalone
+$> selenium-server
+```
+
+If you're running Windows or Linux, see [Selenium setup with remote drivers](http://docs.seleniumhq.org/docs/03_webdriver.jsp#running-standalone-selenium-server-for-use-with-remotedrivers).
+=======
 In order to run the midway test suite, you will need a selenium server running. To install and run selenium, see [Selenium setup with remote drivers](http://docs.seleniumhq.org/docs/03_webdriver.jsp#running-standalone-selenium-server-for-use-with-remotedrivers).
+>>>>>>> billing-origin/master
 
 Once you have selenium installed, you need to install [Protractor](https://github.com/angular/protractor/), the Angular Selenium Driver. Do that by running:
 
@@ -108,14 +120,59 @@ Server mocks are done using Stub.by. Server stubs are stored in the frontend/tes
 
 In order to correctly run the midway tests you will need to keep this running in the background, so open a new terminal after running this command. 
 
+<<<<<<< HEAD
+    protractor test/protractor.conf.js
+
+You can also create a `test/protractor.conf.local.js` file to use when you need dev-specific settings that you don't want used in the CICD builds.
+=======
 When you have your new terminal open, run the tests by entering `grunt test:mid`. 
+>>>>>>> billing-origin/master
 
 #### Testing Individual Pages
 
 When developing a specific page, it's much quicker to run tests only for that page (rather than run the entire suite every time). In order to limit the tests to just that page, pass in path to the file to test as the third option in your grunt command. For example:
 
+<<<<<<< HEAD
+`protractor test/protractor.conf.js --specs=test/midway/cloudDetailPage.js`
+=======
 `grunt test:mid:test/midway/cloudDetailPage.js`
+>>>>>>> billing-origin/master
 
 ### E2E Tests
 
 Goal: Validate our app & all dependencies work in correlation as expected
+<<<<<<< HEAD
+
+#### Setting up E2E tests on Jenkins
+
+First, set your github pull settings, build triggers, and the post-build notifications for the build status, hipchat, etc.
+
+Here is a list of what you might want to set up:
+
+ 1. Hipchat Notifications
+ - Parameterized Build (String parameter = "sha1")
+ - Source Code Management
+ - Build Triggers (GitHub pull requests builder)
+ - Build Environment (Color ANSI Console Output, ANSI color map = xterm)
+ - Execute Shell (see below for information about `jenkins.example.sh`)
+ - Post build actions (Publish HTML reports, HipChat notifications, build status on Github, Delete Workspace)
+
+
+You can use the [starter jenkins CICD script](./test/jenkins.example.sh) for the *"Execute shell"* step.
+
+Be sure to set the workspace [to be deleted after each build ends](https://wiki.jenkins-ci.org/display/JENKINS/Workspace+Cleanup+Plugin), regardless of whether or not it was a success or failure.
+
+You'll need to *exclude* the following directories and files from this cleanup process:
+
+ - report/\**
+ - coverage/\**
+
+Check the box that says *"Apply pattern also on directories"*.
+
+Next, you'll need to SSH into the server and edit the jenkins user's `~/secrets.js` file if necessary.
+
+For an example of what the bare minimum is for a secrets file, see [`test/secrets.example.js`](./test/secrets.example.js).
+
+Next, you'll want to set your app's redirect parameter in the `test/protractor.conf.js` file to point to the "main" page of your team's encore app. For instance, Ticket Queue's app would change `/template/home` to `/ticketing/list`.
+=======
+>>>>>>> billing-origin/master
