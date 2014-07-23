@@ -67,34 +67,6 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'homeSvcs', 'encore.ui', 
         $locationProvider.html5Mode(true).hashPrefix('!');
     }).run(function ($http, $rootScope, $window, $interpolate, Auth, Environment, rxAppRoutes,
                      NOTFOUND_MSG, LOADING_MSG, rxBreadcrumbsSvc) {
-        // Override the children of the billing menu from the encore-ui default.
-        rxAppRoutes.setRouteByKey('billing', {
-            children: [
-                {
-                    href: 'overview/{{accountNumber}}',
-                    linkText: 'Overview'
-                }, {
-                    href: 'transactions/{{accountNumber}}',
-                    linkText: 'Transactions'
-                }, {
-                    href: 'usage/{{accountNumber}}',
-                    linkText: 'Current Usage'
-                }, {
-                // TODO: Commented out until functionality is to be released
-                //     href: 'discounts/{{accountNumber}}',
-                //     linkText: 'Discounts'
-                // }, {
-                    href: 'payment/{{accountNumber}}/options',
-                    linkText: 'Payment Options'
-                }, {
-                    href: 'purchase-orders/{{accountNumber}}',
-                    linkText: 'Purchase Orders'
-                }, {
-                    href: 'preferences/{{accountNumber}}',
-                    linkText: 'Preferences'
-                }
-            ]
-        });
 
         $rootScope.$on('$routeChangeStart', function (event, next) {
             if (Environment.get().name !== 'local' && !Auth.isAuthenticated()) {
