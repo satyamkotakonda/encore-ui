@@ -30,7 +30,7 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'homeSvcs', 'encore.ui', 
                 },
                 controller: 'TransactionDetailsCtrl',
                 data: {
-                    title: 'Transaction Details',
+                    // Setting breadcrumbs title in controller because we need scope access
                     parent: 'Transactions',
                     parentPath: '/billing/transactions/{{accountNumber}}'
                 }
@@ -39,7 +39,7 @@ angular.module('billingApp', ['ngRoute', 'ngResource', 'homeSvcs', 'encore.ui', 
                 templateUrl: 'views/usage/usage.html',
                 controller: 'UsageCtrl',
                 data: {
-                    title: 'Usage'
+                    title: 'Current Usage'
                 }
             })
             .when('/payment/:accountNumber/options', {
