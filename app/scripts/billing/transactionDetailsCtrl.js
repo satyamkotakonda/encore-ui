@@ -20,8 +20,24 @@ angular.module('billingApp')
     *   DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES)
     * </pre>
     */
-    .controller('TransactionDetailsCtrl', function ($scope, $routeParams, Transaction, Account,
-                                                    Balance, PaymentMethod, rxSortUtil, DATE_FORMAT) {
+.controller('TransactionDetailsCtrl', function ($scope, $filter, $routeParams, Transaction, Account,
+                                                rxBreadcrumbsSvc, Balance, PaymentMethod, rxSortUtil, DATE_FORMAT) {
+        function setBreadcrumbs () {
+            // Get non-plural transaction type from routeParams
+            var tranType = $routeParams.transactionType.slice(0, -1);
+            var typeTitle = $filter('rxCapitalize')(tranType);
+            var refNumTitle = _.isUndefined($scope.transaction[tranType]) ?
+                ' Details' : ' #' + $scope.transaction[tranType].tranRefNum;
+            // Get current breadcrumbs
+            var currentCrumbs = rxBreadcrumbsSvc.getAll();
+            // Remove hashKey so ngRepeat doesn't throw up
+            var newCrumbs = _.map(currentCrumbs, function (obj) { return _.omit(obj, '$$hashKey'); });
+            // Add details to breadcrumbs
+            newCrumbs.push({ name: typeTitle + refNumTitle });
+            // Set breadcrumbs and slice off the default "Home" so it doesn't duplicate
+            rxBreadcrumbsSvc.set(newCrumbs.slice(1));
+        }
+
         // Action for setting the sort
         var sortCol = function (predicate) {
             return rxSortUtil.sortCol($scope, predicate);
@@ -46,6 +62,9 @@ angular.module('billingApp')
             $routeParams.transactionType,
             $routeParams.transactionNumber
         );
+
+        // Set breadcrumbs once we have transaction information
+        $scope.transaction.$promise.finally(setBreadcrumbs);
 
         if ($routeParams.transactionType === 'refunds') {
             $scope.transaction.$promise.then(function (transaction) {
