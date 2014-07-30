@@ -92,6 +92,15 @@ angular.module('billingApp')
         $scope.paymentMethods = PaymentMethod.list(defaultParams);
         $scope.billingPeriods = Period.list(defaultParams);
 
+        // Convert transactions into format suitable for CSV conversion
+        $scope.transactions.$promise.then(function (data) {
+            var resp = JSON.parse(angular.toJson(data));
+            // Get headers for CSV based on object keys and remove Atom link header
+            $scope.csvHeaders = _.without(_.keys(resp[0]), 'link');
+            // Strip Atom link from response and convert to array for ng-csv
+            $scope.transactionsCsv = _.map(resp, function (obj) { return _.omit(obj, 'link'); });
+        });
+
         // Group the promises in $q.all for a global error message if any errors occur
         rxPromiseNotifications.add($q.all([
             $scope.billInfo.$promise,

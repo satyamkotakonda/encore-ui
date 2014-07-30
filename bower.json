@@ -13,6 +13,7 @@
     "lodash": "~2.4.1",
     "mousetrap": "~1.4.5",
     "mousetrap-bind-element": "~1.0.1",
+    "ng-csv": "~0.2.3",
     "html2canvas": "~0.4.1",
     "momentjs": "~2.5.0",
     "encore-ui": "0.13.2",
@@ -25,9 +26,7 @@
   },
   "resolutions": {
     "angular": "~1.2.18",
-    "angular-animate": "~1.2.18",
     "angular-sanitize": "~1.2.18",
-    "angular-resource": "~1.2.18",
-    "angular-mocks": "~1.2.18"
+    "angular-resource": "~1.2.18"
   }
 }

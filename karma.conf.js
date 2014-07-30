@@ -26,6 +26,7 @@ module.exports = function(config) {
             'bower_components/mousetrap/mousetrap.js',
             'bower_components/angular-hotkeys/build/hotkeys.js',
             'bower_components/momentjs/moment.js',
+            'bower_components/ng-csv/build/ng-csv.js',
             'scripts/app.js', // always load app definition first
             'scripts/**/*.js',
             'modules/**/*.js',

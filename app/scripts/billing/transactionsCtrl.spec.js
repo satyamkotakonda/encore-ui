@@ -1,6 +1,7 @@
+
 describe('Billing: TransactionsCtrl', function () {
     var scope, ctrl, account, balance, transaction, period, paymentMethod, PageTrackingObject,
-        balanceData, paymentMethods, paymentInfo, billInfo, payment;
+        balanceData, paymentMethods, paymentInfo, billInfo, payment, transactionList;
 
     var testAccountNumber = '12345';
 
@@ -37,6 +38,25 @@ describe('Billing: TransactionsCtrl', function () {
                 isDefault: true,
                 id: 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479'
             }];
+            transactionList = [{
+                amount: '1.00',
+                date: '2014-07-24T15:25:37Z',
+                id: '1d81bfc6-91bf-4c68-b230-4ad2e581bfc6',
+                link: [{
+                    href: 'https://staging.billingv2.com/v2/accounts/020-6035404/payments/test',
+                    rel: 'self'
+                }],
+                status: 'CLOSED',
+                tranRefNum: 'P1-63',
+                type: 'PAYMENT'
+            }, {
+                $promise: {
+                    catch: function () {},
+                    finally: function () {},
+                    then: function () {},
+                    $resolved: true
+                }
+            }];
 
             payment = Payment;
             payment.makePayment = sinon.stub(payment, 'makePayment', getResourceMock({}));
@@ -46,7 +66,7 @@ describe('Billing: TransactionsCtrl', function () {
             period.list = sinon.stub(period, 'list', getResourceMock([]));
             account.get = sinon.stub(account, 'get', getResourceMock({}));
             balance.get = sinon.stub(balance, 'get', getResourceMock(balanceData));
-            transaction.list = sinon.stub(transaction, 'list', getResourceMock([]));
+            transaction.list = sinon.stub(transaction, 'list', getResourceMock(transactionList));
             paymentMethod.list = sinon.stub(paymentMethod, 'list', getResourceMock(paymentMethods));
 
             PageTrackingObject = PageTracking.createInstance().constructor;
@@ -132,5 +152,15 @@ describe('Billing: TransactionsCtrl', function () {
     it('TransactionsCtrl should return a sorting predicate when calling sortCol', function () {
         scope.sortCol('date');
         expect(scope.sort.predicate).to.be.eq('date');
+    });
+
+    it('TransactionsCtrl should filter $resource properties and Atom link from transaction list', function () {
+        scope.transactions.$deferred.resolve(transactionList);
+        scope.$apply();
+        expect(scope.transactionsCsv[0]).to.have.keys(['id', 'amount', 'date', 'status', 'tranRefNum', 'type']);
+        expect(scope.transactionsCsv[0]).to.not.have.keys(['link']);
+        expect(scope.transactionsCsv[1]).to.not.have.ownProperty('$promise');
+        expect(scope.csvHeaders).to.contain('id');
+        expect(scope.csvHeaders).to.not.contain('link');
     });
 });
