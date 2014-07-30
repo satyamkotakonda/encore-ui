@@ -141,11 +141,6 @@ Data Definition List for common key/value descriptions
         font-weight: 500;
         text-align: right;
         clear: left;
-        &.accent {
-            padding-right: 0;
-            padding-left: 0;
-            border-right: 0;
-        }
     }
     dd {
         line-height: @lineHeight;
@@ -156,6 +151,9 @@ Data Definition List for common key/value descriptions
         padding-left: @spacing;
         clear: right;
     }
+}
+
+.list-definition {
     .accent {
         font-size: @fontSize + 0.15;
         line-height: @lineHeight + 0.7em;
@@ -164,6 +162,8 @@ Data Definition List for common key/value descriptions
     }
     dt.accent {
         min-width: 5em;
+        border-right: 0;
+        padding-right: 0;
         padding-left: 1em;
     }
     .accent-group {
@@ -243,7 +243,6 @@ Data Definition List for common key/value descriptions
         color: @actionGrey;
         margin-right: 0.9em;
     }
-
 }
 /*
  List for summarized items that can be used to choose from
@@ -459,6 +458,21 @@ Horizontal Tab Menu based on pure
     }
 }
 
+/*
+```
+<table class="table notes-table">
+    <th>
+        <h3 class="note-creator">{{ rackerSso }}</h3>
+        <small class="note-date">
+        {{ submissionDate | date: 'shortDate' }} at {{ submissionDate | date: 'shortTime' }}
+        </small>
+    </th>
+    <td>
+        <p class="note-text">{{ comments }}</p>
+    </td>
+</table>
+```
+*/
 .notes-table {
     th {
         width: 15%;
