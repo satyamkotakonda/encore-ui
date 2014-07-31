@@ -84,13 +84,13 @@
         </h3>
         <table class="table notes-table">
             <th>
-                <h3>{{ transaction.writeoff.rackerSSO }}</h3>
-                <small>
+                <h3 class="note-creator">{{ transaction.writeoff.rackerSSO }}</h3>
+                <small class="note-date">
                 {{ transaction.writeoff.tranDate | date: 'shortDate' }} at {{ transaction.writeoff.tranDate | date: 'shortTime' }}
                 </small>
             </th>
             <td>
-                <p>{{ transaction.writeoff.comments }}</p>
+                <p class="note-text">{{ transaction.writeoff.comments }}</p>
             </td>
         </table>
     </div>

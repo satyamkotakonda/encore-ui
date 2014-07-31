@@ -39,14 +39,30 @@
     .detail-filters {
         background: #fff;
         margin-bottom: 30px;
+        .filter {
+            max-width: 23%;
+            margin-right: 1em;
+        }
         .form-item {
             .clearfix();
+            .field-label {
+                flex: 0 0 auto;
+            }
+            .field-content {
+                margin-left: 0.8em;
+            }
+            .field-select {
+                &:before {
+                    cursor: pointer;
+                    z-index: 3;
+                }
+            }
             input {
-                width: 225px;
+                width: auto;
             }
             select {
-                width: 230px;
-                max-width: 100%;
+                width: 100%;
+                max-width: inherit;
             }
         }
     }

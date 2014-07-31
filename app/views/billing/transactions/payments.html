@@ -92,13 +92,13 @@
         </h3>
         <table class="table notes-table">
             <th>
-                <h3>{{ transaction.payment.rackerSSO }}</h3>
-                <small>
+                <h3 class="note-creator">{{ transaction.payment.rackerSSO }}</h3>
+                <small class="note-date">
                 {{ transaction.payment.submissionDate | date: 'shortDate' }} at {{ transaction.payment.submissionDate | date: 'shortTime' }}
                 </small>
             </th>
             <td>
-                <p>{{ transaction.payment.comments }}</p>
+                <p class="note-text">{{ transaction.payment.comments }}</p>
             </td>
         </table>
     </div>

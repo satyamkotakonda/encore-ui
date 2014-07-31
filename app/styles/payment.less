@@ -34,12 +34,6 @@
 }
 .payment-amount {
     input {
-        //background-color: #e8f3ff;
-        border: 1px #e8e8e8 solid;
-        border-radius: 0;
-        font-size: 1.4em;
-        letter-spacing: -0.05em;
-        //padding: 3px 6px;
         width: 90px;
     }
 }
@@ -48,9 +42,6 @@
  Overrides for the .detail-list of payment options
  */
 .payment-options {
-    & > * {
-        padding: 10px 0;
-    }
     .detail-list {
         margin-bottom: 40px;
         .default {
@@ -72,7 +63,6 @@
 
 .payment-action-options {
     text-align: left;
-    font-size: 1.1em;
     font-weight: normal;
     width: 12em;
     padding: 0;
@@ -88,9 +78,7 @@
     padding: 1em 0;
     .default-title {
         // Inherit from instead of override
-        &:extend(.rx-app .page-body .section-title);
-        padding: 0.18em;
-        line-height: normal;
+        &:extend(.title);
     }
     .method-description {
         &:extend(.label-definition all);

@@ -46,7 +46,7 @@ table {
  ```
  */
 .section {
-    margin: 0 0 20px;
+    margin: 0 0 1em;
     clear: both;
     .clearfix();
     &.inline {
@@ -60,7 +60,7 @@ table {
     .actions {
         margin-left: 1em;
         padding-left: 2em;
-        border-left: 1px #ccc solid;
+        border-left: .1em #ccc solid;
         min-width: 10em;
         min-height: 8em;
         &.single {
@@ -75,7 +75,9 @@ table {
         }
     }
 }
-
+.section-title {
+    &:extend(.title);
+}
 
 /*
 Column Based Container based on Pure
@@ -135,16 +137,10 @@ Data Definition List for common key/value descriptions
     dt {
         line-height: @lineHeight;
         float: left;
-        min-width: 120px;
+        min-width: 9em;
         font-weight: 500;
         text-align: right;
-        letter-spacing: -0.04em;
         clear: left;
-        &.accent {
-            padding-right: 0;
-            padding-left: 0;
-            border-right: 0;
-        }
     }
     dd {
         line-height: @lineHeight;
@@ -155,14 +151,20 @@ Data Definition List for common key/value descriptions
         padding-left: @spacing;
         clear: right;
     }
+}
+
+.list-definition {
     .accent {
         font-size: @fontSize + 0.15;
         line-height: @lineHeight + 0.7em;
-        border: 1px #aaa solid;
+        border: 0.07em #aaa solid;
         margin-bottom: 0.5em;
     }
     dt.accent {
-        min-width: 150px;
+        min-width: 5em;
+        border-right: 0;
+        padding-right: 0;
+        padding-left: 1em;
     }
     .accent-group {
         min-width: inherit;
@@ -170,7 +172,7 @@ Data Definition List for common key/value descriptions
         margin-bottom: 0.5em;
         padding-left: 0;
         .accent-text {
-            border: 1px #aaa solid;
+            border: 0.07em #aaa solid;
             border-left: 0;
             padding-right: @spacing;
             padding-left: @spacing - 1;
@@ -181,7 +183,7 @@ Data Definition List for common key/value descriptions
             float: left;
             line-height: 0;
             font-size: @fontSize - 0.1em;
-            line-height: @lineHeight - 0.35em;
+            line-height: @lineHeight + 0.1em;
         }
     }
 }
@@ -210,10 +212,9 @@ Data Definition List for common key/value descriptions
 */
 .detail-filters {
     .clearfix();
-    padding: 15px 20px;
+    padding: 0.8em 1em;
     .filter {
-        float: left;
-        margin-right: 10px;
+        display: inline-block;
     }
 }
 
@@ -233,13 +234,15 @@ Data Definition List for common key/value descriptions
     font-size: 1.3em;
     font-weight: 300;
     color: @headingDark;
+    p {
+        margin: .3em 0;
+    }
     strong,
     label {
         font-weight: 400;
         color: @actionGrey;
         margin-right: 0.9em;
     }
-
 }
 /*
  List for summarized items that can be used to choose from
@@ -333,7 +336,7 @@ Horizontal Tab Menu based on pure
     &:extend(.pure-menu-open all);
     &:extend(.pure-menu-horizontal all);
     .clearfix();
-    border-bottom: 1px @tabColor solid;
+    border-bottom: 0.1em @tabColor solid;
     ul {
         .clearfix();
         border-bottom: 9px @activeColor solid;
@@ -445,37 +448,55 @@ Horizontal Tab Menu based on pure
     thead {
         tr {
             th:first-child {
-                width: 160px;
+                width: 10em;
             }
         }
     }
 
     tr, td {
-        padding: 15px;
+        padding: .9em;
     }
 }
 
+/*
+```
+<table class="table notes-table">
+    <th>
+        <h3 class="note-creator">{{ rackerSso }}</h3>
+        <small class="note-date">
+        {{ submissionDate | date: 'shortDate' }} at {{ submissionDate | date: 'shortTime' }}
+        </small>
+    </th>
+    <td>
+        <p class="note-text">{{ comments }}</p>
+    </td>
+</table>
+```
+*/
 .notes-table {
     th {
         width: 15%;
         background-color: lighten(@actionGrey, 30%);
         text-align: right;
-        > h3 {
-            &:extend(.rx-app .page-body .section-title);
-            margin: 0 0 0 0.25em;
-        }
-        small {
-            &:extend(.rx-app .page-body .section-title);
-            font-size: 80%;
-            color: lighten(@actionGrey, 15%);
-        }
-    }
-    td {
-        p {
-            margin: 0;
-        }
+        padding: 1.2em;
     }
     th, td {
         vertical-align: top;
+    }
+
+    .note-creator {
+        &:extend(.title.sm);
+        font-weight: 700;
+        margin: 0 0 0 0.1em;
+        color: @actionGrey;
+    }
+    .note-date {
+        &:extend(.title.xs);
+        font-weight: 400;
+        color: lighten(@actionGrey, 15%);
+    }
+    .note-text {
+        margin-left: 1.2em;
+        margin-right: 1.2em;
     }
 }
