@@ -53,4 +53,71 @@ angular.module('billingApp')
                 });
             }
         };
+    })
+// Given a methodID perform a call to make it default. Refreshing the payment
+// methods upon success (refreshPaymentMethods is a post hook). 
+    .controller('PaymentActionCtrl', function (
+        $scope, $routeParams, Payment, rxNotify, BillingErrorResponse, STATUS_MESSAGES) {
+        var defaultStackName = 'makePayment';
+
+        var clearNotifications = function () {
+                rxNotify.clear(defaultStackName);
+                rxNotify.clear('page');
+            };
+
+        var paymentFail = function (response) {// Show a notification error within the modal
+                var msg = STATUS_MESSAGES.payment.error,
+                    responseMsg = BillingErrorResponse(response);
+
+                if (!_.isEmpty(responseMsg.msgDetails)) {
+                    msg += ': (' + responseMsg.msgDetails[0].message + ')';
+                } else if (!_.isEmpty(responseMsg.msg)) {
+                    msg += ': (' + responseMsg.msg + ')';
+                }
+
+                rxNotify.add(msg, {
+                    stack: defaultStackName,
+                    type: 'error'
+                });
+            },
+            paymentSuccess = function (data) {
+                var stack = $scope.notificationStack;
+                rxNotify.add(STATUS_MESSAGES.payment.success, {
+                    stack: stack,
+                    type: 'success'
+                });
+                $scope.$close(data);
+            },
+
+            makePayment = function () {
+                clearNotifications();
+                // Capture the instance of the loading notification in order to dismiss it once done processing
+                var loading = rxNotify.add(STATUS_MESSAGES.payment.load, {
+                    stack: defaultStackName,
+                    loading: true
+                });
+
+                $scope.paymentResult = Payment.makePayment($routeParams.accountNumber, $scope.payment.amount,
+                                                           $scope.payment.methodId, paymentSuccess, paymentFail);
+
+                $scope.paymentResult.$promise.finally(function () {
+                    rxNotify.dismiss(loading);
+                });
+
+                // Call the postHook (if) defined on successful result of makePayment
+                if ($scope.postHook) {
+                    $scope.paymentResult.$promise.then($scope.postHook);
+                }
+
+            };
+
+        var submitForm = function () {
+            clearNotifications();
+            makePayment();
+        };
+
+        // Make Payment  modal is using this controller, so we are overriding submit and cancel
+        // to prevent the modal from closing before the promise resolves
+        $scope.submit = submitForm;
+        $scope.cancel = $scope.$dismiss;
     });

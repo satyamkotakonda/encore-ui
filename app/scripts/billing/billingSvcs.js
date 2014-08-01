@@ -204,7 +204,7 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
             }
         );
 
-        payment.makePayment = function (accountNumber, amount, methodId) {
+        payment.makePayment = function (accountNumber, amount, methodId, success, error) {
             return payment.make({
                 accountNumber: accountNumber // URL Arguments
             }, {
@@ -212,7 +212,7 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
                     amount: amount,
                     methodId: methodId
                 }
-            });
+            }, success, error);
         };
 
         return payment;
@@ -341,7 +341,8 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
 
             error = _.extend({
                 type: 'error',
-                msg: ''
+                msg: '',
+                msgDetails: ''
             }, error[errorKey]);
 
             // Save the key as error type
@@ -354,9 +355,12 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
             if (error.status === 404) {
                 error.msg = STATUS_MESSAGES.permissionDenied;
                 error.type = 'permissionDenied';
-            } else if (!_.isEmpty(error.message)) {
+            } else if (!_.isEmpty(error.message) && _.isEmpty(error.details)) {
                 // Grab the error message from the API return data
                 error.msg = error.message;
+            } else if (!_.isEmpty(error.details)) {
+                error.msg = error.message;
+                error.msgDetails = error.details;
             }
 
             return error;
