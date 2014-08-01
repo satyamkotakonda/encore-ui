@@ -32,7 +32,7 @@ angular.module('billingApp')
     * </pre>
     */
     .controller('TransactionsCtrl', function (
-        $scope, $routeParams, $q, Transaction, Account, Balance,
+        $scope, $routeParams, $q, Transaction, Account, Balance, TransformJson,
         Period, Payment, PaymentMethod, PageTracking, PaymentInfo, BillInfo,
         rxSortUtil, rxPromiseNotifications, DefaultPaymentMethodFilter, AccountNumberUtil,
         DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES) {
@@ -94,7 +94,8 @@ angular.module('billingApp')
 
         // Convert transactions into format suitable for CSV conversion
         $scope.transactions.$promise.then(function (data) {
-            var resp = JSON.parse(angular.toJson(data));
+            // Remove $promise state from JSON data we want to serialize
+            var resp = TransformJson(data);
             // Get headers for CSV based on object keys and remove Atom link header
             $scope.csvHeaders = _.without(_.keys(resp[0]), 'link');
             // Strip Atom link from response and convert to array for ng-csv
