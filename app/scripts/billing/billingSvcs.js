@@ -358,9 +358,8 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
             } else if (!_.isEmpty(error.message) && _.isEmpty(error.details)) {
                 // Grab the error message from the API return data
                 error.msg = error.message;
-            } else if (!_.isEmpty(error.details)) {
-                error.msg = error.message;
-                error.msgDetails = error.details;
+            } else if (error.status === 400 && !_.isEmpty(error.details)) {
+                error.msg = _.first(error.details).message;
             }
 
             return error;
