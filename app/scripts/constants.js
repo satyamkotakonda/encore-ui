@@ -10,26 +10,30 @@ angular.module('constants', [])
         },
         payment: {
             error: 'There was an error Posting the Payment Request',
-            load: 'Posting Payment',
+            loading: 'Posting Payment',
             success: 'The Payment was successfully Submitted'
         },
         changeDefault: {
             error: 'There was an error Changing the Default Payment',
-            load: 'Changing Default Payment',
+            loading: 'Changing Default Payment',
             success: 'The Default Payment Method was successfully Changed'
         },
         usage: {
             error: 'There was an error loading Estimated Charges.'
         },
         purchaseOrders: {
-            create: 'Creating new Purchase Order',
-            createError: 'Error Activating new Purchase Order.',
-            createSuccess: 'The new Purchase Order has been Activated',
-            disable: 'Disabling current Purchase Order',
-            disableError: 'Error Disabling current Purchase Order.',
-            disableSuccess: 'The current Purchase Order has been Disabled',
             loading: 'Loading Purchase Orders',
             loadingError: 'Error loading Purchase Orders'
+        },
+        purchaseOrderCreate: {
+            success: 'The new Purchase Order has been Activated',
+            error: 'Error Activating new Purchase Order',
+            loading: 'Creating new Purchase Order'
+        },
+        purchaseOrderDisable: {
+            success: 'The current Purchase Order has been Disabled',
+            error: 'Error Disabling current Purchase Order',
+            loading: 'Disabling current Purchase Order'
         }
     })
     .constant('DATE_FORMAT', 'MM / dd / yyyy')
