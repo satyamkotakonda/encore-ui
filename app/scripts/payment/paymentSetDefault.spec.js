@@ -122,7 +122,7 @@ describe('rxPaymentSetDefault: PaymentSetDefaultCtrl', function () {
         module('constants');
         module('billingApp');
 
-        inject(function ($controller, $rootScope, $q, PaymentMethod,
+        inject(function ($controller, $rootScope, $q, PaymentMethod, rxNotify,
                          BillingErrorResponse, Account, STATUS_MESSAGES) {
             var getResourceResultMock = function (data) {
                 var deferred = $q.defer();
@@ -142,30 +142,7 @@ describe('rxPaymentSetDefault: PaymentSetDefaultCtrl', function () {
                     };
                 };
             msgs = STATUS_MESSAGES;
-            notify = {
-                stacks: {},
-                add: function (msg, opt) {
-                    if (!_.isArray(notify.stacks[opt.stack])) {
-                        notify.stacks[opt.stack] = [];
-                    }
-                    if (opt.stack) {
-                        opt.msg = msg;
-                        opt.id = _.uniqueId();
-                        notify.stacks[opt.stack].push(opt);
-                        return opt;
-                    }
-                },
-                clear: function (stack) {
-                    if (notify.stacks.hasOwnProperty(stack)) {
-                        notify.stacks[stack] = undefined;
-                        delete notify.stacks[stack];
-                    }
-                },
-                dismiss: function (msg) {
-                    notify.stacks[msg.stack] = _.reject(notify.stacks[msg.stack], { 'id': msg.id });
-                }
-            };
-
+            notify = rxNotify;
             paymentMethod = PaymentMethod;
             paymentMethod.changeDefault = sinon.stub(paymentMethod, 'changeDefault', getResourceMock({}));
 
@@ -181,8 +158,7 @@ describe('rxPaymentSetDefault: PaymentSetDefaultCtrl', function () {
             ctrl = $controller('PaymentSetDefaultCtrl', {
                 $scope: scope,
                 $routeParams: routeParams,
-                PaymentMethod: paymentMethod,
-                rxNotify: notify
+                PaymentMethod: paymentMethod
             });
         });
     });
@@ -192,8 +168,6 @@ describe('rxPaymentSetDefault: PaymentSetDefaultCtrl', function () {
     });
 
     it('PaymentSetDefaultCtrl should call postHook upon successful method change', function () {
-        scope.notificationStack = 'testPage';
-        expect(notify.stacks).to.be.empty;
         scope.postHook = postHook;
         scope.submit();
         expect(notify.stacks[stack]).not.to.be.empty;
@@ -203,13 +177,11 @@ describe('rxPaymentSetDefault: PaymentSetDefaultCtrl', function () {
         scope.changeDefaultResult.$deferred.resolve({});
         scope.$apply();
 
-        expect(notify.stacks[scope.notificationStack]).not.to.be.empty;
         sinon.assert.calledOnce(scope.postHook);
         sinon.assert.calledOnce(scope.$close);
     });
 
     it('PaymentSetDefaultCtrl should display a success message upon creation in the notificationStack', function () {
-        scope.notificationStack = 'testPage';
         scope.submit();
         expect(notify.stacks).not.to.be.empty;
 
@@ -218,8 +190,8 @@ describe('rxPaymentSetDefault: PaymentSetDefaultCtrl', function () {
         scope.changeDefaultResult.$deferred.resolve({});
         scope.$apply();
 
-        expect(notify.stacks[scope.notificationStack]).not.to.be.empty;
-        expect(notify.stacks[scope.notificationStack][0].type).to.be.eq('success');
+        expect(notify.stacks['page']).not.to.be.empty;
+        expect(notify.stacks['page'][0].type).to.be.eq('success');
         sinon.assert.calledOnce(scope.$close);
     });
 
@@ -242,7 +214,7 @@ describe('rxPaymentSetDefault: PaymentSetDefaultCtrl', function () {
         expect(notify.stacks[stack]).not.to.be.empty;
         expect(notify.stacks[stack][0].type).to.be.eq('error');
         var errorMsg = msgs.changeDefault.error + ': (Test Error Message)';
-        expect(notify.stacks[stack][0].msg).to.be.eq(errorMsg);
+        expect(notify.stacks[stack][0].text).to.be.eq(errorMsg);
     });
 
     it('PaymentSetDefaultCtrl should display generic error message when method change fails', function () {
@@ -258,7 +230,7 @@ describe('rxPaymentSetDefault: PaymentSetDefaultCtrl', function () {
 
         expect(notify.stacks[stack]).not.to.be.empty;
         expect(notify.stacks[stack][0].type).to.be.eq('error');
-        expect(notify.stacks[stack][0].msg).to.be.eq(msgs.changeDefault.error + ': ()');
+        expect(notify.stacks[stack][0].text).to.be.eq(msgs.changeDefault.error + ': ()');
 
         expect(scope.$close).not.to.have.been.called;
     });

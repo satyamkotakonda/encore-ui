@@ -98,3 +98,128 @@ describe('rxPaymentAction', function () {
     });
 
 });
+
+describe('rxPaymentSetDefault: PaymentActionCtrl', function () {
+    var scope, ctrl, notify, msgs, postHook, payment;
+
+    var testAccountNumber = '020-12345',
+        stack = 'makePayment',
+        routeParams = { accountNumber: testAccountNumber };
+
+    beforeEach(function () {
+        module('constants');
+        module('billingApp');
+
+        inject(function ($controller, $rootScope, $q, Payment, rxNotify,
+                         BillingErrorResponse, Account, STATUS_MESSAGES) {
+            var getResourceResultMock = function (data) {
+                var deferred = $q.defer();
+                data.$promise = deferred.promise;
+                data.$deferred = deferred;
+                return data;
+            },
+                getResourceMock = function (returnData) {
+                    return function (callData, success, error) {
+                        returnData = getResourceResultMock(returnData);
+                        if (arguments.length === 4) {
+                            success = arguments[2];
+                            error = arguments[3];
+                        }
+                        returnData.$promise.then(success, error);
+                        return returnData;
+                    };
+                };
+            msgs = STATUS_MESSAGES;
+            notify = rxNotify;
+            payment = Payment;
+            payment.makePayment = sinon.stub(payment, 'makePayment', getResourceMock({}));
+
+            scope = $rootScope.$new();
+            // Mock the modal instance for scope
+            scope.$close = sinon.stub();
+            scope.$dismiss = sinon.stub();
+            scope.payment = {
+                methodId: '12345'
+            };
+            postHook = sinon.stub();
+
+            ctrl = $controller('PaymentActionCtrl', {
+                $scope: scope,
+                $routeParams: routeParams,
+                Payment: payment
+            });
+        });
+    });
+
+    it('should exist', function () {
+        expect(ctrl).to.exist;
+    });
+
+    it('should call postHook upon successful method change', function () {
+        scope.postHook = postHook;
+        scope.submit();
+        expect(notify.stacks[stack]).not.to.be.empty;
+
+        sinon.assert.calledOnce(payment.makePayment);
+
+        scope.paymentResult.$deferred.resolve({});
+        scope.$apply();
+
+        sinon.assert.calledOnce(scope.postHook);
+        sinon.assert.calledOnce(scope.$close);
+    });
+
+    it('should display a success message upon creation in the notificationStack', function () {
+        scope.submit();
+        expect(notify.stacks).not.to.be.empty;
+
+        sinon.assert.calledOnce(payment.makePayment);
+
+        scope.paymentResult.$deferred.resolve({});
+        scope.$apply();
+
+        expect(notify.stacks['page']).not.to.be.empty;
+        expect(notify.stacks['page'][0].type).to.be.eq('success');
+        sinon.assert.calledOnce(scope.$close);
+    });
+
+    it('should display error message from api when method change fails', function () {
+        scope.submit();
+        expect(notify.stacks).not.to.be.empty;
+
+        sinon.assert.calledOnce(payment.makePayment);
+
+        scope.paymentResult.$deferred.reject({
+            status: 400,
+            data: {
+                badRequest: {
+                    message: 'Test Error Message'
+                }
+            }
+        });
+        scope.$apply();
+
+        expect(notify.stacks[stack]).not.to.be.empty;
+        expect(notify.stacks[stack][0].type).to.be.eq('error');
+        var errorMsg = msgs.payment.error + ': (Test Error Message)';
+        expect(notify.stacks[stack][0].text).to.be.eq(errorMsg);
+    });
+
+    it('should display generic error message when method change fails', function () {
+        scope.submit();
+        expect(notify.stacks).not.to.be.empty;
+
+        sinon.assert.calledOnce(payment.makePayment);
+
+        scope.paymentResult.$deferred.reject({
+            status: 400
+        });
+        scope.$apply();
+
+        expect(notify.stacks[stack]).not.to.be.empty;
+        expect(notify.stacks[stack][0].type).to.be.eq('error');
+        expect(notify.stacks[stack][0].text).to.be.eq(msgs.payment.error + ': ()');
+
+        expect(scope.$close).not.to.have.been.called;
+    });
+});

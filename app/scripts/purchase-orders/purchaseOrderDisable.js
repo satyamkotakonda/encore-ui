@@ -38,75 +38,23 @@ angular.module('billingApp')
                 postHook: '&'
             }
         };
-    }).controller('PurchaseOrderDisableCtrl', function (
-        $scope, $routeParams, PurchaseOrder,
+    }).controller('PurchaseOrderDisableCtrl', function ($scope, $routeParams, PurchaseOrder, rxModalUtil,
         rxNotify, Account, BillingErrorResponse, AccountNumberUtil, STATUS_MESSAGES) {
 
-        var defaultParams = { accountNumber: $routeParams.accountNumber };
+        var accountNumber = $routeParams.accountNumber;
+        var defaultParams = { accountNumber: accountNumber };
+        var defaultStackName = 'purchaseOrderDisable';
+        var modal = rxModalUtil.getModal($scope, defaultStackName,
+            STATUS_MESSAGES.purchaseOrderDisable, BillingErrorResponse);
 
-        var notifyInstances = {},
-            defaultStackName = 'purchaseOrderDisable';
+        var purchaseOrderCreate = function () {
+            $scope.newPO = PurchaseOrder.disablePO(accountNumber, $scope.currentPurchaseOrderId);
+            $scope.newPO.$promise.then(modal.successClose('page'), modal.fail());
+            modal.processing($scope.newPO.$promise);
+        };
 
-        // Clears the notifications stacks that are being used by this controller
-        var clearNotifications = function () {
-                if (!_.isEmpty(rxNotify.stacks[defaultStackName])) {
-                    rxNotify.clear(defaultStackName);
-                }
-
-                // Only attempt to clear the notificationStack if it has been passed in
-                if ($scope.notificationStack && !_.isEmpty(rxNotify.stacks[$scope.notificationStack])) {
-                    rxNotify.clear($scope.notificationStack);
-                }
-            },
-            // Show a notification error within the modal
-            disableError = function (response) {
-                var msg = STATUS_MESSAGES.purchaseOrders.disableError,
-                    error = BillingErrorResponse(response);
-
-                // #NOTE: This may change once Billing API has Repose in front of it
-                if (error.msg !== '') {
-                    msg += ' "' + error.msg + '".';
-                }
-                rxNotify.add(msg, {
-                    stack: defaultStackName,
-                    type: 'error'
-                });
-            },
-            disableSuccess = function (data) {
-                var stack = $scope.notificationStack || defaultStackName;
-                rxNotify.add(STATUS_MESSAGES.purchaseOrders.disableSuccess, {
-                    stack: stack,
-                    type: 'success'
-                });
-                $scope.$close(data);
-            },
-            disablePurchaseOrder = function () {
-                // We clear the notification stacks used by us so that we don't let them stack up
-                clearNotifications();
-
-                // Capture the instance of the loading notification in order to dismiss it once done processing
-                notifyInstances.loading = rxNotify.add(STATUS_MESSAGES.purchaseOrders.disable, {
-                    stack: defaultStackName,
-                    loading: true
-                });
-
-                $scope.newPO = PurchaseOrder.disablePO($routeParams.accountNumber,
-                                                       $scope.currentPurchaseOrderId,
-                                                       disableSuccess,
-                                                       disableError);
-
-                $scope.newPO.$promise.finally(function () {
-                    rxNotify.dismiss(notifyInstances.loading);
-                });
-                // Call the postHook (if) defined on succesful result of disablePO
-                if ($scope.postHook) {
-                    $scope.newPO.$promise.then($scope.postHook);
-                }
-            };
-
-        clearNotifications();
-
-        $scope.account = Account.get(defaultParams);
-        $scope.submit = disablePurchaseOrder;
+        modal.clear();
+        $scope.submit = purchaseOrderCreate;
         $scope.cancel = $scope.$dismiss;
+        $scope.account = Account.get(defaultParams);
     });
