@@ -66,6 +66,7 @@ angular.module('billingApp')
                 defaultMethod: { methodId: $scope.payment.methodId }
             });
 
+            // This passes a success notification to the main page (default stack 'page')
             $scope.changeDefaultResult.$promise.then(modal.successClose('page'), modal.fail());
             modal.processing($scope.changeDefaultResult.$promise);
         };

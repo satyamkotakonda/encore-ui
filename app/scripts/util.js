@@ -103,6 +103,7 @@ angular.module('rxGenericUtil', [])
  * $scope.submit = downgradeAccount;
  * $scope.cancel = $scope.$dismiss;
  */
+// Note -- this functionality is being implemented in Encore-UI but is not ready yet
     .factory('rxModalUtil', function (rxNotify) {
         var stacks = ['page'];
         var util = {};
