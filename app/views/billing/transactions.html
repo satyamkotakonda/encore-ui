@@ -43,7 +43,10 @@
     <hr />
     <h3 class="section-title">
         Billed Items
-        <a href="#" class="pull-right"><small>Download Transactions</small></a>
+        <div class="pull-right download">
+            <img src="/billing/images/icon-export.png">
+            <button class="btn-link" type="button" ng-csv="transactionsCsv" csv-header="csvHeaders" filename="{{accountNumber}}-transactions.csv">Download Transactions</button>
+        </div>
     </h3>
     <div class="section billing-transactions">
         <div class="detail-filters">

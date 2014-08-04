@@ -1,5 +1,5 @@
 angular.module('rxGenericUtil', [])
-    /**
+   /**
     * @ngdoc service
     * @name encore.service:AccountNumberUtil
     * @description
@@ -49,6 +49,18 @@ angular.module('rxGenericUtil', [])
                     errorMsg = fromPath(json, msgSplitPath);
                 return errorMsg && !_.isEqual(errorMsg, json) ? errorMsg : fromPath(json, splitPath);
             };
+        };
+    })
+   /**
+    * @ngdoc service
+    * @name billingApp.TransformJson
+    * @description
+    *
+    * Strip $promise state from Json being returned in API calls via ngResource.
+    */
+     .factory('TransformJson', function () {
+        return function (data) {
+            return JSON.parse(angular.toJson(data));
         };
     })
    /**
