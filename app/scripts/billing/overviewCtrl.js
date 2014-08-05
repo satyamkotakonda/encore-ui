@@ -49,14 +49,6 @@ angular.module('billingApp')
                 // Get the Primary Payment Method's ID, second promise of $q.all
                 $scope.paymentMethod = DefaultPaymentMethodFilter(result[1]);
             },
-            postPayment = function (amount, methodId) {
-                $scope.paymentResult = Payment.makePayment($scope.accountNumber, amount, methodId);
-                rxPromiseNotifications.add($scope.paymentResult.$promise, {
-                    loading: STATUS_MESSAGES.payment.load,
-                    success: STATUS_MESSAGES.payment.success,
-                    error: STATUS_MESSAGES.payment.error
-                }, 'makePayment');
-            },
             billingContacts = function (contacts) {
                 var billingContact = _.first(contacts);
                 if (!_.isEmpty(billingContact)) {
@@ -73,9 +65,6 @@ angular.module('billingApp')
 
         // Default Date Format
         $scope.defaultDateFormat = DATE_FORMAT;
-
-        // Assign template actions
-        $scope.postPayment = postPayment;
 
         // Get Account & Contact Info
         $scope.account = Account.get(defaultParams);

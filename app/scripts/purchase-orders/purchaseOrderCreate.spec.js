@@ -65,7 +65,7 @@ describe('rxPurchaseOrderCreate: PurchaseOrderCreateCtrl', function () {
         module('constants');
         module('billingApp');
 
-        inject(function ($controller, $rootScope, $q, PurchaseOrder, Account, STATUS_MESSAGES) {
+        inject(function ($controller, $rootScope, $q, PurchaseOrder, rxNotify, Account, STATUS_MESSAGES) {
             var getResourceResultMock = function (data) {
                     var deferred = $q.defer();
                     data.$promise = deferred.promise;
@@ -84,30 +84,7 @@ describe('rxPurchaseOrderCreate: PurchaseOrderCreateCtrl', function () {
                     };
                 };
             msgs = STATUS_MESSAGES;
-            notify = {
-                stacks: {},
-                add: function (msg, opt) {
-                    if (!_.isArray(notify.stacks[opt.stack])) {
-                        notify.stacks[opt.stack] = [];
-                    }
-                    if (opt.stack) {
-                        opt.msg = msg;
-                        opt.id = _.uniqueId();
-                        notify.stacks[opt.stack].push(opt);
-                        return opt;
-                    }
-                },
-                clear: function (stack) {
-                    if (notify.stacks.hasOwnProperty(stack)) {
-                        notify.stacks[stack] = undefined;
-                        delete notify.stacks[stack];
-                    }
-                },
-                dismiss: function (msg) {
-                    notify.stacks[msg.stack] = _.reject(notify.stacks[msg.stack], { 'id': msg.id });
-                }
-            };
-
+            notify = rxNotify;
             purchaseOrder = PurchaseOrder;
             purchaseOrder.createPO = sinon.stub(purchaseOrder, 'createPO', getResourceMock({}));
 
@@ -126,18 +103,16 @@ describe('rxPurchaseOrderCreate: PurchaseOrderCreateCtrl', function () {
             ctrl = $controller('PurchaseOrderCreateCtrl', {
                 $scope: scope,
                 $routeParams: routeParams,
-                PurchaseOrder: purchaseOrder,
-                rxNotify: notify
+                PurchaseOrder: purchaseOrder
             });
         });
     });
 
-    it('PurchaseOrderCreateCtrl should exist', function () {
+    it('should exist', function () {
         expect(ctrl).to.exist;
     });
 
-    it('PurchaseOrderCreateCtrl should call postHook upon successful creation', function () {
-        expect(notify.stacks).to.be.empty;
+    it('should call postHook upon successful creation', function () {
         scope.postHook = postHook;
         scope.submit();
         expect(notify.stacks[stack]).not.to.be.empty;
@@ -147,14 +122,11 @@ describe('rxPurchaseOrderCreate: PurchaseOrderCreateCtrl', function () {
         scope.newPO.$deferred.resolve({});
         scope.$apply();
 
-        expect(notify.stacks[stack]).not.to.be.empty;
         sinon.assert.calledOnce(scope.postHook);
         sinon.assert.calledOnce(scope.$close);
     });
 
-    it('PurchaseOrderCreateCtrl should create a purchase order upon submit action', function () {
-        expect(notify.stacks).to.be.empty;
-
+    it('should create a purchase order upon submit action', function () {
         scope.submit();
         expect(notify.stacks[stack]).not.to.be.empty;
 
@@ -163,12 +135,10 @@ describe('rxPurchaseOrderCreate: PurchaseOrderCreateCtrl', function () {
         scope.newPO.$deferred.resolve({});
         scope.$apply();
 
-        expect(notify.stacks[stack]).not.to.be.empty;
         sinon.assert.calledOnce(scope.$close);
     });
 
-    it('PurchaseOrderCreateCtrl should reset the notificationStack upon multiple creation attempts', function () {
-        scope.notificationStack = 'testStack';
+    it('should reset the notificationStack upon multiple creation attempts', function () {
         scope.submit();
         expect(notify.stacks[stack]).not.to.be.empty;
 
@@ -176,8 +146,8 @@ describe('rxPurchaseOrderCreate: PurchaseOrderCreateCtrl', function () {
         scope.$apply();
 
         expect(notify.stacks[stack]).to.be.empty;
-        expect(notify.stacks[scope.notificationStack]).not.to.be.empty;
-        expect(notify.stacks[scope.notificationStack][0].type).to.be.eq('success');
+        expect(notify.stacks['page']).not.to.be.empty;
+        expect(notify.stacks['page'][0].type).to.be.eq('success');
 
         // Begins to clear notificationStack defined in scope
         scope.submit();
@@ -188,8 +158,7 @@ describe('rxPurchaseOrderCreate: PurchaseOrderCreateCtrl', function () {
         });
         scope.$apply();
 
-        expect(notify.stacks[stack]).not.to.be.empty;
-        expect(notify.stacks[scope.notificationStack]).to.be.empty;
+        expect(notify.stacks['page']).to.be.empty;
 
         // Begins to clear default stack
         scope.submit();
@@ -199,11 +168,11 @@ describe('rxPurchaseOrderCreate: PurchaseOrderCreateCtrl', function () {
         scope.$apply();
 
         expect(notify.stacks[stack]).to.be.empty;
-        expect(notify.stacks[scope.notificationStack]).not.to.be.empty;
-        expect(notify.stacks[scope.notificationStack][0].type).to.be.eq('success');
+        expect(notify.stacks['page']).not.to.be.empty;
+        expect(notify.stacks['page'][0].type).to.be.eq('success');
     });
 
-    it('PurchaseOrderCreateCtrl should display a success message upon creation in the notificationStack', function () {
+    it('should display a success message upon creation in the notificationStack', function () {
         scope.submit();
         expect(notify.stacks).not.to.be.empty;
 
@@ -212,12 +181,12 @@ describe('rxPurchaseOrderCreate: PurchaseOrderCreateCtrl', function () {
         scope.newPO.$deferred.resolve({});
         scope.$apply();
 
-        expect(notify.stacks[stack]).not.to.be.empty;
-        expect(notify.stacks[stack][0].type).to.be.eq('success');
+        expect(notify.stacks[stack]).to.be.empty;
+        expect(notify.stacks['page'][0].type).to.be.eq('success');
         sinon.assert.calledOnce(scope.$close);
     });
 
-    it('PurchaseOrderCreateCtrl should display permission denied message upon permission failure', function () {
+    it('should display permission denied message upon permission failure', function () {
         scope.submit();
         expect(notify.stacks).not.to.be.empty;
 
@@ -230,11 +199,11 @@ describe('rxPurchaseOrderCreate: PurchaseOrderCreateCtrl', function () {
 
         expect(notify.stacks[stack]).not.to.be.empty;
         expect(notify.stacks[stack][0].type).to.be.eq('error');
-        var errorMsg = msgs.purchaseOrders.createError + ' "' + msgs.permissionDenied + '".';
-        expect(notify.stacks[stack][0].msg).to.be.eq(errorMsg);
+        var errorMsg = msgs.purchaseOrderCreate.error + ': (' + msgs.permissionDenied + ')';
+        expect(notify.stacks[stack][0].text).to.be.eq(errorMsg);
     });
 
-    it('PurchaseOrderCreateCtrl should display error message from api when PO create fails', function () {
+    it('should display error message from api when PO create fails', function () {
         scope.submit();
         expect(notify.stacks).not.to.be.empty;
 
@@ -252,11 +221,11 @@ describe('rxPurchaseOrderCreate: PurchaseOrderCreateCtrl', function () {
 
         expect(notify.stacks[stack]).not.to.be.empty;
         expect(notify.stacks[stack][0].type).to.be.eq('error');
-        var errorMsg = msgs.purchaseOrders.createError + ' "Test Error Message".';
-        expect(notify.stacks[stack][0].msg).to.be.eq(errorMsg);
+        var errorMsg = msgs.purchaseOrderCreate.error + ': (Test Error Message)';
+        expect(notify.stacks[stack][0].text).to.be.eq(errorMsg);
     });
 
-    it('PurchaseOrderCreateCtrl should display generic error message when PO create fails', function () {
+    it('should display generic error message when PO create fails', function () {
         scope.submit();
         expect(notify.stacks).not.to.be.empty;
 
@@ -269,6 +238,6 @@ describe('rxPurchaseOrderCreate: PurchaseOrderCreateCtrl', function () {
 
         expect(notify.stacks[stack]).not.to.be.empty;
         expect(notify.stacks[stack][0].type).to.be.eq('error');
-        expect(notify.stacks[stack][0].msg).to.be.eq(msgs.purchaseOrders.createError);
+        expect(notify.stacks[stack][0].text).to.be.eq(msgs.purchaseOrderCreate.error + ': ()');
     });
 });

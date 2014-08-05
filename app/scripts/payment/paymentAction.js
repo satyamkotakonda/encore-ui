@@ -53,4 +53,20 @@ angular.module('billingApp')
                 });
             }
         };
+    })
+    .controller('PaymentActionCtrl', function (
+        $scope, $routeParams, Payment, rxNotify, rxModalUtil, BillingErrorResponse, STATUS_MESSAGES) {
+        var defaultStackName = 'makePayment';
+        var accountNumber = $routeParams.accountNumber;
+        var modal = rxModalUtil.getModal($scope, defaultStackName, STATUS_MESSAGES.payment, BillingErrorResponse);
+
+        var makePayment = function () {
+            $scope.paymentResult = Payment.makePayment(accountNumber, $scope.payment.amount, $scope.payment.methodId);
+            $scope.paymentResult.$promise.then(modal.successClose('page'), modal.fail());
+            modal.processing($scope.paymentResult.$promise);
+        };
+
+        modal.clear();
+        $scope.submit = makePayment;
+        $scope.cancel = $scope.$dismiss;
     });
