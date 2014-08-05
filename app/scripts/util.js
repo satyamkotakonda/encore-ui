@@ -110,8 +110,9 @@ angular.module('rxGenericUtil', [])
 
         // Register stacks to be used when clearing them
         util.registerStacks = function () {
+            // Return a copy of, rather than the instance
             stacks = stacks.concat(_.toArray(arguments));
-            return stacks;
+            return stacks.slice(0);
         };
 
         // Clear notifications that have been used by the controller
@@ -186,7 +187,7 @@ angular.module('rxGenericUtil', [])
                     promise.then(scope.postHook);
                 }
 
-                return promise;
+                return loading;
             };
         };
 
