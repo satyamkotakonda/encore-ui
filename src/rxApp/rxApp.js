@@ -188,27 +188,19 @@ angular.module('encore.ui.rxApp', ['encore.ui.rxEnvironment', 'ngSanitize', 'ngR
     var AppRoutes = function () {
         var routes = [];
 
-        var stripLeadingChars = function (str) {
-            _.forEach(['#', '/'], function (chr) {
-                if (str.substring(0, 1) === chr) {
-                    str = stripLeadingChars(str.substring(1));
+        // remove any preceding # and / from the URL for cleaner comparison
+        var stripLeadingChars = function (url) {
+            _.forEach(['#', '/'], function (char) {
+                if (url[0] === char) {
+                    url = stripLeadingChars(url.substring(1));
                 }
             });
 
-            return str;
+            return url;
         };
 
-        var getBaseUrl = function () {
-            // remove query string
-            var baseUrl = $location.absUrl().split('?')[0];
-
-            // remove protocol and domain
-            baseUrl = baseUrl.split('/').splice(3).join('/');
-            baseUrl = stripLeadingChars(baseUrl);
-
-            return baseUrl;
-        };
-
+        // get the url defined in the route (with hash/leading slash/query string removed)
+        // e.g. '/#/my/url?param=1' -> 'my/url'
         var getItemUrl = function (item) {
             if (!_.isString(item.url)) {
                 return undefined;
@@ -222,13 +214,11 @@ angular.module('encore.ui.rxApp', ['encore.ui.rxEnvironment', 'ngSanitize', 'ngR
         };
 
         var isActive = function (item) {
-            // check if url matches absUrl
-            // TODO: Add Unit Tests for URLs with Query Strings in them.
-            var baseUrl = getBaseUrl();
+            var currentPath = stripLeadingChars($location.path());
             var itemUrl = getItemUrl(item);
-            var pathMatches = itemUrl &&
-                (baseUrl.substring(0, itemUrl.length) === itemUrl ||
-                 baseUrl.substring(1).substring(0, itemUrl.length) === itemUrl);
+            // check against the path and the hash
+            // (in case the difference is the 'hash' like on the encore-ui demo page)
+            var pathMatches = currentPath == itemUrl || $location.hash() == itemUrl;
 
             // if current item not active, check if any children are active
             if (!pathMatches && item.children) {
@@ -646,18 +636,18 @@ angular.module('encore.ui.rxApp', ['encore.ui.rxEnvironment', 'ngSanitize', 'ngR
     };
 })
 .directive('rxBillingSearch', function ($window) {
-    return {
-        template: '<rx-app-search placeholder="Fetch account by transaction or auth ID..." submit="fetchAccounts">' +
+    return {
+        template: '<rx-app-search placeholder="Fetch account by transaction or auth ID..." submit="fetchAccounts">' +
             '</rx-app-search>',
-        restrict: 'E',
-        link: function (scope) {
-            scope.fetchAccounts = function (searchValue) {
+        restrict: 'E',
+        link: function (scope) {
+            scope.fetchAccounts = function (searchValue) {
                 if (!_.isEmpty(searchValue)) {
-                    $window.location = '/billing/search/' + searchValue;
+                    $window.location = '/billing/search/' + searchValue;
                 }
-            };
-        }
-    };
+            };
+        }
+    };
 })
 
 /**

@@ -1,7 +1,7 @@
 module.exports = {
     app: 'src',
     build: 'build',
-    dist: 'build/dist', // used for js/css files pushed to CDN/bower
+    dist: '<%= config.build %>/dist', // used for js/css files pushed to CDN/bower
     font: '<%= config.dist %>/font',
     docs: 'build', // used for demo, coverage, jsdocs files to go to gh-pages (same a 'build' folder, but a
                    // different variable in case they're later changed)
