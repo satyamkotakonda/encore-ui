@@ -91,6 +91,7 @@ angular.module('encore.ui.rxApp', ['encore.ui.rxEnvironment', 'ngSanitize', 'ngR
     {
         linkText: 'Cloud',
         key: 'cloud',
+        base: '/cloud/',
         directive: 'rx-atlas-search',
         childVisibility: function (scope) {
             // We only want to show this nav if user is already defined in the URL
@@ -206,8 +207,21 @@ angular.module('encore.ui.rxApp', ['encore.ui.rxEnvironment', 'ngSanitize', 'ngR
                 return undefined;
             }
 
+            var itemUrl = item.url;
+
+            /* If the product uses <base href="/foobar/">, its item.url values will
+             * all have "/foobar/" at the front, and its entry in encoreNav should have
+             * a `base: '/foobar'` in it. $location.path() will *not*
+             * include the "/foobar/" though. The value returned by this function
+             * is compared against $location.path(), so we'll use item.base to strip
+             * out the "/foobar/"
+             */
+            if (!_.isUndefined(item.base) && itemUrl.indexOf(item.base) === 0) {
+                itemUrl = itemUrl.substring(item.base.length);
+            }
+
             // remove query string
-            var itemUrl = item.url.split('?')[0];
+            itemUrl = itemUrl.split('?')[0];
             itemUrl = stripLeadingChars(itemUrl);
 
             return itemUrl;
@@ -245,14 +259,20 @@ angular.module('encore.ui.rxApp', ['encore.ui.rxEnvironment', 'ngSanitize', 'ngR
             return url;
         };
 
-        var setDynamicProperties = function (routes) {
+        var setDynamicProperties = function (routes, base) {
             _.each(routes, function (route) {
                 // build out url for current route
                 route.url = buildUrl(route.href);
+                if (_.has(route, 'base')) {
+                    base = route.base;
+                }
+                if (!_.isUndefined(base)) {
+                    route.base = base;
+                }
 
                 // check if any children exist, if so, build their URLs as well
                 if (route.children) {
-                    route.children = setDynamicProperties(route.children);
+                    route.children = setDynamicProperties(route.children, base);
                 }
 
                 // set active state (this needs to go after the recursion,
