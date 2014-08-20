@@ -62,10 +62,19 @@ field-prefix, field-suffix and field-description are all optional.
     align-items: baseline;
 }
 
-.rx-form-fieldset > fieldset {
-    width: 100%;
+.rx-form-fieldset {
+    .fieldset-content {
+        width: 100%;
+        display: flex;
+    }
+
     .full-width .option-table {
         width: 100%;
+    }
+
+    // Styles for rx-form-item inside of fieldsets
+    .field-legend + .field-input {
+        flex: 1 1 auto;
     }
 }
 
@@ -85,7 +94,6 @@ field-prefix, field-suffix and field-description are all optional.
     display: flex;
     flex: 1 auto;
 
-    -webkit-flex-flow: row wrap;
     flex-flow: row wrap;
     justify-content: flex-start;
     align-items: center;

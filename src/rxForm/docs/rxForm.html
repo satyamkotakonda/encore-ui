@@ -23,6 +23,22 @@
 
     <hr>
 
+    <h3 class="title">rxFieldset</h3>
+
+    <p>Used for instances where there are multiple inputs for a single model.</p>
+
+    <rx-form-fieldset legend="Address Information">
+        <rx-form-item label="Street">
+            <input type="text">
+        </rx-form-item>
+        <rx-form-item label="City">
+            <input type="text">
+        </rx-form-item>
+        <rx-form-item label="Zip">
+            <input type="text" maxlength="5">
+        </rx-form-item>
+    </rx-form-fieldset>
+
     <h3 class="title">Select Boxes</h3>
     <rx-form-item label="Type" description="Bound Value: {{volume.type}}">
         <span class="field-select">
