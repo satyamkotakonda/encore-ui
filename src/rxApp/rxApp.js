@@ -620,7 +620,7 @@ angular.module('encore.ui.rxApp', ['encore.ui.rxEnvironment', 'ngSanitize', 'ngR
 */
 .directive('rxAtlasSearch', function ($window) {
     return {
-        template: '<rx-app-search placeholder="Search for username..." submit="searchAccounts"></rx-app-search>',
+        template: '<rx-app-search placeholder="Search by username..." submit="searchAccounts"></rx-app-search>',
         restrict: 'E',
         link: function (scope) {
             scope.searchAccounts = function (searchValue) {
