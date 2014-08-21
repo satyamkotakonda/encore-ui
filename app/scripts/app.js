@@ -1,6 +1,5 @@
-'use strict';
 angular.module('billingApp', ['ngRoute', 'ngResource', 'ngCsv', 'encore.ui', 'encore.ui.tpls',
-        'rxSwitch', 'encore.ui.rxPopover', 'billingSvcs', 'paymentSvcs', 'supportSvcs',
+        'rxSwitch', 'encore.ui.rxPopover', 'billing.tpls', 'billingSvcs', 'paymentSvcs', 'supportSvcs',
         'customerAdminSvcs', 'constants', 'productConstants'])
     .config(function ($httpProvider, $routeProvider, $locationProvider) {
         // Add Interceptors for auth

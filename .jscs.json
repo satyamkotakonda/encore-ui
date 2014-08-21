@@ -32,7 +32,6 @@
     "disallowSpaceAfterObjectKeys": true,
     "requireCommaBeforeLineBreak": true,
     "disallowSpaceAfterPrefixUnaryOperators": ["!"],
-
     "requireSpaceBeforeBinaryOperators": [
         "&",
         "|",
@@ -108,13 +107,7 @@
         "!=",
         "!=="
     ],
-    "requireCamelCaseOrUpperCaseIdentifiers": true,
     "disallowMultipleLineBreaks": true,
     "disallowKeywordsOnNewLine": ["else"],
-    "validateJSDoc": {
-        "checkParamNames": true,
-        "checkRedundantParams": false,
-        "requireParamTypes": true
-    },
     "excludeFiles": ["app/scripts/lib/**"]
 }

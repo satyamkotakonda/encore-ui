@@ -4,7 +4,6 @@ describe('rxPaymentMethodDetails', function () {
 
     beforeEach(function () {
         module('billingApp');
-        module('views/payment/paymentMethodDetails.html');
 
         inject(function ($rootScope, $compile, $templateCache) {
             var template = $templateCache.get('views/payment/paymentMethodDetails.html');

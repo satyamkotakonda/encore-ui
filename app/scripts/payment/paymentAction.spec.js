@@ -31,7 +31,6 @@ describe('rxPaymentAction', function () {
 
     beforeEach(function () {
         module('billingApp');
-        module('views/payment/paymentAction.html');
 
         inject(function ($rootScope, $compile, $templateCache) {
             var template = $templateCache.get('views/payment/paymentAction.html');

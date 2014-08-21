@@ -11,7 +11,6 @@ describe('rxPurchaseOrderCreate', function () {
                         '</rx-purchase-order-create>';
     beforeEach(function () {
         module('billingApp');
-        module('views/purchase-orders/purchaseOrderCreate.html');
 
         inject(function ($rootScope, $compile, $templateCache) {
             var template = $templateCache.get('views/purchase-orders/purchaseOrderCreate.html');

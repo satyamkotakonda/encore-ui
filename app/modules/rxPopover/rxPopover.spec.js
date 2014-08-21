@@ -12,13 +12,10 @@ describe('rxPopover', function () {
     var rootPopoverEl, triggerDirectiveEl, triggerContentEl, contentDirectiveEl, popoverWrapperEl,
         popoverArrow, popoverBody;
     beforeEach(function () {
+        module('billingApp');
         module('encore.ui.rxPopover');
-        module('modules/rxPopover/templates/rxPopover.html');
 
-        inject(function ($rootScope, $compile, $templateCache) {
-            var mainTemplate = $templateCache.get('modules/rxPopover/templates/rxPopover.html');
-            $templateCache.put('/billing/modules/rxPopover/templates/rxPopover.html', mainTemplate);
-
+        inject(function ($rootScope, $compile) {
             rootScope = $rootScope;
             compile = $compile;
             scope = $rootScope.$new();
