@@ -1,5 +1,5 @@
 var rxAppPage = require('../rxApp.page.js').rxApp;
-var rxPagePage = require('../rxApp.page.js').rxPage;
+var rxPage = require('../rxApp.page.js').rxPage;
 
 describe('rxApp', function () {
     var rxAppCustom, rxAppStandard;
@@ -64,20 +64,32 @@ describe('rxApp', function () {
 });
 
 describe('rxPage', function () {
-    var rxPage;
+    var standardPage, customPage;
 
     before(function () {
         demoPage.go('#/component/rxApp');
-        rxPage = rxPagePage.initialize($('#custom-rxApp .rx-page'));
+        standardPage = rxPage.initialize($('#standard-rxApp .rx-page'));
+        customPage = rxPage.initialize($('#custom-rxApp .rx-page'));
     });
 
     it('should show element', function () {
-        expect(rxPage.rootElement.isDisplayed()).to.eventually.eq.true;
+        expect(customPage.rootElement.isDisplayed()).to.eventually.eq.true;
+    });
+
+    it('should have a title', function () {
+        expect(standardPage.title).to.eventually.equal('Standard Page Title');
+    });
+
+    it('should return a blank string if no subtitle is found', function () {
+        expect(standardPage.subtitle).to.eventually.equal('');
+    });
+
+    it('should have a subtitle', function () {
+        expect(customPage.subtitle).to.eventually.equal('With a subtitle');
     });
 
     it('should update page subtitle dynamically', function () {
-        expect(rxPage.subtitle).to.eventually.equal('With a subtitle');
-        demoPage.rxPageSubtitleButton.click();
-        expect(rxPage.subtitle).to.eventually.contain('With a new subtitle at 1');
+        $('button.changeSubtitle').click();
+        expect(customPage.subtitle).to.eventually.contain('With a new subtitle at 1');
     });
 });

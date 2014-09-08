@@ -5,19 +5,13 @@ module.exports = Page.create({
 
     storeTokenButton: {
         get: function () {
-            return this.findElement(this.by.css('button.storeToken'));
+            return $('button.storeToken');
         }
     },
 
     clearTokenButton: {
         get: function () {
-            return this.findElement(this.by.css('button.clearToken'));
-        }
-    },
-
-    rxPageSubtitleButton: {
-        get: function () {
-            return this.findElement(this.by.css('button.changeSubtitle'));
+            return $('button.clearToken');
         }
     }
 });

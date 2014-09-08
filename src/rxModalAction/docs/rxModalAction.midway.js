@@ -73,4 +73,19 @@ describe('rxModalAction', function () {
         expect(changePasswordModal.isDisplayed()).to.eventually.be.false;
     });
 
+    describe('default modal behavior', function () {
+        var defaultModal;
+
+        before(function () {
+            defaultModal = modal.initialize();
+        });
+
+        it('should support basic functionality without supplying any arguments', function () {
+            triggerModal();
+            expect(defaultModal.title).to.eventually.equal('Change hey_dude Admin Password');
+            defaultModal.cancel();
+        });
+
+    });
+
 });

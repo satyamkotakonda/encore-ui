@@ -17,8 +17,8 @@
         <tbody>
             <tr>
                 <td>Globally dismissible</td>
-                <td>    
-                    <rx-action-menu>
+                <td>
+                    <rx-action-menu id="globalDismissal">
                         <ul class="actions-area">
                             <li>
                                 <rx-modal-action
@@ -61,6 +61,23 @@
                     </rx-action-menu>
                 </td>
             </tr>
+                <td>Unorthodox Behaviors (no modals)</td>
+                <td ng-controller="rxActionMenuCtrl">
+                    <rx-action-menu id="custom">
+                        <ul class="actions-area">
+                            <li>
+                              <button class="btn-link msg-action trigger" ng-click="add()">
+                                <i class="fa fa-plus fa-lg msg-action"></i> Add
+                              </button>
+                            </li>
+                            <li>
+                              <button class="btn-link msg-warn trigger" ng-click="remove()">
+                                <i class="fa fa-times fa-lg msg-warn"></i> Delete
+                              </button>
+                            </li>
+                        </ul>
+                    </rx-action-menu>
+                </td>
         </tbody>
     </table>
 

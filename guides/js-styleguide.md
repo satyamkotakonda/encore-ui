@@ -113,6 +113,14 @@ function showAlert () {
 element('.foo').on('mouseover', showAlert);
 ```
 
+## Type Checks
+
+See [the jQuery Style Guide](http://contribute.jquery.org/style-guide/js/#type-checks) for guidance on checking data types of variables. For instances where using the `jQuery` object is recommended, instead use the matching Lo-Dash utility method:
+
+ - [Plain Object](http://lodash.com/docs#isPlainObject): `_.isPlainObject(object)`
+ - [Function](http://lodash.com/docs#isFunction): `_.isFunction( object )`
+ - [Array](http://lodash.com/docs#isArray): `_.isArray( object )`
+
 ## Resources
 
 * [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)

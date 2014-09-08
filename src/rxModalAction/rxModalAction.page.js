@@ -65,6 +65,9 @@ var rxModalAction = {
 exports.rxModalAction = {
 
     initialize: function (customFunctionality) {
+        if (!_.isObject(customFunctionality)) {
+            customFunctionality = {};
+        }
         return Page.create(_.merge(customFunctionality, rxModalAction));
     }
 

@@ -110,37 +110,70 @@ exports.rxApp = {
             get: function () { return rxAppElement; }
         };
         return Page.create(rxApp);
-    },
-
-    help: function () { return Object.keys(rxApp); }
-
+    }
 };
 
 var rxPage = {
 
     lblTitle: {
-        get: function () { return this.rootElement.$('.rx-page .page-title'); }
+        get: function () { return this.rootElement.$('.page-title'); }
     },
 
     lblSubtitle: {
-        get: function () { return this.rootElement.$('.rx-page .page-subtitle'); }
+        get: function () { return this.rootElement.$('.page-subtitle'); }
     },
 
     title: {
-        get: function () { return this.lblTitle.getText(); }
+        get: function () {
+            var page = this;
+            return this.lblTitle.isPresent().then(function (present) {
+                if (present) {
+                    return page.lblTitle.getText();
+                } else {
+                    var deferred = protractor.promise.defer();
+                    deferred.fulfill('');
+                    return deferred.promise;
+                }
+            });
+        }
     },
 
     subtitle: {
-        get: function () { return this.lblSubtitle.getText(); }
+        get: function () {
+            var page = this;
+            return this.lblSubtitle.isPresent().then(function (present) {
+                if (present) {
+                    return page.lblSubtitle.getText();
+                } else {
+                    var deferred = protractor.promise.defer();
+                    deferred.fulfill('');
+                    return deferred.promise;
+                }
+            });
+        }
     }
-
 };
 
 exports.rxPage = {
     initialize: function (rxPageElement) {
+        if (rxPageElement === undefined) {
+            rxPageElement = element;
+        }
         rxPage.rootElement = {
             get: function () { return rxPageElement; }
         };
         return Page.create(rxPage);
+    },
+
+    title: {
+        get: function () {
+            return this.initialize().title;
+        }
+    },
+
+    subtitle: {
+        get: function () {
+            return this.initialize().subtitle;
+        }
     }
 };
