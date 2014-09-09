@@ -28,16 +28,16 @@ Grunt is used to automate the UI build and test tasks for Encore. Run `npm insta
 
 If you haven't already, clone the Encore repo.
 
-`git clone https://github.rackspace.com/valkyrie/chunky_bacon/`
+`git clone git@github.com:rackerlabs/encore-cloud-ui.git`
 
-Once downloaded, go into the 'frontend' directory:
-
-`cd chunky_bacon/frontend`
-
-Finally, install the dependencies needed by Encore UI using NPM and bower:
+Then, install the dependencies needed by Encore UI using NPM and bower:
 
 `npm install`
 `bower install`
+
+To check that you're able to successfully hit all the APIs billing uses, run `grunt server`, then click 'Billing' in the left panel, and enter 'P1-54'. Make sure you don't see any error messages when the page loads (like "There was an error loading Account Transactions").
+
+If you get an error, try updating grunt-connect-proxy: `npm install grunt-connect-proxy@0.1.10`, then rerun the server and refresh the page.
 
 ## Running Encore UI
 
