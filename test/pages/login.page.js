@@ -17,7 +17,7 @@ module.exports = Page.create({
     },
 
     btnSubmit: {
-        get: function () { return $('.button.primary'); }
+        get: function () { return $('.button'); }
     },
 
     cssInvalidLogin: {
@@ -52,7 +52,7 @@ module.exports = Page.create({
         // This allows you to use the same `login()` function, without arguments, everywhere, and
         // still be authenticated as something.
         //
-        // If you use this function without arguments on staging, it will grab the first available 
+        // If you use this function without arguments on staging, it will grab the first available
         // username and password from `test/secrets.js`, and it will log you in using those.
         //
         // If you use this function with only one argument on staging, it will assume that is the username,
@@ -114,7 +114,7 @@ module.exports = Page.create({
         // roles for reasonable staging tests. These will be written to local storage.
         //
         // The "roles" parameter, should you provide it, is a javascript object, which will be
-        // set in local storage. If it is not provided, the username will be used to look up a 
+        // set in local storage. If it is not provided, the username will be used to look up a
         // set of default roles and those will be used instead.
         value: function (username, password, roles) {
             var page = this;
