@@ -19,7 +19,7 @@ exports.config = {
     ],
 
     params: {
-        loginRedirect: config.appName + '/home'
+        loginRedirect: config.appName + '/billing'
     },
 
     // Capabilities to be passed to the webdriver instance.
