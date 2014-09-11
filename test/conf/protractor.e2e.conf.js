@@ -1,8 +1,8 @@
 /*jshint node:true */
 // For some reason 'grunt jshint' doesn't respect the node:true in the .jshintrc file, so we have to add it here
 
-var config = require('../tasks/util/config');
-var secrets = require('./secrets');
+var config = require('../../tasks/util/config');
+var secrets = require('../secrets');
 
 exports.config = {
     framework: 'mocha',
@@ -16,12 +16,12 @@ exports.config = {
     baseUrl: 'https://staging.encore.rackspace.com',
 
     specs: [
-        './stories/*.js'
+        '../stories/*.js'
     ],
 
     params: {
         logins: secrets.credentials,
-        loginRedirect: config.appName + '/home'
+        loginRedirect: config.appName
     },
 
 
