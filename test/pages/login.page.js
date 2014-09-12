@@ -2,7 +2,6 @@ var Page = require('astrolabe').Page;
 var _ = require('lodash');
 var rest = require('restler');
 
-var homePage = require('./home.page');
 var defaultRoles = require('../roles');
 
 module.exports = Page.create({
@@ -168,9 +167,7 @@ module.exports = Page.create({
 
     logout: {
         value: function () {
-            // TODO: Replace this with rxLogout's logout() function.
-            // homepage.navigation.logout();
-            homePage.navigation.lnkLogout.click();
+            $('[rx-logout]').click();
         }
     },
 

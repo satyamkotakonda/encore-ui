@@ -21,11 +21,13 @@ exports.config = {
 
     params: {
         logins: secrets.credentials,
-        loginRedirect: config.appName
+        loginRedirect: config.appName,
+        accountId: '473500'
     },
 
     onPrepare: function () {
         expect = require('chai').use(require('chai-as-promised')).expect;
+        encore = require('rx-page-objects');
     },
 
     // Capabilities to be passed to the webdriver instance.
