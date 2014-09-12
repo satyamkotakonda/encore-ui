@@ -24,6 +24,9 @@ exports.config = {
         loginRedirect: config.appName
     },
 
+    onPrepare: function () {
+        expect = require('chai').use(require('chai-as-promised')).expect;
+    },
 
     // Capabilities to be passed to the webdriver instance.
     capabilities: {
