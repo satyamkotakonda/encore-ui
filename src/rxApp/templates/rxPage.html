@@ -6,8 +6,9 @@
         <rx-notifications></rx-notifications>
         <div class="page-titles" ng-if="title.length > 0 || subtitle.length > 0">
             <h2 class="page-title title lg" ng-bind-html="title" ng-if="title.length > 0"></h2>
-            <h 3 class="page-subtitle title subdued" ng-bind-html="subtitle" ng-if="subtitle.length > 0"></h3>
+            <h3 class="page-subtitle title subdued" ng-bind-html="subtitle" ng-if="subtitle.length > 0"></h3>
         </div>
+        <div class="service-controlled-area"></div>
         <div class="page-content" ng-transclude></div>
     </div>
 </div>
