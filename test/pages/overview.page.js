@@ -10,63 +10,13 @@ module.exports = Page.create({
 
     contact: {
         get: function () {
-            return Page.create({
-                name: {
-                    get: function () {
-                        return element(by.binding('contactName')).getText().then(function (name) {
-                            return name.split('\n')[0].trim();
-                        });
-                    }
-                },
-
-                address: {
-                    get: function () {
-                        return $('address').getText().then(function (address) {
-                            return address.split('\n').join(' ').trim();
-                        });
-                    }
-                },
-
-            });
+            return require('./overview/contact');
         }
     },
 
     summary: {
         get: function () {
-            return Page.create({
-                contractEntity: {
-                    get: function () {
-                        return element(by.binding('contractEntity.description')).getText().then(function (text) {
-                            return text.split('Contract Entity:')[1].trim();
-                        });
-                    }
-                },
-
-                accountManager: {
-                    get: function () {
-                        return element(by.binding('accountManager.name')).getText().then(function (text) {
-                            return text.split('Account Manager:')[1].trim();
-                        });
-                    }
-                },
-
-                businessUnit: {
-                    get: function () {
-                        return element(by.binding('supportInfo.businessUnit')).getText().then(function (text) {
-                            return text.split('Business Unit:')[1].trim();
-                        });
-                    }
-                },
-
-                consolidatedAccount: {
-                    get: function () {
-                        var binding = 'supportAccount.linked_account_number';
-                        return element(by.binding(binding)).getText().then(function (text) {
-                            return text.split('Consolidated Account:')[1].trim();
-                        });
-                    }
-                }
-            });
+            return require('./overview/summary');
         }
     },
 
@@ -97,7 +47,7 @@ module.exports = Page.create({
     makePaymentModal: {
         get: function () {
             $('.rx-payment-action a').click();
-            return encore.rxModalAction.initialize(require('./overview/payment.modal'));
+            return encore.rxModalAction.initialize(require('./modals/payment.modal'));
         }
     }
 

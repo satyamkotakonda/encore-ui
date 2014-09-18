@@ -9,7 +9,7 @@ describe('purchase orders page', function () {
         loginPage.login();
     });
 
-    it('should search for current usage', function () {
+    it('should search for purchase orders', function () {
         purchaseOrdersPage.search(browser.params.accountId);
         expect(encore.rxPage.main.title).to.eventually.equal('Billing - Purchase Orders');
     });
