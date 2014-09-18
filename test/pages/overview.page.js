@@ -92,6 +92,13 @@ module.exports = Page.create({
                 return text.split(' ')[1].toUpperCase();
             });
         }
+    },
+
+    makePaymentModal: {
+        get: function () {
+            $('.rx-payment-action a').click();
+            return encore.rxModalAction.initialize(require('./overview/payment.modal'));
+        }
     }
 
 });
