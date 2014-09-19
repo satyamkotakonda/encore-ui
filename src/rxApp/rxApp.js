@@ -10,7 +10,7 @@ angular.module('encore.ui.rxApp', ['encore.ui.rxAppRoutes', 'encore.ui.rxEnviron
 * @returns {object} Instance of rxAppRoutes with `fetchRoutes` method added
 */
 .factory('encoreRoutes', function (rxAppRoutes, routesCdnPath, rxNotify, $q, $http,
-                                     rxVisibilityPathParams, rxVisibility) {
+                                     rxVisibilityPathParams, rxVisibility, Environment) {
 
     // We use rxVisibility in the nav menu at routesCdnPath, so ensure it's ready
     // before loading from the CDN
@@ -24,8 +24,16 @@ angular.module('encore.ui.rxApp', ['encore.ui.rxAppRoutes', 'encore.ui.rxEnviron
         });
     };
 
+    var env = Environment.get();
+    var url = null;
+    if (env !== 'unified' && env !== 'unified-prod') {
+        url = routesCdnPath.staging;
+    } else {
+        url = routesCdnPath.production;
+    }
+
     encoreRoutes.fetchRoutes = function () {
-        return $http.get(routesCdnPath)
+        return $http.get(url)
             .success(encoreRoutes.setAll)
             .error(setFailureMessage);
     };
