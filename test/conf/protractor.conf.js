@@ -1,7 +1,7 @@
 /*jshint node:true */
 // For some reason 'grunt jshint' doesn't respect the node:true in the .jshintrc file, so we have to add it here
 
-var config = require('../tasks/util/config');
+var config = require('../../tasks/util/config');
 
 exports.config = {
     framework: 'mocha',
@@ -15,11 +15,15 @@ exports.config = {
     baseUrl: 'http://localhost:9000',
 
     specs: [
-        './stories/*.js'
+        '../stories/*.js'
     ],
 
     params: {
-        loginRedirect: config.appName + '/billing'
+        loginRedirect: config.appName
+    },
+
+    onPrepare: function () {
+        expect = require('chai').use(require('chai-as-promised')).expect;
     },
 
     // Capabilities to be passed to the webdriver instance.

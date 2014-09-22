@@ -62,6 +62,7 @@ module.exports = Page.create({
         // arguments with the default mock username/password pair.
         value: function (username, password) {
             var page = this;
+            this.go();
             return this.driver.getCurrentUrl().then(function (url) {
                 if (/encore.rackspace.com/.test(url)) {
                     page.loginStaging(username, password);

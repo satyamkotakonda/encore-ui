@@ -29,9 +29,11 @@
     "globals": {
         "$": false,
         "$$": false,
+        "by": false,
         "alert": false,
         "angular": false,
         "browser": false,
+        "element": false,
         "devel": false,
         "describe": false,
         "it": false,
