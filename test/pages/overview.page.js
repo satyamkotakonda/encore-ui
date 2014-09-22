@@ -8,26 +8,6 @@ module.exports = Page.create({
         }
     },
 
-    title: {
-        get: function () {
-            return $('.page-title').getText();
-        }
-    },
-
-    subtitle: {
-        get: function () {
-            return $('.page-subtitle').getText();
-        }
-    },
-
-    account: {
-        get: function () {
-            return this.subtitle.then(function (subtitle) {
-                return subtitle.split('On account ')[1];
-            });
-        }
-    },
-
     contact: {
         get: function () {
             return Page.create({

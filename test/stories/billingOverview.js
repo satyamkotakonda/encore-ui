@@ -2,7 +2,6 @@ var loginPage = require('../pages/login.page');
 var homePage = require('../pages/home.page');
 var overviewPage = require('../pages/overview.page');
 
-var encore = require('rx-page-objects');
 var notifications = encore.rxNotify;
 
 describe('overview page', function () {
@@ -12,8 +11,8 @@ describe('overview page', function () {
     });
 
     it('should search for an account', function () {
-        homePage.search('473500');
-        expect(overviewPage.title).to.eventually.equal('Billing - Overview');
+        homePage.search(browser.params.accountId);
+        expect(encore.rxPage.main.title).to.eventually.equal('Billing - Overview');
     });
 
     it('should not show any notifications', function () {
@@ -21,7 +20,7 @@ describe('overview page', function () {
     });
 
     it('should list the account name in the subtitle @dev', function () {
-        expect(overviewPage.subtitle).to.eventually.equal('On account Digitas London');
+        expect(encore.rxPage.main.subtitle).to.eventually.equal('On account Digitas London');
     });
 
     describe('contact information @dev', function () {
@@ -76,6 +75,10 @@ describe('overview page', function () {
             expect(overviewPage.currencyType).to.eventually.equal('USD');
         });
 
+    });
+
+    after(function () {
+        loginPage.logout();
     });
 
 });
