@@ -137,7 +137,7 @@ Data Definition List for common key/value descriptions
     dt {
         line-height: @lineHeight;
         float: left;
-        min-width: 9em;
+        min-width: 10em;
         font-weight: 500;
         text-align: right;
         clear: left;
@@ -176,6 +176,14 @@ Data Definition List for common key/value descriptions
             border-left: 0;
             padding-right: @spacing;
             padding-left: @spacing - 1;
+            margin-right: @spacing/2;
+            float: left;
+        }
+        .accent-text-invoice {
+            border: 0.07em #aaa solid;
+            border-left: 0;
+            padding-right: @spacing;
+            padding-left: @spacing*4;
             margin-right: @spacing/2;
             float: left;
         }
@@ -362,6 +370,7 @@ Horizontal Tab Menu based on pure
         a:active {
             &:extend(.tab-menu li.tab-selected a);
         }
+        cursor: pointer;
     }
 }
 

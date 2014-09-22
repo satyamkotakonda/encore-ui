@@ -10,7 +10,7 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
     *                       mainly used on the response
     */
     .factory('Transaction', function ($resource, Transform) {
-        var transaction = $resource('/api/billing/:prefix-:accountNumber/:transactionType/:transactionNumber',
+        var transaction = $resource('/api/billing/:prefix-:accountNumber/:transactionType/:transactionNumber/:action',
             {
                 accountNumber: '@accountNumber',
                 prefix: '020'
@@ -28,6 +28,36 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
                     method: 'GET',
                     isArray: false
                 },
+                pdf: {
+                    method: 'GET',
+                    isArray: false,
+                    headers: {
+                        accept: 'application/pdf'
+                    },
+                    responseType: 'arraybuffer',
+                    cache: true,
+                    transformResponse: function (data) {
+                        var pdf;
+                        if (data) { pdf = new Blob([data], { type: 'application/pdf' }); }
+                        return { response: pdf };
+                    }
+                },
+                detailsCsv: {
+                    method: 'GET',
+                    params: {
+                        action: 'detail'
+                    },
+                    isArray: false,
+                    headers: {
+                        accept: 'text/csv'
+                    },
+                    cache: true,
+                    transformResponse: function (data) {
+                        var csv;
+                        if (data) { csv = new Blob([data], { type: 'text/csv' }); }
+                        return { response: csv };
+                    }
+                },
                 search: {
                     method: 'GET',
                     url: '/api/billing',
@@ -39,6 +69,20 @@ angular.module('billingSvcs', ['ngResource', 'rxGenericUtil'])
         );
         transaction.getDetails = function (accountNumber, type, tranNumber, success, fail) {
             return transaction.details({
+                accountNumber: accountNumber,
+                transactionType: type,
+                transactionNumber: tranNumber
+            }, success, fail);
+        };
+        transaction.getPdf = function (accountNumber, type, tranNumber, success, fail) {
+            return transaction.pdf({
+                accountNumber: accountNumber,
+                transactionType: type,
+                transactionNumber: tranNumber
+            }, success, fail);
+        };
+        transaction.getCsv = function (accountNumber, type, tranNumber, success, fail) {
+            return transaction.detailsCsv({
                 accountNumber: accountNumber,
                 transactionType: type,
                 transactionNumber: tranNumber

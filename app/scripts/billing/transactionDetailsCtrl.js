@@ -20,8 +20,9 @@ angular.module('billingApp')
     *   DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES)
     * </pre>
     */
-.controller('TransactionDetailsCtrl', function ($scope, $filter, $routeParams, Transaction, Account,
-                                                rxBreadcrumbsSvc, Balance, PaymentMethod, rxSortUtil, DATE_FORMAT) {
+.controller('TransactionDetailsCtrl', function ($scope, $filter, $document, $timeout, $routeParams,
+                                                Transaction, Account, rxBreadcrumbsSvc, Balance,
+                                                PaymentMethod, rxNotify, rxSortUtil, DATE_FORMAT) {
         function setBreadcrumbs () {
             // Get non-plural transaction type from routeParams
             var tranType = $routeParams.transactionType.slice(0, -1);
@@ -62,6 +63,48 @@ angular.module('billingApp')
             $routeParams.transactionType,
             $routeParams.transactionNumber
         );
+
+        var getFilename = function (type) {
+            return $routeParams.accountNumber + '_Invoice_' +
+                $scope.transaction.invoice.tranRefNum + '_' +
+                $filter('date')($scope.transaction.invoice.coverageStartDate, 'yyyy-MM-dd') + type;
+        };
+
+        $scope.downloadPdf = function () {
+            return Transaction.getPdf(
+                $routeParams.accountNumber,
+                $routeParams.transactionType,
+                $routeParams.transactionNumber,
+                function (data) {
+                    window.saveAs(data.response, getFilename('.pdf'));
+                },
+                function (config) {
+                    if (config.status === 404) {
+                        rxNotify.add('Invoice PDF Not Found', {
+                            type: 'error'
+                        });
+                    }
+                }
+            );
+        };
+
+        $scope.downloadCsv = function () {
+            return Transaction.getCsv(
+                $routeParams.accountNumber,
+                $routeParams.transactionType,
+                $routeParams.transactionNumber,
+                function (data) {
+                    window.saveAs(data.response, getFilename('.csv'));
+                },
+                function (config) {
+                    if (config.status === 404) {
+                        rxNotify.add('Invoice CSV Not Found', {
+                            type: 'error'
+                        });
+                    }
+                }
+            );
+        };
 
         // Set breadcrumbs once we have transaction information
         $scope.transaction.$promise.finally(setBreadcrumbs);

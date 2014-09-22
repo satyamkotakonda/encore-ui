@@ -18,7 +18,8 @@
     "momentjs": "~2.5.0",
     "spin.js": "~1.3.2",
     "pure": "~0.4.2",
-    "encore-ui": "1.0.*"
+    "encore-ui": "1.0.8",
+    "save-as": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.15",
