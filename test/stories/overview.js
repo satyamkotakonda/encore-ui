@@ -8,10 +8,10 @@ describe('overview page', function () {
 
     before(function () {
         loginPage.login();
+        homePage.search(browser.params.accountId);
     });
 
     it('should search for an account', function () {
-        homePage.search(browser.params.accountId);
         expect(encore.rxPage.main.title).to.eventually.equal('Billing - Overview');
     });
 
@@ -68,11 +68,30 @@ describe('overview page', function () {
         });
 
         it('should have a balance due', function () {
-            expect(overviewPage.amountDue).to.eventually.equal(0.00);
+            expect(overviewPage.amountDue).to.eventually.equal(12.34);
         });
 
         it('should have a currency type', function () {
             expect(overviewPage.currencyType).to.eventually.equal('USD');
+        });
+
+    });
+
+    describe('make a payment modal', function () {
+        var modal;
+
+        before(function () {
+            modal = overviewPage.makePaymentModal;
+        });
+
+        it('should have the right title', function () {
+            expect(modal.title).to.eventually.equal('Make a Payment');
+        });
+
+        it('should have the full amount due prefilled by default', function () {
+            overviewPage.amountDue.then(function (due) {
+                expect(modal.paymentAmount).to.eventually.equal(due);
+            });
         });
 
     });

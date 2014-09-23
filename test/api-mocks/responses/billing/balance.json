@@ -1,7 +1,7 @@
 {
     "balance": {
         "currentBalance": "162.38",
-        "amountDue": "0.00",
+        "amountDue": "12.34",
         "pastDue": "162.38",
         "unbilledCharges": "0.00",
         "currency": "USD"
