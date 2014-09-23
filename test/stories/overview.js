@@ -94,21 +94,14 @@ describe('overview page', function () {
             });
         });
 
-        it('should make a payment with primary payment method');
-
-        it('should make a payment with non-primary credit card');
-
+        it('should make a payment with primary payment method @dev');
+        it('should make a payment with non-primary credit card @dev');
         it('should not allow a payment more than the balance amount');
-
         it('should not allow a payment less than a dollar');
-
         it('should not allow a payment greater than 5000 dollars');
-
         it('should not allow a payment less than zero dollars');
-
         it('should cancel out of the payment modal');
-
-        it('should not have charged the account after canceling #regression');
+        it('should not have charged the account after canceling');
 
     });
 

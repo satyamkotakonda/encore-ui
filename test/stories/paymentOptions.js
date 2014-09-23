@@ -63,14 +63,14 @@ describe('payment options page', function () {
             expect(modal.paymentAmount).to.eventually.equal(amountDue);
         });
 
-        it('should make a payment with primary payment method');
-        it('should make a payment with non-primary credit card payment method');
+        it('should make a payment with primary payment method @dev');
+        it('should make a payment with non-primary credit card payment method @dev');
         it('should not allow a payment more than the balance');
         it('should not allow a payment less than a dollar');
         it('should not allow a payment greater than a 5000 dollars');
         it('should not allow a payment less than a dollar');
         it('should cancel a out of the make a payment modal');
-        it('should should not have charged the account after canceling #regression');
+        it('should should not have charged the account after canceling');
 
         after(function () {
             modal.cancel();
