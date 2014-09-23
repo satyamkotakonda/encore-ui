@@ -22,6 +22,25 @@ describe('transactions page', function () {
         expect(encore.rxPage.main.subtitle).to.eventually.equal('On account Digitas London');
     });
 
+    describe('make a payment modal', function () {
+        var modal;
+
+        before(function () {
+            modal = transactionsPage.makePaymentModal;
+        });
+
+        it('should have the right title', function () {
+            expect(modal.title).to.eventually.equal('Make a Payment');
+        });
+
+        it('should have the full amount due prefilled by default', function () {
+            transactionsPage.amountDue.then(function (due) {
+                expect(modal.paymentAmount).to.eventually.equal(due);
+            });
+        });
+
+    });
+
     after(function () {
         loginPage.logout();
     });

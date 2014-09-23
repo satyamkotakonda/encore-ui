@@ -26,7 +26,7 @@ exports.config = {
     },
 
     onPrepare: function () {
-        expect = require('chai').use(require('chai-as-promised')).expect;
+        expect = require('chai').use(require('chai-as-promised')).use(require('chai-datetime')).expect;
         encore = require('rx-page-objects');
     },
 
