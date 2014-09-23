@@ -48,13 +48,13 @@ describe('transactions page', function () {
         it('should not allow a payment greater than 5000 dollars');
         it('should not allow a payment less than zero dollars');
         it('should cancel out of the payment modal');
-        it('should not have charged the account after canceling #regression');
+        it('should not have charged the account after canceling');
 
     });
 
     describe('billed items', function () {
 
-        it('should download transactions of the billed items table #manual #regression');
+        it('should download transactions of the billed items table #manual #regression @staging');
 
         describe('filtering', function () {
 

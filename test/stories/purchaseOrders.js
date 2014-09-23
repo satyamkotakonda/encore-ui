@@ -27,7 +27,7 @@ describe('purchase orders page', function () {
         it('should add a new purchase order');
         it('should display an error when an invalid purchase order is added');
         it('should cancel out of the add new purchase order modal');
-        it('should not have added a new purchase #regression');
+        it('should not have added a new purchase');
 
     });
 
@@ -35,7 +35,7 @@ describe('purchase orders page', function () {
 
         it('should disable purchase order');
         it('should cancel out of the disable purchase order modal');
-        it('should not have disabled the purchase #regression');
+        it('should not have disabled the purchase');
 
     });
 
