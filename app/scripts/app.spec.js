@@ -26,7 +26,6 @@ describe('Billing: app', function () {
             win = $window;
             win.location = '/billing';
 
-            // console.log(window);
             env.get = sinon.stub();
             env.get.returns({ name: 'staging' });
 
