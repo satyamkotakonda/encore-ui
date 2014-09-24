@@ -22,6 +22,13 @@ describe('preferences page', function () {
         expect(encore.rxPage.main.subtitle).to.eventually.equal('On account Digitas London');
     });
 
+    it('should update the paperless billing preference');
+    it('should update the notifications preference');
+    it('should update both the paperless billing and notifications preferences');
+    it('should show an error if changing the paperless billing preference fails @dev');
+    it('should show an error if changing the notifications preference fails @dev');
+    it('should not save unless the update button is selected on');
+
     after(function () {
         loginPage.logout();
     });
