@@ -13,6 +13,11 @@ angular.module('constants', [])
             loading: 'Posting Payment',
             success: 'The Payment was successfully Submitted'
         },
+        session: {
+            error: 'There was an error creating the session.',
+            loading: 'Creating a new session for payment method capture...',
+            success: 'Session created. Redirecting to payment form.'
+        },
         changeDefault: {
             error: 'There was an error Changing the Default Payment',
             loading: 'Changing Default Payment',
