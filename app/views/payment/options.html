@@ -37,7 +37,7 @@
         <div class="actions" ng-class="{single: !defaultMethod}">
             <ul>
                 <li>
-                  <rx-payment-set-default
+                    <rx-payment-set-default
                         post-hook="refreshPaymentMethods"
                         user-name="userName"
                         classes="button"
@@ -45,6 +45,15 @@
                         methods="paymentMethods">
                         <img src="/billing/images/icon-change_set_white.png" /> Change Primary
                     </rx-payment-set-default>
+                </li>
+                <li>
+                    <rx-modal-action
+                        post-hook="addPayment()"
+                        classes="button action"
+                        template-url="views/payment/paymentAdd.html">
+                        <img src="/billing/images/icon-add_white.png" />
+                        Add Payment Method
+                    </rx-modal-action>
                 </li>
                 <li>
                     <rx-payment-action

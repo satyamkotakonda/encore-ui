@@ -24,9 +24,10 @@ angular.module('billingApp')
  *       Payment, DefaultPaymentMethodFilter, rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
  * </pre>
  */
-    .controller('OptionsCtrl', function (
-        $scope, $routeParams, $q, rxNotify, Account, Balance, PaymentMethod, AccountNumberUtil,
-        Payment, DefaultPaymentMethodFilter, rxSortUtil, rxPromiseNotifications, STATUS_MESSAGES) {
+    .controller('OptionsCtrl', function ($scope, $routeParams, $window, $q, rxNotify, Account, Balance,
+                                        PaymentMethod, AccountNumberUtil, PaymentSession, Payment,
+                                        PaymentFormURI, DefaultPaymentMethodFilter, Session, rxSortUtil,
+                                        rxPromiseNotifications, STATUS_MESSAGES) {
 
         // Get filter the paymentMethods and retrieve the default one (callback)
         var getDefaultMethod = function (paymentMethods) {
@@ -80,10 +81,23 @@ angular.module('billingApp')
                 }, 'makePayment');
             };
 
+        // Establish session with payment forms API and redirect to method capture
+        var addPayment = function () {
+            $scope.createSession = PaymentSession.create($routeParams.accountNumber, $window.location.href);
+            rxPromiseNotifications.add($scope.createSession.$promise, STATUS_MESSAGES.session);
+
+            // Redirect user to payment form with valid session
+            $scope.createSession.$promise.then(
+                function (data) {
+                    $window.location.href = PaymentFormURI() + data.session.id;
+                });
+        };
+
         // Assign template actions
         $scope.refreshPaymentMethods = refreshPaymentMethods;
         $scope.postPayment = postPayment;
         $scope.disableMethod = disableMethod;
+        $scope.addPayment = addPayment;
 
         // Set the default sort of the payment methods that are cards
         $scope.cardSortCol = sortCol('cardSort');

@@ -1,4 +1,4 @@
-angular.module('paymentSvcs', ['ngResource', 'rxGenericUtil'])
+angular.module('paymentSvcs', ['ngResource', 'rxGenericUtil', 'encore.ui'])
     /**
      * @ngdoc service
      * @name paymentSvcs.PaymentMethod
@@ -22,4 +22,37 @@ angular.module('paymentSvcs', ['ngResource', 'rxGenericUtil'])
                 changeDefault: { method: 'PUT', params: { methodId: 'default' }}
             }
         );
+    })
+    .factory('PaymentSession', function ($resource, Session) {
+        var session = $resource('/api/forms/sessions', {},
+            {
+                get: { method: 'GET' },
+                save: {
+                    method: 'POST',
+                    headers: {
+                        'X-RAX-SupportUser-Token': Session.getTokenId()
+                    }
+                }
+            }
+        );
+        session.create = function (accountNumber, postbackUrl, success, fail) {
+            var data = {
+                'session': {
+                    'ran': '020-' + accountNumber,
+                    'postbackURL': postbackUrl
+                }
+            };
+            return session.save({}, data, success, fail);
+        };
+
+        return session;
+    })
+    .factory('PaymentFormURI', function (Environment) {
+        var path = '/v1/forms/method_capture?sessionId=';
+        return function () {
+            if (Environment.get().name === 'unified-prod') {
+                return 'https://forms.payment.api.rackspacecloud.com' + path;
+            }
+            return 'https://staging.forms.payment.pipeline2.api.rackspacecloud.com' + path;
+        };
     });

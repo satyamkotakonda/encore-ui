@@ -26,6 +26,16 @@ module.exports = {
                 rewrite: {
                     '/api/payment': '/v1'
                 }
+            },
+            {
+                context: '/api/forms',
+                host: 'staging.forms.payment.pipeline2.api.rackspacecloud.com',
+                port: 443,
+                https: true,
+                changeOrigin: true,
+                rewrite: {
+                    '/api/forms': '/v1'
+                }
             }
         ].concat(config.defaultProxies),
     },
