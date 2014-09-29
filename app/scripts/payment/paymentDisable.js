@@ -34,4 +34,25 @@ angular.module('billingApp')
                 classes: '@'
             }
         };
+    })
+    .controller('PaymentDisableCtrl', function (
+        $scope, $routeParams, Payment, PaymentMethod, rxNotify, rxModalUtil, STATUS_MESSAGES) {
+        var defaultStackName = 'disablePaymentOption';
+        var accountNumber = $routeParams.accountNumber;
+        var modal = rxModalUtil.getModal($scope, defaultStackName, STATUS_MESSAGES.paymentDisable);
+
+        // Given a methodID perform a call to disable it.  Refreshing the payment
+        // methods upon success.
+        var disableMethod = function (methodId) {
+            $scope.disableMethodResult = PaymentMethod.disable({
+                accountNumber: accountNumber,
+                methodId: methodId
+            });
+            $scope.disableMethodResult.$promise.then(modal.successClose('page'), modal.fail());
+            modal.processing($scope.disableMethodResult.$promise);
+        };
+
+        modal.clear();
+        $scope.submit = disableMethod;
+        $scope.cancel = $scope.$dismiss;
     });

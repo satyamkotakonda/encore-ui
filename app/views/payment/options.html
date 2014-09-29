@@ -42,7 +42,7 @@
                         user-name="userName"
                         classes="button"
                         method-id="defaultMethod.id"
-                        methods="paymentMethods">
+                        methods="enabledMethods">
                         <img src="/billing/images/icon-change_set_white.png" /> Change Primary
                     </rx-payment-set-default>
                 </li>
@@ -62,7 +62,7 @@
                         classes="button"
                         amount="paymentAmount"
                         method-id="defaultMethod.id"
-                        methods="paymentMethods">
+                        methods="enabledMethods">
                         <img src="/billing/images/icon-add_white.png" /> Make a Payment
                     </rx-payment-action>
                 </li>
@@ -148,7 +148,7 @@
                                         post-hook="refreshPaymentMethods"
                                         user-name="userName"
                                         method-id="card.id"
-                                        methods="paymentMethods">
+                                        methods="enabledMethods">
                                        <img src="/billing/images/icon-change_set.png" /> Set as Primary
                                     </rx-payment-set-default>
                                     <rx-payment-action
@@ -156,7 +156,7 @@
                                         user-name="userName"
                                         amount="paymentAmount"
                                         method-id="card.id"
-                                        methods="paymentMethods">
+                                        methods="enabledMethods">
                                         <img src="/billing/images/icon-add.png" /> Make Payment with
                                     </rx-payment-action>
                                     <rx-payment-disable
@@ -250,7 +250,7 @@
                                         post-hook="changeDefaultMethod"
                                         user-name="userName"
                                         method-id="ach.id"
-                                        methods="paymentMethods">
+                                        methods="enabledMethods">
                                          <img src="/billing/images/icon-change_set.png" /> Set as Primary
                                     </rx-payment-set-default>
                                     <rx-payment-action
@@ -258,7 +258,7 @@
                                         user-name="userName"
                                         amount="paymentAmount"
                                         method-id="ach.id"
-                                        methods="paymentMethods">
+                                        methods="enabledMethods">
                                         <img src="/billing/images/icon-add.png" /> Make Payment with
                                     </rx-payment-action>
                                     <rx-payment-disable

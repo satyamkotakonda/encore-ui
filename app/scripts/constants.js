@@ -13,6 +13,11 @@ angular.module('constants', [])
             loading: 'Posting Payment',
             success: 'The Payment was successfully Submitted'
         },
+        paymentDisable: {
+            error: 'There was an error disabling the payment method',
+            loading: 'Disabling payment method',
+            success: 'The payment method was successfully disabled'
+        },
         session: {
             error: 'There was an error creating the session.',
             loading: 'Creating a new session for payment method capture...',
@@ -20,7 +25,7 @@ angular.module('constants', [])
         },
         changeDefault: {
             error: 'There was an error Changing the Default Payment',
-            loading: 'Changing Default Payment',
+            loading: 'Changing Default Payment Method',
             success: 'The Default Payment Method was successfully Changed'
         },
         usage: {
