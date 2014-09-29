@@ -6,15 +6,19 @@ describe('rxPaymentSetDefault', function () {
         paymentMethods = [{
             id: 'id1',
             isDefault: true,
+            disabled: false,
             paymentCard: { number: '1234' }
         }, {
             id: 'id2',
+            disabled: false,
             electronicCheck: { number: '1234' }
         }, {
             id: 'id3',
+            disabled: false,
             paymentCard: { number: '1234' }
         }, {
             id: 'id4',
+            disabled: false,
             invoice: { number: '1234' }
         }],
         validTemplate = '<rx-payment-set-default' +

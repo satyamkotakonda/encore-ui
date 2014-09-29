@@ -55,30 +55,6 @@ angular.module('billingApp')
                     var reverse = ($scope[sort].predicate === predicate) ? !$scope[sort].reverse : false;
                     $scope[sort] = { reverse: reverse, predicate: predicate };
                 };
-            },
-            // Given a methodID perform a call to disable it.  Refreshing the payment
-            // methods upon success.  Passes promise to rxPromiseNotifications
-            disableMethod = function (methodId) {
-                var disableMethodResult = PaymentMethod.disable({
-                    accountNumber: $routeParams.accountNumber,
-                    methodId: methodId
-                }, refreshPaymentMethods);
-                // Display messages depending on the success of the call
-                rxPromiseNotifications.add(disableMethodResult.$promise, {
-                    loading: STATUS_MESSAGES.payment.load,
-                    success: STATUS_MESSAGES.payment.success,
-                    error: STATUS_MESSAGES.payment.error
-                }, 'disablePaymentOption');
-            },
-            // Given an amount, and a methodID perform a call to post a payment.
-            // Passes promise to rxPromiseNotifications
-            postPayment = function (amount, methodId) {
-                $scope.paymentResult = Payment.makePayment($routeParams.accountNumber, amount, methodId);
-                rxPromiseNotifications.add($scope.paymentResult.$promise, {
-                    loading: STATUS_MESSAGES.payment.load,
-                    success: STATUS_MESSAGES.payment.success,
-                    error: STATUS_MESSAGES.payment.error
-                }, 'makePayment');
             };
 
         // Establish session with payment forms API and redirect to method capture
@@ -95,8 +71,6 @@ angular.module('billingApp')
 
         // Assign template actions
         $scope.refreshPaymentMethods = refreshPaymentMethods;
-        $scope.postPayment = postPayment;
-        $scope.disableMethod = disableMethod;
         $scope.addPayment = addPayment;
 
         // Set the default sort of the payment methods that are cards

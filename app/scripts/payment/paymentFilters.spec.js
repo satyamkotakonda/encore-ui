@@ -6,18 +6,21 @@ describe('PaymentFilters', function () {
     paymentMethods = [{
         'id': 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479',
         'isDefault': true,
+        'disabled': false,
         'paymentCard': {
             'cardNumber': 'XXXXXXXXXXXX3456',
             'cardType': 'VISA'
         }
     }, {
         'id': 'urn:uuid:4620b3d4-62ad-4d84-87cc-22a5ef13062f',
+        'disabled': false,
         'electronicCheck': {
             'accountNumber': 'XXXXXX7845',
             'accountType': 'CONSUMER_CHECKING'
         }
     }, {
         'id': 'urn:uuid:4438ef26-a369-47ed-8682-f82df74f0be0',
+        'disabled': false,
         'electronicCheck': {
             'accountNumber': 'XXXXXX1234',
             'accountType': 'CONSUMER_CHECKING'

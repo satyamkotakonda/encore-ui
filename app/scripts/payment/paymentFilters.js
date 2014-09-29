@@ -161,12 +161,15 @@ angular.module('billingApp')
 
         paymentUtil.formFilter = function ($scope) {
             return function (methodType) {
+                // We only care about enabled methods
+                var methods = _.where($scope.methods, { disabled: false });
+
                 // Set the method type we are filtering for for display purposes.
                 $scope.methodType = methodType;
 
                 // Filter the list of payment methods by it's method type (electronicCard/paymentCard/default)
                 // Map it to setValue to set the id value of the object
-                $scope.methodList = paymentMethodTypeFilter($scope.methods, methodType).map(setValue);
+                $scope.methodList = paymentMethodTypeFilter(methods, methodType).map(setValue);
 
                 // If we are filtering for the default paymentMethod, we must find out (if any present)
                 // what type of payment method it is (card/ach).

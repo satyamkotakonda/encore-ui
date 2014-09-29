@@ -136,16 +136,6 @@ describe('OptionsCtrl', function () {
         expect(scope.defaultMethod).to.not.be.empty;
     });
 
-    it('should post a payment', function () {
-        scope.postPayment(12314, 'urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
-        sinon.assert.calledOnce(payment.makePayment);
-    });
-
-    it('should disable a payment method', function () {
-        scope.disableMethod('urn:uuid:f47ac10b-58cc-4372-a567-0e02b2c3d479');
-        //sinon.assert.calledOnce(payment.disable);
-    });
-
     it('should create a new payment form session and redirect to the form', function () {
         scope.addPayment();
         scope.createSession.$deferred.resolve(sessionData);
