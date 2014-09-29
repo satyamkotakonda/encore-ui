@@ -38,13 +38,7 @@ angular.module('billingApp')
                 $scope.paymentAmount = balance.amountDue;
             },
             // Return the list of payment methods for the account being viewed
-            getPaymentMethods = function (status) {
-                if (status === 'enabled') {
-                    return PaymentMethod.list({
-                        accountNumber: $routeParams.accountNumber,
-                        showDisabled: false
-                    }, getDefaultMethod);
-                }
+            getPaymentMethods = function () {
                 return PaymentMethod.list({
                     accountNumber: $routeParams.accountNumber,
                     showDisabled: true
@@ -53,7 +47,6 @@ angular.module('billingApp')
             // Refresh the list of payment methods in scope (callback)
             refreshPaymentMethods = function () {
                 $scope.paymentMethods = getPaymentMethods();
-                $scope.enabledMethods = getPaymentMethods('enabled');
             },
             // Stolen from rxSortableColumn, as it does not allow multiple tables in
             // one controller to be sorted independently

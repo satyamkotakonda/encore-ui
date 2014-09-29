@@ -46,9 +46,7 @@ angular.module('billingApp')
                 };
 
                 $scope.changeMethodType = PaymentFormUtil.formFilter($scope);
-
-                // Set default as the active view
-                $q.when($scope.methods.$promise).then(function () {
+                $scope.$watchCollection('methods', function () {
                     PaymentFormUtil.filterDefault($scope);
                 });
             }
