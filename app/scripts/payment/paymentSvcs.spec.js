@@ -22,6 +22,11 @@ describe('PaymentFormURI', function () {
 
     it('should return staging endpoint in staging env', function () {
         Environment.get.returns({ name: 'staging' });
+        expect(PaymentFormURI()).to.eq('https://staging.forms.payment.api.rackspacecloud.com' + path);
+    });
+
+    it('should return dev endpoint in dev env', function () {
+        Environment.get.returns({ name: 'local' });
         expect(PaymentFormURI()).to.eq('https://staging.forms.payment.pipeline2.api.rackspacecloud.com' + path);
     });
 

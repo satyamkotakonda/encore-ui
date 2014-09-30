@@ -52,7 +52,9 @@ angular.module('paymentSvcs', ['ngResource', 'rxGenericUtil', 'encore.ui'])
         return function () {
             if (Environment.get().name === 'unified-prod') {
                 return 'https://forms.payment.api.rackspacecloud.com' + path;
+            } else if (Environment.get().name === 'local') {
+                return 'https://staging.forms.payment.pipeline2.api.rackspacecloud.com' + path;
             }
-            return 'https://staging.forms.payment.pipeline2.api.rackspacecloud.com' + path;
+            return 'https://staging.forms.payment.api.rackspacecloud.com' + path;
         };
     });
