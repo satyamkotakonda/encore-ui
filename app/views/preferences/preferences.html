@@ -11,8 +11,11 @@
                         true-value="PAPERLESS"
                         false-value="PAPER"
                         loading="isResourceLoading(billInfo, billInfoUpdate)"
-                        disabled="isResourceLoading(billInfo, billInfoUpdate)"
+                        disabled="true"
                         post-hook="setDirty(newValue, value, billInfo)"></rx-switch>
+                    <div style="margin-top:10px; font-size:0.8em; font-style:italic;">
+                        This option is currently disabled.
+                    </div>
                 </div>
             </div>
             <div class="col-1-3">
