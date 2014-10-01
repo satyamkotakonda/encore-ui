@@ -22,10 +22,10 @@ describe('preferences page', function () {
         expect(encore.rxPage.main.subtitle).to.eventually.equal('On account Digitas London');
     });
 
-    it('should update the paperless billing preference without saving it', function () {
+    it('should not update the paperless billing preference', function () {
         preferencesPage.paperlessBilling.invoices.then(function (currentSetting) {
             preferencesPage.paperlessBilling.invoices = !currentSetting;
-            expect(preferencesPage.paperlessBilling.invoices).not.to.eventually.equal(currentSetting);
+            expect(preferencesPage.paperlessBilling.invoices).to.eventually.equal(currentSetting);
         });
     });
 
@@ -36,11 +36,11 @@ describe('preferences page', function () {
         });
     });
 
-    it('should update the paperless billing preference and save it @staging', function () {
+    it('should not update the paperless billing preference when saving it @staging', function () {
         preferencesPage.paperlessBilling.invoices.then(function (currentSetting) {
             preferencesPage.paperlessBilling.invoices = !currentSetting;
             preferencesPage.submit();
-            expect(preferencesPage.notifications.successfulPayments).not.to.eventually.equal(currentSetting);
+            expect(preferencesPage.notifications.successfulPayments).to.eventually.equal(currentSetting);
         });
     });
 
@@ -52,49 +52,23 @@ describe('preferences page', function () {
         });
     });
 
-    it('should update both the paperless billing and notifications preferences and save it @staging', function () {
-        preferencesPage.paperlessBilling.invoices.then(function (paperless) {
-            preferencesPage.notifications.successfulPayments.then(function (payments) {
-                preferencesPage.paperlessBilling.invoices = !paperless;
-                preferencesPage.notifications.successfulPayments = !payments;
-                preferencesPage.submit();
-                expect(preferencesPage.paperlessBilling.invoices).not.to.eventually.equal(paperless);
-                expect(preferencesPage.notifications.successfulPayments).not.to.eventually.equal(payments);
-            });
-        });
-    });
-
     it('should not save unless the update button is clicked', function () {
         browser.refresh();
-        preferencesPage.paperlessBilling.invoices.then(function (paperless) {
-            preferencesPage.notifications.successfulPayments.then(function (payments) {
-                preferencesPage.paperlessBilling.invoices = !paperless;
-                preferencesPage.notifications.successfulPayments = !payments;
-                browser.refresh();
-                expect(preferencesPage.paperlessBilling.invoices).to.eventually.equal(paperless);
-                expect(preferencesPage.notifications.successfulPayments).to.eventually.equal(payments);
-            });
+        preferencesPage.notifications.successfulPayments.then(function (payments) {
+            preferencesPage.notifications.successfulPayments = !payments;
+            browser.refresh();
+            expect(preferencesPage.notifications.successfulPayments).to.eventually.equal(payments);
         });
     });
 
     describe('unsuccessful updates @dev', function () {
 
         before(function () {
-            preferencesPage.search('8675309');
+            preferencesPage.search('404-updating-preferences');
         });
 
         afterEach(function () {
             encore.rxNotify.all.dismiss();
-        });
-
-        it('should show an error if changing the paperless billing preference fails', function () {
-            preferencesPage.paperlessBilling.invoices.then(function (currentSetting) {
-                preferencesPage.paperlessBilling.invoices = !currentSetting;
-                preferencesPage.submit();
-                encore.rxNotify.all.byType('error').then(function (errors) {
-                    expect(errors[0].text).to.eventually.equal('Error Updating Billing Preferences');
-                });
-            });
         });
 
         it('should show an error if changing the notifications preference fails', function () {

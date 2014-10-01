@@ -24,6 +24,70 @@ describe('transactions page', function () {
         expect(encore.rxPage.main.subtitle).to.eventually.equal('On account Digitas London');
     });
 
+    describe('overview statement amounts @dev', function () {
+
+        it('should show the current amount due', function () {
+            expect(transactionsPage.amountDue).to.eventually.equal(12.34);
+        });
+
+        it('should show the currency type', function () {
+            expect(transactionsPage.currencyType).to.eventually.equal('USD');
+        });
+
+        it('should show the account balance', function () {
+            expect(transactionsPage.accountBalance).to.eventually.equal(162.38);
+        });
+
+        it('should show the past due amount', function () {
+            expect(transactionsPage.pastDue).to.eventually.equal(162.38);
+        });
+
+        it('should show the terms', function () {
+            expect(transactionsPage.terms).to.eventually.equal('NET_0');
+        });
+
+        it('should show the billing cycle', function () {
+            expect(transactionsPage.billingCycle).to.eventually.equal('Monthly');
+        });
+
+    });
+
+    describe('N/A overview statement amounts @dev', function () {
+
+        before(function () {
+            transactionsPage.search('8675309');
+        });
+
+        it('should not show a value for current amount due', function () {
+            expect(transactionsPage.amountDue).to.eventually.be.null;
+        });
+
+        it('should not show a value for currency type', function () {
+            expect(transactionsPage.currencyType).to.eventually.be.null;
+        });
+
+        it('should not show the account balance', function () {
+            expect(transactionsPage.accountBalance).to.eventually.be.null;
+        });
+
+        it('should not show the past due amount', function () {
+            expect(transactionsPage.pastDue).to.eventually.be.null;
+        });
+
+        it('should not show the terms', function () {
+            expect(transactionsPage.terms).to.eventually.be.null;
+        });
+
+        it('should not show the billing cycle', function () {
+            expect(transactionsPage.billingCycle).to.eventually.be.null;
+        });
+
+        after(function () {
+            transactionsPage.search(browser.params.accountId);
+        });
+
+    });
+
     describe('make a payment modal', function () {
         var modal;
 
