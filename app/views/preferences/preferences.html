@@ -11,7 +11,7 @@
                         true-value="PAPERLESS"
                         false-value="PAPER"
                         loading="isResourceLoading(billInfo, billInfoUpdate)"
-                        disabled="true"
+                        disabled="isResourceLoading(billInfo, billInfoUpdate)"
                         post-hook="setDirty(newValue, value, billInfo)"></rx-switch>
                 </div>
             </div>
