@@ -18,6 +18,26 @@
             content-type: application/json
         file: test/api-mocks/responses/billing/balance.json
 
+# Get Billing Information for an Account
+-   request:
+        url: ^/api/billing/(.*)/billInfo$
+        method: [GET, PUT]
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/bill-info.json
+
+# Get Payment Information for an Account
+-   request:
+        url: ^/api/billing/(.*)/paymentInfo$
+        method: [GET, PUT]
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/payment-info.json
+
 # Get Billing Periods for an account
 -   request:
         url: ^/api/billing/(.*)/billing-periods$
