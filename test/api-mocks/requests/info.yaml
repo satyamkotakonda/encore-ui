@@ -1,7 +1,21 @@
 # Fail updating paperless settings
 -   request:
-        url: ^/api/billing/020-8675309/billInfo$
+        url: ^/api/billing/020-404-updating-preferences/billInfo$
         method: PUT
+    response:
+        status: 404
+
+# Fail updating notifications
+-   request:
+        url: ^/api/billing/020-404-updating-preferences/paymentInfo$
+        method: PUT
+    response:
+        status: 404
+
+# Get N/A Response for Billing Cycle, etc.
+-   request:
+        url: ^/api/billing/020-8675309/billInfo$
+        method: GET
     response:
         status: 404
 
@@ -15,10 +29,10 @@
             content-type: application/json
         file: test/api-mocks/responses/billing/bill-info.json
 
-# Fail updating notifications
+# Get N/A Response for Terms, etc.
 -   request:
         url: ^/api/billing/020-8675309/paymentInfo$
-        method: PUT
+        method: GET
     response:
         status: 404
 

@@ -1,0 +1,16 @@
+# Get N/A response for Account Balance, Past Due, etc.
+-   request:
+        url: ^/api/billing/020-8675309/balance$
+        method: GET
+    response:
+        status: 404
+
+# Get Balance for an Account
+-   request:
+        url: ^/api/billing/(.*)/balance$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/balance.json

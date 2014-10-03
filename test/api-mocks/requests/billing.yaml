@@ -8,16 +8,6 @@
             content-type: application/json
         file: test/api-mocks/responses/billing/transactions.json
 
-# Get Balance for an Account
--   request:
-        url: ^/api/billing/(.*)/balance$
-        method: GET
-    response:
-        status: 200
-        headers:
-            content-type: application/json
-        file: test/api-mocks/responses/billing/balance.json
-
 # Get Billing Periods for an account
 -   request:
         url: ^/api/billing/(.*)/billing-periods$
