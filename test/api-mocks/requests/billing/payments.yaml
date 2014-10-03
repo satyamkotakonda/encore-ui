@@ -1,0 +1,9 @@
+# Post a payment to account
+-   request:
+        url: ^/api/billing/(.*)/payments$
+        method: POST
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/make-payment.json

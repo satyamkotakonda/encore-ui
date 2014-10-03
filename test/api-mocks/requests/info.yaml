@@ -14,7 +14,7 @@
 
 # Get N/A Response for Billing Cycle, etc.
 -   request:
-        url: ^/api/billing/020-8675309/billInfo$
+        url: ^/api/billing/020-404-transactions-overview/billInfo$
         method: GET
     response:
         status: 404
@@ -31,7 +31,7 @@
 
 # Get N/A Response for Terms, etc.
 -   request:
-        url: ^/api/billing/020-8675309/paymentInfo$
+        url: ^/api/billing/020-404-transactions-overview/paymentInfo$
         method: GET
     response:
         status: 404

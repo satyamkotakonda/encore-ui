@@ -1,0 +1,9 @@
+# Get Estimated Charges for an account
+-   request:
+        url: ^/api/billing/(.*)/billing-periods/(.*)/estimated_charges$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/estimated-charges.json

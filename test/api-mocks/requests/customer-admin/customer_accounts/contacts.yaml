@@ -7,13 +7,3 @@
         headers:
             content-type: application/json
         file: test/api-mocks/responses/customer/contacts.json
-
-# Get Customer Admin Account Info
--   request:
-        url: ^/api/customer-admin/customer_accounts/(.+)/(.+)$
-        method: GET
-    response:
-        status: 200
-        headers:
-            content-type: application/json
-        file: test/api-mocks/responses/customer/customer-account.json

@@ -1,0 +1,29 @@
+# Get Purchase Orders
+-   request:
+        url: ^/api/billing/(.*)/purchaseOrders?$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/purchase-orders.json
+
+# Create Purchase Order
+-   request:
+        url: ^/api/billing/(.*)/purchaseOrders?$
+        method: POST
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/purchase-order-create.json
+
+# Delete Purchase Order
+-   request:
+        url: ^/api/billing/(.*)/purchaseOrders/(.+)?$
+        method: DELETE
+    response:
+        status: 204
+        headers:
+            content-type: application/json
+        body:

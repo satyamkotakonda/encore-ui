@@ -1,6 +1,6 @@
 # Get N/A response for Account Balance, Past Due, etc.
 -   request:
-        url: ^/api/billing/020-8675309/balance$
+        url: ^/api/billing/020-404-transactions-overview/balance$
         method: GET
     response:
         status: 404
