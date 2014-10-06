@@ -20,12 +20,38 @@
                     {{ contactAddress.country }}
                 </address>
             </div>
+            <div class="section label-definition">
+                <p>
+                    <strong>Phone:</strong>
+                    {{ phoneNumber | LoadingValue:contacts.$resolved:notFoundMsg }}
+                </p>
+                <p>
+                    <strong>Email:</strong>
+                    {{ emailAddress | LoadingValue:contacts.$resolved:notFoundMsg }}
+                </p>
+            </div>
             <hr />
             <h3 class="section-title">Account Summary</h3>
             <div class="section label-definition" ng-if="!(contractEntity.$resolved && supportRoles.$resolved && supportAccount.$resolved)">
                 {{ loadingMsg }}
             </div>
             <div class="section label-definition" ng-if="contractEntity.$resolved && supportRoles.$resolved && supportAccount.$resolved">
+                <p>
+                    <strong>Account Creation:</strong>
+                    {{ billInfo.accountCreationDate | date:'medium' || notFoundMsg }}
+                </p>
+                <p>
+                    <strong>Billing Day of Month:</strong>
+                    {{ billInfo.billingDayOfMonth || notFoundMsg }}
+                </p>
+                <p>
+                    <strong>Payment Terms:</strong>
+                    {{ paymentInfo.paymentTerms || notFoundMsg }}
+                </p>
+                <p>
+                    <strong>Currency:</strong>
+                    {{ balance.currency || notFoundMsg }}
+                </p>
                 <p>
                     <strong>Contract Entity:</strong>
                     {{ contractEntity.description || notFoundMsg }}
