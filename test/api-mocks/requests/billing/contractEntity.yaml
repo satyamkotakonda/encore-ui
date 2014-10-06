@@ -1,0 +1,9 @@
+# Get Contract Entity for an Account
+-   request:
+        url: ^/api/billing/(.*)/contractEntity$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/contract-entity.json

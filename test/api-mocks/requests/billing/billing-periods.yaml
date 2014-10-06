@@ -1,0 +1,9 @@
+# Get Billing Periods for an account
+-   request:
+        url: ^/api/billing/(.*)/billing-periods$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/billing-periods.json

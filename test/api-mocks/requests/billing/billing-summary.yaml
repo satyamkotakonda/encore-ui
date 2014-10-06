@@ -1,0 +1,9 @@
+# Get Billing Transactions for an Account
+-   request:
+        url: ^/api/billing/(.*)/billing-summary$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/transactions.json

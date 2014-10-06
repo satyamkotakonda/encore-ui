@@ -1,0 +1,9 @@
+# Get Account Information for Support
+-   request:
+        url: ^/api/support/support-accounts/[\w_-]+$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/support/support-account.json

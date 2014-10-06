@@ -55,7 +55,7 @@ describe('transactions page', function () {
     describe('N/A overview statement amounts @dev', function () {
 
         before(function () {
-            transactionsPage.search('8675309');
+            transactionsPage.search('404-transactions-overview');
         });
 
         it('should not show a value for current amount due', function () {

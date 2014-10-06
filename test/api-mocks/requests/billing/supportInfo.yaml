@@ -1,0 +1,9 @@
+# Get Support Info for an Account
+-   request:
+        url: ^/api/billing/(.*)/supportInfo$
+        method: GET
+    response:
+        status: 200
+        headers:
+            content-type: application/json
+        file: test/api-mocks/responses/billing/support-info.json
