@@ -10,6 +10,13 @@ exports.config = {
 
     allScriptsTimeout: 30000,
 
+    params: {
+        environments: {
+            'http://localhost:9001': 'localhost',
+            'http://rackerlabs.github.io/encore-ui': 'staging'
+        }
+    },
+
     // Options to be passed to mocha
     mochaOpts: {
         enableTimeouts: false,

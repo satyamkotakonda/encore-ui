@@ -17,6 +17,13 @@ var config = {
 
     allScriptsTimeout: 30000,
 
+    params: {
+        environments: {
+            'http://localhost:9001': 'localhost',
+            'http://rackerlabs.github.io/encore-ui': 'staging'
+        }
+    },
+
     onPrepare: function () {
         expect = require('chai').use(require('chai-as-promised')).expect;
         demoPage = require('./utils/demo.page.js');

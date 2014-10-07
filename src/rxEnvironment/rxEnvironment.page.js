@@ -2,12 +2,16 @@ var _ = require('lodash');
 
 exports.rxEnvironment = {
 
+    // Return the current environment the user sees.
+    // The default is set to something simple and reasonable,
+    // but should you find a need to supply your own environments, be
+    // sure to have `environments` defined in your protractor conf's params section.
     current: (function () {
-        var environments = [
-            'localhost',
-            'staging',
-            'preprod'
-        ];
+        var environments = browser.params.environments || {
+            'localhost': 'localhost',
+            'staging': 'staging',
+            'preprod': 'preprod'
+        };
 
         return browser.getCurrentUrl().then(function (url) {
             return _.find(environments, function findEnvironment (env) {
