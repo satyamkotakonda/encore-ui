@@ -38,6 +38,7 @@ exports.config = {
     allScriptsTimeout: (1000 * 60 * 3),
 
     mochaOpts: {
+        enableTimeouts: false,
         reporter: 'spec',
         slow: 5000,
         ui: 'bdd',
