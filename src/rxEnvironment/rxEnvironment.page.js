@@ -23,19 +23,19 @@ exports.rxEnvironment = {
     })(),
 
     isLocalhost: function () {
-        return _.isEqual(exports.rxEnvironment.current(), 'localhost');
+        return _.isEqual(exports.rxEnvironment.current, 'localhost');
     },
 
     isStaging: function () {
-        return _.isEqual(exports.rxEnvironment.current(), 'staging');
+        return _.isEqual(exports.rxEnvironment.current, 'staging');
     },
 
     isPreprod: function () {
-        return _.isEqual(exports.rxEnvironment.current(), 'preprod');
+        return _.isEqual(exports.rxEnvironment.current, 'preprod');
     },
 
     isProd: function () {
-        return _.isEqual(exports.rxEnvironment.current(), 'production');
+        return _.isEqual(exports.rxEnvironment.current, 'production');
     }
 
 };
