@@ -27,7 +27,7 @@ angular.module('billingApp')
     * @example
     * <pre>
     * .controller('OverviewCtrl', function ($scope, $routeParams, $q, Transaction, Account, Balance,
-    *   Period, Payment, PaymentMethod, PageTracking, rxSortUtil, rxPromiseNotifications, 
+    *   Period, Payment, PaymentMethod, PageTracking, rxSortUtil, rxPromiseNotifications,
     *   DefaultPaymentMethodFilter,
     *   DATE_FORMAT, TRANSACTION_TYPES, TRANSACTION_STATUSES, STATUS_MESSAGES)
     * </pre>
@@ -35,7 +35,7 @@ angular.module('billingApp')
     .controller('OverviewCtrl', function (
         $scope, $routeParams, $q, $timeout,
         Balance, Payment, PaymentMethod, ContractEntity, SupportInfo,
-        Contact, Account, SupportAccount, SupportRoles,
+        BillInfo, PaymentInfo, Contact, Account, SupportAccount, SupportRoles,
         DefaultPaymentMethodFilter, PrimaryAddressFilter, RoleNameFilter,
         AccountNumberUtil, rxPromiseNotifications, DATE_FORMAT, STATUS_MESSAGES) {
 
@@ -54,6 +54,8 @@ angular.module('billingApp')
                 if (!_.isEmpty(billingContact)) {
                     $scope.contactAddress = PrimaryAddressFilter(billingContact.addresses.address);
                     $scope.contactName = billingContact.firstName + ' ' + billingContact.lastName;
+                    $scope.phoneNumber = _.first(billingContact.phoneNumbers.phoneNumber).number;
+                    $scope.emailAddress = _.first(billingContact.emailAddresses.emailAddress).address;
                 }
             },
             accountManager = function (roles) {
@@ -75,6 +77,8 @@ angular.module('billingApp')
         $scope.balance = Balance.get(defaultParams);
         $scope.contractEntity = ContractEntity.get(defaultParams);
         $scope.supportInfo = SupportInfo.get(defaultParams);
+        $scope.billInfo = BillInfo.get(defaultParams);
+        $scope.paymentInfo = PaymentInfo.get(defaultParams);
 
         $scope.paymentMethods = PaymentMethod.list(defaultParams);
 
@@ -86,7 +90,9 @@ angular.module('billingApp')
             $scope.supportRoles.$promise,
             $scope.balance.$promise,
             $scope.contractEntity.$promise,
-            $scope.supportInfo.$promise
+            $scope.supportInfo.$promise,
+            $scope.billInfo.$promise,
+            $scope.paymentInfo.$promise
         ]), {
             loading: '',
             error: STATUS_MESSAGES.overview.error

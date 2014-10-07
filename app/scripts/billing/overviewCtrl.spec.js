@@ -1,7 +1,7 @@
 describe('Billing: OverviewCtrl', function () {
     var scope, ctrl, balanceData, paymentMethods, supportRolesData, contactData;
 
-    var balance, paymentMethod, contractEntity, supportInfo,
+    var balance, paymentMethod, contractEntity, supportInfo, billInfo, paymentInfo,
         contact, account, supportAccount, supportRoles, payment;
 
     var testAccountNumber = '020-12345',
@@ -12,7 +12,7 @@ describe('Billing: OverviewCtrl', function () {
 
         inject(function ($controller, $rootScope, $httpBackend, $q,
             Balance, Payment, PaymentMethod, ContractEntity, SupportInfo,
-            Contact, Account, SupportAccount, SupportRoles,
+            Contact, Account, SupportAccount, SupportRoles, BillInfo, PaymentInfo,
             DefaultPaymentMethodFilter) {
             var getResourceResultMock = function (data) {
                     var deferred = $q.defer();
@@ -48,7 +48,7 @@ describe('Billing: OverviewCtrl', function () {
                 'lastName': 'Racker',
                 'roles': {
                     'role': [
-                        'TECHNICAL'
+                        'BILLING'
                     ]
                 },
                 'addresses': {
@@ -60,13 +60,23 @@ describe('Billing: OverviewCtrl', function () {
                         'country': 'US',
                         'city': 'San Antonio'
                     }]
+                },
+                'phoneNumbers': {
+                    'phoneNumber': [{
+                        'number': '111-323-4412'
+                    }]
+                },
+                'emailAddresses': {
+                    'emailAddress': [{
+                        'address': 'tree@house.com'
+                    }]
                 }
             }, {
                 'firstName': 'Joe',
                 'lastName': 'Racker',
                 'roles': {
                     'role': [
-                        'BILLING'
+                        'TECHNICAL'
                     ]
                 },
                 'addresses': {
@@ -84,6 +94,8 @@ describe('Billing: OverviewCtrl', function () {
             paymentMethod = PaymentMethod;
             contractEntity = ContractEntity;
             supportInfo = SupportInfo;
+            billInfo = BillInfo;
+            paymentInfo = PaymentInfo;
 
             account = Account;
             contact = Contact;
@@ -98,6 +110,8 @@ describe('Billing: OverviewCtrl', function () {
             paymentMethod.list = sinon.stub(paymentMethod, 'list', getResourceMock(paymentMethods));
             contractEntity.get = sinon.stub(contractEntity, 'get', getResourceMock({}));
             supportInfo.get = sinon.stub(supportInfo, 'get', getResourceMock({}));
+            billInfo.get = sinon.stub(billInfo, 'get', getResourceMock({}));
+            paymentInfo.get = sinon.stub(paymentInfo, 'get', getResourceMock({}));
 
             account.get = sinon.stub(account, 'get', getResourceMock({}));
             contact.list = sinon.stub(contact, 'list', getResourceMock([]));
@@ -113,6 +127,8 @@ describe('Billing: OverviewCtrl', function () {
                 PaymentMethod: paymentMethod,
                 ContractEntity: contractEntity,
                 SupportInfo: supportInfo,
+                BillInfo: billInfo,
+                PaymentInfo: paymentInfo,
                 SupportRoles: supportRoles,
                 Account: account,
                 Contact: contact,
@@ -166,6 +182,8 @@ describe('Billing: OverviewCtrl', function () {
         });
         expect(scope.contactName).to.be.eq('Joe Racker');
         expect(scope.contactAddress).to.not.be.empty;
+        expect(scope.phoneNumber).to.not.be.empty;
+        expect(scope.emailAddress).to.not.be.empty;
     });
 
     it('OverviewCtrl should leave contact information undefined when no billing contact is found', function () {
