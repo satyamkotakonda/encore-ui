@@ -10,6 +10,6 @@ angular.module('billingApp')
     .directive('rxPaymentMethodDetails', function () {
         return {
             restrict: 'E',
-            templateUrl: '/billing/views/payment/paymentMethodDetails.html',
+            templateUrl: 'views/payment/paymentMethodDetails.html',
         };
     });

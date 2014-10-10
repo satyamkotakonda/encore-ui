@@ -3,7 +3,7 @@
 module.exports = function(config) {
     config.set({
         // base path, that will be used to resolve files and exclude
-        basePath: 'app/',
+        basePath: '',
 
 
         // frameworks to use
@@ -12,29 +12,32 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'bower_components/jquery/jquery.min.js',
-            'bower_components/angular/angular.js',
-            'bower_components/angular-animate/angular-animate.js',
-            'bower_components/angular-cookies/angular-cookies.js',
-            'bower_components/angular-mocks/angular-mocks.js',
-            'bower_components/angular-resource/angular-resource.js',
-            'bower_components/angular-route/angular-route.js',
-            'bower_components/angular-sanitize/angular-sanitize.js',
-            'http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.js',
-            'bower_components/encore-ui/encore-ui-tpls.min.js',
-            'bower_components/lodash/dist/lodash.js',
-            'bower_components/mousetrap/mousetrap.js',
-            'bower_components/angular-hotkeys/build/hotkeys.js',
-            'bower_components/momentjs/moment.js',
-            'bower_components/ng-csv/build/ng-csv.js',
-            'bower_components/save-as/FileSaver.js',
-            'scripts/app.js', // always load app definition first
-            'scripts/**/*.js',
-            'modules/**/*.js',
-            '../test/browser-helpers.js',
+            // bower:js
+            'app/bower_components/angular/angular.js',
+            'app/bower_components/angular-animate/angular-animate.js',
+            'app/bower_components/json3/lib/json3.min.js',
+            'app/bower_components/angular-route/angular-route.js',
+            'app/bower_components/angular-resource/angular-resource.js',
+            'app/bower_components/angular-cookies/angular-cookies.js',
+            'app/bower_components/angular-sanitize/angular-sanitize.js',
+            'app/bower_components/lodash/dist/lodash.compat.js',
+            'app/bower_components/mousetrap/mousetrap.js',
+            'app/bower_components/mousetrap-bind-element/mousetrap-bind-element.js',
+            'app/bower_components/ng-csv/build/ng-csv.min.js',
+            'app/bower_components/html2canvas/build/html2canvas.js',
+            'app/bower_components/momentjs/moment.js',
+            'app/bower_components/spin.js/spin.js',
+            'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+            'app/bower_components/angular-hotkeys/build/hotkeys.min.js',
+            'app/bower_components/encore-ui/encore-ui-tpls.js',
+            // endbower
+            'app/bower_components/angular-mocks/angular-mocks.js',
+            'app/bower_components/save-as/FileSaver.js',
+            'app/scripts/app.js', // always load app definition first
+            'app/scripts/**/*.js',
+            'app/modules/**/*.js',
+            'test/browser-helpers.js'
             // '../test/window-hack.js', // Only load when preventing window.location redirects
-            'modules/**/*.html',
-            'views/**/*.html',// templates
         ],
 
         // list of files to exclude
@@ -42,17 +45,14 @@ module.exports = function(config) {
         ],
 
         preprocessors: {
-            'views/**/*.html': 'ng-html2js',
-            'modules/**/*.html': 'ng-html2js',
-            // TODO figure out how to filter 'lib' folder
-            'modules/**/!(*.spec).js': ['coverage'],
-            'scripts/**/!(*.spec).js': ['coverage']
+            'app/scripts/**/!(*.spec).js': ['coverage'],
+            'app/modules/**/!(*.spec).js': ['coverage']
         },
 
 
         // test results reporter to use
         // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-        reporters: ['mocha', 'coverage', 'threshold'],
+        reporters: ['coverage', 'mocha'],
 
         coverageReporter: {
             type : 'html',

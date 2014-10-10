@@ -8,13 +8,10 @@ describe('rxSwitch', function () {
         customTemplate = '<rx-switch model="customModel" true-value="TEST" false-value="TEST-FALSY"></rx-switch>';
 
     beforeEach(function () {
+        module('billingApp');
         module('rxSwitch');
-        module('modules/rxSwitch/templates/rxSwitch.html');
 
-        inject(function ($rootScope, $compile, $templateCache) {
-            var template = $templateCache.get('modules/rxSwitch/templates/rxSwitch.html');
-            $templateCache.put('/billing/modules/rxSwitch/templates/rxSwitch.html', template);
-
+        inject(function ($rootScope, $compile) {
             rootScope = $rootScope;
             compile = $compile;
             scope = $rootScope.$new();

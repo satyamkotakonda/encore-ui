@@ -11,7 +11,6 @@ describe('rxPurchaseOrderDisable', function () {
                         '</rx-purchase-order-disable>';
     beforeEach(function () {
         module('billingApp');
-        module('views/purchase-orders/purchaseOrderDisable.html');
 
         inject(function ($rootScope, $compile, $templateCache) {
             var template = $templateCache.get('views/purchase-orders/purchaseOrderDisable.html');

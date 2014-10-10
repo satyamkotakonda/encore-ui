@@ -1,40 +1,14 @@
-var gulp        = require('gulp'),
-    livereload  = require('gulp-livereload'),
-    open        = require('gulp-open'),
-    less        = require('./gulpTasks/less'),
-    jshint      = require('./gulpTasks/jshint'),
-    jscs        = require('./gulpTasks/jscs'),
-    karma       = require('./gulpTasks/karma'),
-    stubby      = require('./gulpTasks/stubby'),
-    server      = require('./gulpTasks/server');
+/*
+  gulpfile.js
+  ===========
+  Rather than manage one giant configuration file responsible
+  for creating multiple tasks, each task has been broken out into
+  its own file in gulp/tasks. Any file in that folder gets automatically
+  required by the loop in ./gulp/index.js (required below).
 
-gulp.task('less', less);
-gulp.task('jshint', jshint);
-gulp.task('jscs', jscs);
-gulp.task('test', karma);
-gulp.task('stubApi', stubby);
-gulp.task('server', ['stubApi'], server);
+  To add a new task, simply add a new task file to gulp/tasks.
+*/
 
-gulp.task('lint', ['jshint', 'jscs']);
-
-gulp.task('open', ['server'], function (cb) {
-    gulp.src('app/index.html')
-        .pipe(open('', { url: 'http://localhost:9000', app: 'google chrome' }));
-    cb();
-});
-
-gulp.task('default', ['lint', 'test', 'less', 'open'], function () {
-    var server = livereload(),
-        fileChange = function (file) {
-            server.changed(file.path);
-        };
-
-    gulp.watch('app/**/*.js', ['lint','test'])
-        .on('change', fileChange);
-
-    gulp.watch('app/**/*.html')
-        .on('change', fileChange);
-
-    gulp.watch('app/styles/*.less', ['less'])
-        .on('change', fileChange);
-});
+var pkg = require('./package.json');
+require('./gulp');
+global.appName = pkg.config.appName;

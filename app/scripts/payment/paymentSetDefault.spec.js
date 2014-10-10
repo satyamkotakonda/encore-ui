@@ -34,7 +34,6 @@ describe('rxPaymentSetDefault', function () {
 
     beforeEach(function () {
         module('billingApp');
-        module('views/payment/paymentSetDefault.html');
 
         inject(function ($rootScope, $compile, $templateCache) {
             var template = $templateCache.get('views/payment/paymentSetDefault.html');

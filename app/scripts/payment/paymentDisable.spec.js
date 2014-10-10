@@ -30,7 +30,6 @@ describe('rxPaymentDisable', function () {
 
     beforeEach(function () {
         module('billingApp');
-        module('views/payment/paymentDisable.html');
 
         inject(function ($rootScope, $compile, $templateCache) {
             var template = $templateCache.get('views/payment/paymentDisable.html');

@@ -10,7 +10,7 @@ angular.module('rxSwitch', [])
 .directive('rxSwitch', function () {
     return {
         restrict: 'E',
-        templateUrl: '/billing/modules/rxSwitch/templates/rxSwitch.html',
+        templateUrl: 'views/rxSwitch/templates/rxSwitch.html',
         scope: {
             model: '=',
             loading: '=?',
