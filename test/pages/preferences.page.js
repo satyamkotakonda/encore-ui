@@ -53,7 +53,7 @@ module.exports = Page.create({
     notifications: {
         get: function () {
             return Page.create({
-                eleSuccessfulPaymentsSwtich: {
+                eleSuccessfulPaymentsSwitch: {
                     get: function () {
                         return element(by.cssContainingText('.label-definition', 'Successful Payment:')).$('rx-switch');
                     }
@@ -61,10 +61,10 @@ module.exports = Page.create({
 
                 successfulPayments: {
                     get: function () {
-                        return switchIsOn(this.eleSuccessfulPaymentsSwtich);
+                        return switchIsOn(this.eleSuccessfulPaymentsSwitch);
                     },
                     set: function (enabled) {
-                        return flipSwitch(this.eleSuccessfulPaymentsSwtich, enabled);
+                        return flipSwitch(this.eleSuccessfulPaymentsSwitch, enabled);
                     }
                 }
             });
