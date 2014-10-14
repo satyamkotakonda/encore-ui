@@ -23,7 +23,7 @@ module.exports.unless = function (element, innerFn) {
                 return innerFn(text);
             });
         } else {
-            return protractor.promise.fulfilled(null);
+            return null;
         }
     });
 };
