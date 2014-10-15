@@ -1,13 +1,12 @@
 var _ = require('lodash');
 
-exports.rxEnvironment = {
+var component = exports.rxEnvironment = {
 
     // Return the current environment the user sees.
     // The default is set to something simple and reasonable,
     // but should you find a need to supply your own environments, be
     // sure to have `environments` defined in your protractor conf's params section.
     current: function () {
-        var component = this;
         return browser.getCurrentUrl().then(function (url) {
             return component.compare(url);
         });
@@ -16,11 +15,11 @@ exports.rxEnvironment = {
     // Return the original environment, as defined in the current protractor conf file.
     // Returns a promise to keep the usage consistent with `rxEnvironment.current`.
     original: function () {
-        return protractor.promise.fulfilled(this.compare(browser.baseUrl));
+        return protractor.promise.fulfilled(component.compare(browser.baseUrl));
     },
 
     compare: function (url) {
-        return _.find(this.environments, function findEnvironment (envName, env) {
+        return _.find(component.environments, function findEnvironment (envName, env) {
             if (_.contains(url, env)) {
                 return envName;
             }
@@ -35,23 +34,22 @@ exports.rxEnvironment = {
     }),
 
     isLocalhost: function (useBaseUrl) {
-        return this.confirmEnvironment(useBaseUrl, 'localhost');
+        return component.confirmEnvironment(useBaseUrl, 'localhost');
     },
 
     isStaging: function (useBaseUrl) {
-        return this.confirmEnvironment(useBaseUrl, 'staging');
+        return component.confirmEnvironment(useBaseUrl, 'staging');
     },
 
     isPreprod: function (useBaseUrl) {
-        return this.confirmEnvironment(useBaseUrl, 'preprod');
+        return component.confirmEnvironment(useBaseUrl, 'preprod');
     },
 
     isProd: function (useBaseUrl) {
-        return this.confirmEnvironment(useBaseUrl, 'production');
+        return component.confirmEnvironment(useBaseUrl, 'production');
     },
 
     confirmEnvironment: function (useBaseUrl, environment) {
-        var component = this;
         return browser.getCurrentUrl().then(function (url) {
             return _.isEqual(component.compare(useBaseUrl ? protractor.baseUrl : url), environment);
         });
