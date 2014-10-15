@@ -1,6 +1,6 @@
 var _ = require('lodash');
 
-var component = exports.rxEnvironment = {
+exports.rxEnvironment = {
 
     // Return the current environment the user sees.
     // The default is set to something simple and reasonable,
@@ -8,18 +8,18 @@ var component = exports.rxEnvironment = {
     // sure to have `environments` defined in your protractor conf's params section.
     current: function () {
         return browser.getCurrentUrl().then(function (url) {
-            return component.compare(url);
+            return exports.rxEnvironment.compare(url);
         });
     },
 
     // Return the original environment, as defined in the current protractor conf file.
     // Returns a promise to keep the usage consistent with `rxEnvironment.current`.
     original: function () {
-        return protractor.promise.fulfilled(component.compare(browser.baseUrl));
+        return protractor.promise.fulfilled(this.compare(browser.baseUrl));
     },
 
     compare: function (url) {
-        return _.find(component.environments, function findEnvironment (envName, env) {
+        return _.find(this.environments, function findEnvironment (envName, env) {
             if (_.contains(url, env)) {
                 return envName;
             }
@@ -34,24 +34,24 @@ var component = exports.rxEnvironment = {
     }),
 
     isLocalhost: function (useBaseUrl) {
-        return component.confirmEnvironment(useBaseUrl, 'localhost');
+        return this.confirmEnvironment(useBaseUrl, 'localhost');
     },
 
     isStaging: function (useBaseUrl) {
-        return component.confirmEnvironment(useBaseUrl, 'staging');
+        return this.confirmEnvironment(useBaseUrl, 'staging');
     },
 
     isPreprod: function (useBaseUrl) {
-        return component.confirmEnvironment(useBaseUrl, 'preprod');
+        return this.confirmEnvironment(useBaseUrl, 'preprod');
     },
 
     isProd: function (useBaseUrl) {
-        return component.confirmEnvironment(useBaseUrl, 'production');
+        return this.confirmEnvironment(useBaseUrl, 'production');
     },
 
     confirmEnvironment: function (useBaseUrl, environment) {
         return browser.getCurrentUrl().then(function (url) {
-            return _.isEqual(component.compare(useBaseUrl ? protractor.baseUrl : url), environment);
+            return _.isEqual(exports.rxEnvironment.compare(useBaseUrl ? protractor.baseUrl : url), environment);
         });
     }
 
