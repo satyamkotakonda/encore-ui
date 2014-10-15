@@ -1,3 +1,10 @@
+# Get 404 Estimated Charges
+-   request:
+        url: ^/api/billing/020-404/billing-periods/(.*)/estimated_charges$
+        method: GET
+    response:
+        status: 404
+
 # Get Estimated Charges for an account
 -   request:
         url: ^/api/billing/(.*)/billing-periods/(.*)/estimated_charges$

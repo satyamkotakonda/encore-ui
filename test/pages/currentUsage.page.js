@@ -1,7 +1,5 @@
 var Page = require('astrolabe').Page;
 
-var charges = require('./currentUsage/charges.table');
-
 var util = require('./util');
 
 var dateFromMonthDayYearString = function (monthDayYearString) {
@@ -50,9 +48,9 @@ module.exports = Page.create({
         }
     },
 
-    byProduct: {
-        value: function (productName) {
-            return charges.byProduct(productName);
+    charges: {
+        get: function () {
+            return require('./currentUsage/charges.table');
         }
     }
 
