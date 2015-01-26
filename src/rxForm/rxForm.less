@@ -240,10 +240,10 @@ Replace default UI of select fields and adds custom border/arrow
     &:before {
         // background so long text doesn't show behind caret
         content: '';
-        right: 2px;
-        top: 2px;
+        right: 1px;
+        top: 1px;
         width: 20px;
-        height: 90%;
+        height: 94%;
         background: #fff;
         position: absolute;
         pointer-events: none;
@@ -257,7 +257,7 @@ Replace default UI of select fields and adds custom border/arrow
         font-size: 15px;
         color: #aaa;
         right: 10px;
-        top: 6px;
+        top: 7px;
         padding: 0;
         position: absolute;
         pointer-events: none;
@@ -275,8 +275,8 @@ Replace default UI of select fields and adds custom border/arrow
         background: #404140;
     }
     &:after {
-        right: 6px;
-        top: 4px;
+        right: 10px;
+        top: 5px;
     }
 }
 
@@ -286,17 +286,6 @@ Replace default UI of select fields and adds custom border/arrow
     width: 50%;
     select {
         border-radius: 0;
-    }
-}
-
-/*
- * @bugfix Because of '-moz-appearance: window', the border/padding is removed from the select box.
- * This adds it back
- * @see http://stackoverflow.com/questions/5912791/how-to-remove-the-arrow-from-a-select-tag-in-firefox
- */
- @-moz-document url-prefix() {
-    .field-select {
-        .inputBorderPadding;
     }
 }
 
