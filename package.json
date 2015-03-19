@@ -68,7 +68,7 @@
     "marked": "^0.3.3",
     "mocha": "^2.1.0",
     "moment": "~2.9.0",
-    "protractor": "latest",
+    "protractor": "1.8.0",
     "semver": "~4.2.0"
   }
 }
