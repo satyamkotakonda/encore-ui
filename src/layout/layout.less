@@ -1,0 +1,387 @@
+// Converted from https://github.com/angular/material/commits/master/src/core/style/layout.scss
+// commit 4216d242d78f1bdadd89ebd59e1d80b9cc4f2978
+
+// Responsive attributes
+// ------------------------------
+
+// hide means hide everywhere
+/* Sizes:
+  0    <= size < 600  Phone
+  600  <= size < 960  Tablet
+  960  <= size < 1200 Tablet-Landscape
+  1200 <= size        PC
+*/
+
+@import 'flexbox';
+@import 'mixins';
+
+// Layout
+// ------------------------------
+// The extra -lt- vars are needed because LESS cannot do calculations within parenthesis
+
+@layout-gutter-width:      16px;
+@layout-breakpoint-lt-sm:  599px;
+@layout-breakpoint-sm:     600px;
+@layout-breakpoint-lt-md:  959px;
+@layout-breakpoint-md:     960px;
+@layout-breakpoint-lt-lg:  1199px;
+@layout-breakpoint-lg:     1200px;
+
+[layout] {
+  .box-sizing(border-box);
+  .flexbox;
+}
+
+[layout="column"] {
+  .flex-direction(column);
+}
+
+[layout="row"] {
+  .flex-direction(row);
+}
+
+[layout-padding] > [flex-sm],
+[layout-padding] > [flex-lt-md]
+{
+  padding: @layout-gutter-width / 4;
+}
+[layout-padding],
+[layout-padding] > [flex],
+[layout-padding] > [flex-gt-sm],
+[layout-padding] > [flex-md],
+[layout-padding] > [flex-lt-lg]
+{
+  padding: @layout-gutter-width / 2;
+}
+[layout-padding] > [flex-gt-md],
+[layout-padding] > [flex-lg]
+{
+  padding: @layout-gutter-width / 1;
+}
+
+[layout-margin] > [flex-sm],
+[layout-margin] > [flex-lt-md]
+{
+  margin: @layout-gutter-width / 4;
+}
+[layout-margin],
+[layout-margin] > [flex],
+[layout-margin] > [flex-gt-sm],
+[layout-margin] > [flex-md],
+[layout-margin] > [flex-lt-lg] {
+  margin: @layout-gutter-width / 2;
+}
+[layout-margin] > [flex-gt-md],
+[layout-margin] > [flex-lg]
+{
+  margin: @layout-gutter-width / 1;
+}
+
+[layout-wrap] {
+  .flex-wrap(wrap);
+}
+
+[layout-fill] {
+  margin: 0;
+  min-height: 100%;
+  width: 100%;
+}
+@-moz-document url-prefix() {
+  [layout-fill] {
+    margin: 0;
+    width: 100%;
+    min-height: auto;
+    height: inherit;
+  }
+}
+
+
+// Used to concatenate selectors with '-' delimiter or without if no value provided
+// Only works for variable name @selector
+.concat-selector(@base, @value) when not (@value = null) {
+  @selector: ~'@{base}-@{value}';
+}
+.concat-selector(@base, @value) when (@value = null) {
+  @selector: ~'@{base}';
+}
+
+
+.flex-order-for-name(@suffix: null) {
+  .concat-selector('flex-order', @suffix);
+  .loop (@i) when (@i < 10) {
+    [@{selector}="@{i}"] { order: @i; }
+    .loop (@i + 1);
+  }
+  .loop (0);
+}
+
+.layout-for-name(@name) {
+  @selector: ~'layout-@{name}';
+  [@{selector}] {
+    .box-sizing(border-box);
+    .flexbox;
+  }
+  [@{selector}="column"] {
+    .flex-direction(col);
+  }
+  [@{selector}="row"] {
+    .flex-direction(row);
+  }
+}
+
+.offset-for-name(@suffix: null) {
+  .concat-selector('offset', @suffix);
+  .loop (@i) when (@i < 20) {
+    @offset: @i * 5;
+    [@{selector}="@{offset}"] {
+      margin-left: ~"@{offset}%";
+    }
+    .loop (@i + 1);
+  }
+  .loop (1);
+
+  [@{selector}="33"], [@{selector}="34"] {
+    margin-left: 33.33%;
+  }
+  [@{selector}="66"], [@{selector}="67"] {
+    margin-left: 66.66%;
+  }
+}
+
+
+.flex-properties-for-name(@suffix: null) {
+  .concat-selector('flex', @suffix);
+
+  [@{selector}] {
+    .box-sizing(border-box);
+    .flex(1);
+  }
+
+  // (0-20) * 5 = 0-100%
+  .loop (@i) when (@i < 21) {
+    @flex: @i * 5;
+    [@{selector}="@{flex}"] {
+      .flex(0 0 ~'@{flex}%');
+    }
+    [layout="row"] > [@{selector}="@{flex}"] {
+      max-width: ~'@{flex}%';
+    }
+    [layout="column"] > [@{selector}="@{flex}"] {
+      max-height: ~'@{flex}%';
+    }
+    .loop (@i + 1);
+  }
+  .loop (0);
+
+  [@{selector}="33"], [@{selector}="34"] {
+    .flex(0 0 33.33%);
+  }
+  [@{selector}="66"], [@{selector}="67"] {
+    .flex(0 0 66.66%);
+  }
+
+  [layout="row"] {
+    > [@{selector}="33"], > [@{selector}="34"] {
+      max-width: 33.33%;
+    }
+    > [@{selector}="66"], > [@{selector}="67"] {
+      max-width: 66.66%;
+    }
+  }
+  [layout="column"] {
+    > [@{selector}="33"], > [@{selector}="34"] {
+      max-height: 33.33%;
+    }
+    > [@{selector}="66"], > [@{selector}="67"] {
+      max-height: 66.66%;
+    }
+  }
+}
+
+
+// Alignment attributes for layout containers' children
+// Arrange on the Main Axis
+// center, start, end, space-between, space-around
+// flex-start is the default for justify-content
+// ------------------------------
+
+.layout-align-for-name(@suffix: null) {
+  .concat-selector('layout-align', @suffix);
+
+  // Main Axis Center
+  [@{selector}="center"],
+  [@{selector}="center stretch"],
+  [@{selector}="center center"],
+  [@{selector}="center start"],
+  [@{selector}="center end"] {
+    .justify-content(center);
+  }
+
+  // Main Axis End
+  [@{selector}="end"],
+  [@{selector}="end stretch"],
+  [@{selector}="end center"],
+  [@{selector}="end start"],
+  [@{selector}="end end"] {
+    .justify-content(flex-end);
+  }
+
+  // Main Axis Space Around
+  [@{selector}="space-around"],
+  [@{selector}="space-around stretch"],
+  [@{selector}="space-around center"],
+  [@{selector}="space-around start"],
+  [@{selector}="space-around end"] {
+    .justify-content(space-around);
+  }
+
+  // Main Axis Space Between
+  [@{selector}="space-between"],
+  [@{selector}="space-between stretch"],
+  [@{selector}="space-between center"],
+  [@{selector}="space-between start"],
+  [@{selector}="space-between end"] {
+    .justify-content(space-between);
+  }
+
+
+  // Arrange on the Cross Axis
+  // center, start, end
+  // stretch is the default for align-items
+  // ------------------------------
+
+  // Cross Axis Center
+  [@{selector}="center center"],
+  [@{selector}="start center"],
+  [@{selector}="end center"],
+  [@{selector}="space-between center"],
+  [@{selector}="space-around center"] {
+    .align-items(center);
+  }
+
+  // Cross Axis Start
+  [@{selector}="center start"],
+  [@{selector}="start start"],
+  [@{selector}="end start"],
+  [@{selector}="space-between start"],
+  [@{selector}="space-around start"] {
+    .align-items(flex-start);
+  }
+
+  // Cross Axis End
+  [@{selector}="center end"],
+  [@{selector}="start end"],
+  [@{selector}="end end"],
+  [@{selector}="space-between end"],
+  [@{selector}="space-around end"] {
+    .align-items(flex-end);
+  }
+
+  // Matching size and fill available space
+  [@{selector}="center stretch"],
+  [@{selector}="start stretch"],
+  [@{selector}="end stretch"],
+  [@{selector}="space-between stretch"],
+  [@{selector}="space-around stretch"] {
+    .align-items(stretch);
+  }
+}
+
+// Flex attributes for layout children
+// ------------------------------
+
+.flex-properties-for-name();
+.layout-align-for-name();
+.flex-order-for-name();
+.offset-for-name();
+
+/**
+ * `hide-gt-sm show-gt-lg` should hide from 600px to 1200px
+ * `show-md hide-gt-sm` should show from 0px to 960px and hide at >960px
+ * `hide-gt-md show-gt-sm` should show everywhere (show overrides hide)`
+ */
+
+
+// SMALL SCREEN
+@media (max-width: @layout-breakpoint-lt-sm) {
+  [hide-sm], [hide] {
+    &:not([show-sm]):not([show]) {
+      display: none;
+    }
+  }
+
+  .flex-order-for-name(sm);
+  .layout-align-for-name(sm);
+  .layout-for-name(sm);
+  .offset-for-name(sm);
+  .flex-properties-for-name(sm);
+}
+
+// BIGGER THAN SMALL SCREEN
+@media (min-width: @layout-breakpoint-sm) {
+  .flex-order-for-name(gt-sm);
+  .layout-align-for-name(gt-sm);
+  .layout-for-name(gt-sm);
+  .offset-for-name(gt-sm);
+  .flex-properties-for-name(gt-sm);
+}
+
+// MEDIUM SCREEN
+@media (min-width: @layout-breakpoint-sm) and (max-width: @layout-breakpoint-lt-md) {
+  [hide], [hide-gt-sm] {
+    &:not([show-gt-sm]):not([show-md]):not([show]) {
+      display: none;
+    }
+  }
+  [hide-md]:not([show-md]):not([show]) {
+    display: none;
+  }
+
+  .flex-order-for-name(md);
+  .layout-align-for-name(md);
+  .layout-for-name(md);
+  .offset-for-name(md);
+  .flex-properties-for-name(md);
+}
+
+// BIGGER THAN MEDIUM SCREEN
+@media (min-width: @layout-breakpoint-md) {
+  .flex-order-for-name(gt-md);
+  .layout-align-for-name(gt-md);
+  .layout-for-name(gt-md);
+  .offset-for-name(gt-md);
+  .flex-properties-for-name(gt-md);
+}
+
+// LARGE SCREEN
+@media (min-width: @layout-breakpoint-md) and (max-width: @layout-breakpoint-lt-lg) {
+  [hide], [hide-gt-sm], [hide-gt-md] {
+    &:not([show-gt-sm]):not([show-gt-md]):not([show-lg]):not([show]) {
+      display: none;
+    }
+  }
+  [hide-lg]:not([show-lg]):not([show]) {
+    display: none;
+  }
+
+  .flex-order-for-name(lg);
+  .layout-align-for-name(lg);
+  .layout-for-name(lg);
+  .offset-for-name(lg);
+  .flex-properties-for-name(lg);
+}
+
+// BIGGER THAN LARGE SCREEN
+@media (min-width: @layout-breakpoint-lg) {
+  [hide-gt-sm], [hide-gt-md], [hide-gt-lg], [hide] {
+    &:not([show-gt-sm]):not([show-gt-md]):not([show-gt-lg]):not([show]) {
+      display: none;
+    }
+  }
+
+  .flex-order-for-name(gt-lg);
+  .layout-align-for-name(gt-lg);
+  .layout-for-name(gt-lg);
+  .offset-for-name(gt-lg);
+  .flex-properties-for-name(gt-lg);
+}
