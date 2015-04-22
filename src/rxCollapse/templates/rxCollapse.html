@@ -1,0 +1,8 @@
+<div class="collapse-container">
+    <div class="double-chevron-cell" ng-class="{ expanded: isExpanded }">
+        <a class="double-chevron" ng-click="isExpanded = !isExpanded"></a>
+    </div>
+    <h3 class="title">{{title}}</h3>
+    <div class="collapse-body" ng-show="isExpanded" ng-transclude>
+    </div>
+</div>
