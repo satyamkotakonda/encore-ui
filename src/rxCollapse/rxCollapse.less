@@ -5,25 +5,22 @@
   .box-sizing(border-box);
   width: 30px;
   padding: 0px 10px;
+
   .double-chevron {
     cursor: pointer;
     &:after {
       display: inline-block;
       color: #bbbbbb;
       font-size: 28px;
-      .chevron-mixin(-1)
+      .chevron-mixin(-1);
     }
   }
-}
 
-.double-chevron-cell.expanded {
-  .double-chevron {
-    cursor: pointer;
-    &:after {
-      display: inline-block;
-      color: #bbbbbb;
-      font-size: 28px;
-      .chevron-mixin
+  &.expanded {
+    .double-chevron {
+      &:after {
+        .chevron-mixin;
+      }
     }
   }
 }
