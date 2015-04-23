@@ -21,16 +21,20 @@ describe('rxCollapse', function () {
         el = helpers.createDirective(validTemplate, compile, scope);
     });
 
-    it('should expand', function () {
-
+    it('should render template', function () {
+        expect(el).to.not.be.empty;
+        expect(el.find('rx-collapse')).to.not.be.empty;
     });
 
-    it('should collapse', function () {
+    it('should expand and collapse', function () {
+        expect(el.find('.double-chevron-cell').hasClass('expanded')).to.be.true;
 
+        el.find('.double-chevron').click();
+        expect(el.find('.double-chevron-cell').hasClass('expanded')).to.be.false;
     });
 
     it('should show custom title', function () {
-
+        expect(el.find('.title').text()).to.equal('Filter results');
     });
 
 });
