@@ -14,6 +14,30 @@ var rxCollapse = {
         value: function () {
             return this.rootElement.isDisplayed();
         }
+    },
+
+    isExpanded: {
+        get: function () {
+            return this.rootElement.$('.expanded').isPresent();
+        }
+    },
+
+    title: {
+        get: function () {
+            return this.rootElement.$('.title');
+        }
+    },
+
+    btnToggle: {
+        get: function () {
+            return this.rootElement.$('.double-chevron');
+        }
+    },
+
+    elBody: {
+        get: function () {
+            return this.rootElement.$('.collapse-body');
+        }
     }
 
 };
@@ -40,7 +64,7 @@ exports.rxCollapse = {
     */
     main: (function () {
         rxCollapse.rootElement = {
-            get: function () { return $('#rxCollapse'); }
+            get: function () { return $('rx-collapse'); }
         };
         return Page.create(rxCollapse);
     })()

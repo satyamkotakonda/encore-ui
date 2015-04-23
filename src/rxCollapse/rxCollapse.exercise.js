@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var rxCollapse = require('./rxCollapse.page').rxCollapse;
 
 /**
@@ -30,7 +31,25 @@ exports.rxCollapse = function (options) {
             }
         });
 
-        it('should start exercising defaults now');
+        it('should show the element', function () {
+            expect(component.isDisplayed()).to.eventually.be.true;
+        });
+
+        it('should show a custom title', function () {
+            expect(component.title.getText()).to.eventually.equal('Filter results');
+        });
+
+        it('should expand and collapse with toggle', function () {
+            expect(component.isExpanded).to.eventually.be.true;
+
+            // Collapse
+            component.btnToggle.click();
+            expect(component.isExpanded).to.eventually.be.false;
+
+            // Expand
+            component.btnToggle.click();
+            expect(component.isExpanded).to.eventually.be.true;
+        });
 
     };
 };
