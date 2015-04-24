@@ -1,0 +1,38 @@
+<div ng-controller="collapseFilterExampleCtrl">
+    <rx-collapse title="Filter results">
+        <div class="pure-g columns clear">
+            <div class="pure-u-1-5" ng-repeat="section in regions">
+                <ul>
+                    <li ng-repeat="region in section">
+                        <rx-form-item label="{{region.name}}">
+                            <input type="radio" name="region" value="{{region.name}}" ng-model="filter.region">
+                        </rx-form-item>
+                    </li>
+                </ul>
+            </div>
+            <div class="pure-u-1-5">
+                <a href="" class="button sm" ng-click="filter.region = ''">Clear filter</a>
+            </div>
+        </div>
+    </rx-collapse>
+    <table class="table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>RAM</th>
+            <th>vCPUs</th>
+            <th>System Disk</th>
+            <th>Region</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="server in servers | filter:filter.region">
+            <td>{{server.name}}</td>
+            <td>{{server.ram}}</td>
+            <td>{{server.cpu}}</td>
+            <td>{{server.disk}}</td>
+            <td>{{server.region}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
