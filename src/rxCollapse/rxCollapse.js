@@ -22,7 +22,7 @@ angular.module('encore.ui.rxCollapse', [])
         transclude: true,
         link: function (scope, element, attrs) {
             scope.title = attrs.title || 'Filter';
-            scope.isExpanded = attrs.expanded || true;
+            scope.isExpanded = (attrs.expanded === 'false') ? false : true;
         }
     };
 });
