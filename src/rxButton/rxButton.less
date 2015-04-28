@@ -153,3 +153,45 @@ thead th .btn-link {
         color: @tableHeaderText;
     }
 }
+
+.button-group {
+    display: flex;
+    border: 1px solid @inputBorderColor;
+    border-radius: 5px;
+    font-size: 1.1em;
+
+    input {
+        display: none;
+    }
+    label {
+        @labelBorderRadius: 3px;
+
+        flex: 1;
+        text-align: center;
+        padding: 7px 13px;
+        color: @inputBorderColor;
+
+        &:first-of-type {
+            border-top-left-radius: @labelBorderRadius;
+            border-bottom-left-radius: @labelBorderRadius;
+        }
+        &:last-of-type {
+            border-top-right-radius: @labelBorderRadius;
+            border-bottom-right-radius: @labelBorderRadius;
+        }
+        &:not(:last-of-type) {
+            border-right: 1px solid @inputBorderColor
+        }
+
+        &:hover,
+        &:focus {
+            cursor: pointer;
+            color: @white;
+            background: @buttonCancelBgHover;
+        }
+    }
+    input:checked + label {
+        color: @white;
+        background: @buttonCancelBg;
+    }
+}
