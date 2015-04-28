@@ -155,32 +155,34 @@ thead th .btn-link {
 }
 
 .button-group {
+    @border: 2px solid #eaeaea;
+    @borderRadius: 6px;
+
     display: flex;
-    border: 1px solid @inputBorderColor;
-    border-radius: 5px;
+    border: @border;
+    border-radius: @borderRadius;
     font-size: 1.1em;
 
     input {
         display: none;
     }
     label {
-        @labelBorderRadius: 3px;
 
         flex: 1;
         text-align: center;
         padding: 7px 13px;
-        color: @inputBorderColor;
+        color: #989998;
 
         &:first-of-type {
-            border-top-left-radius: @labelBorderRadius;
-            border-bottom-left-radius: @labelBorderRadius;
+            border-top-left-radius: @borderRadius;
+            border-bottom-left-radius: @borderRadius;
         }
         &:last-of-type {
-            border-top-right-radius: @labelBorderRadius;
-            border-bottom-right-radius: @labelBorderRadius;
+            border-top-right-radius: @borderRadius;
+            border-bottom-right-radius: @borderRadius;
         }
         &:not(:last-of-type) {
-            border-right: 1px solid @inputBorderColor
+            border-right: @border;
         }
 
         &:hover,
@@ -192,6 +194,6 @@ thead th .btn-link {
     }
     input:checked + label {
         color: @white;
-        background: @buttonCancelBg;
+        background: #757575;
     }
 }
