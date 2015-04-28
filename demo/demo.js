@@ -182,8 +182,8 @@ angular.module('demoApp', ['encore.ui', 'ngRoute'])
                             linkText: 'Lists'
                         },
                         {
-                            href: '#/styleguide/basics#filters',
-                            linkText: 'Filters'
+                            href: '#/styleguide/basics#collapsible',
+                            linkText: 'Collapsible Element'
                         },
                         {
                             href: '#/styleguide/basics#wells',

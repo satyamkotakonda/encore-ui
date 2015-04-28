@@ -20,8 +20,10 @@ angular.module('encore.ui.rxCollapse', [])
         restrict: 'E',
         templateUrl: 'templates/rxCollapse.html',
         transclude: true,
+        scope: {
+            title: '@'
+        },
         link: function (scope, element, attrs) {
-            scope.title = attrs.title || 'Filter';
             scope.isExpanded = (attrs.expanded === 'false') ? false : true;
         }
     };
