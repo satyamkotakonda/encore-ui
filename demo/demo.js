@@ -432,12 +432,14 @@ angular.module('demoApp', ['encore.ui', 'ngRoute'])
 
 // Used by the Filters styleguide page to show a collapsible region
 .controller('collapseFilterExampleCtrl', function ($scope) {
-    $scope.regions = [
-        [{ name: 'DFW', city: 'Dallas-Fort Worth' }, { name: 'ORD', city: 'Chicago' }],
-        [{ name: 'IAD', city: 'Northern Virginia' }, { name: 'LON', city: 'London' }],
-        [{ name: 'HKG', city: 'Hong Kong' }, { name: 'SYD', city: 'Sydney' }]
-    ];
     $scope.filter = { region: '' };
+
+    $scope.regions = [
+        { name: 'DFW', city: 'Dallas-Fort Worth' }, { name: 'ORD', city: 'Chicago' },
+        { name: 'IAD', city: 'Northern Virginia' }, { name: 'LON', city: 'London' },
+        { name: 'HKG', city: 'Hong Kong' }, { name: 'SYD', city: 'Sydney' }
+    ];
+
     $scope.servers = [
         { name: 'General1-1', ram: '1 GB', cpu: 1, disk: '20GB SSD', region: 'DFW'},
         { name: 'General1-2', ram: '2 GB', cpu: 2, disk: '40GB SSD', region: 'ORD'},
