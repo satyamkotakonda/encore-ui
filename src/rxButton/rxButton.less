@@ -155,12 +155,9 @@ thead th .btn-link {
 }
 
 .button-group {
-    @border: 2px solid #eaeaea;
-    @borderRadius: 6px;
-
     display: flex;
-    border: @border;
-    border-radius: @borderRadius;
+    border: @buttonGroupBorder;
+    border-radius: @buttonGroupBorderRadius;
     font-size: 1.1em;
 
     input {
@@ -174,15 +171,15 @@ thead th .btn-link {
         color: #989998;
 
         &:first-of-type {
-            border-top-left-radius: @borderRadius;
-            border-bottom-left-radius: @borderRadius;
+            border-top-left-radius: @buttonGroupBorderRadius;
+            border-bottom-left-radius: @buttonGroupBorderRadius;
         }
         &:last-of-type {
-            border-top-right-radius: @borderRadius;
-            border-bottom-right-radius: @borderRadius;
+            border-top-right-radius: @buttonGroupBorderRadius;
+            border-bottom-right-radius: @buttonGroupBorderRadius;
         }
         &:not(:last-of-type) {
-            border-right: @border;
+            border-right: @buttonGroupBorder;
         }
 
         &:hover,
