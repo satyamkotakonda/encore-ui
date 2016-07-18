@@ -24,6 +24,12 @@
         "sortable",
         "sorting",
         "sort",
-        "status column"
+        "status column",
+        "rxSelectFilter",
+        "dropdown",
+        "form",
+        "search",
+        "input",
+        "select"
     ]
 }
