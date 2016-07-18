@@ -8,7 +8,7 @@
  * table filtering.
  *
  * ## Directives
- * * {@link rxSelectFilter.directive:rxSelectFilter rxSelectFilter}
+ * * {@link elements.directive:rxSelectFilter rxSelectFilter}
  */
 angular.module('encore.ui.rxSelectFilter', [
     'encore.ui.utilities',
