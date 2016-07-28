@@ -1,7 +1,12 @@
 {
-    "displayName": "typeahead",
-    "stability": "unstable",
+    "displayName": "Typeahead",
+    "stability": "stable",
     "description": "",
     "isLegacy": true,
-    "keywords": []
+    "keywords": [
+      "auto",
+      "fill",
+      "predict",
+      "typeahead"
+    ]
 }

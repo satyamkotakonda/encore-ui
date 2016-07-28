@@ -1,4 +1,4 @@
-angular.module('encore.ui.typeahead')
+angular.module('encore.ui.elements')
 .config(function ($provide) {
     $provide.decorator('typeaheadDirective', function ($delegate, $filter) {
         var typeahead = $delegate[0];

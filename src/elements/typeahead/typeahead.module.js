@@ -22,6 +22,6 @@
  * for an example.
  *
  */
-angular.module('encore.ui.typeahead', [
+angular.module('encore.ui.elements', [
     'ui.bootstrap'
 ]);
