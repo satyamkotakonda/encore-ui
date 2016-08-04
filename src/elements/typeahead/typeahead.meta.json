@@ -2,7 +2,6 @@
     "displayName": "Typeahead",
     "stability": "stable",
     "description": "",
-    "isLegacy": true,
     "keywords": [
       "auto",
       "fill",
