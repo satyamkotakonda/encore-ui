@@ -7,7 +7,9 @@ describe('rxNotify', function () {
 
     beforeEach(function () {
 
+        module('encore.ui.utilities');
         module('encore.ui.elements');
+        module('ngSanitize');
         module('templates/rxNotifications.html');
         module('templates/rxNotification.html');
 

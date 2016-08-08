@@ -4,6 +4,7 @@ describe('rxNotify', function () {
     var defaultStack = 'page';
 
     beforeEach(function () {
+        module('encore.ui.utilities');
         module('encore.ui.elements');
         module('templates/rxNotification.html');
 

@@ -75,6 +75,7 @@ describe('elements:rxAccountInfo', function () {
                 });
 
             // load module
+            module('encore.ui.utilities');
             module('encore.ui.elements');
             module('templates/rxInfoPanel.html');
             module('encore.ui.elements', 'testApp');
