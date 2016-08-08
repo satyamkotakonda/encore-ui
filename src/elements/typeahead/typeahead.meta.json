@@ -2,6 +2,7 @@
     "displayName": "Typeahead",
     "stability": "stable",
     "description": "",
+    "hasApi": false,
     "keywords": [
       "auto",
       "fill",
